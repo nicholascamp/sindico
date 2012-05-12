@@ -1,30 +1,43 @@
 package br.com.sindico.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Table;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Endereco.
  */
+@Embeddable
+@Table (name="ENDERECO")
 public class Endereco {
 
 	/** The bairro. */
+	@Column (name="BAIRRO")
 	private String	bairro;
 
 	/** The cep. */
+	@Column(name="CEP")
 	private String	cep;
 
 	/** The cidade. */
+	@Column(name="CIDADE")
 	private String	cidade;
 
 	/** The complemento. */
+	@Column(name="COMPLEMENTO")
 	private String	complemento;
 
 	/** The endereco. */
+	@Column(name="RUA")
 	private String	endereco;
 
 	/** The estado. */
+	@Column(name="ESTADO")
 	private String	estado;
 
 	/** The numero. */
+	@Column(name="NUMERO")
 	private int		numero;
 
 	/**

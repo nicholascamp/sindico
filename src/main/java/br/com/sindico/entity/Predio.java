@@ -2,43 +2,75 @@ package br.com.sindico.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Predio.
  */
+@Entity
+@Table(name="PREDIO")
 public class Predio {
 
 	/** The caminho foto. */
-	private String		caminhoFoto;		// REVER
+	@Column(name="ARQUIVO_FOTO")
+	private String		arquivoFoto;		// REVER
 
 	/** The cnpj. */
+	@Column(name="CNPJ")
 	private String		cnpj;
 
 	/** The codigo. */
+	@Id @GeneratedValue
+	@Column(name="PREDIO_ID")
 	private int			codigo;
 
 	/** The data de cadastro. */
+	@Column(name="DATA_CADASTRO")
 	private Date		dataDeCadastro;
 
 	/** The endereco. */
+	@Embedded
+	@JoinTable(name="ENDERECO")
 	private Endereco	endereco;
 
 	/** The nome. */
+	@Column(name="NOME")
 	private String		nome;
 
 	/** The numero apartamentos. */
+	@Column(name="NUMERO_APARTAMENTOS")
 	private int			numeroApartamentos;
 
 	/** The tipo. */
+	@Column(name="TIPO")
 	private char		tipo;
+	
+	@ManyToOne
+	@JoinColumn(name="GERENTE_ID")
+	private GerenteAdministradora gerente;
+	
+	@ManyToOne
+	@JoinColumn(name="GERENTE_ID")
+	private boolean gerenteRecebeCotacao;
 
 	/**
 	 * Gets the caminho foto.
 	 * 
 	 * @return the caminho foto
 	 */
-	public String getCaminhoFoto() {
-		return caminhoFoto;
+	public String getArquivoFoto() {
+		return arquivoFoto;
 	}
 
 	/**
@@ -110,8 +142,8 @@ public class Predio {
 	 * @param caminhoFoto
 	 *            the new caminho foto
 	 */
-	public void setCaminhoFoto(final String caminhoFoto) {
-		this.caminhoFoto = caminhoFoto;
+	public void setArquivoFoto(final String arquivoFoto) {
+		this.arquivoFoto = arquivoFoto;
 	}
 
 	/**
@@ -183,5 +215,23 @@ public class Predio {
 	public void setTipo(final char tipo) {
 		this.tipo = tipo;
 	}
+
+	public GerenteAdministradora getGerente() {
+		return gerente;
+	}
+
+	public void setGerente(GerenteAdministradora gerente) {
+		this.gerente = gerente;
+	}
+
+	public boolean isGerenteRecebeCotacao() {
+		return gerenteRecebeCotacao;
+	}
+
+	public void setGerenteRecebeCotacao(boolean gerenteRecebeCotacao) {
+		this.gerenteRecebeCotacao = gerenteRecebeCotacao;
+	}
+	
+	
 
 }

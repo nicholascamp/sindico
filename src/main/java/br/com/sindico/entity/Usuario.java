@@ -1,254 +1,175 @@
 package br.com.sindico.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Usuario.
  */
+@Entity
+@Table (name= "USUARIO")
 public class Usuario {
-
-	/** The celular. */
-	private Telefone	celular;
-
+	
 	/** The codigo. */
+	@Id @GeneratedValue (strategy=GenerationType.AUTO)
+	@Column (name = "USUARIO_ID")
 	private int			codigo;
-
-	/** The data de cadastro. */
-	private Date		dataDeCadastro;
-
-	/** The data de nascimento. */
-	private Date		dataDeNascimento;
-
-	/** The email. */
-	private String		email;
-
-	/** The nome. */
-	private String		nome;
-
+	
+	@Column (name="NOME", length=20)
+	private String nome;
+	
+	@Column (name="SOBRENOME", length=45)
+	private String sobrenome;
+	
+	@Column (name="SENHA", length=10)
+	private String senha;
+	
+	@Column (name="TELEFONE", length=20)
+	private String telefone;
+	
+	@Column (name="CELULAR", length=20)
+	private String celular;
+	
+	@Column (name="FAX", length=20)
+	private String fax;
+	
+	@Column (name="TELEFONE_COMERCIAL", length=20)
+	private String telefoneComercial;
+	
+	@Column(name="DATA_CADASTRO")
+	private Date dataCadastro;
+	
+	@Column (name="DATA_NASCIMENTO")
+	private Date dataNascimento;
+	
+	@Column (name="EMAIL", length=50)
+	private String email;
+	
 	/** The recebe cotacao. */
+	@Column (name="RECEBE_COTACAO")
 	private boolean		recebeCotacao;
-
-	/** The recebe email marketing. */
-	private boolean		recebeEmailMarketing;
-
-	/** The senha. */
-	private String		senha;
-
-	/** The telefone. */
-	private Telefone	telefone;
-
+	
 	/** The tipo. */
+	@Column (name="TIPO")
 	private char		tipo;					// s = sindico, c = conselho, m
 												// = morador e z = zelador
 
-	/**
-	 * Gets the celular.
-	 * 
-	 * @return the celular
-	 */
-	public Telefone getCelular() {
-		return celular;
-	}
-
-	/**
-	 * Gets the codigo.
-	 * 
-	 * @return the codigo
-	 */
+	@ManyToMany(mappedBy="usuarios")
+	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	
 	public int getCodigo() {
 		return codigo;
 	}
 
-	/**
-	 * Gets the data de cadastro.
-	 * 
-	 * @return the data de cadastro
-	 */
-	public Date getDataDeCadastro() {
-		return dataDeCadastro;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
-	/**
-	 * Gets the data de nascimento.
-	 * 
-	 * @return the data de nascimento
-	 */
-	public Date getDataDeNascimento() {
-		return dataDeNascimento;
-	}
-
-	/**
-	 * Gets the email.
-	 * 
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * Gets the nome.
-	 * 
-	 * @return the nome
-	 */
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * Gets the senha.
-	 * 
-	 * @return the senha
-	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
 	public String getSenha() {
 		return senha;
 	}
 
-	/**
-	 * Gets the telefone.
-	 * 
-	 * @return the telefone
-	 */
-	public Telefone getTelefone() {
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getTelefone() {
 		return telefone;
 	}
 
-	/**
-	 * Gets the tipo.
-	 * 
-	 * @return the tipo
-	 */
-	public char getTipo() {
-		return tipo;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
-	/**
-	 * Checks if is recebe cotacao.
-	 * 
-	 * @return true, if is recebe cotacao
-	 */
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public String getTelefoneComercial() {
+		return telefoneComercial;
+	}
+
+	public void setTelefoneComercial(String telefoneComercial) {
+		this.telefoneComercial = telefoneComercial;
+	}
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public boolean isRecebeCotacao() {
 		return recebeCotacao;
 	}
 
-	/**
-	 * Checks if is recebe email marketing.
-	 * 
-	 * @return true, if is recebe email marketing
-	 */
-	public boolean isRecebeEmailMarketing() {
-		return recebeEmailMarketing;
-	}
-
-	/**
-	 * Sets the celular.
-	 * 
-	 * @param celular
-	 *            the new celular
-	 */
-	public void setCelular(final Telefone celular) {
-		this.celular = celular;
-	}
-
-	/**
-	 * Sets the codigo.
-	 * 
-	 * @param codigo
-	 *            the new codigo
-	 */
-	public void setCodigo(final int codigo) {
-		this.codigo = codigo;
-	}
-
-	/**
-	 * Sets the data de cadastro.
-	 * 
-	 * @param dataDeCadastro
-	 *            the new data de cadastro
-	 */
-	public void setDataDeCadastro(final Date dataDeCadastro) {
-		this.dataDeCadastro = dataDeCadastro;
-	}
-
-	/**
-	 * Sets the data de nascimento.
-	 * 
-	 * @param dataDeNascimento
-	 *            the new data de nascimento
-	 */
-	public void setDataDeNascimento(final Date dataDeNascimento) {
-		this.dataDeNascimento = dataDeNascimento;
-	}
-
-	/**
-	 * Sets the email.
-	 * 
-	 * @param email
-	 *            the new email
-	 */
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	/**
-	 * Sets the nome.
-	 * 
-	 * @param nome
-	 *            the new nome
-	 */
-	public void setNome(final String nome) {
-		this.nome = nome;
-	}
-
-	/**
-	 * Sets the recebe cotacao.
-	 * 
-	 * @param recebeCotacao
-	 *            the new recebe cotacao
-	 */
-	public void setRecebeCotacao(final boolean recebeCotacao) {
+	public void setRecebeCotacao(boolean recebeCotacao) {
 		this.recebeCotacao = recebeCotacao;
 	}
 
-	/**
-	 * Sets the recebe email marketing.
-	 * 
-	 * @param recebeEmailMarketing
-	 *            the new recebe email marketing
-	 */
-	public void setRecebeEmailMarketing(final boolean recebeEmailMarketing) {
-		this.recebeEmailMarketing = recebeEmailMarketing;
+	public char getTipo() {
+		return tipo;
 	}
 
-	/**
-	 * Sets the senha.
-	 * 
-	 * @param senha
-	 *            the new senha
-	 */
-	public void setSenha(final String senha) {
-		this.senha = senha;
-	}
-
-	/**
-	 * Sets the telefone.
-	 * 
-	 * @param telefone
-	 *            the new telefone
-	 */
-	public void setTelefone(final Telefone telefone) {
-		this.telefone = telefone;
-	}
-
-	/**
-	 * Sets the tipo.
-	 * 
-	 * @param tipo
-	 *            the new tipo
-	 */
-	public void setTipo(final char tipo) {
+	public void setTipo(char tipo) {
 		this.tipo = tipo;
 	}
-
+	
+	
 }
