@@ -52,7 +52,15 @@
         <property name="hbm2ddl.auto">create</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="org.hibernate.tutorial.annotations.Event"/>
+        <mapping class="br.com.sindico.entity.Administradora"/>
+        <mapping class="br.com.sindico.entity.Usuario"/>
+        <mapping class="br.com.sindico.entity.Fornecedor"/>
+        <mapping class="br.com.sindico.entity.Predio"/>
+        <mapping class="br.com.sindico.entity.Categoria"/>
+        <mapping class="br.com.sindico.entity.Subcategoria"/>
+        <mapping class="br.com.sindico.entity.Cotacao"/>
+        <mapping class="br.com.sindico.entity.RespostaCotacao"/>
+        <mapping class="br.com.sindico.entity.GerenteAdministradora"/>
 
     </session-factory>
 
