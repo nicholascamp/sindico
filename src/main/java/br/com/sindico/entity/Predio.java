@@ -3,7 +3,6 @@ package br.com.sindico.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 // TODO: Auto-generated Javadoc
@@ -37,7 +35,7 @@ public class Predio {
 
 	/** The data de cadastro. */
 	@Column(name="DATA_CADASTRO")
-	private Date		dataDeCadastro;
+	private Date		dataCadastro;
 
 	/** The endereco. */
 	@Embedded
@@ -96,8 +94,8 @@ public class Predio {
 	 * 
 	 * @return the data de cadastro
 	 */
-	public Date getDataDeCadastro() {
-		return dataDeCadastro;
+	public Date getDataCadastro() {
+		return dataCadastro;
 	}
 
 	/**
@@ -172,8 +170,8 @@ public class Predio {
 	 * @param dataDeCadastro
 	 *            the new data de cadastro
 	 */
-	public void setDataDeCadastro(final Date dataDeCadastro) {
-		this.dataDeCadastro = dataDeCadastro;
+	public void setDataCadastro(final Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	/**

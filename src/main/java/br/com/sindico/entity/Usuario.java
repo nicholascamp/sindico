@@ -71,6 +71,14 @@ public class Usuario {
 		return codigo;
 	}
 
+	public Collection<Cotacao> getCotacoes() {
+		return cotacoes;
+	}
+
+	public void setCotacoes(Collection<Cotacao> cotacoes) {
+		this.cotacoes = cotacoes;
+	}
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
