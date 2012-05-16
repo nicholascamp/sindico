@@ -1,79 +1,125 @@
-package br.com.sindico.dao;
+package com.sindico.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import br.com.sindico.entity.Cotacao;
+import com.sindico.entity.Cotacao;
 
+/**
+ * The Class CotacaoDAO.
+ */
 public class CotacaoDAO {
-	public static void salvaCotacao(Cotacao cotacao){
-		try{
+
+	/**
+	 * Salva cotacao.
+	 * 
+	 * @param cotacao
+	 *            the cotacao
+	 */
+	public static void salvaCotacao(final Cotacao cotacao) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.saveObject(session, cotacao);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void salvaCotacao(Cotacao cotacao, Session session){
-		try{
+
+	/**
+	 * Salva cotacao.
+	 * 
+	 * @param cotacao
+	 *            the cotacao
+	 * @param session
+	 *            the session
+	 */
+	public static void salvaCotacao(final Cotacao cotacao, final Session session) {
+		try {
 			HibernateFactory.saveObject(session, cotacao);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaCotacao(Cotacao cotacao){
-		try{
+
+	/**
+	 * Deleta cotacao.
+	 * 
+	 * @param cotacao
+	 *            the cotacao
+	 */
+	public static void deletaCotacao(final Cotacao cotacao) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.deleteObject(session, cotacao);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaCotacao(Cotacao cotacao, Session session){
-		try{
+
+	/**
+	 * Deleta cotacao.
+	 * 
+	 * @param cotacao
+	 *            the cotacao
+	 * @param session
+	 *            the session
+	 */
+	public static void deletaCotacao(final Cotacao cotacao, final Session session) {
+		try {
 			HibernateFactory.deleteObject(session, cotacao);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaCotacao(Cotacao cotacao){
-		try{
+
+	/**
+	 * Atualiza cotacao.
+	 * 
+	 * @param cotacao
+	 *            the cotacao
+	 */
+	public static void atualizaCotacao(final Cotacao cotacao) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.updateObject(session, cotacao);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaCotacao(Cotacao cotacao, Session session){
-		try{
+
+	/**
+	 * Atualiza cotacao.
+	 * 
+	 * @param cotacao
+	 *            the cotacao
+	 * @param session
+	 *            the session
+	 */
+	public static void atualizaCotacao(final Cotacao cotacao, final Session session) {
+		try {
 			HibernateFactory.updateObject(session, cotacao);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

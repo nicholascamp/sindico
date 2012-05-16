@@ -1,79 +1,125 @@
-package br.com.sindico.dao;
+package com.sindico.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import br.com.sindico.entity.Categoria;
+import com.sindico.entity.Categoria;
 
+/**
+ * The Class CategoriaDAO.
+ */
 public class CategoriaDAO {
-	public static void salvaCategoria(Categoria categoria){
-		try{
+
+	/**
+	 * Salva categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 */
+	public static void salvaCategoria(final Categoria categoria) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.saveObject(session, categoria);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void salvaCategoria(Categoria categoria, Session session){
-		try{
+
+	/**
+	 * Salva categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @param session
+	 *            the session
+	 */
+	public static void salvaCategoria(final Categoria categoria, final Session session) {
+		try {
 			HibernateFactory.saveObject(session, categoria);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaCategoria(Categoria categoria){
-		try{
+
+	/**
+	 * Deleta categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 */
+	public static void deletaCategoria(final Categoria categoria) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.deleteObject(session, categoria);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaCategoria(Categoria categoria, Session session){
-		try{
+
+	/**
+	 * Deleta categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @param session
+	 *            the session
+	 */
+	public static void deletaCategoria(final Categoria categoria, final Session session) {
+		try {
 			HibernateFactory.deleteObject(session, categoria);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaCategoria(Categoria categoria){
-		try{
+
+	/**
+	 * Atualiza categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 */
+	public static void atualizaCategoria(final Categoria categoria) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.updateObject(session, categoria);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaCategoria(Categoria categoria, Session session){
-		try{
+
+	/**
+	 * Atualiza categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @param session
+	 *            the session
+	 */
+	public static void atualizaCategoria(final Categoria categoria, final Session session) {
+		try {
 			HibernateFactory.updateObject(session, categoria);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -1,79 +1,125 @@
-package br.com.sindico.dao;
+package com.sindico.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import br.com.sindico.entity.Fornecedor;
+import com.sindico.entity.Fornecedor;
 
+/**
+ * The Class FornecedorDAO.
+ */
 public class FornecedorDAO {
-	public static void salvaFornecedor(Fornecedor fornecedor){
-		try{
+
+	/**
+	 * Salva fornecedor.
+	 * 
+	 * @param fornecedor
+	 *            the fornecedor
+	 */
+	public static void salvaFornecedor(final Fornecedor fornecedor) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.saveObject(session, fornecedor);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void salvaFornecedor(Fornecedor fornecedor, Session session){
-		try{
+
+	/**
+	 * Salva fornecedor.
+	 * 
+	 * @param fornecedor
+	 *            the fornecedor
+	 * @param session
+	 *            the session
+	 */
+	public static void salvaFornecedor(final Fornecedor fornecedor, final Session session) {
+		try {
 			HibernateFactory.saveObject(session, fornecedor);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaFornecedor(Fornecedor fornecedor){
-		try{
+
+	/**
+	 * Deleta fornecedor.
+	 * 
+	 * @param fornecedor
+	 *            the fornecedor
+	 */
+	public static void deletaFornecedor(final Fornecedor fornecedor) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.deleteObject(session, fornecedor);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaFornecedor(Fornecedor fornecedor, Session session){
-		try{
+
+	/**
+	 * Deleta fornecedor.
+	 * 
+	 * @param fornecedor
+	 *            the fornecedor
+	 * @param session
+	 *            the session
+	 */
+	public static void deletaFornecedor(final Fornecedor fornecedor, final Session session) {
+		try {
 			HibernateFactory.deleteObject(session, fornecedor);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaFornecedor(Fornecedor fornecedor){
-		try{
+
+	/**
+	 * Atualiza fornecedor.
+	 * 
+	 * @param fornecedor
+	 *            the fornecedor
+	 */
+	public static void atualizaFornecedor(final Fornecedor fornecedor) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.updateObject(session, fornecedor);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaFornecedor(Fornecedor fornecedor, Session session){
-		try{
+
+	/**
+	 * Atualiza fornecedor.
+	 * 
+	 * @param fornecedor
+	 *            the fornecedor
+	 * @param session
+	 *            the session
+	 */
+	public static void atualizaFornecedor(final Fornecedor fornecedor, final Session session) {
+		try {
 			HibernateFactory.updateObject(session, fornecedor);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -1,19 +1,56 @@
-package br.com.sindico.factory;
+package com.sindico.factory;
 
 import java.util.Collection;
 import java.util.Date;
 
-import br.com.sindico.entity.Administradora;
-import br.com.sindico.entity.Cotacao;
-import br.com.sindico.entity.GerenteAdministradora;
-import br.com.sindico.entity.Predio;
+import com.sindico.entity.Administradora;
+import com.sindico.entity.Cotacao;
+import com.sindico.entity.GerenteAdministradora;
+import com.sindico.entity.Predio;
 
+/**
+ * A factory for creating GerenteAdministradora objects.
+ */
 public class GerenteAdministradoraFactory {
-	
-	public static GerenteAdministradora criGerenteAdministradora(Administradora admin, Collection<Predio> predios, Date dataCadastro, 
-			String nome, String sobrenome, String email, String telefone, String celular, String fax,
-			String telefoneComercial, Collection<Boolean> recebeCotacaoPredios, boolean recebeEmailMkt, String senha,
-			Collection<Cotacao> cotacoes){
+
+	/**
+	 * Cri gerente administradora.
+	 * 
+	 * @param admin
+	 *            the admin
+	 * @param predios
+	 *            the predios
+	 * @param dataCadastro
+	 *            the data cadastro
+	 * @param nome
+	 *            the nome
+	 * @param sobrenome
+	 *            the sobrenome
+	 * @param email
+	 *            the email
+	 * @param telefone
+	 *            the telefone
+	 * @param celular
+	 *            the celular
+	 * @param fax
+	 *            the fax
+	 * @param telefoneComercial
+	 *            the telefone comercial
+	 * @param recebeCotacaoPredios
+	 *            the recebe cotacao predios
+	 * @param recebeEmailMkt
+	 *            the recebe email mkt
+	 * @param senha
+	 *            the senha
+	 * @param cotacoes
+	 *            the cotacoes
+	 * @return the gerente administradora
+	 */
+	public static GerenteAdministradora criGerenteAdministradora(final Administradora admin,
+			final Collection<Predio> predios, final Date dataCadastro, final String nome, final String sobrenome,
+			final String email, final String telefone, final String celular, final String fax,
+			final String telefoneComercial, final Collection<Boolean> recebeCotacaoPredios,
+			final boolean recebeEmailMkt, final String senha, final Collection<Cotacao> cotacoes) {
 		GerenteAdministradora gerente = new GerenteAdministradora();
 		gerente.setAdministradora(admin);
 		gerente.setPredios(predios);

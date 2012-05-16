@@ -1,16 +1,16 @@
-package br.com.sindico.factory;
+package com.sindico.factory;
 
 import java.util.Date;
 
-import br.com.sindico.entity.Endereco;
-import br.com.sindico.entity.GerenteAdministradora;
-import br.com.sindico.entity.Predio;
+import com.sindico.entity.Endereco;
+import com.sindico.entity.GerenteAdministradora;
+import com.sindico.entity.Predio;
 
 public class PredioFactory {
-	
-	public static Predio criaPredio(String arquivoFoto, String cnpj, Date dataCadastro, Endereco endereco,
-			String nome, int numeroApartamentos, char tipo, GerenteAdministradora gerente, boolean gerenteRecebeCotacao
-			){
+
+	public static Predio criaPredio(final String arquivoFoto, final String cnpj, final Date dataCadastro,
+			final Endereco endereco, final String nome, final int numeroApartamentos, final char tipo,
+			final GerenteAdministradora gerente, final boolean gerenteRecebeCotacao) {
 		Predio predio = new Predio();
 		predio.setArquivoFoto(arquivoFoto);
 		predio.setCnpj(cnpj);
@@ -23,5 +23,5 @@ public class PredioFactory {
 		predio.setGerenteRecebeCotacao(gerenteRecebeCotacao);
 		return predio;
 	}
-	
+
 }

@@ -1,79 +1,125 @@
-package br.com.sindico.dao;
+package com.sindico.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import br.com.sindico.entity.Usuario;
+import com.sindico.entity.Usuario;
 
+/**
+ * The Class UsuarioDAO.
+ */
 public class UsuarioDAO {
-	public static void salvaUsuario(Usuario usuario){
-		try{
+
+	/**
+	 * Salva usuario.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 */
+	public static void salvaUsuario(final Usuario usuario) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.saveObject(session, usuario);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void salvaUsuario(Usuario usuario, Session session){
-		try{
+
+	/**
+	 * Salva usuario.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 * @param session
+	 *            the session
+	 */
+	public static void salvaUsuario(final Usuario usuario, final Session session) {
+		try {
 			HibernateFactory.saveObject(session, usuario);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaUsuario(Usuario usuario){
-		try{
+
+	/**
+	 * Deleta usuario.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 */
+	public static void deletaUsuario(final Usuario usuario) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.deleteObject(session, usuario);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaUsuario(Usuario usuario, Session session){
-		try{
+
+	/**
+	 * Deleta usuario.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 * @param session
+	 *            the session
+	 */
+	public static void deletaUsuario(final Usuario usuario, final Session session) {
+		try {
 			HibernateFactory.deleteObject(session, usuario);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaUsuario(Usuario usuario){
-		try{
+
+	/**
+	 * Atualiza usuario.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 */
+	public static void atualizaUsuario(final Usuario usuario) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.updateObject(session, usuario);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaUsuario(Usuario usuario, Session session){
-		try{
+
+	/**
+	 * Atualiza usuario.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 * @param session
+	 *            the session
+	 */
+	public static void atualizaUsuario(final Usuario usuario, final Session session) {
+		try {
 			HibernateFactory.updateObject(session, usuario);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -1,4 +1,4 @@
-package br.com.sindico.entity;
+package com.sindico.entity;
 
 import java.util.Date;
 
@@ -17,55 +17,58 @@ import javax.persistence.Table;
  * The Class Predio.
  */
 @Entity
-@Table(name="PREDIO")
+@Table(name = "PREDIO")
 public class Predio {
 
-	/** The caminho foto. */
-	@Column(name="ARQUIVO_FOTO")
-	private String		arquivoFoto;		// REVER
+	/** The arquivo foto. */
+	@Column(name = "ARQUIVO_FOTO")
+	private String arquivoFoto; // REVER
 
 	/** The cnpj. */
-	@Column(name="CNPJ")
-	private String		cnpj;
+	@Column(name = "CNPJ")
+	private String cnpj;
 
 	/** The codigo. */
-	@Id @GeneratedValue
-	@Column(name="PREDIO_ID")
-	private int			codigo;
+	@Id
+	@GeneratedValue
+	@Column(name = "PREDIO_ID")
+	private int codigo;
 
-	/** The data de cadastro. */
-	@Column(name="DATA_CADASTRO")
-	private Date		dataCadastro;
+	/** The data cadastro. */
+	@Column(name = "DATA_CADASTRO")
+	private Date dataCadastro;
 
 	/** The endereco. */
 	@Embedded
-	@JoinTable(name="ENDERECO")
-	private Endereco	endereco;
+	@JoinTable(name = "ENDERECO")
+	private Endereco endereco;
 
 	/** The nome. */
-	@Column(name="NOME")
-	private String		nome;
+	@Column(name = "NOME")
+	private String nome;
 
 	/** The numero apartamentos. */
-	@Column(name="NUMERO_APARTAMENTOS")
-	private int			numeroApartamentos;
+	@Column(name = "NUMERO_APARTAMENTOS")
+	private int numeroApartamentos;
 
 	/** The tipo. */
-	@Column(name="TIPO")
-	private char		tipo;
-	
+	@Column(name = "TIPO")
+	private char tipo;
+
+	/** The gerente. */
 	@ManyToOne
-	@JoinColumn(name="GERENTE_ID")
+	@JoinColumn(name = "GERENTE_ID")
 	private GerenteAdministradora gerente;
-	
+
+	/** The gerente recebe cotacao. */
 	@ManyToOne
-	@JoinColumn(name="GERENTE_ID")
+	@JoinColumn(name = "GERENTE_ID")
 	private boolean gerenteRecebeCotacao;
 
 	/**
-	 * Gets the caminho foto.
+	 * Gets the arquivo foto.
 	 * 
-	 * @return the caminho foto
+	 * @return the arquivo foto
 	 */
 	public String getArquivoFoto() {
 		return arquivoFoto;
@@ -90,9 +93,9 @@ public class Predio {
 	}
 
 	/**
-	 * Gets the data de cadastro.
+	 * Gets the data cadastro.
 	 * 
-	 * @return the data de cadastro
+	 * @return the data cadastro
 	 */
 	public Date getDataCadastro() {
 		return dataCadastro;
@@ -135,10 +138,10 @@ public class Predio {
 	}
 
 	/**
-	 * Sets the caminho foto.
+	 * Sets the arquivo foto.
 	 * 
-	 * @param caminhoFoto
-	 *            the new caminho foto
+	 * @param arquivoFoto
+	 *            the new arquivo foto
 	 */
 	public void setArquivoFoto(final String arquivoFoto) {
 		this.arquivoFoto = arquivoFoto;
@@ -165,10 +168,10 @@ public class Predio {
 	}
 
 	/**
-	 * Sets the data de cadastro.
+	 * Sets the data cadastro.
 	 * 
-	 * @param dataDeCadastro
-	 *            the new data de cadastro
+	 * @param dataCadastro
+	 *            the new data cadastro
 	 */
 	public void setDataCadastro(final Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
@@ -214,22 +217,42 @@ public class Predio {
 		this.tipo = tipo;
 	}
 
+	/**
+	 * Gets the gerente.
+	 * 
+	 * @return the gerente
+	 */
 	public GerenteAdministradora getGerente() {
 		return gerente;
 	}
 
-	public void setGerente(GerenteAdministradora gerente) {
+	/**
+	 * Sets the gerente.
+	 * 
+	 * @param gerente
+	 *            the new gerente
+	 */
+	public void setGerente(final GerenteAdministradora gerente) {
 		this.gerente = gerente;
 	}
 
+	/**
+	 * Checks if is gerente recebe cotacao.
+	 * 
+	 * @return true, if is gerente recebe cotacao
+	 */
 	public boolean isGerenteRecebeCotacao() {
 		return gerenteRecebeCotacao;
 	}
 
-	public void setGerenteRecebeCotacao(boolean gerenteRecebeCotacao) {
+	/**
+	 * Sets the gerente recebe cotacao.
+	 * 
+	 * @param gerenteRecebeCotacao
+	 *            the new gerente recebe cotacao
+	 */
+	public void setGerenteRecebeCotacao(final boolean gerenteRecebeCotacao) {
 		this.gerenteRecebeCotacao = gerenteRecebeCotacao;
 	}
-	
-	
 
 }

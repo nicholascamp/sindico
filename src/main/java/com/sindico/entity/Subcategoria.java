@@ -1,4 +1,4 @@
-package br.com.sindico.entity;
+package com.sindico.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,66 +13,129 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * The Class Subcategoria.
+ */
 @Entity
-@Table(name="SUBCATEGORIA")
+@Table(name = "SUBCATEGORIA")
 public class Subcategoria {
-	
-	@Id @GeneratedValue	
-	@Column(name="SUBCATEGORIA_ID")
+
+	/** The codigo. */
+	@Id
+	@GeneratedValue
+	@Column(name = "SUBCATEGORIA_ID")
 	private int codigo;
-	
+
+	/** The categoria. */
 	@ManyToOne
-	@JoinColumn(name="CATEGORIA_ID")
+	@JoinColumn(name = "CATEGORIA_ID")
 	private Categoria categoria;
-	
-	@Column(name="TITLE")
+
+	/** The title. */
+	@Column(name = "TITLE")
 	private String title;
-	
-	@ManyToMany(mappedBy="subcategorias")
+
+	/** The fornecedores. */
+	@ManyToMany(mappedBy = "subcategorias")
 	private Collection<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
-	
-	@OneToMany(mappedBy="subcategoria")
+
+	/** The cotacoes. */
+	@OneToMany(mappedBy = "subcategoria")
 	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
 
+	/**
+	 * Gets the fornecedores.
+	 * 
+	 * @return the fornecedores
+	 */
 	public Collection<Fornecedor> getFornecedores() {
 		return fornecedores;
 	}
 
-	public void setFornecedores(Collection<Fornecedor> fornecedores) {
+	/**
+	 * Sets the fornecedores.
+	 * 
+	 * @param fornecedores
+	 *            the new fornecedores
+	 */
+	public void setFornecedores(final Collection<Fornecedor> fornecedores) {
 		this.fornecedores = fornecedores;
 	}
 
+	/**
+	 * Gets the cotacoes.
+	 * 
+	 * @return the cotacoes
+	 */
 	public Collection<Cotacao> getCotacoes() {
 		return cotacoes;
 	}
 
-	public void setCotacoes(Collection<Cotacao> cotacoes) {
+	/**
+	 * Sets the cotacoes.
+	 * 
+	 * @param cotacoes
+	 *            the new cotacoes
+	 */
+	public void setCotacoes(final Collection<Cotacao> cotacoes) {
 		this.cotacoes = cotacoes;
 	}
 
+	/**
+	 * Gets the codigo.
+	 * 
+	 * @return the codigo
+	 */
 	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	/**
+	 * Sets the codigo.
+	 * 
+	 * @param codigo
+	 *            the new codigo
+	 */
+	public void setCodigo(final int codigo) {
 		this.codigo = codigo;
 	}
 
+	/**
+	 * Gets the categoria.
+	 * 
+	 * @return the categoria
+	 */
 	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	/**
+	 * Sets the categoria.
+	 * 
+	 * @param categoria
+	 *            the new categoria
+	 */
+	public void setCategoria(final Categoria categoria) {
 		this.categoria = categoria;
 	}
 
+	/**
+	 * Gets the title.
+	 * 
+	 * @return the title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	/**
+	 * Sets the title.
+	 * 
+	 * @param title
+	 *            the new title
+	 */
+	public void setTitle(final String title) {
 		this.title = title;
 	}
-	
-	
+
 }

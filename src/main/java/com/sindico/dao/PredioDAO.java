@@ -1,79 +1,125 @@
-package br.com.sindico.dao;
+package com.sindico.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import br.com.sindico.entity.Predio;
+import com.sindico.entity.Predio;
 
+/**
+ * The Class PredioDAO.
+ */
 public class PredioDAO {
-	public static void salvaPredio(Predio predio){
-		try{
+
+	/**
+	 * Salva predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 */
+	public static void salvaPredio(final Predio predio) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.saveObject(session, predio);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void salvaPredio(Predio predio, Session session){
-		try{
+
+	/**
+	 * Salva predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 * @param session
+	 *            the session
+	 */
+	public static void salvaPredio(final Predio predio, final Session session) {
+		try {
 			HibernateFactory.saveObject(session, predio);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaPredio(Predio predio){
-		try{
+
+	/**
+	 * Deleta predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 */
+	public static void deletaPredio(final Predio predio) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.deleteObject(session, predio);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaPredio(Predio predio, Session session){
-		try{
+
+	/**
+	 * Deleta predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 * @param session
+	 *            the session
+	 */
+	public static void deletaPredio(final Predio predio, final Session session) {
+		try {
 			HibernateFactory.deleteObject(session, predio);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaPredio(Predio predio){
-		try{
+
+	/**
+	 * Atualiza predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 */
+	public static void atualizaPredio(final Predio predio) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.updateObject(session, predio);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaPredio(Predio predio, Session session){
-		try{
+
+	/**
+	 * Atualiza predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 * @param session
+	 *            the session
+	 */
+	public static void atualizaPredio(final Predio predio, final Session session) {
+		try {
 			HibernateFactory.updateObject(session, predio);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

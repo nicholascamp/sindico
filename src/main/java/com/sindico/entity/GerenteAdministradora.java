@@ -1,4 +1,4 @@
-package br.com.sindico.entity;
+package com.sindico.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,175 +13,359 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * The Class GerenteAdministradora.
+ */
 @Entity
-@Table(name="GERENTE_ADMINISTRADORA")
+@Table(name = "GERENTE_ADMINISTRADORA")
 public class GerenteAdministradora {
-	@Id @GeneratedValue
-	@Column(name="GERENTE_ID")
+
+	/** The codigo. */
+	@Id
+	@GeneratedValue
+	@Column(name = "GERENTE_ID")
 	private int codigo;
-	
+
+	/** The administradora. */
 	@ManyToOne
-	@JoinColumn(name="ADMINISTRADORA_ID")
+	@JoinColumn(name = "ADMINISTRADORA_ID")
 	private Administradora administradora;
-	
-	@OneToMany (mappedBy="gerente")
+
+	/** The predios. */
+	@OneToMany(mappedBy = "gerente")
 	private Collection<Predio> predios = new ArrayList<Predio>();
-	
-	@Column(name="DATA_CADASTRO")
+
+	/** The data cadastro. */
+	@Column(name = "DATA_CADASTRO")
 	private Date dataCadastro;
-	
-	@Column(name="NOME")
+
+	/** The nome. */
+	@Column(name = "NOME")
 	private String nome;
-	
-	@Column(name="SOBRENOME")
+
+	/** The sobrenome. */
+	@Column(name = "SOBRENOME")
 	private String sobrenome;
-	
-	@Column(name="EMAIL")
+
+	/** The email. */
+	@Column(name = "EMAIL")
 	private String email;
-	
-	@Column(name="TELEFONE")
+
+	/** The telefone. */
+	@Column(name = "TELEFONE")
 	private String telefone;
-	
-	@Column(name="CELULAR")
+
+	/** The celular. */
+	@Column(name = "CELULAR")
 	private String celular;
-	
-	@Column(name="FAX")
+
+	/** The fax. */
+	@Column(name = "FAX")
 	private String fax;
-	
-	@Column(name="TELEFONE_COMERCIAL")
+
+	/** The telefone comercial. */
+	@Column(name = "TELEFONE_COMERCIAL")
 	private String telefoneComercial;
-	
-	@OneToMany(mappedBy="gerenteRecebeCotacao")
+
+	/** The recebe cotacao predios. */
+	@OneToMany(mappedBy = "gerenteRecebeCotacao")
 	private Collection<Boolean> recebeCotacaoPredios; // TIRAR DUVIDA E REVER
-	
-	@Column(name="RECEBE_EMAIL_MKT")
+
+	/** The recebe email mkt. */
+	@Column(name = "RECEBE_EMAIL_MKT")
 	private boolean recebeEmailMkt;
-	
-	@Column(name="SENHA")
+
+	/** The senha. */
+	@Column(name = "SENHA")
 	private String senha;
-	
-	@OneToMany(mappedBy="gerenteAdmin")
+
+	/** The cotacoes. */
+	@OneToMany(mappedBy = "gerenteAdmin")
 	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
 
+	/**
+	 * Gets the cotacoes.
+	 * 
+	 * @return the cotacoes
+	 */
 	public Collection<Cotacao> getCotacoes() {
 		return cotacoes;
 	}
 
-	public void setCotacoes(Collection<Cotacao> cotacoes) {
+	/**
+	 * Sets the cotacoes.
+	 * 
+	 * @param cotacoes
+	 *            the new cotacoes
+	 */
+	public void setCotacoes(final Collection<Cotacao> cotacoes) {
 		this.cotacoes = cotacoes;
 	}
 
+	/**
+	 * Gets the codigo.
+	 * 
+	 * @return the codigo
+	 */
 	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	/**
+	 * Sets the codigo.
+	 * 
+	 * @param codigo
+	 *            the new codigo
+	 */
+	public void setCodigo(final int codigo) {
 		this.codigo = codigo;
 	}
 
+	/**
+	 * Gets the administradora.
+	 * 
+	 * @return the administradora
+	 */
 	public Administradora getAdministradora() {
 		return administradora;
 	}
 
-	public void setAdministradora(Administradora administradora) {
+	/**
+	 * Sets the administradora.
+	 * 
+	 * @param administradora
+	 *            the new administradora
+	 */
+	public void setAdministradora(final Administradora administradora) {
 		this.administradora = administradora;
 	}
 
+	/**
+	 * Gets the predios.
+	 * 
+	 * @return the predios
+	 */
 	public Collection<Predio> getPredios() {
 		return predios;
 	}
 
-	public void setPredios(Collection<Predio> predios) {
+	/**
+	 * Sets the predios.
+	 * 
+	 * @param predios
+	 *            the new predios
+	 */
+	public void setPredios(final Collection<Predio> predios) {
 		this.predios = predios;
 	}
 
+	/**
+	 * Gets the data cadastro.
+	 * 
+	 * @return the data cadastro
+	 */
 	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Date dataCadastro) {
+	/**
+	 * Sets the data cadastro.
+	 * 
+	 * @param dataCadastro
+	 *            the new data cadastro
+	 */
+	public void setDataCadastro(final Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
+	/**
+	 * Gets the nome.
+	 * 
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	/**
+	 * Sets the nome.
+	 * 
+	 * @param nome
+	 *            the new nome
+	 */
+	public void setNome(final String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Gets the sobrenome.
+	 * 
+	 * @return the sobrenome
+	 */
 	public String getSobrenome() {
 		return sobrenome;
 	}
 
-	public void setSobrenome(String sobrenome) {
+	/**
+	 * Sets the sobrenome.
+	 * 
+	 * @param sobrenome
+	 *            the new sobrenome
+	 */
+	public void setSobrenome(final String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
 
+	/**
+	 * Gets the email.
+	 * 
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	/**
+	 * Sets the email.
+	 * 
+	 * @param email
+	 *            the new email
+	 */
+	public void setEmail(final String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Gets the telefone.
+	 * 
+	 * @return the telefone
+	 */
 	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(String telefone) {
+	/**
+	 * Sets the telefone.
+	 * 
+	 * @param telefone
+	 *            the new telefone
+	 */
+	public void setTelefone(final String telefone) {
 		this.telefone = telefone;
 	}
 
+	/**
+	 * Gets the celular.
+	 * 
+	 * @return the celular
+	 */
 	public String getCelular() {
 		return celular;
 	}
 
-	public void setCelular(String celular) {
+	/**
+	 * Sets the celular.
+	 * 
+	 * @param celular
+	 *            the new celular
+	 */
+	public void setCelular(final String celular) {
 		this.celular = celular;
 	}
 
+	/**
+	 * Gets the fax.
+	 * 
+	 * @return the fax
+	 */
 	public String getFax() {
 		return fax;
 	}
 
-	public void setFax(String fax) {
+	/**
+	 * Sets the fax.
+	 * 
+	 * @param fax
+	 *            the new fax
+	 */
+	public void setFax(final String fax) {
 		this.fax = fax;
 	}
 
+	/**
+	 * Gets the telefone comercial.
+	 * 
+	 * @return the telefone comercial
+	 */
 	public String getTelefoneComercial() {
 		return telefoneComercial;
 	}
 
-	public void setTelefoneComercial(String telefoneComercial) {
+	/**
+	 * Sets the telefone comercial.
+	 * 
+	 * @param telefoneComercial
+	 *            the new telefone comercial
+	 */
+	public void setTelefoneComercial(final String telefoneComercial) {
 		this.telefoneComercial = telefoneComercial;
 	}
 
+	/**
+	 * Gets the recebe cotacao predios.
+	 * 
+	 * @return the recebe cotacao predios
+	 */
 	public Collection<Boolean> getRecebeCotacaoPredios() {
 		return recebeCotacaoPredios;
 	}
 
-	public void setRecebeCotacaoPredios(Collection<Boolean> recebeCotacaoPredios) {
+	/**
+	 * Sets the recebe cotacao predios.
+	 * 
+	 * @param recebeCotacaoPredios
+	 *            the new recebe cotacao predios
+	 */
+	public void setRecebeCotacaoPredios(final Collection<Boolean> recebeCotacaoPredios) {
 		this.recebeCotacaoPredios = recebeCotacaoPredios;
 	}
 
+	/**
+	 * Checks if is recebe email mkt.
+	 * 
+	 * @return true, if is recebe email mkt
+	 */
 	public boolean isRecebeEmailMkt() {
 		return recebeEmailMkt;
 	}
 
-	public void setRecebeEmailMkt(boolean recebeEmailMkt) {
+	/**
+	 * Sets the recebe email mkt.
+	 * 
+	 * @param recebeEmailMkt
+	 *            the new recebe email mkt
+	 */
+	public void setRecebeEmailMkt(final boolean recebeEmailMkt) {
 		this.recebeEmailMkt = recebeEmailMkt;
 	}
 
+	/**
+	 * Gets the senha.
+	 * 
+	 * @return the senha
+	 */
 	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
+	/**
+	 * Sets the senha.
+	 * 
+	 * @param senha
+	 *            the new senha
+	 */
+	public void setSenha(final String senha) {
 		this.senha = senha;
 	}
-	
 
 }

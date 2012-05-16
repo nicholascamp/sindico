@@ -1,4 +1,4 @@
-package br.com.sindico.entity;
+package com.sindico.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,119 +18,240 @@ import javax.persistence.Table;
  * The Class Administradora.
  */
 @Entity
-@Table (name="ADMINISTRADORA")
+@Table(name = "ADMINISTRADORA")
 public class Administradora {
-	@Id @GeneratedValue
-	@Column (name="ADMINISTRADORA_ID")
+
+	/** The codigo. */
+	@Id
+	@GeneratedValue
+	@Column(name = "ADMINISTRADORA_ID")
 	private int codigo;
-	
-	@Column(name="DATA_CADASTRO")
+
+	/** The data cadastro. */
+	@Column(name = "DATA_CADASTRO")
 	private Date dataCadastro;
-	
-	@Column(name="CNJPJ", length=20)
+
+	/** The cnpj. */
+	@Column(name = "CNJPJ", length = 20)
 	private String cnpj;
-	
+
+	/** The enderecos. */
 	@ElementCollection
-	@JoinTable (name="ENDERECO", joinColumns=@JoinColumn(name="ADMINISTRADORA_ID"))
+	@JoinTable(name = "ENDERECO", joinColumns = @JoinColumn(name = "ADMINISTRADORA_ID"))
 	private Collection<Endereco> enderecos = new ArrayList<Endereco>();
-	
-	@Column (name="TELEFONE", length=20)
+
+	/** The telefone. */
+	@Column(name = "TELEFONE", length = 20)
 	private String telefone;
-	
-	@Column (name="CELULAR", length=20)
+
+	/** The celular. */
+	@Column(name = "CELULAR", length = 20)
 	private String celular;
-	
-	@Column (name="FAX", length=20)
+
+	/** The fax. */
+	@Column(name = "FAX", length = 20)
 	private String fax;
-	
-	@Column (name="TELEFONE_COMERCIAL", length=20)
+
+	/** The telefone comercial. */
+	@Column(name = "TELEFONE_COMERCIAL", length = 20)
 	private String telefoneComercial;
-	
-	@OneToMany (mappedBy="administradora")
+
+	/** The gerentes. */
+	@OneToMany(mappedBy = "administradora")
 	private Collection<GerenteAdministradora> gerentes = new ArrayList<GerenteAdministradora>();
-	
-	@OneToMany (mappedBy="administradora")
+
+	/** The cotacoes. */
+	@OneToMany(mappedBy = "administradora")
 	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
 
+	/**
+	 * Gets the cotacoes.
+	 * 
+	 * @return the cotacoes
+	 */
 	public Collection<Cotacao> getCotacoes() {
 		return cotacoes;
 	}
 
-	public void setCotacoes(Collection<Cotacao> cotacoes) {
+	/**
+	 * Sets the cotacoes.
+	 * 
+	 * @param cotacoes
+	 *            the new cotacoes
+	 */
+	public void setCotacoes(final Collection<Cotacao> cotacoes) {
 		this.cotacoes = cotacoes;
 	}
 
+	/**
+	 * Gets the codigo.
+	 * 
+	 * @return the codigo
+	 */
 	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	/**
+	 * Sets the codigo.
+	 * 
+	 * @param codigo
+	 *            the new codigo
+	 */
+	public void setCodigo(final int codigo) {
 		this.codigo = codigo;
 	}
 
+	/**
+	 * Gets the data cadastro.
+	 * 
+	 * @return the data cadastro
+	 */
 	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Date dataCadastro) {
+	/**
+	 * Sets the data cadastro.
+	 * 
+	 * @param dataCadastro
+	 *            the new data cadastro
+	 */
+	public void setDataCadastro(final Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
+	/**
+	 * Gets the cnpj.
+	 * 
+	 * @return the cnpj
+	 */
 	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(String cnpj) {
+	/**
+	 * Sets the cnpj.
+	 * 
+	 * @param cnpj
+	 *            the new cnpj
+	 */
+	public void setCnpj(final String cnpj) {
 		this.cnpj = cnpj;
 	}
 
+	/**
+	 * Gets the enderecos.
+	 * 
+	 * @return the enderecos
+	 */
 	public Collection<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(Collection<Endereco> enderecos) {
+	/**
+	 * Sets the enderecos.
+	 * 
+	 * @param enderecos
+	 *            the new enderecos
+	 */
+	public void setEnderecos(final Collection<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
 
+	/**
+	 * Gets the telefone.
+	 * 
+	 * @return the telefone
+	 */
 	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(String telefone) {
+	/**
+	 * Sets the telefone.
+	 * 
+	 * @param telefone
+	 *            the new telefone
+	 */
+	public void setTelefone(final String telefone) {
 		this.telefone = telefone;
 	}
 
+	/**
+	 * Gets the celular.
+	 * 
+	 * @return the celular
+	 */
 	public String getCelular() {
 		return celular;
 	}
 
-	public void setCelular(String celular) {
+	/**
+	 * Sets the celular.
+	 * 
+	 * @param celular
+	 *            the new celular
+	 */
+	public void setCelular(final String celular) {
 		this.celular = celular;
 	}
 
+	/**
+	 * Gets the fax.
+	 * 
+	 * @return the fax
+	 */
 	public String getFax() {
 		return fax;
 	}
 
-	public void setFax(String fax) {
+	/**
+	 * Sets the fax.
+	 * 
+	 * @param fax
+	 *            the new fax
+	 */
+	public void setFax(final String fax) {
 		this.fax = fax;
 	}
 
+	/**
+	 * Gets the telefone comercial.
+	 * 
+	 * @return the telefone comercial
+	 */
 	public String getTelefoneComercial() {
 		return telefoneComercial;
 	}
 
-	public void setTelefoneComercial(String telefoneComercial) {
+	/**
+	 * Sets the telefone comercial.
+	 * 
+	 * @param telefoneComercial
+	 *            the new telefone comercial
+	 */
+	public void setTelefoneComercial(final String telefoneComercial) {
 		this.telefoneComercial = telefoneComercial;
 	}
 
+	/**
+	 * Gets the gerentes.
+	 * 
+	 * @return the gerentes
+	 */
 	public Collection<GerenteAdministradora> getGerentes() {
 		return gerentes;
 	}
 
-	public void setGerentes(Collection<GerenteAdministradora> gerentes) {
+	/**
+	 * Sets the gerentes.
+	 * 
+	 * @param gerentes
+	 *            the new gerentes
+	 */
+	public void setGerentes(final Collection<GerenteAdministradora> gerentes) {
 		this.gerentes = gerentes;
 	}
-	
-	
+
 }

@@ -1,79 +1,125 @@
-package br.com.sindico.dao;
+package com.sindico.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import br.com.sindico.entity.RespostaCotacao;
+import com.sindico.entity.RespostaCotacao;
 
+/**
+ * The Class RespostaCotacaoDAO.
+ */
 public class RespostaCotacaoDAO {
-	public static void salvaRespostaCotacao(RespostaCotacao respostaCotacao){
-		try{
+
+	/**
+	 * Salva resposta cotacao.
+	 * 
+	 * @param respostaCotacao
+	 *            the resposta cotacao
+	 */
+	public static void salvaRespostaCotacao(final RespostaCotacao respostaCotacao) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.saveObject(session, respostaCotacao);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void salvaRespostaCotacao(RespostaCotacao respostaCotacao, Session session){
-		try{
+
+	/**
+	 * Salva resposta cotacao.
+	 * 
+	 * @param respostaCotacao
+	 *            the resposta cotacao
+	 * @param session
+	 *            the session
+	 */
+	public static void salvaRespostaCotacao(final RespostaCotacao respostaCotacao, final Session session) {
+		try {
 			HibernateFactory.saveObject(session, respostaCotacao);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaRespostaCotacao(RespostaCotacao respostaCotacao){
-		try{
+
+	/**
+	 * Deleta resposta cotacao.
+	 * 
+	 * @param respostaCotacao
+	 *            the resposta cotacao
+	 */
+	public static void deletaRespostaCotacao(final RespostaCotacao respostaCotacao) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.deleteObject(session, respostaCotacao);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void deletaRespostaCotacao(RespostaCotacao respostaCotacao, Session session){
-		try{
+
+	/**
+	 * Deleta resposta cotacao.
+	 * 
+	 * @param respostaCotacao
+	 *            the resposta cotacao
+	 * @param session
+	 *            the session
+	 */
+	public static void deletaRespostaCotacao(final RespostaCotacao respostaCotacao, final Session session) {
+		try {
 			HibernateFactory.deleteObject(session, respostaCotacao);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaRespostaCotacao(RespostaCotacao respostaCotacao){
-		try{
+
+	/**
+	 * Atualiza resposta cotacao.
+	 * 
+	 * @param respostaCotacao
+	 *            the resposta cotacao
+	 */
+	public static void atualizaRespostaCotacao(final RespostaCotacao respostaCotacao) {
+		try {
 			Session session = HibernateFactory.setUp();
 			HibernateFactory.updateObject(session, respostaCotacao);
 			HibernateFactory.tearDown(session);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void atualizaRespostaCotacao(RespostaCotacao respostaCotacao, Session session){
-		try{
+
+	/**
+	 * Atualiza resposta cotacao.
+	 * 
+	 * @param respostaCotacao
+	 *            the resposta cotacao
+	 * @param session
+	 *            the session
+	 */
+	public static void atualizaRespostaCotacao(final RespostaCotacao respostaCotacao, final Session session) {
+		try {
 			HibernateFactory.updateObject(session, respostaCotacao);
-			
-		} catch(HibernateException hbe){
+
+		} catch (HibernateException hbe) {
 			hbe.printStackTrace();
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
