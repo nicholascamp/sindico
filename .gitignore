@@ -1,0 +1,17 @@
+.DS_Store
+target/
+database/
+*.classpath
+*.project
+*.pmd
+*.ruleset
+*.checkstyle
+*.settings/
+*.db
+*.log
+.actionScriptProperties
+bin/
+bin-debug/
+*.bak
+*.orig
+.metadata/
