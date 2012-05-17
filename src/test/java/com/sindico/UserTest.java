@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.dao.UsuarioDAO;
 import com.sindico.entity.Usuario;
@@ -20,11 +22,13 @@ import com.sindico.entity.Usuario;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/sindico-beans.xml")
+@ContextConfiguration("classpath:sindico-beans.xml")
+@TransactionConfiguration
+@Transactional
 public class UserTest {
 
 	@Autowired
-	private UsuarioDAO usuarioDAO;
+	private UsuarioDAO	usuarioDAO;
 
 	@Test
 	public void testCriarUsuario() {

@@ -1,9 +1,7 @@
 package com.sindico.factory;
 
-import java.util.Collection;
 import java.util.Date;
 
-import com.sindico.entity.Cotacao;
 import com.sindico.entity.Usuario;
 
 /**
@@ -42,10 +40,13 @@ public class UsuarioFactory {
 	 *            the cotacoes
 	 * @return the usuario
 	 */
-	public static Usuario criaUsuario(final String nome, final String sobrenome, final String senha,
-			final String telefone, final String celular, final String fax, final String telefoneComercial,
-			final Date dataCadastro, final Date dataNascimento, final String email, final boolean recebeCotacao,
-			final char tipo, final Collection<Cotacao> cotacoes) {
+	public static Usuario criaUsuario(final String nome,
+			final String sobrenome, final String senha, final String telefone,
+			final String celular, final String fax,
+			final String telefoneComercial, final Date dataCadastro,
+			final Date dataNascimento, final String email,
+			final boolean recebeCotacao, final char tipo) {
+		// , final Collection<Cotacao> cotacoes) {
 		Usuario usuario = new Usuario();
 		usuario.setNome(nome);
 		usuario.setSobrenome(sobrenome);
@@ -59,7 +60,7 @@ public class UsuarioFactory {
 		usuario.setEmail(email);
 		usuario.setRecebeCotacao(recebeCotacao);
 		usuario.setTipo(tipo);
-		usuario.setCotacoes(cotacoes);
+		// usuario.setCotacoes(cotacoes);
 		return usuario;
 	}
 

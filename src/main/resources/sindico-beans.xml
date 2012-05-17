@@ -32,12 +32,10 @@
 	</bean>
 
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
-		<property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration" />
 		<property name="packagesToScan" ref="entityPackages" />
 		<property name="dataSource" ref="dataSource" />
-		<property name="lobHandler" ref="lobHandler" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>

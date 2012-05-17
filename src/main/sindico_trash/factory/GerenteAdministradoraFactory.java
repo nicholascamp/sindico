@@ -46,11 +46,14 @@ public class GerenteAdministradoraFactory {
 	 *            the cotacoes
 	 * @return the gerente administradora
 	 */
-	public static GerenteAdministradora criGerenteAdministradora(final Administradora admin,
-			final Collection<Predio> predios, final Date dataCadastro, final String nome, final String sobrenome,
-			final String email, final String telefone, final String celular, final String fax,
-			final String telefoneComercial, final Collection<Boolean> recebeCotacaoPredios,
-			final boolean recebeEmailMkt, final String senha, final Collection<Cotacao> cotacoes) {
+	public static GerenteAdministradora criaGerenteAdministradora(
+			final Administradora admin, final Collection<Predio> predios,
+			final Date dataCadastro, final String nome, final String sobrenome,
+			final String email, final String telefone, final String celular,
+			final String fax, final String telefoneComercial,
+			final Collection<Boolean> recebeCotacaoPredios,
+			final boolean recebeEmailMkt, final String senha,
+			final Collection<Cotacao> cotacoes) {
 		GerenteAdministradora gerente = new GerenteAdministradora();
 		gerente.setAdministradora(admin);
 		gerente.setPredios(predios);

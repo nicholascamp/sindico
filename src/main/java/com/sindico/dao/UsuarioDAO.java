@@ -2,17 +2,19 @@ package com.sindico.dao;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.sindico.entity.Usuario;
 
 /**
  * The Class UsuarioDAO.
  */
+@Repository
 public class UsuarioDAO {
 
 	/** The session factory. */
 	@Autowired
-	private SessionFactory sessionFactory;
+	private SessionFactory	sessionFactory;
 
 	/**
 	 * Adiciona usuario.
@@ -32,7 +34,8 @@ public class UsuarioDAO {
 	 *            the id
 	 */
 	public void removeUsuario(final Long id) {
-		Usuario usuario = (Usuario) sessionFactory.getCurrentSession().load(Usuario.class, id);
+		Usuario usuario = (Usuario) sessionFactory.getCurrentSession().load(
+				Usuario.class, id);
 		if (usuario != null) {
 			sessionFactory.getCurrentSession().delete(usuario);
 		}
