@@ -22,7 +22,7 @@ import com.sindico.entity.Usuario;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:sindico-beans.xml")
+@ContextConfiguration("classpath:sindico-beans-test.xml")
 @TransactionConfiguration
 @Transactional
 public class UserTest {
