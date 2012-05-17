@@ -14,7 +14,7 @@ public class UsuarioDAO {
 
 	/** The session factory. */
 	@Autowired
-	private SessionFactory	sessionFactory;
+	private SessionFactory sessionFactory;
 
 	/**
 	 * Adiciona usuario.
@@ -34,8 +34,7 @@ public class UsuarioDAO {
 	 *            the id
 	 */
 	public void removeUsuario(final Long id) {
-		Usuario usuario = (Usuario) sessionFactory.getCurrentSession().load(
-				Usuario.class, id);
+		Usuario usuario = (Usuario) sessionFactory.getCurrentSession().load(Usuario.class, id);
 		if (usuario != null) {
 			sessionFactory.getCurrentSession().delete(usuario);
 		}

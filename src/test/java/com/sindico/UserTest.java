@@ -14,7 +14,7 @@ import com.sindico.dao.UsuarioDAO;
 import com.sindico.entity.Usuario;
 
 /**
- * 
+ * The Class UserTest.
  */
 
 /**
@@ -27,9 +27,13 @@ import com.sindico.entity.Usuario;
 @Transactional
 public class UserTest {
 
+	/** The usuario dao. */
 	@Autowired
-	private UsuarioDAO	usuarioDAO;
+	private UsuarioDAO usuarioDAO;
 
+	/**
+	 * Test criar usuario.
+	 */
 	@Test
 	public void testCriarUsuario() {
 		Usuario usuario = new Usuario();

@@ -1,5 +1,6 @@
 package com.sindico.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,94 +16,74 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "USUARIO")
-public class Usuario {
+public class Usuario implements Serializable {
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 5734174882704951761L;
 
 	/** The codigo. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "USUARIO_ID")
-	private int		codigo;
+	private Long codigo;
 
 	/** The nome. */
 	@Column(name = "NOME", length = 20)
-	private String	nome;
+	private String nome;
 
 	/** The sobrenome. */
 	@Column(name = "SOBRENOME", length = 45)
-	private String	sobrenome;
+	private String sobrenome;
 
 	/** The senha. */
 	@Column(name = "SENHA", length = 10)
-	private String	senha;
+	private String senha;
 
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20)
-	private String	telefone;
+	private String telefone;
 
 	/** The celular. */
 	@Column(name = "CELULAR", length = 20)
-	private String	celular;
+	private String celular;
 
 	/** The fax. */
 	@Column(name = "FAX", length = 20)
-	private String	fax;
+	private String fax;
 
 	/** The telefone comercial. */
 	@Column(name = "TELEFONE_COMERCIAL", length = 20)
-	private String	telefoneComercial;
+	private String telefoneComercial;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
-	private Date	dataCadastro;
+	private Date dataCadastro;
 
 	/** The data nascimento. */
 	@Column(name = "DATA_NASCIMENTO")
-	private Date	dataNascimento;
+	private Date dataNascimento;
 
 	/** The email. */
 	@Column(name = "EMAIL", length = 50)
-	private String	email;
+	private String email;
 
 	/** The recebe cotacao. */
 	@Column(name = "RECEBE_COTACAO")
-	private boolean	recebeCotacao;
+	private boolean recebeCotacao;
 
 	/** The tipo. */
 	@Column(name = "TIPO")
-	private char	tipo;				// s = sindico, c = conselho, m
-										// = morador e z = zelador
-
-	// /** The cotacoes. */
-	// @ManyToMany(mappedBy = "usuarios")
-	// private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	private char tipo; // s = sindico, c = conselho, m
+						// = morador e z = zelador
 
 	/**
 	 * Gets the codigo.
 	 * 
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
-
-	/**
-	 * Gets the cotacoes.
-	 * 
-	 * @return the cotacoes
-	 */
-	// public Collection<Cotacao> getCotacoes() {
-	// return cotacoes;
-	// }
-
-	/**
-	 * Sets the cotacoes.
-	 * 
-	 * @param cotacoes
-	 *            the new cotacoes
-	 */
-	// public void setCotacoes(final Collection<Cotacao> cotacoes) {
-	// this.cotacoes = cotacoes;
-	// }
 
 	/**
 	 * Sets the codigo.
@@ -110,7 +91,7 @@ public class Usuario {
 	 * @param codigo
 	 *            the new codigo
 	 */
-	public void setCodigo(final int codigo) {
+	public void setCodigo(final Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -341,5 +322,9 @@ public class Usuario {
 	public void setTipo(final char tipo) {
 		this.tipo = tipo;
 	}
+
+	// /** The cotacoes. */
+	// @ManyToMany(mappedBy = "usuarios")
+	// private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
 
 }

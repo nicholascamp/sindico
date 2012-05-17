@@ -17,14 +17,12 @@
 
 	<context:component-scan base-package="com.sindico" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:advice/>
 
-
-<!-- 	<bean id="messageSource" -->
-<!-- 		class="br.org.sesc.commons.rest.MessageSourceLocaleResolverByThread"> -->
-<!-- 		<property name="basename" value="locale/exceptions" /> -->
-<!-- 	</bean> -->
-
-<!-- 	<bean id="localeResolver" -->
-<!-- 		class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" /> -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+		
+		<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" 
+                p:sessionFactory-ref="sessionFactory" />
 
 </beans>
