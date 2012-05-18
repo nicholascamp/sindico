@@ -1,127 +1,64 @@
 package com.sindico.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Cotacao;
+import com.sindico.entity.Fornecedor;
 
 /**
  * The Class CotacaoDAO.
  */
+@Repository
 public class CotacaoDAO {
+	/** The session factory. */
+	@Autowired
+	private SessionFactory	sessionFactory;
 
-	/**
-	 * Salva cotacao.
-	 * 
-	 * @param cotacao
-	 *            the cotacao
-	 */
-	public static void salvaCotacao(final Cotacao cotacao) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.saveObject(session, cotacao);
-			HibernateFactory.tearDown(session);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+	@Transactional
+	public Cotacao criaCotacao(final Cotacao cotacao) {
+		sessionFactory.getCurrentSession().save(cotacao);
+		return cotacao;
+	}
+
+
+	public Cotacao atualizaCotacao(final Cotacao cotacao) {
+		sessionFactory.getCurrentSession().update(cotacao);
+		return cotacao;
+	}
+
+
+	public Cotacao recuperaCotacao(final Long id) {
+		return (Cotacao) sessionFactory.getCurrentSession().load(Cotacao.class,
+				id);
+	}
+
+
+	public void removeCotacao(final Long id) {
+		Cotacao cotacao = (Cotacao) sessionFactory.getCurrentSession().load(
+				Cotacao.class, id);
+		if (cotacao != null) {
+			sessionFactory.getCurrentSession().delete(cotacao);
 		}
 	}
 
-	/**
-	 * Salva cotacao.
-	 * 
-	 * @param cotacao
-	 *            the cotacao
-	 * @param session
-	 *            the session
-	 */
-	public static void salvaCotacao(final Cotacao cotacao, final Session session) {
-		try {
-			HibernateFactory.saveObject(session, cotacao);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	@SuppressWarnings("unchecked")
+	public List<Cotacao> listaCotacao() {
+		List<Cotacao> cotacao = new ArrayList<Cotacao>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select cotacao from Cotacao cotacao");
+		cotacao = query.list();
+
+		return cotacao;
 	}
-
-	/**
-	 * Deleta cotacao.
-	 * 
-	 * @param cotacao
-	 *            the cotacao
-	 */
-	public static void deletaCotacao(final Cotacao cotacao) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.deleteObject(session, cotacao);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deleta cotacao.
-	 * 
-	 * @param cotacao
-	 *            the cotacao
-	 * @param session
-	 *            the session
-	 */
-	public static void deletaCotacao(final Cotacao cotacao, final Session session) {
-		try {
-			HibernateFactory.deleteObject(session, cotacao);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza cotacao.
-	 * 
-	 * @param cotacao
-	 *            the cotacao
-	 */
-	public static void atualizaCotacao(final Cotacao cotacao) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.updateObject(session, cotacao);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza cotacao.
-	 * 
-	 * @param cotacao
-	 *            the cotacao
-	 * @param session
-	 *            the session
-	 */
-	public static void atualizaCotacao(final Cotacao cotacao, final Session session) {
-		try {
-			HibernateFactory.updateObject(session, cotacao);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

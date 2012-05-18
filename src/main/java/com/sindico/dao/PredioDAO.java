@@ -1,127 +1,62 @@
 package com.sindico.dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Predio;
 
 /**
  * The Class PredioDAO.
  */
+@Repository
 public class PredioDAO {
+	/** The session factory. */
+	@Autowired
+	private SessionFactory	sessionFactory;
 
-	/**
-	 * Salva predio.
-	 * 
-	 * @param predio
-	 *            the predio
-	 */
-	public static void salvaPredio(final Predio predio) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.saveObject(session, predio);
-			HibernateFactory.tearDown(session);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+	@Transactional
+	public Predio criaPredio(final Predio predio) {
+		sessionFactory.getCurrentSession().save(predio);
+		return predio;
+	}
+
+
+	public Predio atualizaPredio(final Predio predio) {
+		sessionFactory.getCurrentSession().update(predio);
+		return predio;
+	}
+
+
+	public Predio recuperaPredio(final Long id) {
+		return (Predio) sessionFactory.getCurrentSession().load(Predio.class,
+				id);
+	}
+
+
+	public void removePredio(final Long id) {
+		Predio predio = (Predio) sessionFactory.getCurrentSession().load(
+				Predio.class, id);
+		if (predio != null) {
+			sessionFactory.getCurrentSession().delete(predio);
 		}
 	}
 
-	/**
-	 * Salva predio.
-	 * 
-	 * @param predio
-	 *            the predio
-	 * @param session
-	 *            the session
-	 */
-	public static void salvaPredio(final Predio predio, final Session session) {
-		try {
-			HibernateFactory.saveObject(session, predio);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	@SuppressWarnings("unchecked")
+	public List<Predio> listaPredios() {
+		List<Predio> predio = new ArrayList<Predio>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select predio from Predio predio");
+		predio = query.list();
 
-	/**
-	 * Deleta predio.
-	 * 
-	 * @param predio
-	 *            the predio
-	 */
-	public static void deletaPredio(final Predio predio) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.deleteObject(session, predio);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deleta predio.
-	 * 
-	 * @param predio
-	 *            the predio
-	 * @param session
-	 *            the session
-	 */
-	public static void deletaPredio(final Predio predio, final Session session) {
-		try {
-			HibernateFactory.deleteObject(session, predio);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza predio.
-	 * 
-	 * @param predio
-	 *            the predio
-	 */
-	public static void atualizaPredio(final Predio predio) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.updateObject(session, predio);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza predio.
-	 * 
-	 * @param predio
-	 *            the predio
-	 * @param session
-	 *            the session
-	 */
-	public static void atualizaPredio(final Predio predio, final Session session) {
-		try {
-			HibernateFactory.updateObject(session, predio);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		return predio;
 	}
 
 }

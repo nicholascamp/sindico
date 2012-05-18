@@ -1,130 +1,63 @@
 package com.sindico.dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.GerenteAdministradora;
 
 /**
  * The Class GerenteAdministradoraDAO.
  */
+@Repository
 public class GerenteAdministradoraDAO {
 
-	/**
-	 * Salva gerente administradora.
-	 * 
-	 * @param gerenteAdministradora
-	 *            the gerente administradora
-	 */
-	public static void salvaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.saveObject(session, gerenteAdministradora);
-			HibernateFactory.tearDown(session);
+	/** The session factory. */
+	@Autowired
+	private SessionFactory	sessionFactory;
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+
+	@Transactional
+	public GerenteAdministradora criaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora) {
+		sessionFactory.getCurrentSession().save(gerenteAdministradora);
+		return gerenteAdministradora;
+	}
+
+
+	public GerenteAdministradora atualizaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora) {
+		sessionFactory.getCurrentSession().update(gerenteAdministradora);
+		return gerenteAdministradora;
+	}
+
+
+	public GerenteAdministradora recuperaGerenteAdministradora(final Long id) {
+		return (GerenteAdministradora) sessionFactory.getCurrentSession().load(GerenteAdministradora.class,
+				id);
+	}
+
+
+	public void removeGerenteAdministradora(final Long id) {
+		GerenteAdministradora gerenteAdministradora = (GerenteAdministradora) sessionFactory.getCurrentSession().load(
+				GerenteAdministradora.class, id);
+		if (gerenteAdministradora != null) {
+			sessionFactory.getCurrentSession().delete(gerenteAdministradora);
 		}
 	}
 
-	/**
-	 * Salva gerente administradora.
-	 * 
-	 * @param gerenteAdministradora
-	 *            the gerente administradora
-	 * @param session
-	 *            the session
-	 */
-	public static void salvaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora,
-			final Session session) {
-		try {
-			HibernateFactory.saveObject(session, gerenteAdministradora);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	@SuppressWarnings("unchecked")
+	public List<GerenteAdministradora> listaGerenteAdministradora() {
+		List<GerenteAdministradora> gerenteAdministradora = new ArrayList<GerenteAdministradora>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select gerenteAdministradora from GerenteAdministradora gerenteAdministradora");
+		gerenteAdministradora = query.list();
 
-	/**
-	 * Deleta gerente administradora.
-	 * 
-	 * @param gerenteAdministradora
-	 *            the gerente administradora
-	 */
-	public static void deletaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.deleteObject(session, gerenteAdministradora);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deleta gerente administradora.
-	 * 
-	 * @param gerenteAdministradora
-	 *            the gerente administradora
-	 * @param session
-	 *            the session
-	 */
-	public static void deletaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora,
-			final Session session) {
-		try {
-			HibernateFactory.deleteObject(session, gerenteAdministradora);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza gerente administradora.
-	 * 
-	 * @param gerenteAdministradora
-	 *            the gerente administradora
-	 */
-	public static void atualizaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.updateObject(session, gerenteAdministradora);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza gerente administradora.
-	 * 
-	 * @param gerenteAdministradora
-	 *            the gerente administradora
-	 * @param session
-	 *            the session
-	 */
-	public static void atualizaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora,
-			final Session session) {
-		try {
-			HibernateFactory.updateObject(session, gerenteAdministradora);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		return gerenteAdministradora;
 	}
 
 }

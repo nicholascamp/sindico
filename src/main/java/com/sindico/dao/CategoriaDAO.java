@@ -1,127 +1,62 @@
 package com.sindico.dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Categoria;
 
 /**
  * The Class CategoriaDAO.
  */
+@Repository
 public class CategoriaDAO {
 
-	/**
-	 * Salva categoria.
-	 * 
-	 * @param categoria
-	 *            the categoria
-	 */
-	public static void salvaCategoria(final Categoria categoria) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.saveObject(session, categoria);
-			HibernateFactory.tearDown(session);
+	/** The session factory. */
+	@Autowired
+	private SessionFactory	sessionFactory;
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+
+	@Transactional
+	public Categoria criaCategoria(final Categoria categoria) {
+		sessionFactory.getCurrentSession().save(categoria);
+		return categoria;
+	}
+
+
+	public Categoria atualizaCategoria(final Categoria categoria) {
+		sessionFactory.getCurrentSession().update(categoria);
+		return categoria;
+	}
+
+
+	public Categoria recuperaCategoria(final Long id) {
+		return (Categoria) sessionFactory.getCurrentSession().load(Categoria.class,
+				id);
+	}
+
+
+	public void removeCategoria(final Long id) {
+		Categoria categoria = (Categoria) sessionFactory.getCurrentSession().load(
+				Categoria.class, id);
+		if (categoria != null) {
+			sessionFactory.getCurrentSession().delete(categoria);
 		}
 	}
 
-	/**
-	 * Salva categoria.
-	 * 
-	 * @param categoria
-	 *            the categoria
-	 * @param session
-	 *            the session
-	 */
-	public static void salvaCategoria(final Categoria categoria, final Session session) {
-		try {
-			HibernateFactory.saveObject(session, categoria);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	@SuppressWarnings("unchecked")
+	public List<Categoria> listaCategoria() {
+		List<Categoria> categoria = new ArrayList<Categoria>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select categoria from Categoria categoria");
+		categoria = query.list();
+
+		return categoria;
 	}
-
-	/**
-	 * Deleta categoria.
-	 * 
-	 * @param categoria
-	 *            the categoria
-	 */
-	public static void deletaCategoria(final Categoria categoria) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.deleteObject(session, categoria);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deleta categoria.
-	 * 
-	 * @param categoria
-	 *            the categoria
-	 * @param session
-	 *            the session
-	 */
-	public static void deletaCategoria(final Categoria categoria, final Session session) {
-		try {
-			HibernateFactory.deleteObject(session, categoria);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza categoria.
-	 * 
-	 * @param categoria
-	 *            the categoria
-	 */
-	public static void atualizaCategoria(final Categoria categoria) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.updateObject(session, categoria);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza categoria.
-	 * 
-	 * @param categoria
-	 *            the categoria
-	 * @param session
-	 *            the session
-	 */
-	public static void atualizaCategoria(final Categoria categoria, final Session session) {
-		try {
-			HibernateFactory.updateObject(session, categoria);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

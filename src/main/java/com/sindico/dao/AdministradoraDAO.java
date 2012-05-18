@@ -1,81 +1,44 @@
 package com.sindico.dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Administradora;
 
+@Repository
 public class AdministradoraDAO {
-	public static void salvaAdministradora(final Administradora administradora) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.saveObject(session, administradora);
-			HibernateFactory.tearDown(session);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+	/** The session factory. */
+	@Autowired
+	private SessionFactory	sessionFactory;
+
+	@Transactional
+	public Administradora criaAdministradora(final Administradora administradora) {
+		sessionFactory.getCurrentSession().save(administradora);
+		return administradora;
+	}
+
+	public void removeAdministradora(final Long id) {
+		Administradora administradora = (Administradora) sessionFactory
+				.getCurrentSession().load(Administradora.class, id);
+		if (administradora != null) {
+			sessionFactory.getCurrentSession().delete(administradora);
 		}
 	}
 
-	public static void salvaAdministradora(final Administradora administradora, final Session session) {
-		try {
-			HibernateFactory.saveObject(session, administradora);
+	@SuppressWarnings("unchecked")
+	public List<Administradora> listaUsuarios() {
+		List<Administradora> administradoras = new ArrayList<Administradora>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select administradora from Usuario administradora");
+		administradoras = query.list();
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		return administradoras;
 	}
-
-	public static void deletaAdministradora(final Administradora administradora) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.deleteObject(session, administradora);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void deletaAdministradora(final Administradora administradora, final Session session) {
-		try {
-			HibernateFactory.deleteObject(session, administradora);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void atualizaAdministradora(final Administradora administradora) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.updateObject(session, administradora);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void atualizaAdministradora(final Administradora administradora, final Session session) {
-		try {
-			HibernateFactory.updateObject(session, administradora);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

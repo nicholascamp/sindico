@@ -1,127 +1,63 @@
 package com.sindico.dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Fornecedor;
 
 /**
  * The Class FornecedorDAO.
  */
+@Repository
 public class FornecedorDAO {
 
-	/**
-	 * Salva fornecedor.
-	 * 
-	 * @param fornecedor
-	 *            the fornecedor
-	 */
-	public static void salvaFornecedor(final Fornecedor fornecedor) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.saveObject(session, fornecedor);
-			HibernateFactory.tearDown(session);
+	/** The session factory. */
+	@Autowired
+	private SessionFactory	sessionFactory;
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+
+	@Transactional
+	public Fornecedor criaFornecedor(final Fornecedor fornecedor) {
+		sessionFactory.getCurrentSession().save(fornecedor);
+		return fornecedor;
+	}
+
+
+	public Fornecedor atualizaFornecedor(final Fornecedor fornecedor) {
+		sessionFactory.getCurrentSession().update(fornecedor);
+		return fornecedor;
+	}
+
+
+	public Fornecedor recuperaFornecedor(final Long id) {
+		return (Fornecedor) sessionFactory.getCurrentSession().load(Fornecedor.class,
+				id);
+	}
+
+
+	public void removeFornecedor(final Long id) {
+		Fornecedor fornecedor = (Fornecedor) sessionFactory.getCurrentSession().load(
+				Fornecedor.class, id);
+		if (fornecedor != null) {
+			sessionFactory.getCurrentSession().delete(fornecedor);
 		}
 	}
 
-	/**
-	 * Salva fornecedor.
-	 * 
-	 * @param fornecedor
-	 *            the fornecedor
-	 * @param session
-	 *            the session
-	 */
-	public static void salvaFornecedor(final Fornecedor fornecedor, final Session session) {
-		try {
-			HibernateFactory.saveObject(session, fornecedor);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> listaFornecedores() {
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select fornecedor from Fornecedor fornecedor");
+		fornecedores = query.list();
 
-	/**
-	 * Deleta fornecedor.
-	 * 
-	 * @param fornecedor
-	 *            the fornecedor
-	 */
-	public static void deletaFornecedor(final Fornecedor fornecedor) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.deleteObject(session, fornecedor);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deleta fornecedor.
-	 * 
-	 * @param fornecedor
-	 *            the fornecedor
-	 * @param session
-	 *            the session
-	 */
-	public static void deletaFornecedor(final Fornecedor fornecedor, final Session session) {
-		try {
-			HibernateFactory.deleteObject(session, fornecedor);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza fornecedor.
-	 * 
-	 * @param fornecedor
-	 *            the fornecedor
-	 */
-	public static void atualizaFornecedor(final Fornecedor fornecedor) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.updateObject(session, fornecedor);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza fornecedor.
-	 * 
-	 * @param fornecedor
-	 *            the fornecedor
-	 * @param session
-	 *            the session
-	 */
-	public static void atualizaFornecedor(final Fornecedor fornecedor, final Session session) {
-		try {
-			HibernateFactory.updateObject(session, fornecedor);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		return fornecedores;
 	}
 
 }
