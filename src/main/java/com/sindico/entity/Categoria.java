@@ -31,6 +31,14 @@ public class Categoria {
 	@OneToMany(mappedBy = "categoria")
 	Collection<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
 
+	public Collection<Subcategoria> getSubcategorias() {
+		return subcategorias;
+	}
+
+	public void setSubcategorias(Collection<Subcategoria> subcategorias) {
+		this.subcategorias = subcategorias;
+	}
+
 	/**
 	 * Gets the codigo.
 	 * 
