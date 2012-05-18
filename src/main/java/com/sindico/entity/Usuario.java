@@ -1,13 +1,23 @@
 package com.sindico.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.sindico.enums.TipoUsuario;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -71,19 +81,13 @@ public class Usuario implements Serializable {
 
 	/** The tipo. */
 	@Column(name = "TIPO")
-	private char				tipo;										// s
-																			// =
-																			// sindico,
-																			// c
-																			// =
-																			// conselho,
-																			// m
-																			// =
-																			// morador
-																			// e
-																			// z
-																			// =
-																			// zelador
+	private TipoUsuario			tipo;
+
+	/** The cotacoes. */
+	@Transient
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+	private Collection<Cotacao>	cotacoes			= new ArrayList<Cotacao>();
 
 	/**
 	 * Gets the id.
@@ -318,7 +322,7 @@ public class Usuario implements Serializable {
 	 * 
 	 * @return the tipo
 	 */
-	public char getTipo() {
+	public TipoUsuario getTipo() {
 		return tipo;
 	}
 
@@ -328,12 +332,27 @@ public class Usuario implements Serializable {
 	 * @param tipo
 	 *            the new tipo
 	 */
-	public void setTipo(final char tipo) {
+	public void setTipo(final TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
 
-	// /** The cotacoes. */
-	// @ManyToMany(mappedBy = "usuarios")
-	// private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	/**
+	 * Gets the cotacoes.
+	 * 
+	 * @return the cotacoes
+	 */
+	public Collection<Cotacao> getCotacoes() {
+		return cotacoes;
+	}
+
+	/**
+	 * Sets the cotacoes.
+	 * 
+	 * @param cotacoes
+	 *            the new cotacoes
+	 */
+	public void setCotacoes(final Collection<Cotacao> cotacoes) {
+		this.cotacoes = cotacoes;
+	}
 
 }

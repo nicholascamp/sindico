@@ -65,7 +65,7 @@ public class GerenteAdministradoraFactory {
 		gerente.setCelular(celular);
 		gerente.setFax(fax);
 		gerente.setTelefoneComercial(telefoneComercial);
-		gerente.setRecebeCotacaoPredios(recebeCotacaoPredios);
+		// gerente.setRecebeCotacaoPredios(recebeCotacaoPredios);
 		gerente.setRecebeEmailMkt(recebeEmailMkt);
 		gerente.setSenha(senha);
 		gerente.setCotacoes(cotacoes);

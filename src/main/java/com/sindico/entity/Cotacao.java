@@ -14,6 +14,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.NotNull;
+
+import com.sindico.enums.Status;
+
+// TODO: Auto-generated Javadoc
 /**
  * The Class Cotacao.
  */
@@ -25,49 +30,52 @@ public class Cotacao {
 	@Id
 	@GeneratedValue
 	@Column(name = "COTACAO_ID")
-	private int codigo;
+	private int						codigo;
 
 	/** The data. */
 	@Column(name = "DATA")
-	private Date data;
+	private Date					data;
 
 	/** The subcategoria. */
 	@ManyToOne
 	@JoinColumn(name = "SUBCATEGORIA_ID")
-	private Subcategoria subcategoria;
+	private Subcategoria			subcategoria;
 
 	/** The status. */
 	@Column(name = "STATUS")
-	private char status; // a = aberto, t = trabalho e f = fechado
+	private Status					status;
 
 	/** The aprovada. */
 	@Column(name = "APROVADA")
-	private boolean aprovada;
+	private boolean					aprovada;
 
-	/** The usuarios. */
-	@ManyToMany
-	@JoinTable(name = "COTACAO_USUARIO", joinColumns = @JoinColumn(name = "COTACAO_ID"), inverseJoinColumns = @JoinColumn(name = "USUARIO_ID"))
-	private Collection<Usuario> usuarios = new ArrayList<Usuario>();
+	/** The usuario. */
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "USUARIO_ID")
+	private Usuario					usuario;
 
 	/** The administradora. */
 	@ManyToOne
 	@JoinColumn(name = "ADMINISTRADORA_ID")
-	private Administradora administradora;
+	private Administradora			administradora;
 
 	/** The gerente admin. */
 	@ManyToOne
 	@JoinColumn(name = "GERENTE_ID")
-	private GerenteAdministradora gerenteAdmin;
+	private GerenteAdministradora	gerenteAdmin;
 
 	/** The fornecedores. */
 	@ManyToMany
-	@JoinTable(name = "COTACAO_FORNECEDOR", joinColumns = @JoinColumn(name = "COTACAO_ID"), inverseJoinColumns = @JoinColumn(name = "FORNECEDOR_ID"))
-	private Collection<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+	@JoinTable(name = "COTACAO_FORNECEDOR", joinColumns = @JoinColumn(
+			name = "COTACAO_ID"), inverseJoinColumns = @JoinColumn(
+			name = "FORNECEDOR_ID"))
+	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
 
 	/** The fornecedor vencedor. */
 	@ManyToOne
 	@JoinColumn(name = "FORNECEDOR_ID")
-	private Fornecedor fornecedorVencedor;
+	private Fornecedor				fornecedorVencedor;
 
 	/**
 	 * Gets the codigo.
@@ -131,7 +139,7 @@ public class Cotacao {
 	 * 
 	 * @return the status
 	 */
-	public char getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
@@ -141,7 +149,7 @@ public class Cotacao {
 	 * @param status
 	 *            the new status
 	 */
-	public void setStatus(final char status) {
+	public void setStatus(final Status status) {
 		this.status = status;
 	}
 
@@ -165,22 +173,22 @@ public class Cotacao {
 	}
 
 	/**
-	 * Gets the usuarios.
+	 * Gets the usuario.
 	 * 
-	 * @return the usuarios
+	 * @return the usuario
 	 */
-	public Collection<Usuario> getUsuarios() {
-		return usuarios;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	/**
-	 * Sets the usuarios.
+	 * Sets the usuario.
 	 * 
-	 * @param usuarios
-	 *            the new usuarios
+	 * @param usuario
+	 *            the new usuario
 	 */
-	public void setUsuarios(final Collection<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public void setUsuario(final Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	/**

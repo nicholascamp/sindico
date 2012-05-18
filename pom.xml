@@ -36,7 +36,7 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>3.6.10.Final</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
@@ -48,7 +48,7 @@
 			<artifactId>xstream</artifactId>
 			<version>1.3.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
@@ -142,8 +142,39 @@
 			<version>1.6.0</version>
 		</dependency>
 
+		<!-- MySQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.19</version>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<finalName>sindico</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<configuration>
+					<contextPath>/sindico</contextPath>
+					<!-- <contextHandlers> -->
+					<!-- <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext"> -->
+					<!-- <war>target/dependency/administrativo.war</war> -->
+					<!-- <contextPath>/administrativo</contextPath> -->
+					<!-- </contextHandler> -->
+					<!-- <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext"> -->
+					<!-- <war>target/dependency/guideline.war</war> -->
+					<!-- <contextPath>/guideline</contextPath> -->
+					<!-- </contextHandler> -->
+					<!-- <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext"> -->
+					<!-- <war>target/dependency/upload.war</war> -->
+					<!-- <contextPath>/upload</contextPath> -->
+					<!-- </contextHandler> -->
+<!-- 				</contextHandlers> -->
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

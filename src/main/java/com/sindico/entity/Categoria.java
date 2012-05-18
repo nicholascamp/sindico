@@ -5,10 +5,15 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * The Class Categoria.
@@ -21,21 +26,34 @@ public class Categoria {
 	@Id
 	@GeneratedValue
 	@Column(name = "CATEGORIA_ID")
-	private int codigo;
+	private int					codigo;
 
 	/** The nome. */
 	@Column(name = "NOME")
-	private String nome;
+	private String				nome;
 
 	/** The subcategorias. */
-	@OneToMany(mappedBy = "categoria")
-	Collection<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
+	@Transient
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
+	Collection<Subcategoria>	subcategorias	= new ArrayList<Subcategoria>();
 
+	/**
+	 * Gets the subcategorias.
+	 * 
+	 * @return the subcategorias
+	 */
 	public Collection<Subcategoria> getSubcategorias() {
 		return subcategorias;
 	}
 
-	public void setSubcategorias(Collection<Subcategoria> subcategorias) {
+	/**
+	 * Sets the subcategorias.
+	 * 
+	 * @param subcategorias
+	 *            the new subcategorias
+	 */
+	public void setSubcategorias(final Collection<Subcategoria> subcategorias) {
 		this.subcategorias = subcategorias;
 	}
 

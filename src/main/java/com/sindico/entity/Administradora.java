@@ -7,12 +7,17 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * The Class Administradora.
@@ -25,44 +30,49 @@ public class Administradora {
 	@Id
 	@GeneratedValue
 	@Column(name = "ADMINISTRADORA_ID")
-	private int codigo;
+	private int									codigo;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
-	private Date dataCadastro;
+	private Date								dataCadastro;
 
 	/** The cnpj. */
 	@Column(name = "CNJPJ", length = 20)
-	private String cnpj;
+	private String								cnpj;
 
 	/** The enderecos. */
 	@ElementCollection
-	@JoinTable(name = "ENDERECO", joinColumns = @JoinColumn(name = "ADMINISTRADORA_ID"))
-	private Collection<Endereco> enderecos = new ArrayList<Endereco>();
+	@JoinTable(name = "ENDERECO", joinColumns = @JoinColumn(
+			name = "ADMINISTRADORA_ID"))
+	private Collection<Endereco>				enderecos	= new ArrayList<Endereco>();
 
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20)
-	private String telefone;
+	private String								telefone;
 
 	/** The celular. */
 	@Column(name = "CELULAR", length = 20)
-	private String celular;
+	private String								celular;
 
 	/** The fax. */
 	@Column(name = "FAX", length = 20)
-	private String fax;
+	private String								fax;
 
 	/** The telefone comercial. */
 	@Column(name = "TELEFONE_COMERCIAL", length = 20)
-	private String telefoneComercial;
+	private String								telefoneComercial;
 
 	/** The gerentes. */
-	@OneToMany(mappedBy = "administradora")
-	private Collection<GerenteAdministradora> gerentes = new ArrayList<GerenteAdministradora>();
+	@Transient
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "administradora", fetch = FetchType.EAGER)
+	private Collection<GerenteAdministradora>	gerentes	= new ArrayList<GerenteAdministradora>();
 
 	/** The cotacoes. */
-	@OneToMany(mappedBy = "administradora")
-	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	@Transient
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "administradora", fetch = FetchType.EAGER)
+	private Collection<Cotacao>					cotacoes	= new ArrayList<Cotacao>();
 
 	/**
 	 * Gets the cotacoes.

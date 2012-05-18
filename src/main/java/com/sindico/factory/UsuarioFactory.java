@@ -1,8 +1,11 @@
 package com.sindico.factory;
 
+import java.util.Collection;
 import java.util.Date;
 
+import com.sindico.entity.Cotacao;
 import com.sindico.entity.Usuario;
+import com.sindico.enums.TipoUsuario;
 
 /**
  * A factory for creating Usuario objects.
@@ -45,8 +48,8 @@ public class UsuarioFactory {
 			final String celular, final String fax,
 			final String telefoneComercial, final Date dataCadastro,
 			final Date dataNascimento, final String email,
-			final boolean recebeCotacao, final char tipo) {
-		// , final Collection<Cotacao> cotacoes) {
+			final boolean recebeCotacao, final TipoUsuario tipo,
+			final Collection<Cotacao> cotacoes) {
 		Usuario usuario = new Usuario();
 		usuario.setNome(nome);
 		usuario.setSobrenome(sobrenome);
@@ -60,7 +63,7 @@ public class UsuarioFactory {
 		usuario.setEmail(email);
 		usuario.setRecebeCotacao(recebeCotacao);
 		usuario.setTipo(tipo);
-		// usuario.setCotacoes(cotacoes);
+		usuario.setCotacoes(cotacoes);
 		return usuario;
 	}
 

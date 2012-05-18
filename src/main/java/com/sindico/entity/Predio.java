@@ -22,48 +22,47 @@ public class Predio {
 
 	/** The arquivo foto. */
 	@Column(name = "ARQUIVO_FOTO")
-	private String arquivoFoto; // REVER
+	private String					arquivoFoto;			// REVER
 
 	/** The cnpj. */
 	@Column(name = "CNPJ")
-	private String cnpj;
+	private String					cnpj;
 
 	/** The codigo. */
 	@Id
 	@GeneratedValue
 	@Column(name = "PREDIO_ID")
-	private int codigo;
+	private int						codigo;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
-	private Date dataCadastro;
+	private Date					dataCadastro;
 
 	/** The endereco. */
 	@Embedded
 	@JoinTable(name = "ENDERECO")
-	private Endereco endereco;
+	private Endereco				endereco;
 
 	/** The nome. */
 	@Column(name = "NOME")
-	private String nome;
+	private String					nome;
 
 	/** The numero apartamentos. */
 	@Column(name = "NUMERO_APARTAMENTOS")
-	private int numeroApartamentos;
+	private int						numeroApartamentos;
 
 	/** The tipo. */
 	@Column(name = "TIPO")
-	private char tipo;
+	private char					tipo;
 
 	/** The gerente. */
 	@ManyToOne
 	@JoinColumn(name = "GERENTE_ID")
-	private GerenteAdministradora gerente;
+	private GerenteAdministradora	gerente;
 
 	/** The gerente recebe cotacao. */
-	@ManyToOne
-	@JoinColumn(name = "GERENTE_ID")
-	private boolean gerenteRecebeCotacao;
+	@JoinColumn(name = "GERENTE_COTACAO")
+	private boolean					gerenteRecebeCotacao;
 
 	/**
 	 * Gets the arquivo foto.

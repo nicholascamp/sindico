@@ -24,64 +24,67 @@ public class GerenteAdministradora {
 	@Id
 	@GeneratedValue
 	@Column(name = "GERENTE_ID")
-	private int codigo;
+	private int					codigo;
 
 	/** The administradora. */
 	@ManyToOne
 	@JoinColumn(name = "ADMINISTRADORA_ID")
-	private Administradora administradora;
+	private Administradora		administradora;
 
 	/** The predios. */
 	@OneToMany(mappedBy = "gerente")
-	private Collection<Predio> predios = new ArrayList<Predio>();
+	private Collection<Predio>	predios		= new ArrayList<Predio>();
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
-	private Date dataCadastro;
+	private Date				dataCadastro;
 
 	/** The nome. */
 	@Column(name = "NOME")
-	private String nome;
+	private String				nome;
 
 	/** The sobrenome. */
 	@Column(name = "SOBRENOME")
-	private String sobrenome;
+	private String				sobrenome;
 
 	/** The email. */
 	@Column(name = "EMAIL")
-	private String email;
+	private String				email;
 
 	/** The telefone. */
 	@Column(name = "TELEFONE")
-	private String telefone;
+	private String				telefone;
 
 	/** The celular. */
 	@Column(name = "CELULAR")
-	private String celular;
+	private String				celular;
 
 	/** The fax. */
 	@Column(name = "FAX")
-	private String fax;
+	private String				fax;
 
 	/** The telefone comercial. */
 	@Column(name = "TELEFONE_COMERCIAL")
-	private String telefoneComercial;
+	private String				telefoneComercial;
 
 	/** The recebe cotacao predios. */
-	@OneToMany(mappedBy = "gerenteRecebeCotacao")
-	private Collection<Boolean> recebeCotacaoPredios; // TIRAR DUVIDA E REVER
+	// @OneToMany(mappedBy = "gerenteRecebeCotacao")
+	// private Collection<Boolean> recebeCotacaoPredios; // TIRAR
+	// DUVIDA
+	// E
+	// REVER
 
 	/** The recebe email mkt. */
 	@Column(name = "RECEBE_EMAIL_MKT")
-	private boolean recebeEmailMkt;
+	private boolean				recebeEmailMkt;
 
 	/** The senha. */
 	@Column(name = "SENHA")
-	private String senha;
+	private String				senha;
 
 	/** The cotacoes. */
 	@OneToMany(mappedBy = "gerenteAdmin")
-	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	private Collection<Cotacao>	cotacoes	= new ArrayList<Cotacao>();
 
 	/**
 	 * Gets the cotacoes.
@@ -311,24 +314,25 @@ public class GerenteAdministradora {
 		this.telefoneComercial = telefoneComercial;
 	}
 
-	/**
-	 * Gets the recebe cotacao predios.
-	 * 
-	 * @return the recebe cotacao predios
-	 */
-	public Collection<Boolean> getRecebeCotacaoPredios() {
-		return recebeCotacaoPredios;
-	}
-
-	/**
-	 * Sets the recebe cotacao predios.
-	 * 
-	 * @param recebeCotacaoPredios
-	 *            the new recebe cotacao predios
-	 */
-	public void setRecebeCotacaoPredios(final Collection<Boolean> recebeCotacaoPredios) {
-		this.recebeCotacaoPredios = recebeCotacaoPredios;
-	}
+	// /**
+	// * Gets the recebe cotacao predios.
+	// *
+	// * @return the recebe cotacao predios
+	// */
+	// public Collection<Boolean> getRecebeCotacaoPredios() {
+	// return recebeCotacaoPredios;
+	// }
+	//
+	// /**
+	// * Sets the recebe cotacao predios.
+	// *
+	// * @param recebeCotacaoPredios
+	// * the new recebe cotacao predios
+	// */
+	// public void setRecebeCotacaoPredios(
+	// final Collection<Boolean> recebeCotacaoPredios) {
+	// this.recebeCotacaoPredios = recebeCotacaoPredios;
+	// }
 
 	/**
 	 * Checks if is recebe email mkt.
