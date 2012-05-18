@@ -36,6 +36,30 @@ public class UsuarioDAO {
 	}
 
 	/**
+	 * Atualiza usuario.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 * @return the usuario
+	 */
+	public Usuario atualizaUsuario(final Usuario usuario) {
+		sessionFactory.getCurrentSession().update(usuario);
+		return usuario;
+	}
+
+	/**
+	 * Recupera usuario.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the usuario
+	 */
+	public Usuario recuperaUsuario(final Long id) {
+		return (Usuario) sessionFactory.getCurrentSession().load(Usuario.class,
+				id);
+	}
+
+	/**
 	 * Removes the usuario.
 	 * 
 	 * @param id
