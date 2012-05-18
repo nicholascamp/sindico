@@ -1,7 +1,11 @@
 package com.sindico.dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sindico.entity.Subcategoria;
 
@@ -10,118 +14,49 @@ import com.sindico.entity.Subcategoria;
  */
 public class SubcategoriaDAO {
 
+	/** The session factory. */
+	@Autowired
+	private SessionFactory	sessionFactory;
+
 	/**
-	 * Salva subcategoria.
+	 * Cria sub categoria.
 	 * 
 	 * @param subcategoria
 	 *            the subcategoria
+	 * @return the subcategoria
 	 */
-	public static void salvaSubcategoria(final Subcategoria subcategoria) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.saveObject(session, subcategoria);
-			HibernateFactory.tearDown(session);
+	public Subcategoria criaSubCategoria(final Subcategoria subcategoria) {
+		sessionFactory.getCurrentSession().save(subcategoria);
+		return subcategoria;
+	}
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+	/**
+	 * Removes the subcategoria.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public void removeSubcategoria(final Long id) {
+		Subcategoria subcategoria = (Subcategoria) sessionFactory
+				.getCurrentSession().load(Subcategoria.class, id);
+		if (subcategoria != null) {
+			sessionFactory.getCurrentSession().delete(subcategoria);
 		}
 	}
 
 	/**
-	 * Salva subcategoria.
+	 * Lista subcategorias.
 	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 * @param session
-	 *            the session
+	 * @return the list
 	 */
-	public static void salvaSubcategoria(final Subcategoria subcategoria, final Session session) {
-		try {
-			HibernateFactory.saveObject(session, subcategoria);
+	@SuppressWarnings("unchecked")
+	public List<Subcategoria> listaSubcategorias() {
+		List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select subcategoria from Subcategoria subcategoria");
+		subcategorias = query.list();
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deleta subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 */
-	public static void deletaSubcategoria(final Subcategoria subcategoria) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.deleteObject(session, subcategoria);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deleta subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 * @param session
-	 *            the session
-	 */
-	public static void deletaSubcategoria(final Subcategoria subcategoria, final Session session) {
-		try {
-			HibernateFactory.deleteObject(session, subcategoria);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 */
-	public static void atualizaSubcategoria(final Subcategoria subcategoria) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.updateObject(session, subcategoria);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 * @param session
-	 *            the session
-	 */
-	public static void atualizaSubcategoria(final Subcategoria subcategoria, final Session session) {
-		try {
-			HibernateFactory.updateObject(session, subcategoria);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		return subcategorias;
 	}
 
 }

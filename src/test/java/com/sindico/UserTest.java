@@ -2,6 +2,7 @@ package com.sindico;
 
 import junit.framework.Assert;
 
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,16 @@ public class UserTest {
 
 	/** The usuario dao. */
 	@Autowired
-	private UsuarioDAO	usuarioDAO;
+	private UsuarioDAO		usuarioDAO;
+
+	@Autowired
+	private SessionFactory	sessionFactory;
 
 	/**
 	 * Test criar usuario.
 	 */
 	@Test
-	public void testCriarUsuario() {
+	public void testCriarListarERemoverUsuario() {
 		Usuario usuario = new Usuario();
 		usuario.setNome("Nome");
 		usuario.setCelular("11 77779999");
@@ -44,6 +48,13 @@ public class UserTest {
 		Usuario usuarioNovo = usuarioDAO.criaUsuario(usuario);
 
 		Assert.assertNotNull("Usuario esperado: ", usuarioNovo);
+		Assert.assertEquals("Usuarios criados: ", 1, usuarioDAO.listaUsuarios()
+				.size());
+
+		usuarioDAO.removeUsuario(usuarioNovo.getId());
+
+		Assert.assertEquals("Usuarios criados: ", 0, usuarioDAO.listaUsuarios()
+				.size());
 
 	}
 
