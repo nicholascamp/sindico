@@ -1,127 +1,30 @@
 package com.sindico.dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.sindico.entity.RespostaCotacao;
 
 /**
  * The Class RespostaCotacaoDAO.
  */
+@Repository
 public class RespostaCotacaoDAO {
 
-	/**
-	 * Salva resposta cotacao.
-	 * 
-	 * @param respostaCotacao
-	 *            the resposta cotacao
-	 */
-	public static void salvaRespostaCotacao(final RespostaCotacao respostaCotacao) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.saveObject(session, respostaCotacao);
-			HibernateFactory.tearDown(session);
+	@Autowired
+	private SessionFactory sessionFactory;
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+	public RespostaCotacao criaRespostaCotacao(final RespostaCotacao respostaCotacao) {
+		return (RespostaCotacao) sessionFactory.getCurrentSession().save(respostaCotacao);
 	}
 
-	/**
-	 * Salva resposta cotacao.
-	 * 
-	 * @param respostaCotacao
-	 *            the resposta cotacao
-	 * @param session
-	 *            the session
-	 */
-	public static void salvaRespostaCotacao(final RespostaCotacao respostaCotacao, final Session session) {
-		try {
-			HibernateFactory.saveObject(session, respostaCotacao);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+	public void removeRespostaCotacao(final Long id) {
+		RespostaCotacao respostaCotacao = (RespostaCotacao) sessionFactory.getCurrentSession().load(RespostaCotacao.class, id);
+		if (respostaCotacao != null) {
+			sessionFactory.getCurrentSession().delete(respostaCotacao);
 		}
 	}
-
-	/**
-	 * Deleta resposta cotacao.
-	 * 
-	 * @param respostaCotacao
-	 *            the resposta cotacao
-	 */
-	public static void deletaRespostaCotacao(final RespostaCotacao respostaCotacao) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.deleteObject(session, respostaCotacao);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deleta resposta cotacao.
-	 * 
-	 * @param respostaCotacao
-	 *            the resposta cotacao
-	 * @param session
-	 *            the session
-	 */
-	public static void deletaRespostaCotacao(final RespostaCotacao respostaCotacao, final Session session) {
-		try {
-			HibernateFactory.deleteObject(session, respostaCotacao);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza resposta cotacao.
-	 * 
-	 * @param respostaCotacao
-	 *            the resposta cotacao
-	 */
-	public static void atualizaRespostaCotacao(final RespostaCotacao respostaCotacao) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.updateObject(session, respostaCotacao);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza resposta cotacao.
-	 * 
-	 * @param respostaCotacao
-	 *            the resposta cotacao
-	 * @param session
-	 *            the session
-	 */
-	public static void atualizaRespostaCotacao(final RespostaCotacao respostaCotacao, final Session session) {
-		try {
-			HibernateFactory.updateObject(session, respostaCotacao);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

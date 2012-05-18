@@ -1,127 +1,30 @@
 package com.sindico.dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.sindico.entity.Subcategoria;
 
 /**
  * The Class SubcategoriaDAO.
  */
+@Repository
 public class SubcategoriaDAO {
 
-	/**
-	 * Salva subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 */
-	public static void salvaSubcategoria(final Subcategoria subcategoria) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.saveObject(session, subcategoria);
-			HibernateFactory.tearDown(session);
+	@Autowired
+	private SessionFactory sessionFactory;
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+	public Subcategoria criaSubcategoria(final Subcategoria subcategoria) {
+		return (Subcategoria) sessionFactory.getCurrentSession().save(subcategoria);
 	}
 
-	/**
-	 * Salva subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 * @param session
-	 *            the session
-	 */
-	public static void salvaSubcategoria(final Subcategoria subcategoria, final Session session) {
-		try {
-			HibernateFactory.saveObject(session, subcategoria);
 
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+	public void removeSubcategoria(final Long id) {
+		Subcategoria subcategoria = (Subcategoria) sessionFactory.getCurrentSession().load(Subcategoria.class, id);
+		if (subcategoria != null) {
+			sessionFactory.getCurrentSession().delete(subcategoria);
 		}
 	}
-
-	/**
-	 * Deleta subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 */
-	public static void deletaSubcategoria(final Subcategoria subcategoria) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.deleteObject(session, subcategoria);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deleta subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 * @param session
-	 *            the session
-	 */
-	public static void deletaSubcategoria(final Subcategoria subcategoria, final Session session) {
-		try {
-			HibernateFactory.deleteObject(session, subcategoria);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 */
-	public static void atualizaSubcategoria(final Subcategoria subcategoria) {
-		try {
-			Session session = HibernateFactory.setUp();
-			HibernateFactory.updateObject(session, subcategoria);
-			HibernateFactory.tearDown(session);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Atualiza subcategoria.
-	 * 
-	 * @param subcategoria
-	 *            the subcategoria
-	 * @param session
-	 *            the session
-	 */
-	public static void atualizaSubcategoria(final Subcategoria subcategoria, final Session session) {
-		try {
-			HibernateFactory.updateObject(session, subcategoria);
-
-		} catch (HibernateException hbe) {
-			hbe.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }
