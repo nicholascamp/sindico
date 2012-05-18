@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:sindico-beans-test.xml")
+@ContextConfiguration("classpath:sindico-beans.xml")
 public class TestClass {
 
 	@Test

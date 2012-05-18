@@ -22,14 +22,14 @@ import com.sindico.entity.Usuario;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:sindico-beans-test.xml")
+@ContextConfiguration("classpath:sindico-beans.xml")
 @TransactionConfiguration
 @Transactional
 public class UserTest {
 
 	/** The usuario dao. */
 	@Autowired
-	private UsuarioDAO usuarioDAO;
+	private UsuarioDAO	usuarioDAO;
 
 	/**
 	 * Test criar usuario.
