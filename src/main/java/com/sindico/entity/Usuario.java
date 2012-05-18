@@ -1,12 +1,10 @@
 package com.sindico.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,83 +14,90 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "USUARIO")
-public class Usuario implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 5734174882704951761L;
+public class Usuario {
 
 	/** The codigo. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "USUARIO_ID")
-	private Long codigo;
+	@GeneratedValue
+	private Long	id;
 
 	/** The nome. */
 	@Column(name = "NOME", length = 20)
-	private String nome;
+	private String	nome;
 
 	/** The sobrenome. */
 	@Column(name = "SOBRENOME", length = 45)
-	private String sobrenome;
+	private String	sobrenome;
 
 	/** The senha. */
 	@Column(name = "SENHA", length = 10)
-	private String senha;
+	private String	senha;
 
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20)
-	private String telefone;
+	private String	telefone;
 
 	/** The celular. */
 	@Column(name = "CELULAR", length = 20)
-	private String celular;
+	private String	celular;
 
 	/** The fax. */
 	@Column(name = "FAX", length = 20)
-	private String fax;
+	private String	fax;
 
 	/** The telefone comercial. */
 	@Column(name = "TELEFONE_COMERCIAL", length = 20)
-	private String telefoneComercial;
+	private String	telefoneComercial;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
-	private Date dataCadastro;
+	private Date	dataCadastro;
 
 	/** The data nascimento. */
 	@Column(name = "DATA_NASCIMENTO")
-	private Date dataNascimento;
+	private Date	dataNascimento;
 
 	/** The email. */
 	@Column(name = "EMAIL", length = 50)
-	private String email;
+	private String	email;
 
 	/** The recebe cotacao. */
 	@Column(name = "RECEBE_COTACAO")
-	private boolean recebeCotacao;
+	private boolean	recebeCotacao;
 
 	/** The tipo. */
 	@Column(name = "TIPO")
-	private char tipo; // s = sindico, c = conselho, m
-						// = morador e z = zelador
+	private char	tipo;				// s
+										// =
+										// sindico,
+										// c
+										// =
+										// conselho,
+										// m
+										// =
+										// morador
+										// e
+										// z
+										// =
+										// zelador
 
 	/**
-	 * Gets the codigo.
+	 * Gets the id.
 	 * 
-	 * @return the codigo
+	 * @return the id
 	 */
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * Sets the codigo.
+	 * Sets the id.
 	 * 
-	 * @param codigo
-	 *            the new codigo
+	 * @param id
+	 *            the new id
 	 */
-	public void setCodigo(final Long codigo) {
-		this.codigo = codigo;
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
 	/**
