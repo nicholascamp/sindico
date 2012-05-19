@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -100,6 +101,7 @@ public class Fornecedor {
 
 	/** The email. */
 	@ElementCollection
+	@CollectionTable(name="FORNECEDOR_EMAIL", joinColumns=@JoinColumn(name="FORNECEDOR_ID"))
 	private Collection<String> email = new ArrayList<String>();
 
 	/** The recebe cotacao email1. */

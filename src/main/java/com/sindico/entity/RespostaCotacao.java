@@ -3,11 +3,13 @@ package com.sindico.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -45,6 +47,7 @@ public class RespostaCotacao {
 
 	/** The lista respostas. */
 	@ElementCollection
+	@CollectionTable(name="RESPOSTA_COTACAO_LISTA", joinColumns=@JoinColumn(name="RESPOSTA_COTACAO_ID"))
 	private Collection<String> listaRespostas = new ArrayList<String>();
 
 	/** The atende area. */
