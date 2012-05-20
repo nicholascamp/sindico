@@ -1,6 +1,5 @@
 package com.sindico.dao;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -14,14 +13,26 @@ import org.junit.Before;
 import com.sindico.entity.Endereco;
 import com.sindico.factory.AdministradoraFactory;
 
-public class AdministradoraDAOTeste extends TestCase implements Test{
+/**
+ * The Class AdministradoraDAOTeste.
+ */
+public class AdministradoraDAOTeste extends TestCase implements Test {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		System.out.println("Iniciando teste AdministradoraDAO...");
 	}
-	
-	public void testAdministradoraDAO(){
+
+	/**
+	 * Test administradora dao.
+	 */
+	public void testAdministradoraDAO() {
 		Endereco endereco = new Endereco();
 		endereco.setBairro("Vila Maria Alta");
 		endereco.setCep("02126-070");
@@ -30,14 +41,20 @@ public class AdministradoraDAOTeste extends TestCase implements Test{
 		endereco.setEndereco("Rua Marquê de Pombal");
 		endereco.setNumero(271);
 		endereco.setEstado("SP");
-		
+
 		Collection<Endereco> enderecos = new ArrayList<Endereco>();
 		enderecos.add(endereco);
-		
-		AdministradoraFactory.criaAdministradora(new Date(), "12345678910", 
-				enderecos , "11 2967-2420", "11 8561-6083", "", "", null, null);
+
+		AdministradoraFactory.criaAdministradora(new Date(), "12345678910",
+				enderecos, "11 2967-2420", "11 8561-6083", "", "", null, null);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see junit.framework.TestCase#tearDown()
+	 */
+	@Override
 	@After
 	public void tearDown() throws Exception {
 		System.out.println("Finalizando teste AdministradoraDAO.");

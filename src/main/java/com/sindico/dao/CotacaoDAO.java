@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Cotacao;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CotacaoDAO.
  */
@@ -20,26 +21,49 @@ public class CotacaoDAO {
 	@Autowired
 	private SessionFactory	sessionFactory;
 
-
+	/**
+	 * Cria cotacao.
+	 * 
+	 * @param cotacao
+	 *            the cotacao
+	 * @return the cotacao
+	 */
 	@Transactional
 	public Cotacao criaCotacao(final Cotacao cotacao) {
 		sessionFactory.getCurrentSession().save(cotacao);
 		return cotacao;
 	}
 
-
+	/**
+	 * Atualiza cotacao.
+	 * 
+	 * @param cotacao
+	 *            the cotacao
+	 * @return the cotacao
+	 */
 	public Cotacao atualizaCotacao(final Cotacao cotacao) {
 		sessionFactory.getCurrentSession().update(cotacao);
 		return cotacao;
 	}
 
-
+	/**
+	 * Recupera cotacao.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the cotacao
+	 */
 	public Cotacao recuperaCotacao(final Long id) {
 		return (Cotacao) sessionFactory.getCurrentSession().load(Cotacao.class,
 				id);
 	}
 
-
+	/**
+	 * Removes the cotacao.
+	 * 
+	 * @param id
+	 *            the id
+	 */
 	public void removeCotacao(final Long id) {
 		Cotacao cotacao = (Cotacao) sessionFactory.getCurrentSession().load(
 				Cotacao.class, id);
@@ -48,7 +72,11 @@ public class CotacaoDAO {
 		}
 	}
 
-
+	/**
+	 * Lista cotacao.
+	 * 
+	 * @return the list
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Cotacao> listaCotacao() {
 		List<Cotacao> cotacao = new ArrayList<Cotacao>();

@@ -2,7 +2,6 @@ package com.sindico;
 
 import junit.framework.Assert;
 
-import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sindico.dao.UsuarioDAO;
 import com.sindico.entity.Usuario;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UserTest.
  */
@@ -30,10 +30,10 @@ public class UserTest {
 
 	/** The usuario dao. */
 	@Autowired
-	private UsuarioDAO		usuarioDAO;
+	private UsuarioDAO	usuarioDAO;
 
-	@Autowired
-	private SessionFactory	sessionFactory;
+	// @Autowired
+	// private SessionFactory sessionFactory;
 
 	/**
 	 * Test criar usuario.
