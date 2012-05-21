@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.NotNull;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Predio.
@@ -25,7 +27,8 @@ public class Predio {
 	private String					arquivoFoto;			// REVER
 
 	/** The cnpj. */
-	@Column(name = "CNPJ")
+	@Column(name = "CNPJ", length = 20, unique = true, nullable = false)
+	@NotNull(message="Predio deve ter um CNPJ")
 	private String					cnpj;
 
 	/** The codigo. */
@@ -44,7 +47,8 @@ public class Predio {
 	private Endereco				endereco;
 
 	/** The nome. */
-	@Column(name = "NOME")
+	@Column(name = "NOME", nullable = false, length = 120)
+	@NotNull(message="Prédio deve ter um nome")
 	private String					nome;
 
 	/** The numero apartamentos. */
@@ -57,11 +61,11 @@ public class Predio {
 
 	/** The gerente. */
 	@ManyToOne
-	@JoinColumn(name = "GERENTE_ID")
+	@JoinColumn(name = "GERENTE_ID") // TODOO PREDIO TEM UM GERENTE???
 	private GerenteAdministradora	gerente;
 
 	/** The gerente recebe cotacao. */
-	@JoinColumn(name = "GERENTE_COTACAO")
+	@Column(name = "GERENTE_COTACAO")
 	private boolean					gerenteRecebeCotacao;
 
 	/**

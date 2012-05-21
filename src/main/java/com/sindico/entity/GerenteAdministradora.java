@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.NotNull;
+
 /**
  * The Class GerenteAdministradora.
  */
@@ -29,6 +31,7 @@ public class GerenteAdministradora {
 	/** The administradora. */
 	@ManyToOne
 	@JoinColumn(name = "ADMINISTRADORA_ID")
+	@NotNull(message="Gerente deve pertencer a uma Administradora")
 	private Administradora		administradora;
 
 	/** The predios. */
@@ -40,46 +43,29 @@ public class GerenteAdministradora {
 	private Date				dataCadastro;
 
 	/** The nome. */
-	@Column(name = "NOME")
+	@Column(name = "NOME", length = 50, nullable= false)
+	@NotNull(message = "Gerente deve ter um nome")
 	private String				nome;
 
-	/** The sobrenome. */
-	@Column(name = "SOBRENOME")
-	private String				sobrenome;
-
 	/** The email. */
-	@Column(name = "EMAIL")
+	@Column(name = "EMAIL", length = 60, nullable = false, unique = true)
+	@NotNull(message="Gerente deve ter um email")
 	private String				email;
 
 	/** The telefone. */
-	@Column(name = "TELEFONE")
+	@Column(name = "TELEFONE", length = 20)
 	private String				telefone;
 
 	/** The celular. */
-	@Column(name = "CELULAR")
+	@Column(name = "CELULAR", length = 20)
 	private String				celular;
-
-	/** The fax. */
-	@Column(name = "FAX")
-	private String				fax;
-
-	/** The telefone comercial. */
-	@Column(name = "TELEFONE_COMERCIAL")
-	private String				telefoneComercial;
-
-	/** The recebe cotacao predios. */
-	// @OneToMany(mappedBy = "gerenteRecebeCotacao")
-	// private Collection<Boolean> recebeCotacaoPredios; // TIRAR
-	// DUVIDA
-	// E
-	// REVER
 
 	/** The recebe email mkt. */
 	@Column(name = "RECEBE_EMAIL_MKT")
 	private boolean				recebeEmailMkt;
 
 	/** The senha. */
-	@Column(name = "SENHA")
+	@Column(name = "SENHA", length = 20)
 	private String				senha;
 
 	/** The cotacoes. */
@@ -201,25 +187,6 @@ public class GerenteAdministradora {
 	}
 
 	/**
-	 * Gets the sobrenome.
-	 * 
-	 * @return the sobrenome
-	 */
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	/**
-	 * Sets the sobrenome.
-	 * 
-	 * @param sobrenome
-	 *            the new sobrenome
-	 */
-	public void setSobrenome(final String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
-
-	/**
 	 * Gets the email.
 	 * 
 	 * @return the email
@@ -275,64 +242,6 @@ public class GerenteAdministradora {
 	public void setCelular(final String celular) {
 		this.celular = celular;
 	}
-
-	/**
-	 * Gets the fax.
-	 * 
-	 * @return the fax
-	 */
-	public String getFax() {
-		return fax;
-	}
-
-	/**
-	 * Sets the fax.
-	 * 
-	 * @param fax
-	 *            the new fax
-	 */
-	public void setFax(final String fax) {
-		this.fax = fax;
-	}
-
-	/**
-	 * Gets the telefone comercial.
-	 * 
-	 * @return the telefone comercial
-	 */
-	public String getTelefoneComercial() {
-		return telefoneComercial;
-	}
-
-	/**
-	 * Sets the telefone comercial.
-	 * 
-	 * @param telefoneComercial
-	 *            the new telefone comercial
-	 */
-	public void setTelefoneComercial(final String telefoneComercial) {
-		this.telefoneComercial = telefoneComercial;
-	}
-
-	// /**
-	// * Gets the recebe cotacao predios.
-	// *
-	// * @return the recebe cotacao predios
-	// */
-	// public Collection<Boolean> getRecebeCotacaoPredios() {
-	// return recebeCotacaoPredios;
-	// }
-	//
-	// /**
-	// * Sets the recebe cotacao predios.
-	// *
-	// * @param recebeCotacaoPredios
-	// * the new recebe cotacao predios
-	// */
-	// public void setRecebeCotacaoPredios(
-	// final Collection<Boolean> recebeCotacaoPredios) {
-	// this.recebeCotacaoPredios = recebeCotacaoPredios;
-	// }
 
 	/**
 	 * Checks if is recebe email mkt.

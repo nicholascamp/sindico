@@ -37,8 +37,9 @@ public class Cotacao {
 	private Date					data;
 
 	/** The subcategoria. */
-	@ManyToOne
+	@ManyToOne(optional=false)
 	@JoinColumn(name = "SUBCATEGORIA_ID")
+	@NotNull(message="É necessário definir uma subcategoria")
 	private Subcategoria			subcategoria;
 
 	/** The status. */
@@ -46,19 +47,14 @@ public class Cotacao {
 	private Status					status;
 
 	/** The aprovada. */
-	@Column(name = "APROVADA")
-	private boolean					aprovada;
+	@Column(name = "IMPROPRIA")
+	private boolean					impropria;
 
 	/** The usuario. */
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "USUARIO_ID")
 	private Usuario					usuario;
-
-	/** The administradora. */
-	@ManyToOne
-	@JoinColumn(name = "ADMINISTRADORA_ID")
-	private Administradora			administradora;
 
 	/** The gerente admin. */
 	@ManyToOne
@@ -70,12 +66,25 @@ public class Cotacao {
 	@JoinTable(name = "COTACAO_FORNECEDOR", joinColumns = @JoinColumn(
 			name = "COTACAO_ID"), inverseJoinColumns = @JoinColumn(
 			name = "FORNECEDOR_ID"))
+	@NotNull
 	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
 
 	/** The fornecedor vencedor. */
 	@ManyToOne
 	@JoinColumn(name = "FORNECEDOR_ID")
 	private Fornecedor				fornecedorVencedor;
+	
+	@Column(name="TITULO", columnDefinition="TEXT", nullable=false)
+	private String titulo;
+	
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
 	/**
 	 * Gets the codigo.
@@ -153,23 +162,14 @@ public class Cotacao {
 		this.status = status;
 	}
 
-	/**
-	 * Checks if is aprovada.
-	 * 
-	 * @return true, if is aprovada
-	 */
-	public boolean isAprovada() {
-		return aprovada;
+	
+
+	public boolean isImpropria() {
+		return impropria;
 	}
 
-	/**
-	 * Sets the aprovada.
-	 * 
-	 * @param aprovada
-	 *            the new aprovada
-	 */
-	public void setAprovada(final boolean aprovada) {
-		this.aprovada = aprovada;
+	public void setImpropria(boolean impropria) {
+		this.impropria = impropria;
 	}
 
 	/**
@@ -189,25 +189,6 @@ public class Cotacao {
 	 */
 	public void setUsuario(final Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the administradora.
-	 * 
-	 * @return the administradora
-	 */
-	public Administradora getAdministradora() {
-		return administradora;
-	}
-
-	/**
-	 * Sets the administradora.
-	 * 
-	 * @param administradora
-	 *            the new administradora
-	 */
-	public void setAdministradora(final Administradora administradora) {
-		this.administradora = administradora;
 	}
 
 	/**

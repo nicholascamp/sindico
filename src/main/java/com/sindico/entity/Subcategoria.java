@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.NotNull;
+
 /**
  * The Class Subcategoria.
  */
@@ -29,10 +31,11 @@ public class Subcategoria {
 	/** The categoria. */
 	@ManyToOne
 	@JoinColumn(name = "CATEGORIA_ID")
+	@NotNull(message="Subcategoria deve pertencer a uma Categoria")
 	private Categoria categoria;
 
 	/** The title. */
-	@Column(name = "TITLE")
+	@Column(name = "TITLE", length = 200, nullable = false, unique = true)
 	private String title;
 
 	/** The fornecedores. */

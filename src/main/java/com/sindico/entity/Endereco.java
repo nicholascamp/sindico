@@ -13,31 +13,27 @@ import javax.persistence.Table;
 public class Endereco {
 
 	/** The bairro. */
-	@Column(name = "BAIRRO")
+	@Column(name = "BAIRRO", nullable=false, length = 100)
 	private String bairro;
 
 	/** The cep. */
-	@Column(name = "CEP")
+	@Column(name = "CEP", nullable=false, length = 10)
 	private String cep;
 
 	/** The cidade. */
-	@Column(name = "CIDADE")
+	@Column(name = "CIDADE", nullable=false, length = 100)
 	private String cidade;
 
-	/** The complemento. */
-	@Column(name = "COMPLEMENTO")
-	private String complemento;
-
 	/** The endereco. */
-	@Column(name = "RUA")
+	@Column(name = "RUA", nullable=false)
 	private String endereco;
 
 	/** The estado. */
-	@Column(name = "ESTADO")
+	@Column(name = "ESTADO", nullable=false, length = 2)
 	private String estado;
 
 	/** The numero. */
-	@Column(name = "NUMERO")
+	@Column(name = "NUMERO", nullable=false)
 	private int numero;
 
 	/**
@@ -66,16 +62,7 @@ public class Endereco {
 	public String getCidade() {
 		return cidade;
 	}
-
-	/**
-	 * Gets the complemento.
-	 * 
-	 * @return the complemento
-	 */
-	public String getComplemento() {
-		return complemento;
-	}
-
+	
 	/**
 	 * Gets the endereco.
 	 * 
@@ -133,15 +120,6 @@ public class Endereco {
 		this.cidade = cidade;
 	}
 
-	/**
-	 * Sets the complemento.
-	 * 
-	 * @param complemento
-	 *            the new complemento
-	 */
-	public void setComplemento(final String complemento) {
-		this.complemento = complemento;
-	}
 
 	/**
 	 * Sets the endereco.

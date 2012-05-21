@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.NotNull;
 
 import com.sindico.enums.TipoUsuario;
 
@@ -36,15 +37,13 @@ public class Usuario implements Serializable {
 	private Long				id;
 
 	/** The nome. */
-	@Column(name = "NOME", length = 20)
+	@Column(name = "NOME", length = 60, nullable = false)
+	@NotNull(message="Usuário deve ter um nome")
 	private String				nome;
 
-	/** The sobrenome. */
-	@Column(name = "SOBRENOME", length = 45)
-	private String				sobrenome;
-
 	/** The senha. */
-	@Column(name = "SENHA", length = 10)
+	@Column(name = "SENHA", length = 20, nullable = false)
+	@NotNull(message="Usuário deve ter uma senha")
 	private String				senha;
 
 	/** The telefone. */
@@ -54,15 +53,7 @@ public class Usuario implements Serializable {
 	/** The celular. */
 	@Column(name = "CELULAR", length = 20)
 	private String				celular;
-
-	/** The fax. */
-	@Column(name = "FAX", length = 20)
-	private String				fax;
-
-	/** The telefone comercial. */
-	@Column(name = "TELEFONE_COMERCIAL", length = 20)
-	private String				telefoneComercial;
-
+	
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
 	private Date				dataCadastro;
@@ -72,7 +63,8 @@ public class Usuario implements Serializable {
 	private Date				dataNascimento;
 
 	/** The email. */
-	@Column(name = "EMAIL", length = 50)
+	@Column(name = "EMAIL", length = 50, nullable=false, unique = true)
+	@NotNull(message="Usuário deve possuir um email")
 	private String				email;
 
 	/** The recebe cotacao. */
@@ -125,25 +117,6 @@ public class Usuario implements Serializable {
 	 */
 	public void setNome(final String nome) {
 		this.nome = nome;
-	}
-
-	/**
-	 * Gets the sobrenome.
-	 * 
-	 * @return the sobrenome
-	 */
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	/**
-	 * Sets the sobrenome.
-	 * 
-	 * @param sobrenome
-	 *            the new sobrenome
-	 */
-	public void setSobrenome(final String sobrenome) {
-		this.sobrenome = sobrenome;
 	}
 
 	/**
@@ -201,44 +174,6 @@ public class Usuario implements Serializable {
 	 */
 	public void setCelular(final String celular) {
 		this.celular = celular;
-	}
-
-	/**
-	 * Gets the fax.
-	 * 
-	 * @return the fax
-	 */
-	public String getFax() {
-		return fax;
-	}
-
-	/**
-	 * Sets the fax.
-	 * 
-	 * @param fax
-	 *            the new fax
-	 */
-	public void setFax(final String fax) {
-		this.fax = fax;
-	}
-
-	/**
-	 * Gets the telefone comercial.
-	 * 
-	 * @return the telefone comercial
-	 */
-	public String getTelefoneComercial() {
-		return telefoneComercial;
-	}
-
-	/**
-	 * Sets the telefone comercial.
-	 * 
-	 * @param telefoneComercial
-	 *            the new telefone comercial
-	 */
-	public void setTelefoneComercial(final String telefoneComercial) {
-		this.telefoneComercial = telefoneComercial;
 	}
 
 	/**
