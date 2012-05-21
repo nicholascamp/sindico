@@ -45,6 +45,9 @@ public class Subcategoria {
 	/** The cotacoes. */
 	@OneToMany(mappedBy = "subcategoria")
 	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	
+	@OneToMany(mappedBy="subcategoria")
+	private Collection<Banner> banners = new ArrayList<Banner>();
 
 	/**
 	 * Gets the fornecedores.
@@ -54,6 +57,7 @@ public class Subcategoria {
 	public Collection<Fornecedor> getFornecedores() {
 		return fornecedores;
 	}
+	
 
 	/**
 	 * Sets the fornecedores.
