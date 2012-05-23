@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.NotNull;
 
 /**
  * The Class Categoria.
@@ -29,7 +30,8 @@ public class Categoria {
 	private int					codigo;
 
 	/** The nome. */
-	@Column(name = "NOME")
+	@Column(name = "NOME", length = 100, nullable=false, unique= true)
+	@NotNull(message="A Categorira necessita de um nome")
 	private String				nome;
 
 	/** The subcategorias. */

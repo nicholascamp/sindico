@@ -48,10 +48,8 @@ public class GerenteAdministradoraFactory {
 	 */
 	public static GerenteAdministradora criaGerenteAdministradora(
 			final Administradora admin, final Collection<Predio> predios,
-			final Date dataCadastro, final String nome, final String sobrenome,
+			final Date dataCadastro, final String nome,
 			final String email, final String telefone, final String celular,
-			final String fax, final String telefoneComercial,
-			final Collection<Boolean> recebeCotacaoPredios,
 			final boolean recebeEmailMkt, final String senha,
 			final Collection<Cotacao> cotacoes) {
 		GerenteAdministradora gerente = new GerenteAdministradora();
@@ -59,13 +57,9 @@ public class GerenteAdministradoraFactory {
 		gerente.setPredios(predios);
 		gerente.setDataCadastro(dataCadastro);
 		gerente.setNome(nome);
-		gerente.setSobrenome(sobrenome);
 		gerente.setEmail(email);
 		gerente.setTelefone(telefone);
 		gerente.setCelular(celular);
-		gerente.setFax(fax);
-		gerente.setTelefoneComercial(telefoneComercial);
-		// gerente.setRecebeCotacaoPredios(recebeCotacaoPredios);
 		gerente.setRecebeEmailMkt(recebeEmailMkt);
 		gerente.setSenha(senha);
 		gerente.setCotacoes(cotacoes);

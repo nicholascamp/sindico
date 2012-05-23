@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.validator.NotNull;
 
 /**
  * The Class Fornecedor.
@@ -34,29 +37,32 @@ public class Fornecedor {
 	private Date dataCadastro;
 
 	/** The nome. */
-	@Column(name = "NOME")
+	@Column(name = "NOME", nullable = false, length = 100)
+	@NotNull(message = "Fornecedor necessita de um nome")
 	private String nome;
 
 	/** The nome principal. */
-	@Column(name = "NOME_PRINCIPAL")
-	private String nomePrincipal; // REVER AMBIGUIDADE COM NOME
+	@Column(name = "NOME_PRINCIPAL", nullable = false)
+	private String nomePrincipal;
 
 	/** The logo. */
 	@Column(name = "LOGO")
 	private String logo;
 
 	/** The enderecos. */
-	@ElementCollection
-	@JoinTable(name = "ENDERECO", joinColumns = @JoinColumn(name = "ENDERECO_ID"))
-	private Collection<Endereco> enderecos = new ArrayList<Endereco>();
+	@Embedded
+	@JoinTable(name = "ENDERECO")
+	private Endereco endereco;
 
 	/** The cnpj. */
-	@Column(name = "CNPJ")
+	@Column(name = "CNPJ", length = 20, nullable = false, unique = true)
+	@NotNull(message="Fornecedor necessita de um CNPJ")
 	private String cnpj;
 
 	/** The subcategorias. */
 	@ManyToMany
 	@JoinTable(name = "FORNECEDOR_SUBCATEGORIA", joinColumns = @JoinColumn(name = "FORNECEDOR_ID"), inverseJoinColumns = @JoinColumn(name = "SUBCATEGORIA_ID"))
+	@NotNull
 	private Collection<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
 
 	/** The estrelas. */
@@ -72,20 +78,13 @@ public class Fornecedor {
 	private boolean aprovado;
 
 	/** The telefone. */
-	@Column(name = "TELEFONE")
+	@Column(name = "TELEFONE", length = 20, nullable = false)
+	@NotNull(message = "Fornecedor necessita de um telefone")
 	private String telefone;
 
-	/** The telefone comercial. */
-	@Column(name = "TELEFONE_COMERCIAL")
-	private String telefoneComercial;
-
 	/** The celular. */
-	@Column(name = "CELULAR")
+	@Column(name = "CELULAR", length = 20)
 	private String celular;
-
-	/** The fax. */
-	@Column(name = "FAX")
-	private String fax;
 
 	/** The slogan. */
 	@Column(name = "SLOGAN")
@@ -101,32 +100,8 @@ public class Fornecedor {
 
 	/** The email. */
 	@ElementCollection
-	@CollectionTable(name="FORNECEDOR_EMAIL", joinColumns=@JoinColumn(name="FORNECEDOR_ID"))
-	private Collection<String> email = new ArrayList<String>();
-
-	/** The recebe cotacao email1. */
-	@Column(name = "RECEBE_COTACAO_EMAIL1")
-	private boolean recebeCotacaoEmail1;
-
-	/** The recebe news email1. */
-	@Column(name = "RECEBE_NEWS_EMAIL1")
-	private boolean recebeNewsEmail1;
-
-	/** The recebe cotacao email2. */
-	@Column(name = "RECEBE_COTACAO_EMAIL2")
-	private boolean recebeCotacaoEmail2;
-
-	/** The recebe news email2. */
-	@Column(name = "RECEBE_NEWS_EMAIL2")
-	private boolean recebeNewsEmail2;
-
-	/** The recebe cotacao email3. */
-	@Column(name = "RECEBE_COTACAO_EMAIL3")
-	private boolean recebeCotacaoEmail3;
-
-	/** The recebe news email3. */
-	@Column(name = "RECEBE_NEWS_EMAIL3")
-	private boolean recebeNewsEmail3;
+	@CollectionTable(name="EMAIL_FORNECEDOR", joinColumns=@JoinColumn(name="FORNECEDOR_ID"))
+	private Collection<EmailFornecedor> email = new ArrayList<EmailFornecedor>();
 
 	/** The cotacoes. */
 	@ManyToMany(mappedBy = "fornecedores")
@@ -269,23 +244,14 @@ public class Fornecedor {
 		this.logo = logo;
 	}
 
-	/**
-	 * Gets the enderecos.
-	 * 
-	 * @return the enderecos
-	 */
-	public Collection<Endereco> getEnderecos() {
-		return enderecos;
+	
+
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	/**
-	 * Sets the enderecos.
-	 * 
-	 * @param enderecos
-	 *            the new enderecos
-	 */
-	public void setEnderecos(final Collection<Endereco> enderecos) {
-		this.enderecos = enderecos;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	/**
@@ -402,24 +368,6 @@ public class Fornecedor {
 		this.telefone = telefone;
 	}
 
-	/**
-	 * Gets the telefone comercial.
-	 * 
-	 * @return the telefone comercial
-	 */
-	public String getTelefoneComercial() {
-		return telefoneComercial;
-	}
-
-	/**
-	 * Sets the telefone comercial.
-	 * 
-	 * @param telefoneComercial
-	 *            the new telefone comercial
-	 */
-	public void setTelefoneComercial(final String telefoneComercial) {
-		this.telefoneComercial = telefoneComercial;
-	}
 
 	/**
 	 * Gets the celular.
@@ -440,25 +388,7 @@ public class Fornecedor {
 		this.celular = celular;
 	}
 
-	/**
-	 * Gets the fax.
-	 * 
-	 * @return the fax
-	 */
-	public String getFax() {
-		return fax;
-	}
-
-	/**
-	 * Sets the fax.
-	 * 
-	 * @param fax
-	 *            the new fax
-	 */
-	public void setFax(final String fax) {
-		this.fax = fax;
-	}
-
+	
 	/**
 	 * Gets the slogan.
 	 * 
@@ -516,137 +446,14 @@ public class Fornecedor {
 		this.title = title;
 	}
 
-	/**
-	 * Gets the email.
-	 * 
-	 * @return the email
-	 */
-	public Collection<String> getEmail() {
+	public Collection<EmailFornecedor> getEmail() {
 		return email;
 	}
 
-	/**
-	 * Sets the email.
-	 * 
-	 * @param email
-	 *            the new email
-	 */
-	public void setEmail(final Collection<String> email) {
+	public void setEmail(Collection<EmailFornecedor> email) {
 		this.email = email;
 	}
-
-	/**
-	 * Checks if is recebe cotacao email1.
-	 * 
-	 * @return true, if is recebe cotacao email1
-	 */
-	public boolean isRecebeCotacaoEmail1() {
-		return recebeCotacaoEmail1;
-	}
-
-	/**
-	 * Sets the recebe cotacao email1.
-	 * 
-	 * @param recebeCotacaoEmail1
-	 *            the new recebe cotacao email1
-	 */
-	public void setRecebeCotacaoEmail1(final boolean recebeCotacaoEmail1) {
-		this.recebeCotacaoEmail1 = recebeCotacaoEmail1;
-	}
-
-	/**
-	 * Checks if is recebe news email1.
-	 * 
-	 * @return true, if is recebe news email1
-	 */
-	public boolean isRecebeNewsEmail1() {
-		return recebeNewsEmail1;
-	}
-
-	/**
-	 * Sets the recebe news email1.
-	 * 
-	 * @param recebeNewsEmail1
-	 *            the new recebe news email1
-	 */
-	public void setRecebeNewsEmail1(final boolean recebeNewsEmail1) {
-		this.recebeNewsEmail1 = recebeNewsEmail1;
-	}
-
-	/**
-	 * Checks if is recebe cotacao email2.
-	 * 
-	 * @return true, if is recebe cotacao email2
-	 */
-	public boolean isRecebeCotacaoEmail2() {
-		return recebeCotacaoEmail2;
-	}
-
-	/**
-	 * Sets the recebe cotacao email2.
-	 * 
-	 * @param recebeCotacaoEmail2
-	 *            the new recebe cotacao email2
-	 */
-	public void setRecebeCotacaoEmail2(final boolean recebeCotacaoEmail2) {
-		this.recebeCotacaoEmail2 = recebeCotacaoEmail2;
-	}
-
-	/**
-	 * Checks if is recebe news email2.
-	 * 
-	 * @return true, if is recebe news email2
-	 */
-	public boolean isRecebeNewsEmail2() {
-		return recebeNewsEmail2;
-	}
-
-	/**
-	 * Sets the recebe news email2.
-	 * 
-	 * @param recebeNewsEmail2
-	 *            the new recebe news email2
-	 */
-	public void setRecebeNewsEmail2(final boolean recebeNewsEmail2) {
-		this.recebeNewsEmail2 = recebeNewsEmail2;
-	}
-
-	/**
-	 * Checks if is recebe cotacao email3.
-	 * 
-	 * @return true, if is recebe cotacao email3
-	 */
-	public boolean isRecebeCotacaoEmail3() {
-		return recebeCotacaoEmail3;
-	}
-
-	/**
-	 * Sets the recebe cotacao email3.
-	 * 
-	 * @param recebeCotacaoEmail3
-	 *            the new recebe cotacao email3
-	 */
-	public void setRecebeCotacaoEmail3(final boolean recebeCotacaoEmail3) {
-		this.recebeCotacaoEmail3 = recebeCotacaoEmail3;
-	}
-
-	/**
-	 * Checks if is recebe news email3.
-	 * 
-	 * @return true, if is recebe news email3
-	 */
-	public boolean isRecebeNewsEmail3() {
-		return recebeNewsEmail3;
-	}
-
-	/**
-	 * Sets the recebe news email3.
-	 * 
-	 * @param recebeNewsEmail3
-	 *            the new recebe news email3
-	 */
-	public void setRecebeNewsEmail3(final boolean recebeNewsEmail3) {
-		this.recebeNewsEmail3 = recebeNewsEmail3;
-	}
+	
+	
 
 }

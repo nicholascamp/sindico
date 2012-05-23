@@ -3,7 +3,6 @@ package com.sindico.factory;
 import java.util.Collection;
 import java.util.Date;
 
-import com.sindico.entity.Administradora;
 import com.sindico.entity.Cotacao;
 import com.sindico.entity.Fornecedor;
 import com.sindico.entity.GerenteAdministradora;
@@ -30,8 +29,6 @@ public class CotacaoFactory {
 	 *            the aprovada
 	 * @param usuario
 	 *            the usuario
-	 * @param administradora
-	 *            the administradora
 	 * @param gerente
 	 *            the gerente
 	 * @param fornecedores
@@ -42,8 +39,7 @@ public class CotacaoFactory {
 	 */
 	public static Cotacao criaCotacao(final Date data,
 			final Subcategoria subcategoria, final Status status,
-			final boolean aprovada, final Usuario usuario,
-			final Administradora administradora,
+			final boolean impropria, final Usuario usuario,
 			final GerenteAdministradora gerente,
 			final Collection<Fornecedor> fornecedores,
 			final Fornecedor fornecedorVencedor) {
@@ -51,9 +47,8 @@ public class CotacaoFactory {
 		cotacao.setData(data);
 		cotacao.setSubcategoria(subcategoria);
 		cotacao.setStatus(status);
-		cotacao.setAprovada(aprovada);
+		cotacao.setImpropria(impropria);
 		cotacao.setUsuario(usuario);
-		cotacao.setAdministradora(administradora);
 		cotacao.setGerenteAdmin(gerente);
 		cotacao.setFornecedores(fornecedores);
 		cotacao.setFornecedorVencedor(fornecedorVencedor);

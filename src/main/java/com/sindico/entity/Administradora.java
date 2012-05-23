@@ -5,12 +5,11 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +17,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.NotNull;
 
 /**
  * The Class Administradora.
@@ -35,15 +35,18 @@ public class Administradora {
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
 	private Date								dataCadastro;
+	
+	@Column(name="NOME", length = 60, nullable=false)
+	@NotNull(message="A Administradora necessita de um nome")
+	private String nome;
 
 	/** The cnpj. */
-	@Column(name = "CNJPJ", length = 20)
+	@Column(name = "CNPJ", length = 20, unique=true)
 	private String								cnpj;
 
 	/** The enderecos. */
-	@ElementCollection
-	@JoinTable(name = "ENDERECO", joinColumns = @JoinColumn(
-			name = "ADMINISTRADORA_ID"))
+	@Embedded
+	@JoinTable(name = "ENDERECO")
 	private Collection<Endereco>				enderecos	= new ArrayList<Endereco>();
 
 	/** The telefone. */
@@ -53,45 +56,11 @@ public class Administradora {
 	/** The celular. */
 	@Column(name = "CELULAR", length = 20)
 	private String								celular;
-
-	/** The fax. */
-	@Column(name = "FAX", length = 20)
-	private String								fax;
-
-	/** The telefone comercial. */
-	@Column(name = "TELEFONE_COMERCIAL", length = 20)
-	private String								telefoneComercial;
-
 	/** The gerentes. */
 	@Transient
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "administradora", fetch = FetchType.EAGER)
 	private Collection<GerenteAdministradora>	gerentes	= new ArrayList<GerenteAdministradora>();
-
-	/** The cotacoes. */
-	@Transient
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "administradora", fetch = FetchType.EAGER)
-	private Collection<Cotacao>					cotacoes	= new ArrayList<Cotacao>();
-
-	/**
-	 * Gets the cotacoes.
-	 * 
-	 * @return the cotacoes
-	 */
-	public Collection<Cotacao> getCotacoes() {
-		return cotacoes;
-	}
-
-	/**
-	 * Sets the cotacoes.
-	 * 
-	 * @param cotacoes
-	 *            the new cotacoes
-	 */
-	public void setCotacoes(final Collection<Cotacao> cotacoes) {
-		this.cotacoes = cotacoes;
-	}
 
 	/**
 	 * Gets the codigo.
@@ -110,6 +79,15 @@ public class Administradora {
 	 */
 	public void setCodigo(final int codigo) {
 		this.codigo = codigo;
+	}
+	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	/**
@@ -205,44 +183,6 @@ public class Administradora {
 	 */
 	public void setCelular(final String celular) {
 		this.celular = celular;
-	}
-
-	/**
-	 * Gets the fax.
-	 * 
-	 * @return the fax
-	 */
-	public String getFax() {
-		return fax;
-	}
-
-	/**
-	 * Sets the fax.
-	 * 
-	 * @param fax
-	 *            the new fax
-	 */
-	public void setFax(final String fax) {
-		this.fax = fax;
-	}
-
-	/**
-	 * Gets the telefone comercial.
-	 * 
-	 * @return the telefone comercial
-	 */
-	public String getTelefoneComercial() {
-		return telefoneComercial;
-	}
-
-	/**
-	 * Sets the telefone comercial.
-	 * 
-	 * @param telefoneComercial
-	 *            the new telefone comercial
-	 */
-	public void setTelefoneComercial(final String telefoneComercial) {
-		this.telefoneComercial = telefoneComercial;
 	}
 
 	/**

@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.NotNull;
+
 /**
  * The Class Subcategoria.
  */
@@ -29,10 +31,11 @@ public class Subcategoria {
 	/** The categoria. */
 	@ManyToOne
 	@JoinColumn(name = "CATEGORIA_ID")
+	@NotNull(message="Subcategoria deve pertencer a uma Categoria")
 	private Categoria categoria;
 
 	/** The title. */
-	@Column(name = "TITLE")
+	@Column(name = "TITLE", length = 200, nullable = false, unique = true)
 	private String title;
 
 	/** The fornecedores. */
@@ -42,6 +45,9 @@ public class Subcategoria {
 	/** The cotacoes. */
 	@OneToMany(mappedBy = "subcategoria")
 	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	
+	@OneToMany(mappedBy="subcategoria")
+	private Collection<Banner> banners = new ArrayList<Banner>();
 
 	/**
 	 * Gets the fornecedores.
@@ -51,6 +57,7 @@ public class Subcategoria {
 	public Collection<Fornecedor> getFornecedores() {
 		return fornecedores;
 	}
+	
 
 	/**
 	 * Sets the fornecedores.
@@ -136,6 +143,16 @@ public class Subcategoria {
 	 */
 	public void setTitle(final String title) {
 		this.title = title;
+	}
+
+
+	public Collection<Banner> getBanners() {
+		return banners;
+	}
+
+
+	public void setBanners(Collection<Banner> banners) {
+		this.banners = banners;
 	}
 
 }

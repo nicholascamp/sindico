@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.validator.NotNull;
+
 /**
  * The Class RespostaCotacao.
  */
@@ -26,37 +28,37 @@ public class RespostaCotacao {
 	private int codigo;
 
 	/** The primeira resposta. */
-	@Column(name = "PRIMEIRA_RESPOSTA")
+	@Column(name = "PRIMEIRA_RESPOSTA", columnDefinition="TEXT")
 	private String primeiraResposta;
 
 	/** The valor. */
-	@Column(name = "VALOR")
+	@Column(name = "VALOR", nullable = false)
+	@NotNull(message="Insira um valor")
 	private float valor;
 
 	/** The condicao. */
-	@Column(name = "CONDICAO")
-	private int condicao; // PERGUNTAR O QUE É
+	@Column(name = "CONDICAO", length = 50, nullable = false)
+	@NotNull(message="Insira uma condição")
+	private String condicao;
 
 	/** The garantia. */
-	@Column(name = "GARANTIA")
+	@Column(name = "GARANTIA", nullable = false)
+	@NotNull(message="Insira um garantia")
 	private int garantia;
 
 	/** The prazo. */
-	@Column(name = "PRAZO")
-	private String prazo; // PERGUNTAR O QUE É
+	@Column(name = "PRAZO", length = 100, nullable = false)
+	@NotNull(message="Insira um prazo de entrega")
+	private String prazo;
 
 	/** The lista respostas. */
 	@ElementCollection
-	@CollectionTable(name="RESPOSTA_COTACAO_LISTA", joinColumns=@JoinColumn(name="RESPOSTA_COTACAO_ID"))
+	@CollectionTable(name="RESPOSTA_COTACAO_LISTA", joinColumns=@JoinColumn(name="RESPOSTA_COTACAO_ID", columnDefinition="TEXT"))
 	private Collection<String> listaRespostas = new ArrayList<String>();
 
 	/** The atende area. */
 	@Column(name = "ATENDE_AREA")
 	private boolean atendeArea;
-
-	/** The aprovado. */
-	@Column(name = "APROVADO")
-	private boolean aprovado;
 
 	/** The parcela para. */
 	@Column(name = "PARCELA_PARA")
@@ -123,22 +125,11 @@ public class RespostaCotacao {
 		this.valor = valor;
 	}
 
-	/**
-	 * Gets the condicao.
-	 * 
-	 * @return the condicao
-	 */
-	public int getCondicao() {
+	public String getCondicao() {
 		return condicao;
 	}
 
-	/**
-	 * Sets the condicao.
-	 * 
-	 * @param condicao
-	 *            the new condicao
-	 */
-	public void setCondicao(final int condicao) {
+	public void setCondicao(String condicao) {
 		this.condicao = condicao;
 	}
 
@@ -216,25 +207,6 @@ public class RespostaCotacao {
 	 */
 	public void setAtendeArea(final boolean atendeArea) {
 		this.atendeArea = atendeArea;
-	}
-
-	/**
-	 * Checks if is aprovado.
-	 * 
-	 * @return true, if is aprovado
-	 */
-	public boolean isAprovado() {
-		return aprovado;
-	}
-
-	/**
-	 * Sets the aprovado.
-	 * 
-	 * @param aprovado
-	 *            the new aprovado
-	 */
-	public void setAprovado(final boolean aprovado) {
-		this.aprovado = aprovado;
 	}
 
 	/**

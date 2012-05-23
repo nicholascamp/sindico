@@ -37,7 +37,6 @@ public class AdministradoraDAOTeste extends TestCase implements Test {
 		endereco.setBairro("Vila Maria Alta");
 		endereco.setCep("02126-070");
 		endereco.setCidade("São Paulo");
-		endereco.setComplemento("Casa");
 		endereco.setEndereco("Rua Marquê de Pombal");
 		endereco.setNumero(271);
 		endereco.setEstado("SP");
@@ -46,7 +45,7 @@ public class AdministradoraDAOTeste extends TestCase implements Test {
 		enderecos.add(endereco);
 
 		AdministradoraFactory.criaAdministradora(new Date(), "12345678910",
-				enderecos, "11 2967-2420", "11 8561-6083", "", "", null, null);
+				enderecos, "11 2967-2420", "11 8561-6083", null);
 	}
 
 	/*
