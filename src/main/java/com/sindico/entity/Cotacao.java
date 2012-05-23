@@ -37,28 +37,17 @@ public class Cotacao {
 	private Date					data;
 
 	/** The subcategoria. */
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "SUBCATEGORIA_ID")
-<<<<<<< HEAD
-	private Subcategoria			subcategoria;									// not
-																					// null
-=======
-	@NotNull(message="É necessário definir uma subcategoria")
+	@NotNull
 	private Subcategoria			subcategoria;
->>>>>>> 78c929b750289c8b999af44bce130ed9d0e934a2
 
 	/** The status. */
 	@Column(name = "STATUS")
 	private Status					status;
 
-	/** The aprovada. */
-<<<<<<< HEAD
-	@Column(name = "APROVADA")
-	private boolean					aprovada;										// impropria
-=======
 	@Column(name = "IMPROPRIA")
 	private boolean					impropria;
->>>>>>> 78c929b750289c8b999af44bce130ed9d0e934a2
 
 	/** The usuario. */
 	@NotNull
@@ -66,17 +55,6 @@ public class Cotacao {
 	@JoinColumn(name = "USUARIO_ID")
 	private Usuario					usuario;
 
-<<<<<<< HEAD
-	/** The administradora. */
-	@ManyToOne
-	@JoinColumn(name = "ADMINISTRADORA_ID")
-	private Administradora			administradora;								// nao
-																					// precisa
-																					// desse
-																					// relacionamento
-
-=======
->>>>>>> 78c929b750289c8b999af44bce130ed9d0e934a2
 	/** The gerente admin. */
 	@ManyToOne
 	@JoinColumn(name = "GERENTE_ID")
@@ -94,16 +72,15 @@ public class Cotacao {
 	@ManyToOne
 	@JoinColumn(name = "FORNECEDOR_ID")
 	private Fornecedor				fornecedorVencedor;
-	
-	@Column(name="TITULO", columnDefinition="TEXT", nullable=false)
-	private String titulo;
-	
+
+	@Column(name = "TITULO", columnDefinition = "TEXT", nullable = false)
+	private String					titulo;
 
 	public String getTitulo() {
 		return titulo;
 	}
 
-	public void setTitulo(String titulo) {
+	public void setTitulo(final String titulo) {
 		this.titulo = titulo;
 	}
 
@@ -183,13 +160,11 @@ public class Cotacao {
 		this.status = status;
 	}
 
-	
-
 	public boolean isImpropria() {
 		return impropria;
 	}
 
-	public void setImpropria(boolean impropria) {
+	public void setImpropria(final boolean impropria) {
 		this.impropria = impropria;
 	}
 
