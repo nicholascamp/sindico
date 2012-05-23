@@ -32,9 +32,6 @@ public class UserTest {
 	@Autowired
 	private UsuarioDAO	usuarioDAO;
 
-	// @Autowired
-	// private SessionFactory sessionFactory;
-
 	/**
 	 * Test criar usuario.
 	 */
@@ -42,6 +39,7 @@ public class UserTest {
 	public void testCriarListarERemoverUsuario() {
 		Usuario usuario = new Usuario();
 		usuario.setNome("Nome");
+		usuario.setSenha("senha");
 		usuario.setCelular("11 77779999");
 		usuario.setEmail("email@email.com");
 
