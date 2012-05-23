@@ -13,10 +13,10 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Usuario usuario = UsuarioFactory.criaUsuario("Thiago", "Castro Ferreira", "thicas", 
-				"11 2967-2420", "11 8561-6083", "", "", new Date(), new Date(), 
-				"thiago.castro.ferreira@gmail.com", true, TipoUsuario.SINDICO, null);
-		
+//		Usuario usuario = UsuarioFactory.criaUsuario("Thiago", "Castro Ferreira", "thicas", 
+//				"11 2967-2420", "11 8561-6083", "", "", new Date(), new Date(), 
+//				"thiago.castro.ferreira@gmail.com", true, TipoUsuario.SINDICO, null);
+//		
 //		Endereco endereco = new Endereco();
 //		endereco.setBairro("Vila Maria Alta");
 //		endereco.setCep("02129-170");
@@ -52,9 +52,6 @@ public class Main {
 //		
 //		session.close();
 //		sessionFactory.close();
-		
-		UsuarioDAO dao = new UsuarioDAO();
-		dao.criaUsuario(usuario);
 
 	}
 

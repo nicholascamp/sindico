@@ -35,19 +35,19 @@ public class Banner {
 	private String	arquivoImg;
 
 	/** The descricao. */
-	@Column(name="DESCRICAO")
+	@Column(name="DESCRICAO", nullable=false)
 	private String	descricao;
 
 	/** The margin up. */
-	@Column(name="MARGIN_X")
+	@Column(name="MARGIN_X", nullable=false)
 	private float	marginX;
 
 	/** The margin left. */
-	@Column(name="MARGIN_Y")
+	@Column(name="MARGIN_Y", nullable=false)
 	private float	marginY;
 
 	/** The link. */
-	@Column(name="LINK")
+	@Column(name="LINK", nullable=false)
 	private String	link;
 
 	/** The contador. */

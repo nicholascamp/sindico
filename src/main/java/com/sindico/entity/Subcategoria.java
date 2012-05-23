@@ -145,4 +145,14 @@ public class Subcategoria {
 		this.title = title;
 	}
 
+
+	public Collection<Banner> getBanners() {
+		return banners;
+	}
+
+
+	public void setBanners(Collection<Banner> banners) {
+		this.banners = banners;
+	}
+
 }
