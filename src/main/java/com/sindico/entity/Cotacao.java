@@ -39,7 +39,8 @@ public class Cotacao {
 	/** The subcategoria. */
 	@ManyToOne
 	@JoinColumn(name = "SUBCATEGORIA_ID")
-	private Subcategoria			subcategoria;
+	private Subcategoria			subcategoria;									// not
+																					// null
 
 	/** The status. */
 	@Column(name = "STATUS")
@@ -47,7 +48,7 @@ public class Cotacao {
 
 	/** The aprovada. */
 	@Column(name = "APROVADA")
-	private boolean					aprovada;
+	private boolean					aprovada;										// impropria
 
 	/** The usuario. */
 	@NotNull
@@ -58,7 +59,10 @@ public class Cotacao {
 	/** The administradora. */
 	@ManyToOne
 	@JoinColumn(name = "ADMINISTRADORA_ID")
-	private Administradora			administradora;
+	private Administradora			administradora;								// nao
+																					// precisa
+																					// desse
+																					// relacionamento
 
 	/** The gerente admin. */
 	@ManyToOne
