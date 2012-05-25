@@ -82,6 +82,13 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>UsuarioController</display-name>
+		<servlet-name>UsuarioController</servlet-name>
+		<servlet-class>com.sindico.action.UsuarioController</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>website</servlet-name>
@@ -93,8 +100,25 @@
 		<servlet-name>service</servlet-name>
 		<url-pattern>/service/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UsuarioController</servlet-name>
+		<url-pattern>/usuario</url-pattern>
+	</servlet-mapping>
 
 	<session-config>
 		<session-timeout>10</session-timeout>
 	</session-config>
+	
+	<!--<servlet>
+		<servlet-name>UsuarioController</servlet-name>
+		<servlet-class>com.sindico.action.UsuarioController</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>UsuarioController</servlet-name>
+		<url-pattern>/usuario</url-pattern>
+	</servlet-mapping> -->
+	
 </web-app>
+
+	
