@@ -11,16 +11,6 @@ import org.springframework.web.servlet.HttpServletBean;
 /**
  * Servlet implementation class UsuarioController.
  */
-<<<<<<< HEAD
-public class UsuarioController extends HttpServlet{
-	private static final long serialVersionUID = 1L;
-
-	@Override
-	public void service(HttpServletRequest request, HttpServletResponse response) {
-		String parametro = request.getParameter("logica");
-		String nomeDaClasse = "com.sindico.action" + parametro;
-		
-=======
 public class UsuarioController extends HttpServletBean {
 
 	/** The Constant serialVersionUID. */
@@ -46,24 +36,14 @@ public class UsuarioController extends HttpServletBean {
 		String parametro = request.getParameter("logica");
 		String nomeDaClasse = "br.com.caelum.mvc.logica." + parametro;
 
->>>>>>> 1235b54d467ce742abd4cde44108cdd1bdf75370
 		try {
 			Class classe = Class.forName(nomeDaClasse);
 			Logica logica = (Logica) classe.newInstance();
 			logica.executa(request, response);
-<<<<<<< HEAD
 			
 			} catch (Exception e) {
 				new ServletException("A lógica de negócios causou uma exceção", e);				
 			}
-		
-=======
-
-		} catch (Exception e) {
-			throw new ServletException(
-					"A lógica de negócios causou uma exceção", e);
-		}
->>>>>>> 1235b54d467ce742abd4cde44108cdd1bdf75370
 	}
-
+		
 }
