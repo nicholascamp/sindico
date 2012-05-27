@@ -35,7 +35,7 @@ public class FornecedorDAO {
 	}
 
 
-	public Fornecedor recuperaFornecedor(final Long id) {
+	public Fornecedor getFornecedor(final Long id) {
 		return (Fornecedor) sessionFactory.getCurrentSession().load(Fornecedor.class,
 				id);
 	}
@@ -51,7 +51,7 @@ public class FornecedorDAO {
 
 
 	@SuppressWarnings("unchecked")
-	public List<Fornecedor> listaFornecedores() {
+	public List<Fornecedor> getLista() {
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select fornecedor from Fornecedor fornecedor");

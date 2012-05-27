@@ -34,7 +34,7 @@ public class SubcategoriaDAO {
 	}
 
 
-	public Subcategoria recuperaSubcategoria(final Long id) {
+	public Subcategoria getSubcategoria(final Long id) {
 		return (Subcategoria) sessionFactory.getCurrentSession().load(Subcategoria.class,
 				id);
 	}
@@ -50,7 +50,7 @@ public class SubcategoriaDAO {
 
 
 	@SuppressWarnings("unchecked")
-	public List<Subcategoria> listaSubcategorias() {
+	public List<Subcategoria> getLista() {
 		List<Subcategoria> subcategoria = new ArrayList<Subcategoria>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select subcategoria from Subcategoria subcategoria");

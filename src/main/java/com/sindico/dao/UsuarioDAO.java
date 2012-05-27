@@ -54,7 +54,7 @@ public class UsuarioDAO {
 	 *            the id
 	 * @return the usuario
 	 */
-	public Usuario recuperaUsuario(final Long id) {
+	public Usuario getUsuario(final Long id) {
 		return (Usuario) sessionFactory.getCurrentSession().load(Usuario.class,
 				id);
 	}
@@ -79,7 +79,7 @@ public class UsuarioDAO {
 	 * @return the list
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Usuario> listaUsuarios() {
+	public List<Usuario> getLista() {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select usuario from Usuario usuario");

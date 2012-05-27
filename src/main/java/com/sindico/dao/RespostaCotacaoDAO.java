@@ -35,7 +35,7 @@ public class RespostaCotacaoDAO {
 	}
 
 
-	public RespostaCotacao recuperaRespostaCotacao(final Long id) {
+	public RespostaCotacao getRespostaCotacao(final Long id) {
 		return (RespostaCotacao) sessionFactory.getCurrentSession().load(RespostaCotacao.class,
 				id);
 	}
@@ -51,7 +51,7 @@ public class RespostaCotacaoDAO {
 
 
 	@SuppressWarnings("unchecked")
-	public List<RespostaCotacao> listaRespostasCotacao() {
+	public List<RespostaCotacao> getLista() {
 		List<RespostaCotacao> respostaCotacao = new ArrayList<RespostaCotacao>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select respostaCotacao from RespostaCotacao respostaCotacao");

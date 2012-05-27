@@ -34,7 +34,7 @@ public class PredioDAO {
 	}
 
 
-	public Predio recuperaPredio(final Long id) {
+	public Predio getPredio(final Long id) {
 		return (Predio) sessionFactory.getCurrentSession().load(Predio.class,
 				id);
 	}
@@ -50,7 +50,7 @@ public class PredioDAO {
 
 
 	@SuppressWarnings("unchecked")
-	public List<Predio> listaPredios() {
+	public List<Predio> getLista() {
 		List<Predio> predio = new ArrayList<Predio>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select predio from Predio predio");

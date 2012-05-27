@@ -35,7 +35,7 @@ public class GerenteAdministradoraDAO {
 	}
 
 
-	public GerenteAdministradora recuperaGerenteAdministradora(final Long id) {
+	public GerenteAdministradora getGerenteAdministradora(final Long id) {
 		return (GerenteAdministradora) sessionFactory.getCurrentSession().load(GerenteAdministradora.class,
 				id);
 	}
@@ -51,7 +51,7 @@ public class GerenteAdministradoraDAO {
 
 
 	@SuppressWarnings("unchecked")
-	public List<GerenteAdministradora> listaGerenteAdministradora() {
+	public List<GerenteAdministradora> getLista() {
 		List<GerenteAdministradora> gerenteAdministradora = new ArrayList<GerenteAdministradora>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select gerenteAdministradora from GerenteAdministradora gerenteAdministradora");

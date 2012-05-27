@@ -33,7 +33,7 @@ public class AdministradoraDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Administradora> listaUsuarios() {
+	public List<Administradora> getLista() {
 		List<Administradora> administradoras = new ArrayList<Administradora>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select administradora from Usuario administradora");

@@ -35,7 +35,7 @@ public class CategoriaDAO {
 	}
 
 
-	public Categoria recuperaCategoria(final Long id) {
+	public Categoria getCategoria(final Long id) {
 		return (Categoria) sessionFactory.getCurrentSession().load(Categoria.class,
 				id);
 	}
@@ -51,7 +51,7 @@ public class CategoriaDAO {
 
 
 	@SuppressWarnings("unchecked")
-	public List<Categoria> listaCategoria() {
+	public List<Categoria> getLista() {
 		List<Categoria> categoria = new ArrayList<Categoria>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select categoria from Categoria categoria");

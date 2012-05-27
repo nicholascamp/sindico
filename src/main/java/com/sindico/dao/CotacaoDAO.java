@@ -53,7 +53,7 @@ public class CotacaoDAO {
 	 *            the id
 	 * @return the cotacao
 	 */
-	public Cotacao recuperaCotacao(final Long id) {
+	public Cotacao getCotacao(final Long id) {
 		return (Cotacao) sessionFactory.getCurrentSession().load(Cotacao.class,
 				id);
 	}
@@ -78,7 +78,7 @@ public class CotacaoDAO {
 	 * @return the list
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Cotacao> listaCotacao() {
+	public List<Cotacao> getLista() {
 		List<Cotacao> cotacao = new ArrayList<Cotacao>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select cotacao from Cotacao cotacao");
