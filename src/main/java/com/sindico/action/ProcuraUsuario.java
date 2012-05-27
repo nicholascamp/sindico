@@ -34,7 +34,7 @@ public class ProcuraUsuario extends HttpServlet implements Logica {
 			usuario = usuarioDAO.getUsuarioNome(null); // fazer pesquisa por
 														// nome
 		} else if (tipoPesquisa.equals("E")) {
-			usuario = usuarioDAO.getUsuarioEmail(null); // fazer pesquisa por
+			usuario = usuarioDAO.getUsuarioEmail(null); //  fazer pesquisa por
 														// email
 		} else {
 			usuario = usuarioDAO.getUsuarioPredio(null); // fazer pesquisa por
