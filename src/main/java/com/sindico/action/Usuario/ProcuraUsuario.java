@@ -1,4 +1,4 @@
-package com.sindico.action;
+package com.sindico.action.Usuario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.sindico.action.Logica;
 import com.sindico.dao.UsuarioDAO;
 import com.sindico.entity.Usuario;
 
@@ -26,22 +27,26 @@ public class ProcuraUsuario extends HttpServlet implements Logica {
 		String termoPesquisa = request.getParameter("pesquisa");
 
 		Usuario usuario = null;
-
+		
 		String tipoPesquisa = request.getParameter("pesquisarPor");
 		if (tipoPesquisa.equals("N")) {
-			usuario = usuarioDAO.getUsuarioNome(null); // fazer pesquisa por
+			usuario = usuarioDAO.getUsuarioNome(termoPesquisa); // fazer pesquisa por
 														// nome
 		} else if (tipoPesquisa.equals("E")) {
+<<<<<<< HEAD:src/main/java/com/sindico/action/ProcuraUsuario.java
 			usuario = usuarioDAO.getUsuarioEmail(null); // fazer pesquisa por
+=======
+			usuario = usuarioDAO.getUsuarioEmail(termoPesquisa); //  fazer pesquisa por
+>>>>>>> 68e788242363d22c57cbf513d4ed2e12e1d65a32:src/main/java/com/sindico/action/Usuario/ProcuraUsuario.java
 														// email
 		} else {
-			usuario = usuarioDAO.getUsuarioPredio(null); // fazer pesquisa por
+			usuario = usuarioDAO.getUsuarioPredio(termoPesquisa); // fazer pesquisa por
 															// predio
 		}
 
 		if (usuario != null) {
 			RequestDispatcher rd = request
-					.getRequestDispatcher("mostra-contato.jsp");
+					.getRequestDispatcher("mostra-usuario.jsp");
 			rd.forward(request, response);
 		}
 

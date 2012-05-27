@@ -59,14 +59,35 @@ public class UsuarioDAO {
 				id);
 	}
 
+	/**
+	 * Gets the usuario nome.
+	 * 
+	 * @param nome
+	 *            the nome
+	 * @return the usuario nome
+	 */
 	public Usuario getUsuarioNome(final String nome) {
 		return new Usuario();
 	}
 
+	/**
+	 * Gets the usuario email.
+	 * 
+	 * @param email
+	 *            the email
+	 * @return the usuario email
+	 */
 	public Usuario getUsuarioEmail(final String email) {
 		return new Usuario();
 	}
 
+	/**
+	 * Gets the usuario predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 * @return the usuario predio
+	 */
 	public Usuario getUsuarioPredio(final String predio) {
 		return new Usuario();
 	}

@@ -17,4 +17,10 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<bean name="/criaUsuario.html" class="com.sindico.controller.UsuarioController">
+		<property name="commandClass" value="com.sindico.entity.Usuario" />
+		<property name="formView" value="criaUsuario" />
+		<property name="successView" value="index" />
+	</bean>
+
 </beans>

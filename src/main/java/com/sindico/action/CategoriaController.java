@@ -3,38 +3,23 @@ package com.sindico.action;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.HttpServletBean;
-
 /**
- * Servlet implementation class UsuarioController.
+ * Servlet implementation class CategoriaController
  */
-public class UsuarioController extends HttpServletBean {
-
-	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= 1L;
-
-	/**
-	 * Service.
-	 * 
-	 * @param request
-	 *            the request
-	 * @param response
-	 *            the response
-	 * @throws ServletException
-	 *             the servlet exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
+public class CategoriaController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    
 	@Override
 	protected void service(final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException,
 			IOException {
 
 		String parametro = request.getParameter("logica");
-		String nomeDaClasse = "br.com.sindico.action.Usuario" + parametro;
+		String nomeDaClasse = "br.com.sindico.action.Categoria" + parametro;
 
 		try {
 			Class classe = Class.forName(nomeDaClasse);
@@ -45,5 +30,5 @@ public class UsuarioController extends HttpServletBean {
 				new ServletException("A lógica de negócios causou uma exceção", e);				
 			}
 	}
-		
+
 }

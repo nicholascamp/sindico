@@ -25,7 +25,7 @@
 			<input type="radio" name="tipoUsuario" value="C" /> Conselheiro
 			<input type="radio" name="tipoUsuario" value="M" /> Morador 
 			<input type="radio" name="tipoUsuario" value="Z" /> Zelador 
-			<input type="hidden" name="logica" />
+			<input type="hidden" name="AdicionaContato" />
 			Deseja receber cotações por email? <input type="checkbox" name="recebeCotacao" value="true" checked />
 			<input type="submit" name="button" value="Criar" />
 		</form>
