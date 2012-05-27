@@ -1,7 +1,8 @@
-package com.sindico.action;
+package com.sindico.action.Usuario;
 
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.sindico.action.Logica;
 import com.sindico.dao.UsuarioDAO;
 import com.sindico.entity.Usuario;
 import com.sindico.enums.TipoUsuario;
@@ -43,6 +45,9 @@ public class AdicionaContato extends HttpServlet implements Logica {
 				getTipo(request.getParameter("tipoUsuario")), null);
 
 		usuarioDAO.criaUsuario(usuario);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("mostra-usuario");
+		rd.forward(request, response);
 
 	}
 
