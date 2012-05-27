@@ -40,7 +40,8 @@ public class AdicionaContato extends HttpServlet implements Logica {
 		String celular = getCelular(request);
 
 		Usuario usuario = UsuarioFactory.criaUsuario(
-				request.getParameter("nome"), request.getParameter("senha"),
+				request.getParameter("nome"),
+				request.getParameter("senha"),
 				telefone,
 				celular,
 				new Date(),
