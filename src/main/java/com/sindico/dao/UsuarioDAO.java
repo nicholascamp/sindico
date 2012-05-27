@@ -59,6 +59,18 @@ public class UsuarioDAO {
 				id);
 	}
 
+	public Usuario getUsuarioNome(final String nome) {
+		return new Usuario();
+	}
+
+	public Usuario getUsuarioEmail(final String email) {
+		return new Usuario();
+	}
+
+	public Usuario getUsuarioPredio(final String predio) {
+		return new Usuario();
+	}
+
 	/**
 	 * Removes the usuario.
 	 * 
