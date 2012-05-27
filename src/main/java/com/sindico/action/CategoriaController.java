@@ -19,7 +19,7 @@ public class CategoriaController extends HttpServlet {
 			IOException {
 
 		String parametro = request.getParameter("logica");
-		String nomeDaClasse = "br.com.sindico.action.Categoria" + parametro;
+		String nomeDaClasse = "br.com.sindico.action.categoria." + parametro;
 
 		try {
 			Class classe = Class.forName(nomeDaClasse);

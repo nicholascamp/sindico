@@ -76,11 +76,21 @@
     <description></description>
     <display-name>ProcuraUsuario</display-name>
     <servlet-name>ProcuraUsuario</servlet-name>
-    <servlet-class>com.sindico.action.ProcuraUsuario</servlet-class>
+    <servlet-class>com.sindico.action.usuario.ProcuraUsuario</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ProcuraUsuario</servlet-name>
-    <url-pattern>/ProcuraUsuario</url-pattern>
+    <url-pattern>/usuario/procura</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdicionaUsuario</display-name>
+    <servlet-name>AdicionaUsuario</servlet-name>
+    <servlet-class>com.sindico.action..usuario.AdicionaUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProcuraUsuario</servlet-name>
+    <url-pattern>/usuario/adiciona</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -101,5 +111,15 @@
   <servlet-mapping>
     <servlet-name>AdicionaCategoria</servlet-name>
     <url-pattern>/categoria/adiciona</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Index</display-name>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>com.sindico.action.Index</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
 </web-app>

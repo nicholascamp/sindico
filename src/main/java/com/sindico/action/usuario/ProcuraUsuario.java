@@ -1,4 +1,4 @@
-package com.sindico.action.Usuario;
+package com.sindico.action.usuario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;

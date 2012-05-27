@@ -1,4 +1,4 @@
-package com.sindico.action.Categoria;
+package com.sindico.action.categoria;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +29,7 @@ public class AdicionaCategoria extends HttpServlet implements Logica{
 		
 		if(categoria != null){
 			categoriaDAO.criaCategoria(categoria);
+			request.setAttribute("categoria", categoria);
 			RequestDispatcher rd = request.getRequestDispatcher("mostra-categoria.jsp");
 			rd.forward(request, response);
 		}		

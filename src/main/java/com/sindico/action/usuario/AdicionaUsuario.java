@@ -1,9 +1,8 @@
-package com.sindico.action.Usuario;
+package com.sindico.action.usuario;
 
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +18,7 @@ import com.sindico.factory.UsuarioFactory;
 /**
  * Servlet implementation class AdicionaContato
  */
-@WebServlet("/AdicionaContato")
-public class AdicionaContato extends HttpServlet implements Logica {
+public class AdicionaUsuario extends HttpServlet implements Logica {
 	private static final long	serialVersionUID	= 1L;
 
 	@Autowired

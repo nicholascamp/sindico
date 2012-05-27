@@ -14,7 +14,7 @@
 	</head>
 	
 	<body>
-		<form action="/categoria" method="post">
+		<form action="/sindico/categoria" method="post">
 			Nome: <input type="text" name="nome" />
 			<input type="hidden" name="adicionaCategoria" />
 			<input type="submit" value="Criar" />

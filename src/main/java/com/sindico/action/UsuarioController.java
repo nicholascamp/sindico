@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HttpServletBean;
 
+import com.sindico.action.usuario.AdicionaUsuario;
+import com.sindico.action.usuario.ProcuraUsuario;
+
 /**
  * Servlet implementation class UsuarioController.
  */
@@ -34,15 +37,15 @@ public class UsuarioController extends HttpServletBean {
 			IOException {
 
 		String parametro = request.getParameter("logica");
-		String nomeDaClasse = "br.com.sindico.action.Usuario" + parametro;
 
 		try {
-			Class classe = Class.forName(nomeDaClasse);
-			Logica logica = (Logica) classe.newInstance();
-			logica.executa(request, response);
-			
+			if(parametro.equals("AdicionaUsuario"))
+				new AdicionaUsuario().executa(request, response);
+			else if(parametro.equals("ProcuraUsuario"))
+				new ProcuraUsuario().executa(request, response);
 			} catch (Exception e) {
-				new ServletException("A lógica de negócios causou uma exceção", e);				
+				new ServletException("A lógica de negócios causou uma exceção", e);	
+				System.out.println("Houve um erro no Controller de Usuário");
 			}
 	}
 		

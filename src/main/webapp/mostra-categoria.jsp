@@ -10,9 +10,10 @@
 		<title>Sindico.com</title>
 	</head>
 	<body>
-		<h1>Categoria ${param.nome}</h1>
+		<h1>Categoria ${categoria.nome}</h1>
 		<h3>
-			<a href="/" title="Subcategorias">Subcategorias de ${param.nome }</a>		
+			<a href="/" title="Subcategorias">Subcategorias de ${categoria.nome }</a>	
+			<input type="hidden" name="ListaSubcategorias"/>	
 		</h3>
 	</body>
 </html>
