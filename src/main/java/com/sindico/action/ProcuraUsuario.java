@@ -38,8 +38,8 @@ public class ProcuraUsuario extends HttpServlet implements Logica{
 			usuario = usuarioDAO.recuperaUsuario(null); //fazer pesquisa por nome
 		else if(tipoPesquisa.equals("E"))
 			usuario = usuarioDAO.recuperaUsuario(null); //fazer pesquisa por email
-		else
-			usuario = usuarioDAO.recuperaUsuario(null); //fazer pesquisa por predio
+		//else
+			//usuario = usuarioDAO.recuperaUsuario(null); //fazer pesquisa por predio
 		
 		if(usuario != null){
 			RequestDispatcher rd = request.getRequestDispatcher("mostra-contato.jsp");
