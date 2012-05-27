@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.dao.UsuarioDAO;
 import com.sindico.entity.Usuario;
@@ -20,9 +17,6 @@ import com.sindico.factory.UsuarioFactory;
 /**
  * Servlet implementation class AdicionaContato
  */
-@ContextConfiguration("classpath:sindico-beans.xml")
-@TransactionConfiguration
-@Transactional
 @WebServlet("/AdicionaContato")
 public class AdicionaContato extends HttpServlet implements Logica {
 	private static final long	serialVersionUID	= 1L;
@@ -30,6 +24,7 @@ public class AdicionaContato extends HttpServlet implements Logica {
 	@Autowired
 	private UsuarioDAO			usuarioDAO;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void executa(final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
@@ -40,13 +35,9 @@ public class AdicionaContato extends HttpServlet implements Logica {
 		String celular = getCelular(request);
 
 		Usuario usuario = UsuarioFactory.criaUsuario(
-				request.getParameter("nome"),
-				request.getParameter("senha"),
-				telefone,
-				celular,
-				new Date(),
-				request.getParameter("dataNascimento"), // ajeitar data de
-														// nascimento
+				request.getParameter("nome"), request.getParameter("senha"),
+				telefone, celular, new Date(),
+				new Date(request.getParameter("dataNascimento")),
 				request.getParameter("email"),
 				getRecebeCotacao(request.getParameter("recebeCotacao")),
 				getTipo(request.getParameter("tipoUsuario")), null);

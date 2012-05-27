@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.dao.UsuarioDAO;
 import com.sindico.entity.Usuario;
@@ -17,9 +14,6 @@ import com.sindico.entity.Usuario;
 /**
  * Servlet implementation class ProcuraUsuario
  */
-@ContextConfiguration("classpath:sindico-beans.xml")
-@TransactionConfiguration
-@Transactional
 @WebServlet("/AdicionaContato")
 public class ProcuraUsuario extends HttpServlet implements Logica {
 	private static final long	serialVersionUID	= 1L;

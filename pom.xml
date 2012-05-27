@@ -174,20 +174,39 @@
 		</dependency>
 
 
-
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.0</version>
 		</dependency>
 
+
+		<!-- Javax dependencies -->
 		<dependency>
-    		<groupId>javax</groupId>
-    		<artifactId>javaee-api</artifactId>
-    		<version>6.0</version>
-    		<scope>provided</scope>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
 		</dependency>
+
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+
+		<!-- JSTL Dependencies -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
 
 		<!-- MySQL -->
 		<dependency>

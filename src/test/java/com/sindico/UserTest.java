@@ -46,12 +46,12 @@ public class UserTest {
 		Usuario usuarioNovo = usuarioDAO.criaUsuario(usuario);
 
 		Assert.assertNotNull("Usuario esperado: ", usuarioNovo);
-		Assert.assertEquals("Usuarios criados: ", 1, usuarioDAO.listaUsuarios()
+		Assert.assertEquals("Usuarios criados: ", 1, usuarioDAO.getLista()
 				.size());
 
 		usuarioDAO.removeUsuario(usuarioNovo.getId());
 
-		Assert.assertEquals("Usuarios criados: ", 0, usuarioDAO.listaUsuarios()
+		Assert.assertEquals("Usuarios criados: ", 0, usuarioDAO.getLista()
 				.size());
 
 	}
