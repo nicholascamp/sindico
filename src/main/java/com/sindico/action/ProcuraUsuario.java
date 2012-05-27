@@ -36,6 +36,7 @@ public class ProcuraUsuario extends HttpServlet implements Logica {
 		Usuario usuario = null;
 
 		String tipoPesquisa = request.getParameter("pesquisarPor");
+<<<<<<< HEAD
 		if (tipoPesquisa.equals("N")) {
 			usuario = usuarioDAO.getUsuarioNome(null); // fazer pesquisa por
 														// nome
@@ -50,6 +51,17 @@ public class ProcuraUsuario extends HttpServlet implements Logica {
 		if (usuario != null) {
 			RequestDispatcher rd = request
 					.getRequestDispatcher("mostra-contato.jsp");
+=======
+		if(tipoPesquisa.equals("N"))
+			usuario = usuarioDAO.recuperaUsuario(null); //fazer pesquisa por nome
+		else if(tipoPesquisa.equals("E"))
+			usuario = usuarioDAO.recuperaUsuario(null); //fazer pesquisa por email
+		//else
+			//usuario = usuarioDAO.recuperaUsuario(null); //fazer pesquisa por predio
+		
+		if(usuario != null){
+			RequestDispatcher rd = request.getRequestDispatcher("mostra-contato.jsp");
+>>>>>>> 2956f0aee16cea5c31dd0c272a2f3f9f295b631e
 			rd.forward(request, response);
 		}
 
