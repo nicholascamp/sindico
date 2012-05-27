@@ -38,35 +38,4 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-	<!-- <security:authentication-manager> -->
-	<!-- <security:authentication-provider user-service-ref="userService" /> -->
-	<!-- </security:authentication-manager> -->
-
-
-	<!-- <bean id="userService" class="br.org.sesc.commons.security.test.SimpleUserDetailService"> -->
-	<!-- <constructor-arg> -->
-	<!-- <list> -->
-	<!-- <bean class="br.org.sesc.commons.security.SescUser"> -->
-	<!-- <property name="unidadeOrcamentaria" value="1" /> -->
-	<!-- <property name="chapa" value="00001" /> -->
-	<!-- <property name="digito" value="01" /> -->
-	<!-- <property name="usuCodigo" value="10910" /> -->
-	<!-- <property name="nome" value="Sesc" /> -->
-	<!-- <property name="login" value="sesc" /> -->
-	<!-- <property name="password" value="sesc" /> -->
-	<!-- <property name="sisCodigo" value="1" /> -->
-	<!-- </bean> -->
-	<!-- <bean class="br.org.sesc.commons.security.SescUser"> -->
-	<!-- <property name="unidadeOrcamentaria" value="66" /> -->
-	<!-- <property name="chapa" value="00002" /> -->
-	<!-- <property name="digito" value="02" /> -->
-	<!-- <property name="usuCodigo" value="10488" /> -->
-	<!-- <property name="nome" value="test" /> -->
-	<!-- <property name="login" value="test" /> -->
-	<!-- <property name="password" value="test" /> -->
-	<!-- <property name="sisCodigo" value="1" /> -->
-	<!-- </bean> -->
-	<!-- </list> -->
-	<!-- </constructor-arg> -->
-	<!-- </bean> -->
 </beans>

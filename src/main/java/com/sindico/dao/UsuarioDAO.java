@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Usuario;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UsuarioDAO.
  */
@@ -67,7 +66,7 @@ public class UsuarioDAO {
 	 * @return the usuario nome
 	 */
 	public Usuario getUsuarioNome(final String nome) {
-		return new Usuario();
+		return null;
 	}
 
 	/**
@@ -78,7 +77,7 @@ public class UsuarioDAO {
 	 * @return the usuario email
 	 */
 	public Usuario getUsuarioEmail(final String email) {
-		return new Usuario();
+		return null;
 	}
 
 	/**
@@ -89,7 +88,7 @@ public class UsuarioDAO {
 	 * @return the usuario predio
 	 */
 	public Usuario getUsuarioPredio(final String predio) {
-		return new Usuario();
+		return null;
 	}
 
 	/**
