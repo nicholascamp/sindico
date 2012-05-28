@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Usuario;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UsuarioDAO.
  */

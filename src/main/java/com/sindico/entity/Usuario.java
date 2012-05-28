@@ -38,12 +38,12 @@ public class Usuario implements Serializable {
 
 	/** The nome. */
 	@Column(name = "NOME", length = 60, nullable = false)
-	@NotNull(message="Usuário deve ter um nome")
+	@NotNull(message = "Usuário deve ter um nome")
 	private String				nome;
 
 	/** The senha. */
 	@Column(name = "SENHA", length = 20, nullable = false)
-	@NotNull(message="Usuário deve ter uma senha")
+	@NotNull(message = "Usuário deve ter uma senha")
 	private String				senha;
 
 	/** The telefone. */
@@ -53,7 +53,7 @@ public class Usuario implements Serializable {
 	/** The celular. */
 	@Column(name = "CELULAR", length = 20)
 	private String				celular;
-	
+
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
 	private Date				dataCadastro;
@@ -63,8 +63,8 @@ public class Usuario implements Serializable {
 	private Date				dataNascimento;
 
 	/** The email. */
-	@Column(name = "EMAIL", length = 50, nullable=false, unique = true)
-	@NotNull(message="Usuário deve possuir um email")
+	@Column(name = "EMAIL", length = 50, nullable = false, unique = true)
+	@NotNull(message = "Usuário deve possuir um email")
 	private String				email;
 
 	/** The recebe cotacao. */
@@ -80,6 +80,28 @@ public class Usuario implements Serializable {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
 	private Collection<Cotacao>	cotacoes			= new ArrayList<Cotacao>();
+
+	/**
+	 * Instantiates a new usuario.
+	 */
+	public Usuario() {
+	}
+
+	/**
+	 * Instantiates a new usuario.
+	 * 
+	 * @param nome
+	 *            the nome
+	 * @param senha
+	 *            the senha
+	 * @param email
+	 *            the email
+	 */
+	public Usuario(final String nome, final String senha, final String email) {
+		this.nome = nome;
+		this.senha = senha;
+		this.email = email;
+	}
 
 	/**
 	 * Gets the id.

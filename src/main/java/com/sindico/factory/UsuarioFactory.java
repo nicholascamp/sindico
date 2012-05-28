@@ -12,12 +12,11 @@ import com.sindico.enums.TipoUsuario;
  */
 public class UsuarioFactory {
 
-	
-	public static Usuario criaUsuario(final String nome, final String senha, final String telefone,
-			final String celular, final Date dataCadastro,
-			final Date dataNascimento, final String email,
-			final boolean recebeCotacao, final TipoUsuario tipo,
-			final Collection<Cotacao> cotacoes) {
+	public static Usuario criaUsuario(final String nome, final String senha,
+			final String telefone, final String celular,
+			final Date dataCadastro, final Date dataNascimento,
+			final String email, final boolean recebeCotacao,
+			final TipoUsuario tipo, final Collection<Cotacao> cotacoes) {
 		Usuario usuario = new Usuario();
 		usuario.setNome(nome);
 		usuario.setSenha(senha);
