@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HttpServletBean;
 
 import com.sindico.action.usuario.AdicionaUsuario;
@@ -18,6 +19,9 @@ public class UsuarioController extends HttpServletBean {
 
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 1L;
+
+	@Autowired
+	private AdicionaUsuario		adicionaUsuario;
 
 	/**
 	 * Service.
@@ -39,14 +43,15 @@ public class UsuarioController extends HttpServletBean {
 		String parametro = request.getParameter("logica");
 
 		try {
-			if(parametro.equals("AdicionaUsuario"))
-				new AdicionaUsuario().executa(request, response);
-			else if(parametro.equals("ProcuraUsuario"))
+			if (parametro.equals("AdicionaUsuario")) {
+				adicionaUsuario.executa(request, response);
+			} else if (parametro.equals("ProcuraUsuario")) {
 				new ProcuraUsuario().executa(request, response);
-			} catch (Exception e) {
-				new ServletException("A lógica de negócios causou uma exceção", e);	
-				System.out.println("Houve um erro no Controller de Usuário");
 			}
+		} catch (Exception e) {
+			new ServletException("A lógica de negócios causou uma exceção", e);
+			System.out.println("Houve um erro no Controller de Usuário");
+		}
 	}
-		
+
 }

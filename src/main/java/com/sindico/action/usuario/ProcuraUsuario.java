@@ -1,7 +1,6 @@
 package com.sindico.action.usuario;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,6 @@ import com.sindico.entity.Usuario;
 /**
  * Servlet implementation class ProcuraUsuario
  */
-@WebServlet("/AdicionaContato")
 public class ProcuraUsuario extends HttpServlet implements Logica {
 	private static final long	serialVersionUID	= 1L;
 
@@ -29,17 +27,14 @@ public class ProcuraUsuario extends HttpServlet implements Logica {
 		String termoPesquisa = request.getParameter("pesquisa");
 
 		Usuario usuario = null;
-		
+
 		String tipoPesquisa = request.getParameter("pesquisarPor");
 		if (tipoPesquisa.equals("N")) {
-			usuario = usuarioDAO.getUsuarioNome(termoPesquisa); // fazer pesquisa por
-														// nome
+			usuario = usuarioDAO.getUsuarioNome(termoPesquisa);
 		} else if (tipoPesquisa.equals("E")) {
-			usuario = usuarioDAO.getUsuarioEmail(termoPesquisa); //  fazer pesquisa por
-														// email
+			usuario = usuarioDAO.getUsuarioEmail(termoPesquisa);
 		} else {
-			usuario = usuarioDAO.getUsuarioPredio(termoPesquisa); // fazer pesquisa por
-															// predio
+			usuario = usuarioDAO.getUsuarioPredio(termoPesquisa);
 		}
 
 		if (usuario != null) {

@@ -1,5 +1,6 @@
 package com.sindico.action.usuario;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.sindico.action.Logica;
 import com.sindico.dao.UsuarioDAO;
@@ -18,13 +20,13 @@ import com.sindico.factory.UsuarioFactory;
 /**
  * Servlet implementation class AdicionaContato
  */
+@Repository
 public class AdicionaUsuario extends HttpServlet implements Logica {
 	private static final long	serialVersionUID	= 1L;
 
 	@Autowired
 	private UsuarioDAO			usuarioDAO;
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void executa(final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
@@ -34,16 +36,18 @@ public class AdicionaUsuario extends HttpServlet implements Logica {
 		// Seta variável celular
 		String celular = getCelular(request);
 
+		Date dataNascimento = new SimpleDateFormat("dd/mm/yyyy").parse(request
+				.getParameter("dataNascimento"));
+
 		Usuario usuario = UsuarioFactory.criaUsuario(
 				request.getParameter("nome"), request.getParameter("senha"),
-				telefone, celular, new Date(),
-				new Date(request.getParameter("dataNascimento")),
+				telefone, celular, new Date(), dataNascimento,
 				request.getParameter("email"),
 				getRecebeCotacao(request.getParameter("recebeCotacao")),
 				getTipo(request.getParameter("tipoUsuario")), null);
 
 		usuarioDAO.criaUsuario(usuario);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("mostra-usuario");
 		rd.forward(request, response);
 
