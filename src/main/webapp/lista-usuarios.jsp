@@ -10,10 +10,11 @@
 		<title>Sindico.com</title>
 	</head>
 	<body>
-		<h1>Usuário ${usuario.nome}</h1>
+		<h1>Usuários</h1>
 		<table>
 			<thead>
 				<tr>
+					<th>Nome</th>
 					<th>Telefone</th>
 					<th>Celular</th>
 					<th>Data de Cadastro</th>
@@ -24,25 +25,28 @@
 					<th>Cotações</th>
 				</tr>				
 			</thead>
-			<tr>
-				<td>${usuario.telefone}</td>
-				<td>${usuario.celular}</td>
-				<td>${usuario.dataCadastro}</td>
-				<td>${usuario.dataNascimento}</td>
-				<td>${usuario.email}</td>
-				<td>
-					<c:if test="${usuario.recebeCotacao == true }">
-						Recebe Cotação
-					</c:if>
-					<c:if test="${usuario.recebeCotacao == false }">
-						Não recebe cotação
-					</c:if>
-				</td>	
-				<td>${usuario.tipo }</td>	
-				<td>
-					<a href="/" title="Cotações do Usuário">Cotações</a>
-				</td>		
-			</tr>
+			<c:forEach var="usuario" items="${usuario}">
+				<tr>
+					<td>${usuario.nome}</td>
+					<td>${usuario.telefone}</td>
+					<td>${usuario.celular}</td>
+					<td>${usuario.dataCadastro}</td>
+					<td>${usuario.dataNascimento}</td>
+					<td>${usuario.email}</td>
+					<td>
+						<c:if test="${usuario.recebeCotacao == true }">
+							Recebe Cotação
+						</c:if>
+						<c:if test="${usuario.recebeCotacao == false }">
+							Não recebe cotação
+						</c:if>
+					</td>	
+					<td>${usuario.tipo }</td>	
+					<td>
+						<a href="/" title="Cotações do Usuário">Cotações</a>
+					</td>		
+				</tr>
+			</c:forEach>			
 		</table>
 	</body>
 </html>

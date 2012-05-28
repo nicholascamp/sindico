@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sindico.action.categoria.AdicionaCategoria;
+
 /**
  * Servlet implementation class CategoriaController
  */
@@ -19,12 +21,12 @@ public class CategoriaController extends HttpServlet {
 			IOException {
 
 		String parametro = request.getParameter("logica");
-		String nomeDaClasse = "br.com.sindico.action.categoria." + parametro;
 
 		try {
-			Class classe = Class.forName(nomeDaClasse);
-			Logica logica = (Logica) classe.newInstance();
-			logica.executa(request, response);
+			if(parametro.equals("AdicionaCategoria"))
+				new AdicionaCategoria().executa(request, response);
+			else if(parametro.equals("ProcuraCategoria"))
+				return;
 			
 			} catch (Exception e) {
 				new ServletException("A lógica de negócios causou uma exceção", e);				

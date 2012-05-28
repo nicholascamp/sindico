@@ -41,11 +41,14 @@ public class AdicionaUsuario extends HttpServlet implements Logica {
 				request.getParameter("email"),
 				getRecebeCotacao(request.getParameter("recebeCotacao")),
 				getTipo(request.getParameter("tipoUsuario")), null);
-
-		usuarioDAO.criaUsuario(usuario);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("mostra-usuario");
-		rd.forward(request, response);
+		if(usuario != null){
+			usuarioDAO.criaUsuario(usuario);
+			
+			request.setAttribute("usuario", usuario);
+			RequestDispatcher rd = request.getRequestDispatcher("mostra-usuario");
+			rd.forward(request, response);
+		}	
 
 	}
 

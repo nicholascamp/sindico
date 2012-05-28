@@ -1,6 +1,7 @@
 package com.sindico.dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -59,16 +60,16 @@ public class UsuarioDAO {
 				id);
 	}
 
-	public Usuario getUsuarioNome(final String nome) {
-		return new Usuario();
+	public Collection<Usuario> getUsuarioNome(final String nome) {
+		return new ArrayList<Usuario>();
 	}
 
-	public Usuario getUsuarioEmail(final String email) {
-		return new Usuario();
+	public Collection<Usuario> getUsuarioEmail(final String email) {
+		return new ArrayList<Usuario>();
 	}
 
-	public Usuario getUsuarioPredio(final String predio) {
-		return new Usuario();
+	public Collection<Usuario> getUsuarioPredio(final String predio) {
+		return new ArrayList<Usuario>();
 	}
 
 	/**

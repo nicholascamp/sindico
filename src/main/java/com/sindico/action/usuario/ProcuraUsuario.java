@@ -1,7 +1,8 @@
 package com.sindico.action.usuario;
 
+import java.util.Collection;
+
 import javax.servlet.RequestDispatcher;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,6 @@ import com.sindico.entity.Usuario;
 /**
  * Servlet implementation class ProcuraUsuario
  */
-@WebServlet("/AdicionaContato")
 public class ProcuraUsuario extends HttpServlet implements Logica {
 	private static final long	serialVersionUID	= 1L;
 
@@ -28,23 +28,24 @@ public class ProcuraUsuario extends HttpServlet implements Logica {
 		// TODO Auto-generated method stub
 		String termoPesquisa = request.getParameter("pesquisa");
 
-		Usuario usuario = null;
+		Collection<Usuario> usuarios = null;
 		
 		String tipoPesquisa = request.getParameter("pesquisarPor");
 		if (tipoPesquisa.equals("N")) {
-			usuario = usuarioDAO.getUsuarioNome(termoPesquisa); // fazer pesquisa por
+			usuarios = usuarioDAO.getUsuarioNome(termoPesquisa); // fazer pesquisa por
 														// nome
 		} else if (tipoPesquisa.equals("E")) {
-			usuario = usuarioDAO.getUsuarioEmail(termoPesquisa); //  fazer pesquisa por
+			usuarios = usuarioDAO.getUsuarioEmail(termoPesquisa); //  fazer pesquisa por
 														// email
 		} else {
-			usuario = usuarioDAO.getUsuarioPredio(termoPesquisa); // fazer pesquisa por
+			usuarios = usuarioDAO.getUsuarioPredio(termoPesquisa); // fazer pesquisa por
 															// predio
 		}
 
-		if (usuario != null) {
+		if (usuarios != null) {
+			request.setAttribute("usuarios", usuarios);
 			RequestDispatcher rd = request
-					.getRequestDispatcher("mostra-usuario.jsp");
+					.getRequestDispatcher("lista-usuarios.jsp");
 			rd.forward(request, response);
 		}
 
