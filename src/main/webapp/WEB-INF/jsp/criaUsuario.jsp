@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<form:form action="CriaUsuario" method="post">
+	<form:form commandName="usuario" method="post" action="criaUsuario">
 	Nome: <br />
 		<form:input path="nome" />
 		<br />
@@ -30,7 +30,7 @@
 		<form:input path="email" />
 		<br />
 		<br />
-
+		<input type="submit" value="Cria Usuario" />
 	</form:form>
 
 </body>
