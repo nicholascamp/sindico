@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,16 +43,16 @@ public class PredioController {
 	private GerenteAdministradoraService gerenteAdministradoraService;
 
 	/**
-	 * Predio crud.
+	 * Listar predios.
 	 * 
 	 * @return the model and view
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/predios.html")
-	public ModelAndView predioCRUD() {
+	public ModelAndView listarPredios() {
 
 		ModelAndView modelAndView = new ModelAndView("/predios", "predio", new Predio());
 		PagedListHolder<Predio> pagedListHolder = new PagedListHolder<Predio>(predioService.listarPredios());
-		pagedListHolder.setPageSize(10);
+		pagedListHolder.setPageSize(2);
 
 		List<Predio> pagedListPredios = pagedListHolder.getPageList();
 
@@ -61,12 +62,12 @@ public class PredioController {
 	}
 
 	/**
-	 * Predio form.
+	 * Criar predio.
 	 * 
 	 * @return the model and view
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/criaPredio.html")
-	public ModelAndView predioForm() {
+	public ModelAndView criarPredio() {
 		ModelAndView modelAndView = new ModelAndView("/criaPredio", "predio", new Predio());
 
 		modelAndView.addObject("tipos", TipoPredio.values());
@@ -77,7 +78,7 @@ public class PredioController {
 	}
 
 	/**
-	 * Adds the contact.
+	 * Criar predio.
 	 * 
 	 * @param predio
 	 *            the predio
@@ -86,11 +87,45 @@ public class PredioController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/criaPredio", method = RequestMethod.POST)
-	public String addContact(@ModelAttribute("predio") final Predio predio, final BindingResult result) {
+	public String criarPredio(@ModelAttribute("predio") final Predio predio, final BindingResult result) {
 
-		predioDAO.criaPredio(predio);
+		predioService.criarPredio(predio);
 
 		return "redirect:predios.html";
+	}
+
+	/**
+	 * Buscar predio.
+	 * 
+	 * @param nome
+	 *            the nome
+	 * @return the model and view
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/buscarPredioPorNome")
+	public ModelAndView buscarPredio(@RequestParam final String nome) {
+
+		ModelAndView modelAndView = new ModelAndView("/predios", "predio", new Predio());
+
+		modelAndView.addObject("predios", predioService.buscarPredioPorNome(nome));
+
+		return modelAndView;
+	}
+
+	/**
+	 * Buscar predio por endereco.
+	 * 
+	 * @param endereco
+	 *            the endereco
+	 * @return the model and view
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/buscarPredioPorEndereco")
+	public ModelAndView buscarPredioPorEndereco(@RequestParam final String endereco) {
+
+		ModelAndView modelAndView = new ModelAndView("/predios", "predio", new Predio());
+
+		modelAndView.addObject("predios", predioService.buscarPredioPorEndereco(endereco));
+
+		return modelAndView;
 	}
 
 }

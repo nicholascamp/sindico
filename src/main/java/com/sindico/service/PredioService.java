@@ -22,4 +22,34 @@ public interface PredioService {
 	@Transactional
 	List<Predio> listarPredios();
 
+	/**
+	 * Criar predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 * @return the predio
+	 */
+	@Transactional
+	Predio criarPredio(Predio predio);
+
+	/**
+	 * Buscar predio por nome.
+	 * 
+	 * @param nome
+	 *            the nome
+	 * @return the predio
+	 */
+	@Transactional
+	List<Predio> buscarPredioPorNome(String nome);
+
+	/**
+	 * Buscar predio por endereco.
+	 * 
+	 * @param nome
+	 *            the nome
+	 * @return the predio
+	 */
+	@Transactional
+	List<Predio> buscarPredioPorEndereco(String nome);
+
 }

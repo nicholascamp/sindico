@@ -51,4 +51,30 @@ public class PredioDAO {
 		return predio;
 	}
 
+	/**
+	 * @param nome
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Predio> buscarPredioPorNome(final String nome) {
+		List<Predio> predios = new ArrayList<Predio>();
+
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"SELECT predio FROM Predio predio WHERE predio.nome like '%" + nome + "%'");
+		predios = query.list();
+
+		return predios;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Predio> buscarPredioPorEndereco(final String endereco) {
+		List<Predio> predios = new ArrayList<Predio>();
+
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"SELECT predio FROM Predio predio WHERE predio.endereco like '%" + endereco + "%'");
+		predios = query.list();
+
+		return predios;
+	}
+
 }

@@ -32,4 +32,40 @@ public class PredioServiceImpl implements PredioService {
 
 		return predioDAO.listarPredios();
 	}
+
+	/**
+	 * Criar predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 * @return the predio
+	 */
+	@Override
+	public Predio criarPredio(final Predio predio) {
+
+		return predioDAO.criaPredio(predio);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.PredioService#buscarPredioPorNome(java.lang.String)
+	 */
+	@Override
+	public List<Predio> buscarPredioPorNome(final String nome) {
+		return predioDAO.buscarPredioPorNome(nome);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.PredioService#buscarPredioPorEndereco(java.lang.String
+	 * )
+	 */
+	@Override
+	public List<Predio> buscarPredioPorEndereco(final String endereco) {
+		return predioDAO.buscarPredioPorEndereco(endereco);
+	}
 }
