@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.NotNull;
 
+import com.sindico.enums.Estado;
 import com.sindico.enums.TipoPredio;
 
 // TODO: Auto-generated Javadoc
@@ -24,74 +25,72 @@ import com.sindico.enums.TipoPredio;
 public class Predio implements Serializable {
 
 	/** The Constant serialVersionUID. */
-	private static final long		serialVersionUID	= -3889143352236301499L;
+	private static final long serialVersionUID = -3889143352236301499L;
+
+	/** The id. */
+	@Id
+	@GeneratedValue
+	@Column(name = "PREDIO_ID")
+	private Long id;
 
 	/** The arquivo foto. */
 	@Column(name = "ARQUIVO_FOTO")
-	private String					arquivoFoto;									// REVER
+	private String arquivoFoto; // REVER
 
 	/** The cnpj. */
 	@Column(name = "CNPJ", length = 20, unique = true, nullable = false)
 	@NotNull(message = "Predio deve ter um CNPJ")
-	private String					cnpj;
-
-	/** The codigo. */
-	@Id
-	@GeneratedValue
-	@Column(name = "PREDIO_ID")
-	private Long					id;
+	private String cnpj;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
-	private Date					dataCadastro;
+	private Date dataCadastro;
 
-	/** The endereco. */
 	/** The bairro. */
 	@Column(name = "BAIRRO", nullable = false, length = 100)
-	private String					bairro;
+	private String bairro;
 
 	/** The cep. */
 	@Column(name = "CEP", nullable = false, length = 10)
-	private String					cep;
+	private String cep;
 
 	/** The cidade. */
 	@Column(name = "CIDADE", nullable = false, length = 100)
-	private String					cidade;
+	private String cidade;
 
 	/** The endereco. */
 	@Column(name = "RUA", nullable = false)
-	private String					endereco;
+	private String endereco;
 
 	/** The estado. */
 	@Column(name = "ESTADO", nullable = false, length = 2)
-	private String					estado;
+	private Estado estado;
 
 	/** The numero. */
 	@Column(name = "NUMERO", nullable = false)
-	private int						numero;
+	private int numero;
 
 	/** The nome. */
 	@Column(name = "NOME", nullable = false, length = 120)
 	@NotNull(message = "Prédio deve ter um nome")
-	private String					nome;
+	private String nome;
 
 	/** The numero apartamentos. */
 	@Column(name = "NUMERO_APARTAMENTOS")
-	private int						numeroApartamentos;
+	private int numeroApartamentos;
 
 	/** The tipo. */
 	@Column(name = "TIPO")
-	private TipoPredio				tipo;
+	private TipoPredio tipo;
 
 	/** The gerente. */
 	@ManyToOne
 	@JoinColumn(name = "GERENTE_ID")
-	// TODOO PREDIO TEM UM GERENTE???
-	private GerenteAdministradora	gerente;
+	private GerenteAdministradora gerente;
 
 	/** The gerente recebe cotacao. */
 	@Column(name = "GERENTE_COTACAO")
-	private boolean					gerenteRecebeCotacao;
+	private boolean gerenteRecebeCotacao;
 
 	/**
 	 * Instantiates a new predio.
@@ -120,9 +119,9 @@ public class Predio implements Serializable {
 	}
 
 	/**
-	 * Gets the codigo.
+	 * Gets the id.
 	 * 
-	 * @return the codigo
+	 * @return the id
 	 */
 	public Long getId() {
 		return id;
@@ -185,7 +184,7 @@ public class Predio implements Serializable {
 	}
 
 	/**
-	 * Sets the codigo.
+	 * Sets the id.
 	 * 
 	 * @param id
 	 *            the new id
@@ -334,7 +333,7 @@ public class Predio implements Serializable {
 	 * 
 	 * @return the estado
 	 */
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
@@ -344,7 +343,7 @@ public class Predio implements Serializable {
 	 * @param estado
 	 *            the new estado
 	 */
-	public void setEstado(final String estado) {
+	public void setEstado(final Estado estado) {
 		this.estado = estado;
 	}
 

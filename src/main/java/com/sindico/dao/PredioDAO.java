@@ -18,8 +18,7 @@ import com.sindico.entity.Predio;
 public class PredioDAO {
 	/** The session factory. */
 	@Autowired
-	private SessionFactory	sessionFactory;
-
+	private SessionFactory sessionFactory;
 
 	@Transactional
 	public Predio criaPredio(final Predio predio) {
@@ -27,33 +26,26 @@ public class PredioDAO {
 		return predio;
 	}
 
-
 	public Predio atualizaPredio(final Predio predio) {
 		sessionFactory.getCurrentSession().update(predio);
 		return predio;
 	}
 
-
 	public Predio getPredio(final Long id) {
-		return (Predio) sessionFactory.getCurrentSession().load(Predio.class,
-				id);
+		return (Predio) sessionFactory.getCurrentSession().load(Predio.class, id);
 	}
 
-
 	public void removePredio(final Long id) {
-		Predio predio = (Predio) sessionFactory.getCurrentSession().load(
-				Predio.class, id);
+		Predio predio = (Predio) sessionFactory.getCurrentSession().load(Predio.class, id);
 		if (predio != null) {
 			sessionFactory.getCurrentSession().delete(predio);
 		}
 	}
 
-
 	@SuppressWarnings("unchecked")
-	public List<Predio> getLista() {
+	public List<Predio> listarPredios() {
 		List<Predio> predio = new ArrayList<Predio>();
-		Query query = sessionFactory.getCurrentSession().createQuery(
-				"select predio from Predio predio");
+		Query query = sessionFactory.getCurrentSession().createQuery("select predio from Predio predio");
 		predio = query.list();
 
 		return predio;
