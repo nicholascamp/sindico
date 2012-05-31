@@ -24,9 +24,7 @@
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 
-	<mvc:resources mapping="/javascript/**" location="public/javascript/" />
-	<mvc:resources mapping="/stylesheets/**" location="public/stylesheets/" />
-	<mvc:resources mapping="/img/**" location="public/img/" />
+	<mvc:resources mapping="/javascript/**" location="js/" />
 	<mvc:default-servlet-handler />
 
 	<bean id="viewResolver"
