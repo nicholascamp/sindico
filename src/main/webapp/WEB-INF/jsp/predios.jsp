@@ -44,7 +44,7 @@
 								</c:if></td>
 							<td><c:out value="${predio.gerenteRecebeCotacao}"></c:out></td>
 							<td><a href="atualizarPredio.html?id=${predio.id}">Editar</a>
-								<a href="deletarPredio.html?id=${predio.id}">Deletar</a></td>
+								<a href="removerPredio?id=${predio.id}">Deletar</a></td>
 						</tr>
 					</c:forEach>
 				</c:if>

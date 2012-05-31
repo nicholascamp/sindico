@@ -20,7 +20,7 @@ public class PredioServiceImpl implements PredioService {
 
 	/** The predio dao. */
 	@Autowired
-	private PredioDAO predioDAO;
+	private PredioDAO	predioDAO;
 
 	/*
 	 * (non-Javadoc)
@@ -67,5 +67,40 @@ public class PredioServiceImpl implements PredioService {
 	@Override
 	public List<Predio> buscarPredioPorEndereco(final String endereco) {
 		return predioDAO.buscarPredioPorEndereco(endereco);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.sindico.service.PredioService#deletarPredio(java.lang.Long)
+	 */
+	@Override
+	public void deletarPredio(final Long id) {
+
+		predioDAO.removePredio(id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.PredioService#atualizarPredio(com.sindico.entity.
+	 * Predio)
+	 */
+	@Override
+	public Predio atualizarPredio(final Predio predio) {
+		return predioDAO.atualizaPredio(predio);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.PredioService#getPredio(com.sindico.entity.Predio)
+	 */
+	@Override
+	public Predio getPredio(final Long id) {
+		Predio predio = predioDAO.getPredio(id);
+		return predio;
 	}
 }

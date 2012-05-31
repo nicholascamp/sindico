@@ -52,4 +52,33 @@ public interface PredioService {
 	@Transactional
 	List<Predio> buscarPredioPorEndereco(String nome);
 
+	/**
+	 * Deletar predio.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	@Transactional
+	void deletarPredio(Long id);
+
+	/**
+	 * Atualizar predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 * @return the predio
+	 */
+	@Transactional
+	Predio atualizarPredio(Predio predio);
+
+	/**
+	 * Gets the predio.
+	 * 
+	 * @param predio
+	 *            the predio
+	 * @return the predio
+	 */
+	@Transactional
+	Predio getPredio(Long id);
+
 }
