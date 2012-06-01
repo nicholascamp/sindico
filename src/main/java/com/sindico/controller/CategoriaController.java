@@ -34,7 +34,7 @@ public class CategoriaController {
 
 		List<Categoria> pagedListCategorias = pagedListHolder.getPageList();
 
-		modelAndView.addObject("categoria", pagedListCategorias);
+		modelAndView.addObject("categorias", pagedListCategorias);
 
 		return modelAndView;
 	}
@@ -47,14 +47,14 @@ public class CategoriaController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/cria.html")
+	@RequestMapping(method = RequestMethod.GET, value = "/categoria/cria")
 	public ModelAndView newCategoria(){
 		ModelAndView modelAndView = new ModelAndView("/criaCategoria", "categoria", new Categoria());
 			
 		return modelAndView;		
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/categoria/cria.html")
+	@RequestMapping(method = RequestMethod.POST, value = "/categoria/cria")
 	public ModelAndView createCategoria(@ModelAttribute("categoria") Categoria categoria, BindingResult result){
 		categoriaService.criarCategoria(categoria);
 		
