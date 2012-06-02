@@ -26,12 +26,12 @@ public class GerenteAdministradora {
 	@Id
 	@GeneratedValue
 	@Column(name = "GERENTE_ID")
-	private int					codigo;
+	private Long				codigo;
 
 	/** The administradora. */
 	@ManyToOne
 	@JoinColumn(name = "ADMINISTRADORA_ID")
-	@NotNull(message="Gerente deve pertencer a uma Administradora")
+	@NotNull(message = "Gerente deve pertencer a uma Administradora")
 	private Administradora		administradora;
 
 	/** The predios. */
@@ -43,13 +43,13 @@ public class GerenteAdministradora {
 	private Date				dataCadastro;
 
 	/** The nome. */
-	@Column(name = "NOME", length = 50, nullable= false)
+	@Column(name = "NOME", length = 50, nullable = false)
 	@NotNull(message = "Gerente deve ter um nome")
 	private String				nome;
 
 	/** The email. */
 	@Column(name = "EMAIL", length = 60, nullable = false, unique = true)
-	@NotNull(message="Gerente deve ter um email")
+	@NotNull(message = "Gerente deve ter um email")
 	private String				email;
 
 	/** The telefone. */
@@ -96,7 +96,7 @@ public class GerenteAdministradora {
 	 * 
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
@@ -106,7 +106,7 @@ public class GerenteAdministradora {
 	 * @param codigo
 	 *            the new codigo
 	 */
-	public void setCodigo(final int codigo) {
+	public void setCodigo(final Long codigo) {
 		this.codigo = codigo;
 	}
 

@@ -30,7 +30,7 @@ public class Cotacao {
 	@Id
 	@GeneratedValue
 	@Column(name = "COTACAO_ID")
-	private int						codigo;
+	private Long					codigo;
 
 	/** The data. */
 	@Column(name = "DATA")
@@ -89,7 +89,7 @@ public class Cotacao {
 	 * 
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
@@ -99,7 +99,7 @@ public class Cotacao {
 	 * @param codigo
 	 *            the new codigo
 	 */
-	public void setCodigo(final int codigo) {
+	public void setCodigo(final Long codigo) {
 		this.codigo = codigo;
 	}
 

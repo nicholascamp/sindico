@@ -26,28 +26,28 @@ public class Subcategoria {
 	@Id
 	@GeneratedValue
 	@Column(name = "SUBCATEGORIA_ID")
-	private int codigo;
+	private Long					codigo;
 
 	/** The categoria. */
 	@ManyToOne
 	@JoinColumn(name = "CATEGORIA_ID")
-	@NotNull(message="Subcategoria deve pertencer a uma Categoria")
-	private Categoria categoria;
+	@NotNull(message = "Subcategoria deve pertencer a uma Categoria")
+	private Categoria				categoria;
 
 	/** The title. */
 	@Column(name = "TITLE", length = 200, nullable = false, unique = true)
-	private String title;
+	private String					title;
 
 	/** The fornecedores. */
 	@ManyToMany(mappedBy = "subcategorias")
-	private Collection<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
 
 	/** The cotacoes. */
 	@OneToMany(mappedBy = "subcategoria")
-	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
-	
-	@OneToMany(mappedBy="subcategoria")
-	private Collection<Banner> banners = new ArrayList<Banner>();
+	private Collection<Cotacao>		cotacoes		= new ArrayList<Cotacao>();
+
+	@OneToMany(mappedBy = "subcategoria")
+	private Collection<Banner>		banners			= new ArrayList<Banner>();
 
 	/**
 	 * Gets the fornecedores.
@@ -57,7 +57,6 @@ public class Subcategoria {
 	public Collection<Fornecedor> getFornecedores() {
 		return fornecedores;
 	}
-	
 
 	/**
 	 * Sets the fornecedores.
@@ -93,7 +92,7 @@ public class Subcategoria {
 	 * 
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
@@ -103,7 +102,7 @@ public class Subcategoria {
 	 * @param codigo
 	 *            the new codigo
 	 */
-	public void setCodigo(final int codigo) {
+	public void setCodigo(final Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -145,13 +144,11 @@ public class Subcategoria {
 		this.title = title;
 	}
 
-
 	public Collection<Banner> getBanners() {
 		return banners;
 	}
 
-
-	public void setBanners(Collection<Banner> banners) {
+	public void setBanners(final Collection<Banner> banners) {
 		this.banners = banners;
 	}
 

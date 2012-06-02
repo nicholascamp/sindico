@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Fornecedor;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class FornecedorDAO.
  */
@@ -21,40 +22,126 @@ public class FornecedorDAO {
 	@Autowired
 	private SessionFactory	sessionFactory;
 
-
+	/**
+	 * Cria fornecedor.
+	 * 
+	 * @param fornecedor
+	 *            the fornecedor
+	 * @return the fornecedor
+	 */
 	@Transactional
 	public Fornecedor criaFornecedor(final Fornecedor fornecedor) {
 		sessionFactory.getCurrentSession().save(fornecedor);
 		return fornecedor;
 	}
 
-
+	/**
+	 * Atualiza fornecedor.
+	 * 
+	 * @param fornecedor
+	 *            the fornecedor
+	 * @return the fornecedor
+	 */
 	public Fornecedor atualizaFornecedor(final Fornecedor fornecedor) {
 		sessionFactory.getCurrentSession().update(fornecedor);
 		return fornecedor;
 	}
 
-
+	/**
+	 * Gets the fornecedor.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the fornecedor
+	 */
 	public Fornecedor getFornecedor(final Long id) {
-		return (Fornecedor) sessionFactory.getCurrentSession().load(Fornecedor.class,
-				id);
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select fornecedor from Fornecedor fornecedor where fornecedor.id = "
+						+ id);
+
+		return (Fornecedor) query.uniqueResult();
 	}
 
-
+	/**
+	 * Removes the fornecedor.
+	 * 
+	 * @param id
+	 *            the id
+	 */
 	public void removeFornecedor(final Long id) {
-		Fornecedor fornecedor = (Fornecedor) sessionFactory.getCurrentSession().load(
-				Fornecedor.class, id);
+		Fornecedor fornecedor = (Fornecedor) sessionFactory.getCurrentSession()
+				.load(Fornecedor.class, id);
 		if (fornecedor != null) {
 			sessionFactory.getCurrentSession().delete(fornecedor);
 		}
 	}
 
-
+	/**
+	 * Gets the lista.
+	 * 
+	 * @return the lista
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Fornecedor> getLista() {
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select fornecedor from Fornecedor fornecedor");
+		fornecedores = query.list();
+
+		return fornecedores;
+	}
+
+	/**
+	 * Buscar fornecedor por email.
+	 * 
+	 * @param email
+	 *            the email
+	 * @return the list
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> buscarFornecedorPorEmail(final String email) {
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select fornecedor from Fornecedor fornecedor WHERE fornecedor.email like '%"
+						+ email + "%'");
+		fornecedores = query.list();
+
+		return fornecedores;
+	}
+
+	/**
+	 * Buscar fornecedor por nome.
+	 * 
+	 * @param nome
+	 *            the nome
+	 * @return the list
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> buscarFornecedorPorNome(final String nome) {
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select fornecedor from Fornecedor fornecedor WHERE fornecedor.nome like '%"
+						+ nome + "%'");
+		fornecedores = query.list();
+
+		return fornecedores;
+	}
+
+	/**
+	 * Buscar fornecedor por endereco.
+	 * 
+	 * @param endereco
+	 *            the endereco
+	 * @return the list
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> buscarFornecedorPorEndereco(final String endereco) {
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		Query query = sessionFactory
+				.getCurrentSession()
+				.createQuery(
+						"select fornecedor from Fornecedor fornecedor WHERE fornecedor.endereco like '%"
+								+ endereco + "%'");
 		fornecedores = query.list();
 
 		return fornecedores;

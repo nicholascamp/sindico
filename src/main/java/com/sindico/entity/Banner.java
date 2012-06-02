@@ -24,48 +24,48 @@ public class Banner {
 	/** The codigo. */
 	@Id
 	@GeneratedValue
-	private Long	id;
+	private Long			id;
 
 	/** The data. */
-	@Column(name="DATA")
-	private Date	data;
+	@Column(name = "DATA")
+	private Date			data;
 
 	/** The arquivo img. */
-	@Column(name="ARQUIVO_IMG")
-	private String	arquivoImg;
+	@Column(name = "ARQUIVO_IMG")
+	private String			arquivoImg;
 
 	/** The descricao. */
-	@Column(name="DESCRICAO", nullable=false)
-	private String	descricao;
+	@Column(name = "DESCRICAO", nullable = false)
+	private String			descricao;
 
 	/** The margin up. */
-	@Column(name="MARGIN_X", nullable=false)
-	private float	marginX;
+	@Column(name = "MARGIN_X", nullable = false)
+	private float			marginX;
 
 	/** The margin left. */
-	@Column(name="MARGIN_Y", nullable=false)
-	private float	marginY;
+	@Column(name = "MARGIN_Y", nullable = false)
+	private float			marginY;
 
 	/** The link. */
-	@Column(name="LINK", nullable=false)
-	private String	link;
+	@Column(name = "LINK", nullable = false)
+	private String			link;
 
 	/** The contador. */
-	@Column(name="CONTADOR")
-	private int		contador;
-	
+	@Column(name = "CONTADOR")
+	private int				contador;
+
 	@ManyToOne
-	@JoinColumn(name="SUBCATEGORIA_ID")
-	private Subcategoria subcategoria;
-	
-	@Column(name="TIPO")
-	private char tipo;
+	@JoinColumn(name = "SUBCATEGORIA_ID")
+	private Subcategoria	subcategoria;
+
+	@Column(name = "TIPO")
+	private char			tipo;
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 
@@ -73,7 +73,7 @@ public class Banner {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(final Date data) {
 		this.data = data;
 	}
 
@@ -81,7 +81,7 @@ public class Banner {
 		return arquivoImg;
 	}
 
-	public void setArquivoImg(String arquivoImg) {
+	public void setArquivoImg(final String arquivoImg) {
 		this.arquivoImg = arquivoImg;
 	}
 
@@ -89,7 +89,7 @@ public class Banner {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
+	public void setDescricao(final String descricao) {
 		this.descricao = descricao;
 	}
 
@@ -97,7 +97,7 @@ public class Banner {
 		return marginX;
 	}
 
-	public void setMarginX(float marginX) {
+	public void setMarginX(final float marginX) {
 		this.marginX = marginX;
 	}
 
@@ -105,7 +105,7 @@ public class Banner {
 		return marginY;
 	}
 
-	public void setMarginY(float marginY) {
+	public void setMarginY(final float marginY) {
 		this.marginY = marginY;
 	}
 
@@ -113,7 +113,7 @@ public class Banner {
 		return link;
 	}
 
-	public void setLink(String link) {
+	public void setLink(final String link) {
 		this.link = link;
 	}
 
@@ -121,7 +121,7 @@ public class Banner {
 		return contador;
 	}
 
-	public void setContador(int contador) {
+	public void setContador(final int contador) {
 		this.contador = contador;
 	}
 
@@ -129,7 +129,7 @@ public class Banner {
 		return subcategoria;
 	}
 
-	public void setSubcategoria(Subcategoria subcategoria) {
+	public void setSubcategoria(final Subcategoria subcategoria) {
 		this.subcategoria = subcategoria;
 	}
 
@@ -137,7 +137,7 @@ public class Banner {
 		return tipo;
 	}
 
-	public void setTipo(char tipo) {
+	public void setTipo(final char tipo) {
 		this.tipo = tipo;
 	}
 

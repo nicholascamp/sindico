@@ -25,55 +25,60 @@ public class RespostaCotacao {
 	@Id
 	@GeneratedValue
 	@Column(name = "RESPOSTA_COTACAO_ID")
-	private int codigo;
+	private Long				codigo;
 
 	/** The primeira resposta. */
-	@Column(name = "PRIMEIRA_RESPOSTA", columnDefinition="TEXT")
-	private String primeiraResposta;
+	@Column(name = "PRIMEIRA_RESPOSTA", columnDefinition = "TEXT")
+	private String				primeiraResposta;
 
 	/** The valor. */
 	@Column(name = "VALOR", nullable = false)
-	@NotNull(message="Insira um valor")
-	private float valor;
+	@NotNull(message = "Insira um valor")
+	private float				valor;
 
 	/** The condicao. */
 	@Column(name = "CONDICAO", length = 50, nullable = false)
-	@NotNull(message="Insira uma condição")
-	private String condicao;
+	@NotNull(message = "Insira uma condição")
+	private String				condicao;
 
 	/** The garantia. */
 	@Column(name = "GARANTIA", nullable = false)
-	@NotNull(message="Insira um garantia")
-	private int garantia;
+	@NotNull(message = "Insira um garantia")
+	private int					garantia;
 
 	/** The prazo. */
 	@Column(name = "PRAZO", length = 100, nullable = false)
-	@NotNull(message="Insira um prazo de entrega")
-	private String prazo;
+	@NotNull(message = "Insira um prazo de entrega")
+	private String				prazo;
 
 	/** The lista respostas. */
 	@ElementCollection
-	@CollectionTable(name="RESPOSTA_COTACAO_LISTA", joinColumns=@JoinColumn(name="RESPOSTA_COTACAO_ID", columnDefinition="TEXT"))
-	private Collection<String> listaRespostas = new ArrayList<String>();
+	@CollectionTable(
+			name = "RESPOSTA_COTACAO_LISTA", joinColumns = @JoinColumn(
+					name = "RESPOSTA_COTACAO_ID", columnDefinition = "TEXT"))
+	private Collection<String>	listaRespostas	= new ArrayList<String>();
 
 	/** The atende area. */
 	@Column(name = "ATENDE_AREA")
-	private boolean atendeArea;
+	private boolean				atendeArea;
 
 	/** The parcela para. */
 	@Column(name = "PARCELA_PARA")
-	private int parcelaPara; // PERGUNTAR O QUE É
+	private int					parcelaPara;								// PERGUNTAR
+																			// O
+																			// QUE
+																			// É
 
 	/** The arquivo foto. */
 	@Column(name = "ARQUIVO_FOTO")
-	private String arquivoFoto;
+	private String				arquivoFoto;
 
 	/**
 	 * Gets the codigo.
 	 * 
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
@@ -83,7 +88,7 @@ public class RespostaCotacao {
 	 * @param codigo
 	 *            the new codigo
 	 */
-	public void setCodigo(final int codigo) {
+	public void setCodigo(final Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -129,7 +134,7 @@ public class RespostaCotacao {
 		return condicao;
 	}
 
-	public void setCondicao(String condicao) {
+	public void setCondicao(final String condicao) {
 		this.condicao = condicao;
 	}
 

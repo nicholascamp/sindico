@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +16,9 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.NotNull;
 
+import com.sindico.enums.Estado;
+
+// TODO: Auto-generated Javadoc
 /**
  * The Class Fornecedor.
  */
@@ -30,86 +30,122 @@ public class Fornecedor {
 	@Id
 	@GeneratedValue
 	@Column(name = "FORNECEDOR_ID")
-	private int codigo;
+	private Long						codigo;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
-	private Date dataCadastro;
+	private Date						dataCadastro;
 
 	/** The nome. */
 	@Column(name = "NOME", nullable = false, length = 100)
 	@NotNull(message = "Fornecedor necessita de um nome")
-	private String nome;
+	private String						nome;
 
 	/** The nome principal. */
 	@Column(name = "NOME_PRINCIPAL", nullable = false)
-	private String nomePrincipal;
+	private String						nomePrincipal;
 
 	/** The logo. */
 	@Column(name = "LOGO")
-	private String logo;
+	private String						logo;
 
-	/** The enderecos. */
-	@Embedded
-	@JoinTable(name = "ENDERECO")
-	private Endereco endereco;
+	/** The bairro. */
+	@Column(name = "BAIRRO", nullable = false, length = 100)
+	private String						bairro;
+
+	/** The cep. */
+	@Column(name = "CEP", nullable = false, length = 10)
+	private String						cep;
+
+	/** The cidade. */
+	@Column(name = "CIDADE", nullable = false, length = 100)
+	private String						cidade;
+
+	/** The endereco. */
+	@Column(name = "RUA", nullable = false)
+	private String						endereco;
+
+	/** The estado. */
+	@Column(name = "ESTADO", nullable = false, length = 2)
+	private Estado						estado;
+
+	/** The numero. */
+	@Column(name = "NUMERO", nullable = false)
+	private int							numero;
 
 	/** The cnpj. */
 	@Column(name = "CNPJ", length = 20, nullable = false, unique = true)
-	@NotNull(message="Fornecedor necessita de um CNPJ")
-	private String cnpj;
+	@NotNull(message = "Fornecedor necessita de um CNPJ")
+	private String						cnpj;
 
 	/** The subcategorias. */
 	@ManyToMany
-	@JoinTable(name = "FORNECEDOR_SUBCATEGORIA", joinColumns = @JoinColumn(name = "FORNECEDOR_ID"), inverseJoinColumns = @JoinColumn(name = "SUBCATEGORIA_ID"))
+	@JoinTable(name = "FORNECEDOR_SUBCATEGORIA", joinColumns = @JoinColumn(
+			name = "FORNECEDOR_ID"), inverseJoinColumns = @JoinColumn(
+			name = "SUBCATEGORIA_ID"))
 	@NotNull
-	private Collection<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
+	private Collection<Subcategoria>	subcategorias		= new ArrayList<Subcategoria>();
 
 	/** The estrelas. */
 	@Column(name = "ESTRELAS")
-	private int estrelas;
+	private int							estrelas;
 
 	/** The anunciante. */
 	@Column(name = "ANUNCIANTE")
-	private boolean anunciante;
+	private boolean						anunciante;
 
 	/** The aprovado. */
 	@Column(name = "APROVADO")
-	private boolean aprovado;
+	private boolean						aprovado;
 
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20, nullable = false)
 	@NotNull(message = "Fornecedor necessita de um telefone")
-	private String telefone;
+	private String						telefone;
 
 	/** The celular. */
 	@Column(name = "CELULAR", length = 20)
-	private String celular;
+	private String						celular;
 
 	/** The slogan. */
 	@Column(name = "SLOGAN")
-	private String slogan;
+	private String						slogan;
 
 	/** The descricao. */
 	@Column(name = "DESCRICAO")
-	private String descricao;
+	private String						descricao;
 
 	/** The title. */
 	@Column(name = "TITLE")
-	private String title;
+	private String						title;
 
 	/** The email. */
-	@ElementCollection
-	@CollectionTable(name="EMAIL_FORNECEDOR", joinColumns=@JoinColumn(name="FORNECEDOR_ID"))
-	private Collection<EmailFornecedor> email = new ArrayList<EmailFornecedor>();
+	@Column(name = "email")
+	private String						email;
+
+	/** The recebe cotacao email. */
+	@Column(name = "RECEBE_COTACAO_EMAIL")
+	private boolean						recebeCotacaoEmail;
+
+	/** The recebe news email. */
+	@Column(name = "RECEBE_NEWS_EMAIL")
+	private boolean						recebeNewsEmail;
 
 	/** The cotacoes. */
 	@ManyToMany(mappedBy = "fornecedores")
-	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	private Collection<Cotacao>			cotacoes			= new ArrayList<Cotacao>();
 
 	/** The cotacoes vencedoras. */
 	@OneToMany(mappedBy = "fornecedorVencedor")
-	private Collection<Cotacao> cotacoesVencedoras = new ArrayList<Cotacao>();
+	private Collection<Cotacao>			cotacoesVencedoras	= new ArrayList<Cotacao>();
+
+	/**
+	 * Instantiates a new fornecedor.
+	 */
+	public Fornecedor() {
+		super();
+		this.dataCadastro = new Date();
+	}
 
 	/**
 	 * Gets the cotacoes.
@@ -145,7 +181,8 @@ public class Fornecedor {
 	 * @param cotacoesVencedoras
 	 *            the new cotacoes vencedoras
 	 */
-	public void setCotacoesVencedoras(final Collection<Cotacao> cotacoesVencedoras) {
+	public void setCotacoesVencedoras(
+			final Collection<Cotacao> cotacoesVencedoras) {
 		this.cotacoesVencedoras = cotacoesVencedoras;
 	}
 
@@ -154,7 +191,7 @@ public class Fornecedor {
 	 * 
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
@@ -164,7 +201,7 @@ public class Fornecedor {
 	 * @param codigo
 	 *            the new codigo
 	 */
-	public void setCodigo(final int codigo) {
+	public void setCodigo(final Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -242,16 +279,6 @@ public class Fornecedor {
 	 */
 	public void setLogo(final String logo) {
 		this.logo = logo;
-	}
-
-	
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	/**
@@ -368,7 +395,6 @@ public class Fornecedor {
 		this.telefone = telefone;
 	}
 
-
 	/**
 	 * Gets the celular.
 	 * 
@@ -388,7 +414,6 @@ public class Fornecedor {
 		this.celular = celular;
 	}
 
-	
 	/**
 	 * Gets the slogan.
 	 * 
@@ -446,14 +471,175 @@ public class Fornecedor {
 		this.title = title;
 	}
 
-	public Collection<EmailFornecedor> getEmail() {
+	/**
+	 * Gets the email.
+	 * 
+	 * @return the email
+	 */
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(Collection<EmailFornecedor> email) {
+	/**
+	 * Sets the email.
+	 * 
+	 * @param email
+	 *            the new email
+	 */
+	public void setEmail(final String email) {
 		this.email = email;
 	}
-	
-	
+
+	/**
+	 * Gets the bairro.
+	 * 
+	 * @return the bairro
+	 */
+	public String getBairro() {
+		return bairro;
+	}
+
+	/**
+	 * Sets the bairro.
+	 * 
+	 * @param bairro
+	 *            the new bairro
+	 */
+	public void setBairro(final String bairro) {
+		this.bairro = bairro;
+	}
+
+	/**
+	 * Gets the cep.
+	 * 
+	 * @return the cep
+	 */
+	public String getCep() {
+		return cep;
+	}
+
+	/**
+	 * Sets the cep.
+	 * 
+	 * @param cep
+	 *            the new cep
+	 */
+	public void setCep(final String cep) {
+		this.cep = cep;
+	}
+
+	/**
+	 * Gets the cidade.
+	 * 
+	 * @return the cidade
+	 */
+	public String getCidade() {
+		return cidade;
+	}
+
+	/**
+	 * Sets the cidade.
+	 * 
+	 * @param cidade
+	 *            the new cidade
+	 */
+	public void setCidade(final String cidade) {
+		this.cidade = cidade;
+	}
+
+	/**
+	 * Gets the endereco.
+	 * 
+	 * @return the endereco
+	 */
+	public String getEndereco() {
+		return endereco;
+	}
+
+	/**
+	 * Sets the endereco.
+	 * 
+	 * @param endereco
+	 *            the new endereco
+	 */
+	public void setEndereco(final String endereco) {
+		this.endereco = endereco;
+	}
+
+	/**
+	 * Gets the estado.
+	 * 
+	 * @return the estado
+	 */
+	public Estado getEstado() {
+		return estado;
+	}
+
+	/**
+	 * Sets the estado.
+	 * 
+	 * @param estado
+	 *            the new estado
+	 */
+	public void setEstado(final Estado estado) {
+		this.estado = estado;
+	}
+
+	/**
+	 * Gets the numero.
+	 * 
+	 * @return the numero
+	 */
+	public int getNumero() {
+		return numero;
+	}
+
+	/**
+	 * Sets the numero.
+	 * 
+	 * @param numero
+	 *            the new numero
+	 */
+	public void setNumero(final int numero) {
+		this.numero = numero;
+	}
+
+	/**
+	 * Checks if is recebe cotacao email.
+	 * 
+	 * @return true, if is recebe cotacao email
+	 */
+	public boolean isRecebeCotacaoEmail() {
+		return recebeCotacaoEmail;
+	}
+
+	/**
+	 * Sets the recebe cotacao email.
+	 * 
+	 * @param recebeCotacaoEmail
+	 *            the new recebe cotacao email
+	 */
+	public void setRecebeCotacaoEmail(final boolean recebeCotacaoEmail) {
+		this.recebeCotacaoEmail = recebeCotacaoEmail;
+	}
+
+	/**
+	 * Checks if is recebe news email.
+	 * 
+	 * @return true, if is recebe news email
+	 */
+	public boolean isRecebeNewsEmail() {
+		return recebeNewsEmail;
+	}
+
+	/**
+	 * Sets the recebe news email.
+	 * 
+	 * @param recebeNewsEmail
+	 *            the new recebe news email
+	 */
+	public void setRecebeNewsEmail(final boolean recebeNewsEmail) {
+		this.recebeNewsEmail = recebeNewsEmail;
+	}
 
 }

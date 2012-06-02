@@ -36,6 +36,16 @@ public interface FornecedorService {
 	Fornecedor criarFornecedor(Fornecedor fornecedor);
 
 	/**
+	 * Gets the fornecedor.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the fornecedor
+	 */
+	@Transactional
+	Fornecedor getFornecedor(Long id);
+
+	/**
 	 * Atualizar fornecedor.
 	 * 
 	 * @param fornecedor

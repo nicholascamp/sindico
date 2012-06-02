@@ -19,6 +19,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.NotNull;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Administradora.
  */
@@ -30,18 +31,19 @@ public class Administradora {
 	@Id
 	@GeneratedValue
 	@Column(name = "ADMINISTRADORA_ID")
-	private int									codigo;
+	private Long								codigo;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
 	private Date								dataCadastro;
-	
-	@Column(name="NOME", length = 60, nullable=false)
-	@NotNull(message="A Administradora necessita de um nome")
-	private String nome;
+
+	/** The nome. */
+	@Column(name = "NOME", length = 60, nullable = false)
+	@NotNull(message = "A Administradora necessita de um nome")
+	private String								nome;
 
 	/** The cnpj. */
-	@Column(name = "CNPJ", length = 20, unique=true)
+	@Column(name = "CNPJ", length = 20, unique = true)
 	private String								cnpj;
 
 	/** The enderecos. */
@@ -67,7 +69,7 @@ public class Administradora {
 	 * 
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
@@ -77,16 +79,26 @@ public class Administradora {
 	 * @param codigo
 	 *            the new codigo
 	 */
-	public void setCodigo(final int codigo) {
+	public void setCodigo(final Long codigo) {
 		this.codigo = codigo;
 	}
-	
 
+	/**
+	 * Gets the nome.
+	 * 
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	/**
+	 * Sets the nome.
+	 * 
+	 * @param nome
+	 *            the new nome
+	 */
+	public void setNome(final String nome) {
 		this.nome = nome;
 	}
 
