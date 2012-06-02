@@ -6,41 +6,55 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Categoria;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface CategoriaService.
  */
 public interface CategoriaService {
 
 	/**
-	 * Listar categorias.
+	 * List categorias.
 	 * 
 	 * @return the list
 	 */
 	@Transactional
-<<<<<<< HEAD
-	List<Categoria> listarCategorias();
+	List<Categoria> listCategorias();
 
 	/**
-	 * Criar categoria.
+	 * Gets the categoria.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the categoria
+	 */
+	@Transactional
+	Categoria getCategoria(Long id);
+
+	/**
+	 * Creates the categoria.
 	 * 
 	 * @param categoria
 	 *            the categoria
 	 * @return the categoria
 	 */
-=======
-	List<Categoria> listCategorias();
-	
->>>>>>> 759c5de8bc31dfb78848458290ea8804758b08c8
-	@Transactional
-	Categoria getCategoria(int id);
-	
 	@Transactional
 	Categoria createCategoria(Categoria categoria);
-	
+
+	/**
+	 * Update categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @return the categoria
+	 */
 	@Transactional
 	Categoria updateCategoria(Categoria categoria);
-	
+
+	/**
+	 * Removes the categoria.
+	 * 
+	 * @param id
+	 *            the id
+	 */
 	@Transactional
-	void removeCategoria(int id);
+	void removeCategoria(Long id);
 }

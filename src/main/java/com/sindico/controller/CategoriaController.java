@@ -15,13 +15,22 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sindico.entity.Categoria;
 import com.sindico.service.CategoriaService;
 
+/**
+ * The Class CategoriaController.
+ */
 @Controller
 @SessionAttributes
 public class CategoriaController {
 
+	/** The categoria service. */
 	@Autowired
 	private CategoriaService	categoriaService;
 
+	/**
+	 * Index categoria.
+	 * 
+	 * @return the model and view
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/lista")
 	public ModelAndView indexCategoria() {
@@ -38,8 +47,15 @@ public class CategoriaController {
 		return modelAndView;
 	}
 
+	/**
+	 * Show categoria.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/mostra")
-	public ModelAndView showCategoria(final int id) {
+	public ModelAndView showCategoria(final Long id) {
 		ModelAndView modelAndView = new ModelAndView("/categoria", "categoria",
 				new Categoria());
 
@@ -47,6 +63,11 @@ public class CategoriaController {
 		return modelAndView;
 	}
 
+	/**
+	 * New categoria.
+	 * 
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/cria")
 	public ModelAndView newCategoria() {
 		ModelAndView modelAndView = new ModelAndView("/criaCategoria",
@@ -55,6 +76,15 @@ public class CategoriaController {
 		return modelAndView;
 	}
 
+	/**
+	 * Creates the categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @param result
+	 *            the result
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/categoria/cria")
 	public ModelAndView createCategoria(
 			@ModelAttribute("categoria") final Categoria categoria,
@@ -64,13 +94,27 @@ public class CategoriaController {
 		return new ModelAndView("/categoria", "categoria", categoria);
 	}
 
+	/**
+	 * Edits the categoria.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/edita")
-	public ModelAndView editCategoria(final int id) {
+	public ModelAndView editCategoria(final Long id) {
 		Categoria categoria = categoriaService.getCategoria(id);
 
 		return new ModelAndView("/editaCategoria", "categoria", categoria);
 	}
 
+	/**
+	 * Update categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/categoria/edita")
 	public ModelAndView updateCategoria(final Categoria categoria) {
 		categoriaService.updateCategoria(categoria);
@@ -78,6 +122,13 @@ public class CategoriaController {
 		return new ModelAndView("/categoria", "categoria", categoria);
 	}
 
+	/**
+	 * Destroy categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/categoria/deleta")
 	public ModelAndView destroyCategoria(final Categoria categoria) {
 		categoriaService.removeCategoria(categoria.getCodigo());

@@ -21,34 +21,32 @@ public class CategoriaDAO {
 	@Autowired
 	private SessionFactory	sessionFactory;
 
-
 	@Transactional
 	public Categoria criaCategoria(final Categoria categoria) {
 		sessionFactory.getCurrentSession().save(categoria);
 		return categoria;
 	}
 
-
 	public Categoria atualizaCategoria(final Categoria categoria) {
 		sessionFactory.getCurrentSession().update(categoria);
 		return categoria;
 	}
 
+	public Categoria getCategoria(final Long id) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select categoria from Categoria categoria where categoria.id = "
+						+ id);
 
-	public Categoria getCategoria(final int id) {
-		return (Categoria) sessionFactory.getCurrentSession().load(Categoria.class,
-				id);
+		return (Categoria) query.uniqueResult();
 	}
 
-
-	public void removeCategoria(final int id) {
-		Categoria categoria = (Categoria) sessionFactory.getCurrentSession().load(
-				Categoria.class, id);
+	public void removeCategoria(final Long id) {
+		Categoria categoria = (Categoria) sessionFactory.getCurrentSession()
+				.load(Categoria.class, id);
 		if (categoria != null) {
 			sessionFactory.getCurrentSession().delete(categoria);
 		}
 	}
-
 
 	@SuppressWarnings("unchecked")
 	public List<Categoria> getLista() {

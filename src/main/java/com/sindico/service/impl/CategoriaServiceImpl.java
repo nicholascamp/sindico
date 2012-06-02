@@ -21,24 +21,23 @@ public class CategoriaServiceImpl implements CategoriaService {
 	}
 
 	@Override
-	public Categoria getCategoria(int id) {
+	public Categoria getCategoria(final Long id) {
 		return categoriaDAO.getCategoria(id);
 	}
 
 	@Override
-	public Categoria createCategoria(Categoria categoria) {
+	public Categoria createCategoria(final Categoria categoria) {
 		return categoriaDAO.criaCategoria(categoria);
 	}
 
 	@Override
-	public Categoria updateCategoria(Categoria categoria) {
+	public Categoria updateCategoria(final Categoria categoria) {
 		return categoriaDAO.atualizaCategoria(categoria);
 	}
 
 	@Override
-	public void removeCategoria(int id) {
+	public void removeCategoria(final Long id) {
 		categoriaDAO.removeCategoria(id);
 	}
 
-	
 }
