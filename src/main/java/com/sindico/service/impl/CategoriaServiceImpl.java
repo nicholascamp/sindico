@@ -13,7 +13,7 @@ import com.sindico.service.CategoriaService;
 public class CategoriaServiceImpl implements CategoriaService {
 
 	@Autowired
-	CategoriaDAO	categoriaDAO;
+	private CategoriaDAO	categoriaDAO;
 
 	@Override
 	public List<Categoria> listCategorias() {
