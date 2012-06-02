@@ -15,17 +15,29 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sindico.entity.Categoria;
 import com.sindico.service.CategoriaService;
 
+/**
+ * The Class CategoriaController.
+ */
 @Controller
 @SessionAttributes
 public class CategoriaController {
-		
+
+	/** The categoria service. */
 	@Autowired
-	private CategoriaService categoriaService;
-	
+	private CategoriaService	categoriaService;
+
+	/**
+	 * Index categoria.
+	 * 
+	 * @return the model and view
+	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/lista")
-	public ModelAndView indexCategoria(){
-		ModelAndView modelAndView = new ModelAndView("/categorias", "categoria", new Categoria());
-		PagedListHolder<Categoria> pagedListHolder = new PagedListHolder<Categoria>(categoriaService.listCategorias());
+	public ModelAndView indexCategoria() {
+		ModelAndView modelAndView = new ModelAndView("/categorias",
+				"categoria", new Categoria());
+		PagedListHolder<Categoria> pagedListHolder = new PagedListHolder<Categoria>(
+				categoriaService.listCategorias());
 		pagedListHolder.setPageSize(20);
 
 		List<Categoria> pagedListCategorias = pagedListHolder.getPageList();
@@ -34,47 +46,94 @@ public class CategoriaController {
 
 		return modelAndView;
 	}
-	
+
+	/**
+	 * Show categoria.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/mostra")
-	public ModelAndView showCategoria(int id){
-		ModelAndView modelAndView = new ModelAndView("/categoria", "categoria", new Categoria());
-		
+	public ModelAndView showCategoria(final Long id) {
+		ModelAndView modelAndView = new ModelAndView("/categoria", "categoria",
+				new Categoria());
+
 		modelAndView.addObject("categoria", categoriaService.getCategoria(id));
 		return modelAndView;
 	}
-	
+
+	/**
+	 * New categoria.
+	 * 
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/cria")
-	public ModelAndView newCategoria(){
-		ModelAndView modelAndView = new ModelAndView("/criaCategoria", "categoria", new Categoria());
-			
-		return modelAndView;		
+	public ModelAndView newCategoria() {
+		ModelAndView modelAndView = new ModelAndView("/criaCategoria",
+				"categoria", new Categoria());
+
+		return modelAndView;
 	}
-	
+
+	/**
+	 * Creates the categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @param result
+	 *            the result
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/categoria/cria")
-	public ModelAndView createCategoria(@ModelAttribute("categoria") Categoria categoria, BindingResult result){
+	public ModelAndView createCategoria(
+			@ModelAttribute("categoria") final Categoria categoria,
+			final BindingResult result) {
 		categoriaService.createCategoria(categoria);
-		
+
 		return new ModelAndView("/categoria", "categoria", categoria);
 	}
-	
+
+	/**
+	 * Edits the categoria.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/edita")
-	public ModelAndView editCategoria(int id){
+	public ModelAndView editCategoria(final Long id) {
 		Categoria categoria = categoriaService.getCategoria(id);
-		
+
 		return new ModelAndView("/editaCategoria", "categoria", categoria);
 	}
-	
+
+	/**
+	 * Update categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/categoria/edita")
-	public ModelAndView updateCategoria(Categoria categoria){
+	public ModelAndView updateCategoria(final Categoria categoria) {
 		categoriaService.updateCategoria(categoria);
-		
+
 		return new ModelAndView("/categoria", "categoria", categoria);
 	}
-	
+
+	/**
+	 * Destroy categoria.
+	 * 
+	 * @param categoria
+	 *            the categoria
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/categoria/deleta")
-	public ModelAndView destroyCategoria(Categoria categoria){
+	public ModelAndView destroyCategoria(final Categoria categoria) {
 		categoriaService.removeCategoria(categoria.getCodigo());
-		
-		return new ModelAndView("/categorias", "categorias", categoriaService.listCategorias());
+
+		return new ModelAndView("/categorias", "categorias",
+				categoriaService.listCategorias());
 	}
 }

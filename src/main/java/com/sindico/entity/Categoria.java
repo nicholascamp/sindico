@@ -1,5 +1,6 @@
 package com.sindico.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -16,29 +17,33 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.NotNull;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Categoria.
  */
 @Entity
 @Table(name = "CATEGORIA")
-public class Categoria {
+public class Categoria implements Serializable {
+
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= -7373446708020048049L;
 
 	/** The codigo. */
 	@Id
 	@GeneratedValue
 	@Column(name = "CATEGORIA_ID")
-	private int					codigo;
+	private Long				codigo;
 
 	/** The nome. */
-	@Column(name = "NOME", length = 100, nullable=false, unique= true)
-	@NotNull(message="A Categorira necessita de um nome")
+	@Column(name = "NOME", length = 100, nullable = false, unique = true)
+	@NotNull(message = "A Categorira necessita de um nome")
 	private String				nome;
 
 	/** The subcategorias. */
 	@Transient
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
-	Collection<Subcategoria>	subcategorias	= new ArrayList<Subcategoria>();
+	Collection<Subcategoria>	subcategorias		= new ArrayList<Subcategoria>();
 
 	/**
 	 * Gets the subcategorias.
@@ -64,7 +69,7 @@ public class Categoria {
 	 * 
 	 * @return the codigo
 	 */
-	public int getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
@@ -74,7 +79,7 @@ public class Categoria {
 	 * @param codigo
 	 *            the new codigo
 	 */
-	public void setCodigo(final int codigo) {
+	public void setCodigo(final Long codigo) {
 		this.codigo = codigo;
 	}
 
