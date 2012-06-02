@@ -18,6 +18,7 @@ public interface CategoriaService {
 	 * @return the list
 	 */
 	@Transactional
+<<<<<<< HEAD
 	List<Categoria> listarCategorias();
 
 	/**
@@ -27,6 +28,19 @@ public interface CategoriaService {
 	 *            the categoria
 	 * @return the categoria
 	 */
+=======
+	List<Categoria> listCategorias();
+	
+>>>>>>> 759c5de8bc31dfb78848458290ea8804758b08c8
 	@Transactional
-	Categoria criarCategoria(Categoria categoria);
+	Categoria getCategoria(int id);
+	
+	@Transactional
+	Categoria createCategoria(Categoria categoria);
+	
+	@Transactional
+	Categoria updateCategoria(Categoria categoria);
+	
+	@Transactional
+	void removeCategoria(int id);
 }

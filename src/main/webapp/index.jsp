@@ -8,5 +8,6 @@
 	<body>	
 		<h1>Index</h1>
 		<a href="/sindico/predios.html">Gerenciar Prédios</a>	
+		<a href="/sindico/categoria/lista.html">Gerenciar Categorias</a>
 	</body>
 </html>
