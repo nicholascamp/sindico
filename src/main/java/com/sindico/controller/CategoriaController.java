@@ -12,25 +12,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sindico.dao.CategoriaDAO;
 import com.sindico.entity.Categoria;
 import com.sindico.service.CategoriaService;
 
 @Controller
 @SessionAttributes
 public class CategoriaController {
-	
-	@Autowired
-	private CategoriaDAO categoriaDAO;
-	
+		
 	@Autowired
 	private CategoriaService categoriaService;
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/lista.html")
+	@RequestMapping(method = RequestMethod.GET, value = "/categoria/lista")
 	public ModelAndView indexCategoria(){
 		ModelAndView modelAndView = new ModelAndView("/categorias", "categoria", new Categoria());
-		PagedListHolder<Categoria> pagedListHolder = new PagedListHolder<Categoria>(categoriaService.listarCategorias());
-		pagedListHolder.setPageSize(2);
+		PagedListHolder<Categoria> pagedListHolder = new PagedListHolder<Categoria>(categoriaService.listCategorias());
+		pagedListHolder.setPageSize(20);
 
 		List<Categoria> pagedListCategorias = pagedListHolder.getPageList();
 
@@ -39,11 +35,11 @@ public class CategoriaController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/mostra.html")
-	public ModelAndView showCategoria(long id){
+	@RequestMapping(method = RequestMethod.GET, value = "/categoria/mostra")
+	public ModelAndView showCategoria(int id){
 		ModelAndView modelAndView = new ModelAndView("/categoria", "categoria", new Categoria());
 		
-		modelAndView.addObject("categoria", categoriaDAO.getCategoria(id));
+		modelAndView.addObject("categoria", categoriaService.getCategoria(id));
 		return modelAndView;
 	}
 	
@@ -56,29 +52,29 @@ public class CategoriaController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/categoria/cria")
 	public ModelAndView createCategoria(@ModelAttribute("categoria") Categoria categoria, BindingResult result){
-		categoriaService.criarCategoria(categoria);
+		categoriaService.createCategoria(categoria);
 		
 		return new ModelAndView("/categoria", "categoria", categoria);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/edita.html")
-	public ModelAndView editCategoria(long id){
-		Categoria categoria = categoriaDAO.getCategoria(id);
+	@RequestMapping(method = RequestMethod.GET, value = "/categoria/edita")
+	public ModelAndView editCategoria(int id){
+		Categoria categoria = categoriaService.getCategoria(id);
 		
 		return new ModelAndView("/editaCategoria", "categoria", categoria);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/categoria/edita.html")
+	@RequestMapping(method = RequestMethod.PUT, value = "/categoria/edita")
 	public ModelAndView updateCategoria(Categoria categoria){
-		categoriaDAO.atualizaCategoria(categoria);
+		categoriaService.updateCategoria(categoria);
 		
 		return new ModelAndView("/categoria", "categoria", categoria);
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value = "/categoria/deleta.html")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/categoria/deleta")
 	public ModelAndView destroyCategoria(Categoria categoria){
-		categoriaDAO.removeCategoria((long) categoria.getCodigo());
+		categoriaService.removeCategoria(categoria.getCodigo());
 		
-		return new ModelAndView("/categorias", "categorias", categoriaService.listarCategorias());
+		return new ModelAndView("/categorias", "categorias", categoriaService.listCategorias());
 	}
 }

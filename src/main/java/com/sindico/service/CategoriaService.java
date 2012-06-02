@@ -8,8 +8,17 @@ import com.sindico.entity.Categoria;
 
 public interface CategoriaService {
 	@Transactional
-	List<Categoria> listarCategorias();
+	List<Categoria> listCategorias();
 	
 	@Transactional
-	Categoria criarCategoria(Categoria categoria);
+	Categoria getCategoria(int id);
+	
+	@Transactional
+	Categoria createCategoria(Categoria categoria);
+	
+	@Transactional
+	Categoria updateCategoria(Categoria categoria);
+	
+	@Transactional
+	void removeCategoria(int id);
 }

@@ -35,13 +35,13 @@ public class CategoriaDAO {
 	}
 
 
-	public Categoria getCategoria(final Long id) {
+	public Categoria getCategoria(final int id) {
 		return (Categoria) sessionFactory.getCurrentSession().load(Categoria.class,
 				id);
 	}
 
 
-	public void removeCategoria(final Long id) {
+	public void removeCategoria(final int id) {
 		Categoria categoria = (Categoria) sessionFactory.getCurrentSession().load(
 				Categoria.class, id);
 		if (categoria != null) {

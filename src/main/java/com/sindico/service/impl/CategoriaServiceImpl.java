@@ -16,13 +16,29 @@ public class CategoriaServiceImpl implements CategoriaService {
 	CategoriaDAO	categoriaDAO;
 
 	@Override
-	public List<Categoria> listarCategorias() {
+	public List<Categoria> listCategorias() {
 		return categoriaDAO.getLista();
 	}
 
 	@Override
-	public Categoria criarCategoria(final Categoria categoria) {
+	public Categoria getCategoria(int id) {
+		return categoriaDAO.getCategoria(id);
+	}
+
+	@Override
+	public Categoria createCategoria(Categoria categoria) {
 		return categoriaDAO.criaCategoria(categoria);
 	}
 
+	@Override
+	public Categoria updateCategoria(Categoria categoria) {
+		return categoriaDAO.atualizaCategoria(categoria);
+	}
+
+	@Override
+	public void removeCategoria(int id) {
+		categoriaDAO.removeCategoria(id);
+	}
+
+	
 }

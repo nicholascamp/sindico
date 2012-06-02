@@ -14,13 +14,13 @@
 	<body>
 		<h1>CATEGORIAS</h1>
 		<div>
-		
+			
 		</div>
 		<div>
-			<table>
+			<table style="margin: 10px;">
 				<tr>
 					<th>Nome</th>
-					<th>Subcategorias</th>
+					<th>Consultar</th>
 					<th>Editar</th>
 					<th>Deletar</th>
 				</tr>
@@ -28,33 +28,34 @@
 					<c:forEach items="${categorias }" var="categoria">
 						<tr>
 							<td>${categoria.nome }</td>
-							<!-- <td>
-								<c:url value="/sindico/categoria/subcategorias" var="Subcategorias">
-									<c:param name="codigo" value="${categoria.codigo}" />
+							<td>
+								<c:url value="/categoria/mostra" var="Consultar">
+									<c:param name="id" value="${categoria.codigo}" />
 								</c:url>
-								<c:out value="Subcategorias" />
+								<a href="${Consultar}" title="Consulta Categoria">Consultar</a>
 							</td>
 							<td>
-								<c:url value="/sindico/categoria/edita.html"  var="Editar">
-									<c:param name="codigo" value="${categoria.codigo}" />
+								<c:url value="/categoria/edita"  var="Editar">
+									<c:param name="id" value="${categoria.codigo}" />
 								</c:url>
-								<c:out value="Editar" />
+								<a href="${Editar}" title="Editar Categoria">Editar</a>
 							</td>
 							<td>
-								<c:url value="/sindico/categoria/deleta.html" var="Deletar">
-									<c:param name="codigo" value="${categoria.codigo}" />
+								<c:url value="/categoria/deleta" var="Deletar" >
+									<c:param name="id" value="${categoria.codigo}" />
 								</c:url>
-								<c:out value="Deletar" />
-							</td> -->
+								<a href="${Deletar}" title="Deletar Categoria">Deletar</a>
+							</td>
 						</tr>
 					</c:forEach>
 				</c:if>
-				<c:if test="${empty categorias}">
-					<tr>
-						<td align="center">Nenhuma categoria encontrada</td>
-					</tr>
-				</c:if>
 			</table>
+			<c:if test="${empty categorias}">
+				<p>Nenhuma categoria encontrada</p>
+			</c:if>
+		</div>
+		<div>
+			<a href="/sindico/categoria/cria" title="Criar Categoria">Nova Categoria</a>
 		</div>
 	</body>
 </html>

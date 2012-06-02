@@ -40,12 +40,15 @@ public class SubcategoriaDAO {
 	}
 
 
-	public void removeSubcategoria(final Long id) {
+	public boolean removeSubcategoria(final Long id) {
 		Subcategoria subcategoria = (Subcategoria) sessionFactory.getCurrentSession().load(
 				Subcategoria.class, id);
 		if (subcategoria != null) {
 			sessionFactory.getCurrentSession().delete(subcategoria);
+			return true;
 		}
+		else
+			return false;
 	}
 
 
