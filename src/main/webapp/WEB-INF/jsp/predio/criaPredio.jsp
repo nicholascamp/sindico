@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<form:form commandName="predio" method="put" action="atualizarPredio">
+	<form:form commandName="predio" method="post" action="/sindico/predio/cria">
 	Nome: <br />
 		<form:input path="nome" />
 		<br />
@@ -58,10 +58,8 @@
 		<form:checkbox path="gerenteRecebeCotacao"/>
 		<br />
 		<br />
-		<input type="submit" value="Atualizar Predio" />
+		<input type="submit" value="Cria Predio" />
 	</form:form>
-	
-	<a href="/sindico/predios.html">Cancelar</a>
 
 </body>
 </html>

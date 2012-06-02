@@ -7,7 +7,8 @@
 	</head>
 	<body>	
 		<h1>Index</h1>
-		<a href="/sindico/predios.html">Gerenciar Prédios</a>	
+		<a href="/sindico/predio/lista.html">Gerenciar Prédios</a>	
 		<a href="/sindico/categoria/lista.html">Gerenciar Categorias</a>
+		<a href="/sindico/fornecedor/lista.html">Gerenciar Fornecedores</a>
 	</body>
 </html>

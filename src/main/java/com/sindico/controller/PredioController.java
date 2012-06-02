@@ -31,22 +31,24 @@ public class PredioController {
 
 	/** The predio service. */
 	@Autowired
-	private PredioService predioService;
+	private PredioService					predioService;
 
 	/** The gerente administradora service. */
 	@Autowired
-	private GerenteAdministradoraService gerenteAdministradoraService;
+	private GerenteAdministradoraService	gerenteAdministradoraService;
 
 	/**
 	 * Listar predios.
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/predios.html")
+	@RequestMapping(method = RequestMethod.GET, value = "/predio/lista")
 	public ModelAndView listarPredios() {
 
-		ModelAndView modelAndView = new ModelAndView("/predios", "predio", new Predio());
-		PagedListHolder<Predio> pagedListHolder = new PagedListHolder<Predio>(predioService.listarPredios());
+		ModelAndView modelAndView = new ModelAndView("/predio/predios",
+				"predio", new Predio());
+		PagedListHolder<Predio> pagedListHolder = new PagedListHolder<Predio>(
+				predioService.listarPredios());
 		pagedListHolder.setPageSize(2);
 
 		List<Predio> pagedListPredios = pagedListHolder.getPageList();
@@ -61,13 +63,15 @@ public class PredioController {
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/criaPredio.html")
+	@RequestMapping(method = RequestMethod.GET, value = "/predio/cria")
 	public ModelAndView criarPredio() {
-		ModelAndView modelAndView = new ModelAndView("/criaPredio", "predio", new Predio());
+		ModelAndView modelAndView = new ModelAndView("/predio/criaPredio",
+				"predio", new Predio());
 
 		modelAndView.addObject("tipos", TipoPredio.values());
 		modelAndView.addObject("estados", Estado.values());
-		modelAndView.addObject("gerentes", gerenteAdministradoraService.listaGerentes());
+		modelAndView.addObject("gerentes",
+				gerenteAdministradoraService.listaGerentes());
 		System.out.println("Cria Predio");
 		return modelAndView;
 	}
@@ -81,12 +85,13 @@ public class PredioController {
 	 *            the result
 	 * @return the string
 	 */
-	@RequestMapping(value = "/criaPredio", method = RequestMethod.POST)
-	public String criarPredio(@ModelAttribute("predio") final Predio predio, final BindingResult result) {
+	@RequestMapping(value = "/predio/cria", method = RequestMethod.POST)
+	public String criarPredio(@ModelAttribute("predio") final Predio predio,
+			final BindingResult result) {
 
 		predioService.criarPredio(predio);
 
-		return "redirect:predios.html";
+		return "redirect:/predio/lista.html";
 	}
 
 	/**
@@ -96,12 +101,15 @@ public class PredioController {
 	 *            the nome
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/buscarPredioPorNome")
+	@RequestMapping(
+			method = RequestMethod.GET, value = "/predio/buscarPredioPorNome")
 	public ModelAndView buscarPredio(@RequestParam final String nome) {
 
-		ModelAndView modelAndView = new ModelAndView("/predios", "predio", new Predio());
+		ModelAndView modelAndView = new ModelAndView("/predio/predios",
+				"predio", new Predio());
 
-		modelAndView.addObject("predios", predioService.buscarPredioPorNome(nome));
+		modelAndView.addObject("predios",
+				predioService.buscarPredioPorNome(nome));
 
 		return modelAndView;
 	}
@@ -113,40 +121,49 @@ public class PredioController {
 	 *            the endereco
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/buscarPredioPorEndereco")
-	public ModelAndView buscarPredioPorEndereco(@RequestParam final String endereco) {
+	@RequestMapping(
+			method = RequestMethod.GET,
+			value = "/predio/buscarPredioPorEndereco")
+	public ModelAndView buscarPredioPorEndereco(
+			@RequestParam final String endereco) {
 
-		ModelAndView modelAndView = new ModelAndView("/predios", "predio", new Predio());
+		ModelAndView modelAndView = new ModelAndView("/predio/predios",
+				"predio", new Predio());
 
-		modelAndView.addObject("predios", predioService.buscarPredioPorEndereco(endereco));
+		modelAndView.addObject("predios",
+				predioService.buscarPredioPorEndereco(endereco));
 
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/removerPredio")
+	@RequestMapping(value = "/predio/deleta")
 	public String removerPredio(@RequestParam final Long id) {
 
 		predioService.deletarPredio(id);
 
-		return "redirect:predios.html";
+		return "redirect:/predio/lista.html";
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/atualizarPredio")
-	public String atualizarPredio(@ModelAttribute("predio") final Predio predio, final BindingResult result) {
+	@RequestMapping(method = RequestMethod.PUT, value = "/predio/edita")
+	public String atualizarPredio(
+			@ModelAttribute("predio") final Predio predio,
+			final BindingResult result) {
 
 		predioService.atualizarPredio(predio);
 
-		return "redirect:predios.html";
+		return "redirect:/predio/lista.html";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/atualizarPredio.html")
+	@RequestMapping(method = RequestMethod.GET, value = "/predio/edita")
 	public ModelAndView atualizarPredio(@RequestParam final Long id) {
 
-		ModelAndView modelAndView = new ModelAndView("/atualizaPredio", "predio", predioService.getPredio(id));
+		ModelAndView modelAndView = new ModelAndView("/predio/atualizaPredio",
+				"predio", predioService.getPredio(id));
 
 		modelAndView.addObject("tipos", TipoPredio.values());
 		modelAndView.addObject("estados", Estado.values());
-		modelAndView.addObject("gerentes", gerenteAdministradoraService.listaGerentes());
+		modelAndView.addObject("gerentes",
+				gerenteAdministradoraService.listaGerentes());
 		System.out.println("Atualiza Predio");
 
 		return modelAndView;
