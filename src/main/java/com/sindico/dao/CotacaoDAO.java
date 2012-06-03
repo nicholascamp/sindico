@@ -81,7 +81,24 @@ public class CotacaoDAO {
 	public List<Cotacao> getLista() {
 		List<Cotacao> cotacao = new ArrayList<Cotacao>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"select cotacao from Cotacao cotacao");
+				"SELECT cotacao FROM Cotacao cotacao");
+		cotacao = query.list();
+
+		return cotacao;
+	}
+
+	/**
+	 * @param fornecedorId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Cotacao> listarPorFornecedor(final Long fornecedorId) {
+
+		List<Cotacao> cotacao = new ArrayList<Cotacao>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"SELECT cotacao FROM Cotacao cotacao "
+						+ " LEFT JOIN cotacao.fornecedores fornecedor"
+						+ " WHERE fornecedor.id = " + fornecedorId);
 		cotacao = query.list();
 
 		return cotacao;
