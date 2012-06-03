@@ -87,7 +87,7 @@ public class FornecedorController {
 		modelAndView.addObject("estrelas", Estrela.values());
 		modelAndView.addObject("estados", Estado.values());
 		modelAndView.addObject("subcategorias",
-				subcategoriaService.listSubacategorias());
+				subcategoriaService.listSubcategorias());
 
 		return modelAndView;
 	}

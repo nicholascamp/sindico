@@ -115,8 +115,10 @@ public class CategoriaController {
 	 *            the categoria
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.PUT, value = "/categoria/edita")
+	@RequestMapping(method = RequestMethod.POST, value = "/categoria/edita")
 	public ModelAndView updateCategoria(final Categoria categoria) {
+		System.out.println(categoria.getNome());
+		System.out.println(categoria.getCodigo());
 		categoriaService.updateCategoria(categoria);
 
 		return new ModelAndView("/categoria", "categoria", categoria);

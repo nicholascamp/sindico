@@ -16,7 +16,7 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 	private SubcategoriaDAO	dao;
 
 	@Override
-	public List<Subcategoria> listSubacategorias() {
+	public List<Subcategoria> listSubcategorias() {
 		return dao.getLista();
 	}
 

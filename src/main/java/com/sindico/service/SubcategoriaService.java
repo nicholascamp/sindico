@@ -9,7 +9,7 @@ import com.sindico.entity.Subcategoria;
 public interface SubcategoriaService {
 	
 	@Transactional
-	List<Subcategoria> listSubacategorias();
+	List<Subcategoria> listSubcategorias();
 	
 	@Transactional
 	Subcategoria getSubcategoria(long id);

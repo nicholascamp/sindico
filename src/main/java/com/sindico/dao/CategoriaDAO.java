@@ -39,6 +39,13 @@ public class CategoriaDAO {
 
 		return (Categoria) query.uniqueResult();
 	}
+	
+	public Categoria getCategoriaPorNome(String nome){
+		Query query = sessionFactory.getCurrentSession().createQuery(
+			"select categoria from Categoria categoria where categoria.nome like %" + nome + "%");
+		
+		return (Categoria) query.uniqueResult();
+	}
 
 	public void removeCategoria(final Long id) {
 		Categoria categoria = (Categoria) sessionFactory.getCurrentSession()
