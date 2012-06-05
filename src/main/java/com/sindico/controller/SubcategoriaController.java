@@ -31,20 +31,23 @@ public class SubcategoriaController {
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/subcategoria/lista")
 	public ModelAndView indexSubcategoria(){
-		ModelAndView mv = new ModelAndView("/subcategorias", "subcategorias", subcategoriaService.listSubcategorias());
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias", "subcategorias", subcategoriaService.listSubcategorias());
+		//mv.addObject("categorias", categoriaService.listCategorias());
+		//mv.addObject("categoria", new Categoria());
+		
 		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/subcategoria/mostra")
 	public ModelAndView showSubcategoria(long id){
-		ModelAndView mv = new ModelAndView("/subcategoria", "subcategoria", subcategoriaService.getSubcategoria(id));
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria", "subcategoria", subcategoriaService.getSubcategoria(id));
 		
 		return mv;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/subcategoria/cria")
 	public ModelAndView newSubcategoria(){
-		ModelAndView mv = new ModelAndView("/criaSubcategoria", "subcategoria", new Subcategoria());
+		ModelAndView mv = new ModelAndView("/subcategoria/criaSubcategoria", "subcategoria", new Subcategoria());
 		mv.addObject("categorias", categoriaService.listCategorias());
 		
 		return mv;
@@ -53,7 +56,7 @@ public class SubcategoriaController {
 	@RequestMapping(method = RequestMethod.POST, value = "/subcategoria/cria")
 	public ModelAndView createSubcategoria(@ModelAttribute("subcategoria")  Subcategoria subcategoria){
 		System.out.println(subcategoria.getCategoria().getNome());
-		ModelAndView mv = new ModelAndView("/subcategoria", "subcategoria", subcategoriaService.createSubcategoria(subcategoria));
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria", "subcategoria", subcategoriaService.createSubcategoria(subcategoria));
 		
 		return mv;
 	}
@@ -62,9 +65,7 @@ public class SubcategoriaController {
 	public ModelAndView editSubcategoria(long id){
 		Subcategoria subcategoria = subcategoriaService.getSubcategoria(id);
 		
-		System.out.println(subcategoria.getTitle());
-		System.out.println(subcategoria.getCategoria().getNome());
-		ModelAndView mv = new ModelAndView("/editaCategoria", "subcategoria", subcategoria);
+		ModelAndView mv = new ModelAndView("/subcategoria/editaSubcategoria", "subcategoria", subcategoria);
 		mv.addObject("categorias", categoriaService.listCategorias());
 		
 		return mv;
@@ -72,15 +73,22 @@ public class SubcategoriaController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/subcategoria/edita")
 	public ModelAndView updateSubcategoria(Subcategoria subcategoria){
-		ModelAndView mv = new ModelAndView("/subcategoria", "subcategoria",subcategoriaService.updateSubcategoria(subcategoria));
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria", "subcategoria",subcategoriaService.updateSubcategoria(subcategoria));
 		
 		return mv;
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value = "/subcategoria/delata")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/subcategoria/deleta")
 	public ModelAndView destroySubcategoria(long id){
 		subcategoriaService.removeSubcategoria(id);
-		ModelAndView mv = new ModelAndView("/subcategorias", "subcategorias", subcategoriaService.listSubcategorias());
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias", "subcategorias", subcategoriaService.listSubcategorias());
+		
+		return mv;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/subcategoria/listaPorCategoria")
+	public ModelAndView showSubcategoriaPorCategoria(Categoria categoria){
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias", "subcategorias", subcategoriaService.listSubcategoriasPorCategoria(categoria));
 		
 		return mv;
 	}

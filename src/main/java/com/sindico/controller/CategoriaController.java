@@ -34,7 +34,7 @@ public class CategoriaController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/lista")
 	public ModelAndView indexCategoria() {
-		ModelAndView modelAndView = new ModelAndView("/categorias",
+		ModelAndView modelAndView = new ModelAndView("/categoria/categorias",
 				"categoria", new Categoria());
 		PagedListHolder<Categoria> pagedListHolder = new PagedListHolder<Categoria>(
 				categoriaService.listCategorias());
@@ -56,7 +56,7 @@ public class CategoriaController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/mostra")
 	public ModelAndView showCategoria(final Long id) {
-		ModelAndView modelAndView = new ModelAndView("/categoria", "categoria",
+		ModelAndView modelAndView = new ModelAndView("/categoria/categoria", "categoria",
 				new Categoria());
 
 		modelAndView.addObject("categoria", categoriaService.getCategoria(id));
@@ -70,7 +70,7 @@ public class CategoriaController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/cria")
 	public ModelAndView newCategoria() {
-		ModelAndView modelAndView = new ModelAndView("/criaCategoria",
+		ModelAndView modelAndView = new ModelAndView("/categoria/criaCategoria",
 				"categoria", new Categoria());
 
 		return modelAndView;
@@ -91,7 +91,7 @@ public class CategoriaController {
 			final BindingResult result) {
 		categoriaService.createCategoria(categoria);
 
-		return new ModelAndView("/categoria", "categoria", categoria);
+		return new ModelAndView("/categoria/categoria", "categoria", categoria);
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class CategoriaController {
 	public ModelAndView editCategoria(final Long id) {
 		Categoria categoria = categoriaService.getCategoria(id);
 
-		return new ModelAndView("/editaCategoria", "categoria", categoria);
+		return new ModelAndView("/categoria/editaCategoria", "categoria", categoria);
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class CategoriaController {
 		System.out.println(categoria.getCodigo());
 		categoriaService.updateCategoria(categoria);
 
-		return new ModelAndView("/categoria", "categoria", categoria);
+		return new ModelAndView("/categoria/categoria", "categoria", categoria);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class CategoriaController {
 	public ModelAndView destroyCategoria(final Categoria categoria) {
 		categoriaService.removeCategoria(categoria.getCodigo());
 
-		return new ModelAndView("/categorias", "categorias",
+		return new ModelAndView("/categoria/categorias", "categorias",
 				categoriaService.listCategorias());
 	}
 }

@@ -22,10 +22,10 @@
 					<td><form:input path="title" value="${subcategoria.title }" size="50"/> </td>					
 				</tr>
 				<tr>
-					<!-- <td>Categoria:</td>
+					<td>Categoria:</td>
 					<td><form:select path="categoria">
 						<form:options items="${categorias }" itemValue="codigo" itemLabel="nome"/>
-					</form:select></td> -->
+					</form:select></td>
 				</tr>
 				<tr>
 					<td>

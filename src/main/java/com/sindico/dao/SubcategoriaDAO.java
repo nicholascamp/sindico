@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sindico.entity.Predio;
+import com.sindico.entity.Categoria;
 import com.sindico.entity.Subcategoria;
 
 /**
@@ -49,6 +49,17 @@ public class SubcategoriaDAO {
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"SELECT subcategoria FROM Subcategoria subcategoria WHERE subcategoria.title like '%"
 						+ titulo + "%'");
+		subcategorias = query.list();
+
+		return subcategorias;
+	}
+	
+	public List<Subcategoria> getListaPorCategoria(Categoria categoria){
+		List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
+
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"SELECT subcategoria FROM Subcategoria subcategoria WHERE subcategoria.categoria = "
+						+ categoria);
 		subcategorias = query.list();
 
 		return subcategorias;

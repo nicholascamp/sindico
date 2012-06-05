@@ -17,7 +17,6 @@
 		Buscar Por Endereço: <form:input path="endereco" />
 		<input type="submit" value="Buscar Predios" />
 	</form:form>
-	<a href="/sindico/predios/lista.html">Visualizar todos os Prédios</a>
 	<center>
 		<table style="border-collapse: collapse;" width="500" border="1"
 			bordercolor="#006699">
