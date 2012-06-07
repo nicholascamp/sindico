@@ -4,19 +4,32 @@
 <tiles-definitions>
 
 	<definition name="baseLayout" template="/jsp/layout/layout.jsp">
-		<put-attribute name="title" value="SivaLabs" />
+		<put-attribute name="title" value="Sindico.com" />
 		<put-attribute name="header" value="/jsp/layout/header.jsp" />
 		<put-attribute name="navigation" value="/jsp/layout/navigation.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
 	</definition>
-	<definition name="login" extends="baseLayout">
-		<put-attribute name="title" value="SivaLabs : Login" />
-		<put-attribute name="navigation" value="" />
-		<put-attribute name="body" value="/jsp/login.jsp" />
+	
+	<definition name="listaCategorias" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Categorias" />
+		<put-attribute name="body" value="/jsp/categoria/categorias.jsp" />
 	</definition>
-	<definition name="welcome" extends="baseLayout">
-		<put-attribute name="title" value="SivaLabs : Welcome" />
+	<definition name="mostraCategoria" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Categorias" />
+		<put-attribute name="body" value="/jsp/categoria/categoria.jsp" />
+	</definition>
+	<definition name="criaCategoria" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Categorias" />
+		<put-attribute name="body" value="/jsp/categoria/criaCategoria.jsp" />
+	</definition>
+	<definition name="editaCategoria" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Categorias" />
+		<put-attribute name="body" value="/jsp/categoria/editaCategoria.jsp" />
+	</definition>
+	
+	<definition name="index" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com" />
 		<put-attribute name="body" value="/jsp/welcome.jsp" />
 	</definition>
 </tiles-definitions>

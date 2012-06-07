@@ -179,7 +179,18 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.0</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+		
+		<dependency>  
+        	<groupId>org.slf4j</groupId>  
+        	<artifactId>jcl-over-slf4j</artifactId>  
+        	<version>1.6.1</version>  
+    	</dependency> 
 
 		<!-- Javax dependencies -->
 		<dependency>
@@ -203,11 +214,17 @@
 		</dependency>
 
 		<!-- Tiles -->
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-    		<artifactId>tiles-core</artifactId>
-    		<version>2.2.2</version>			
-		</dependency>
+		<dependency>  
+	        <groupId>org.apache.tiles</groupId>  
+	        <artifactId>tiles-core</artifactId>  
+	        <version>2.2.2</version>  
+	        <exclusions>  
+	            <exclusion>  
+	                <groupId>org.slf4j</groupId>  
+	                <artifactId>jcl-over-slf4j</artifactId>  
+	            </exclusion>  
+	        </exclusions>  
+	    </dependency> 
     
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
