@@ -22,9 +22,11 @@
 				</tr>
 				<tr>
 					<td>Categoria:</td>
-					<td><form:select path="categoria">
-						<form:options items="${categorias }" itemValue="codigo" itemLabel="nome"/>
-					</form:select></td>
+					<td>
+						<form:select path="categoria">
+							<form:options items="${categorias }" itemValue="codigo" itemLabel="nome"/>
+						</form:select>
+					</td>
 				</tr>
 				<tr>
 					<td>
