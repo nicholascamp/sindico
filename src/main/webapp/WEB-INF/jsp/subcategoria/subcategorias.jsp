@@ -8,14 +8,7 @@
 	<head>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-		<script type="text/javascript">
-			$('#delete').click(function(){
-				$.ajax(
-					url: '/sindico/subcategoria/deleta'	
-					method: 'delete'
-					)
-			});
-		</script>
+		<script type="text/javascript" src="/sindico/javascript/actions.js"></script>
 		
 		<title>Sindico.com</title>
 	</head>
@@ -48,10 +41,10 @@
 								<a href="${Editar}" title="Editar Subcategoria">Editar</a>
 							</td>
 							<td>
-								<c:url value="/subcategoria/deleta" var="Deletar" >
+								<c:url value="deleta" var="Deletar" >
 									<c:param name="id" value="${subcategoria.codigo}" />
 								</c:url>
-								<a id="delete" href="${Deletar}" title="Deletar Subcategoria">Deletar</a>
+								<a id="delete" href="javascript:deleteEntity('${Deletar }');" title="Deletar Subcategoria">Deletar</a>
 							</td>
 						</tr>
 					</c:forEach>

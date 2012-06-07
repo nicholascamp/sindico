@@ -78,7 +78,7 @@ public class SubcategoriaController {
 		return mv;
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value = "/subcategoria/deleta")
+	@RequestMapping(method = RequestMethod.GET, value = "/subcategoria/deleta")
 	public ModelAndView destroySubcategoria(long id){
 		subcategoriaService.removeSubcategoria(id);
 		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias", "subcategorias", subcategoriaService.listSubcategorias());
