@@ -27,7 +27,7 @@ public class Subcategoria {
 	@ManyToOne
 	@JoinColumn(name = "CATEGORIA_ID")
 	@NotNull(message = "Subcategoria deve pertencer a uma Categoria")
-	private Categoria	categoria;
+	private Categoria	categoria;	// Pode ter mais de uma categoria
 
 	/** The title. */
 	@Column(name = "TITLE", length = 200, nullable = false, unique = true)

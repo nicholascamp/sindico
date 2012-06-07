@@ -124,4 +124,10 @@ public class PredioDAO {
 		return predios;
 	}
 
+	/**
+	 * 
+	 * IMPLEMENTAR BUSCA POR CNPJ
+	 * 
+	 */
+
 }

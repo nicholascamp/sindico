@@ -155,4 +155,19 @@ public class FornecedorController {
 		return new ModelAndView("/fornecedor/fornecedores", "fornecedores",
 				fornecedorService.listarFornecedores());
 	}
+
+	/**
+	 * 
+	 * BUSCAS POR: NOME, EMAIL, ENDERECO E CNPJ
+	 */
+
+	/**
+	 * USUARIO, FORNECEDOR
+	 * 
+	 * COTACOES, UPLOAD
+	 * 
+	 * 
+	 * WEBSERVICE CORREIOS
+	 * 
+	 */
 }
