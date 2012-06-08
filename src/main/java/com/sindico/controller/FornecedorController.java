@@ -3,12 +3,18 @@
  */
 package com.sindico.controller;
 
+import java.beans.PropertyEditorSupport;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,10 +39,10 @@ public class FornecedorController {
 
 	/** The fornecedor service. */
 	@Autowired
-	FornecedorService	fornecedorService;
+	FornecedorService fornecedorService;
 
 	@Autowired
-	SubcategoriaService	subcategoriaService;
+	SubcategoriaService subcategoriaService;
 
 	/**
 	 * Index fornecedor.
@@ -156,6 +162,7 @@ public class FornecedorController {
 				fornecedorService.listarFornecedores());
 	}
 
+<<<<<<< HEAD
 	/**
 	 * 
 	 * BUSCAS POR: NOME, EMAIL, ENDERECO E CNPJ
@@ -170,4 +177,33 @@ public class FornecedorController {
 	 * WEBSERVICE CORREIOS
 	 * 
 	 */
+=======
+	@InitBinder
+	protected void initBinder(HttpServletRequest request,
+			ServletRequestDataBinder binder) throws Exception {
+		binder.registerCustomEditor(
+		        List.class,
+		        "subcategorias",
+		        new CustomCollectionEditor(List.class) {
+		            protected Object convertElement(Object element) {
+		                return (element == null ? null : subcategoriaService.getSubcategoria((Long) element));
+		            }
+		        }
+		    );
+		
+		binder.registerCustomEditor(Estado.class, "estado", new PropertyEditorSupport() {
+	        public void setAsText(String id) {
+				Estado estado = Estado.valueOf(id);
+	            setValue(estado);
+	        }
+	    });
+		
+		binder.registerCustomEditor(Estrela.class, "estrela", new PropertyEditorSupport() {
+	        public void setAsText(String id) {
+				Estrela estrela = Estrela.valueOf(id);
+	            setValue(estrela);
+	        }
+	    });
+	}
+>>>>>>> e189367b91f85a0e12022a0d964f417e3992ab18
 }

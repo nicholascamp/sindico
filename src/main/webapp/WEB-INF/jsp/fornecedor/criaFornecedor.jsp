@@ -19,7 +19,7 @@
 	<form:form commandName="fornecedor" method="POST" action="cria">
 		<table>
 			<tr>
-				<td>Titulo:</td>
+				<td>Título:</td>
 				<td><form:input path="title" size="100" /></td>
 			</tr>
 			<tr>
@@ -31,7 +31,7 @@
 				<td><form:input path="nomePrincipal" size="100" /></td>
 			</tr>
 			<tr>
-				<td>Desricao:</td>
+				<td>Descrição:</td>
 				<td><form:textarea path="descricao" size="100" /></td>
 			</tr>
 			<tr>
@@ -86,9 +86,9 @@
 			</tr>
 			<tr>
 				<td>Subcategorias:</td>
-				<td><form:select path="subcategorias" multiple="true">
-						<form:options items="${subcategorias}" />
-					</form:select></td>
+				<td>
+					<form:checkboxes items="${subcategorias }" path="subcategorias" itemLabel="title" itemValue="codigo"/>
+				</td>
 			</tr>
 			<tr>
 				<td>Estrelas:</td>

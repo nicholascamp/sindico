@@ -83,7 +83,6 @@ public class Fornecedor {
 	@JoinTable(name = "FORNECEDOR_SUBCATEGORIA", joinColumns = @JoinColumn(
 			name = "FORNECEDOR_ID"), inverseJoinColumns = @JoinColumn(
 			name = "SUBCATEGORIA_ID"))
-	@NotNull
 	private Collection<Subcategoria>	subcategorias		= new ArrayList<Subcategoria>();
 
 	/** The estrelas. */
