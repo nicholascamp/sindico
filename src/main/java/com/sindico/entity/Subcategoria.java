@@ -1,10 +1,14 @@
 package com.sindico.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -32,6 +36,9 @@ public class Subcategoria {
 	/** The title. */
 	@Column(name = "TITLE", length = 200, nullable = false, unique = true)
 	private String		title;
+	
+	@ManyToMany(mappedBy="subcategorias")
+	private Collection<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 
 	/**
 	 * Gets the codigo.
@@ -88,6 +95,14 @@ public class Subcategoria {
 	 */
 	public void setTitle(final String title) {
 		this.title = title;
+	}
+
+	public void setFornecedores(Collection<Fornecedor> fornecedores) {
+		this.fornecedores = fornecedores;
+	}
+
+	public Collection<Fornecedor> getFornecedores() {
+		return fornecedores;
 	}
 
 }
