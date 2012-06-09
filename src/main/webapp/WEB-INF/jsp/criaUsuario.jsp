@@ -1,4 +1,4 @@
-<%@include file="/WEB-INF/tags/taglib_includes.jsp" %>
+<%@include file="/WEB-INF/tags/taglib_includes.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -17,8 +17,12 @@
 		<form:input path="nome" />
 		<br />
 		<br />
+	Username: <br />
+		<form:input path="username" />
+		<br />
+		<br />
 	Senha: <br />
-		<form:password path="senha" />
+		<form:password path="password" />
 		<br />
 		<br />
 	Email: <br />

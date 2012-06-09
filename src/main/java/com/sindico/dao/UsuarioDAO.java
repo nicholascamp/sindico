@@ -8,7 +8,6 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Usuario;
 
@@ -29,7 +28,6 @@ public class UsuarioDAO {
 	 *            the usuario
 	 * @return the usuario
 	 */
-	@Transactional
 	public Usuario criaUsuario(final Usuario usuario) {
 		sessionFactory.getCurrentSession().save(usuario);
 		return usuario;
@@ -98,5 +96,18 @@ public class UsuarioDAO {
 		usuarios = query.list();
 
 		return usuarios;
+	}
+
+	/**
+	 * @param username
+	 * @return
+	 */
+	public Usuario loadByUsername(final String username) {
+		Query query = sessionFactory
+				.getCurrentSession()
+				.createQuery(
+						"SELECT usuario FROM Usuario usuario WHERE usuario.username = :username")
+				.setParameter("username", username);
+		return (Usuario) query.uniqueResult();
 	}
 }

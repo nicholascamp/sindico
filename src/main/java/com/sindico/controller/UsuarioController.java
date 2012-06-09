@@ -1,5 +1,6 @@
 package com.sindico.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sindico.entity.Usuario;
+import com.sindico.service.impl.SindicoUserDetailsServiceImpl;
 
 /**
  * Servlet implementation class UsuarioController.
@@ -17,10 +19,21 @@ import com.sindico.entity.Usuario;
 @SessionAttributes
 public class UsuarioController {
 
+	@Autowired
+	private SindicoUserDetailsServiceImpl	sindicoUserDetailsServiceImpl;
+
 	@RequestMapping(method = RequestMethod.GET, value = "/criaUsuario.html")
 	public ModelAndView usuarioForm() {
+
 		System.out.println("Cria Usuario");
 		return new ModelAndView("/criaUsuario", "usuario", new Usuario());
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/login.html")
+	public ModelAndView usuarioLogin() {
+
+		System.out.println("Loga Usuario");
+		return new ModelAndView("/login");
 	}
 
 	/**
@@ -31,14 +44,17 @@ public class UsuarioController {
 	 * @param result
 	 *            the result
 	 * @return the string
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/criaUsuario", method = RequestMethod.POST)
 	public String addContact(@ModelAttribute("usuario") final Usuario usuario,
-			final BindingResult result) {
+			final BindingResult result) throws Exception {
 
-		System.out.println("First Name:" + usuario.getNome());
+		// String password = usuario.getPassword();
+		// usuario.setPassword(StringUtils.encodePassword(password));
+		sindicoUserDetailsServiceImpl.criarUsuario(usuario);
 
-		return "redirect:usuarios.html";
+		return "redirect:/login.html";
 	}
 
 	/**

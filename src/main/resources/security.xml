@@ -16,25 +16,35 @@
 		secured-annotations="enabled" />
 
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/**" access="ROLE_USER" />
+		<security:intercept-url pattern="/criaUsuario*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/**" access="ROLE_USUARIO" />
 		<security:http-basic />
 	</security:http>
-
-
+	
+	<bean id="sindicoUserDetailsService"
+		class="com.sindico.service.impl.SindicoUserDetailsServiceImpl">
+	</bean>
+	
 	<!-- Usernames/Passwords are rod/koala dianne/emu scott/wombat peter/opal -->
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:password-encoder hash="md5" />
-			<security:user-service>
-				<security:user name="rod" password="a564de63c2d0da68cf47586ee05984d7"
-					authorities="ROLE_SUPERVISOR, ROLE_USER, ROLE_TELLER" />
-				<security:user name="dianne" password="65d15fe9156f9c4bbffd98085992a44e"
-					authorities="ROLE_USER, ROLE_TELLER" />
-				<security:user name="scott" password="2b58af6dddbd072ed27ffc86725d7d3a"
-					authorities="ROLE_USER" />
-				<security:user name="peter" password="22b5c9accc6e1ba628cedc63a72d57f8"
-					authorities="ROLE_USER" />
-			</security:user-service>
+		<security:authentication-provider
+			user-service-ref="sindicoUserDetailsService">
+
+<!-- 			<security:password-encoder hash="sha-256"> -->
+<!-- 				<security:salt-source user-property="username" /> -->
+<!-- 			</security:password-encoder> -->
+
+			<!-- <security:user-service> -->
+			<!-- <security:user name="rod" password="a564de63c2d0da68cf47586ee05984d7" -->
+			<!-- authorities="ROLE_SUPERVISOR, ROLE_USER, ROLE_TELLER" /> -->
+			<!-- <security:user name="dianne" password="65d15fe9156f9c4bbffd98085992a44e" -->
+			<!-- authorities="ROLE_USER, ROLE_TELLER" /> -->
+			<!-- <security:user name="scott" password="2b58af6dddbd072ed27ffc86725d7d3a" -->
+			<!-- authorities="ROLE_USER" /> -->
+			<!-- <security:user name="peter" password="22b5c9accc6e1ba628cedc63a72d57f8" -->
+			<!-- authorities="ROLE_USER" /> -->
+			<!-- </security:user-service> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
 
