@@ -16,24 +16,31 @@
 		secured-annotations="enabled" />
 
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/criaUsuario*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/criaUsuario*"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/login*"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/**" access="ROLE_USUARIO" />
 		<security:http-basic />
 	</security:http>
-	
-	<bean id="sindicoUserDetailsService"
-		class="com.sindico.service.impl.SindicoUserDetailsServiceImpl">
+
+	<bean id="sindicoUserDetailsService" class="com.sindico.service.impl.SindicoUserDetailsServiceImpl">
 	</bean>
-	
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+		<constructor-arg value="256" />
+		<property name="iterations" value="1024" />
+	</bean>
+
 	<!-- Usernames/Passwords are rod/koala dianne/emu scott/wombat peter/opal -->
 	<security:authentication-manager>
 		<security:authentication-provider
 			user-service-ref="sindicoUserDetailsService">
 
-<!-- 			<security:password-encoder hash="sha-256"> -->
-<!-- 				<security:salt-source user-property="username" /> -->
-<!-- 			</security:password-encoder> -->
+			<security:password-encoder ref="passwordEncoder">
+				<security:salt-source user-property="username" />
+			</security:password-encoder>
 
 			<!-- <security:user-service> -->
 			<!-- <security:user name="rod" password="a564de63c2d0da68cf47586ee05984d7" -->

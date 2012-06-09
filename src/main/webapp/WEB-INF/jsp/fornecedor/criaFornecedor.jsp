@@ -10,7 +10,9 @@
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js">
+	
+</script>
 
 <title>Sindico.com</title>
 </head>
@@ -59,36 +61,35 @@
 				<td><form:input path="logo" size="100" /></td>
 			</tr>
 			<tr>
+				<td>CEP:</td>
+				<td><form:input id="cep" path="cep" size="8" onblur="" /></td>
+			</tr>
+			<tr>
 				<td>Endereco:</td>
-				<td><form:input path="endereco" size="100" /></td>
+				<td><form:input id="endereco" path="endereco" size="100" /></td>
 			</tr>
 			<tr>
 				<td>Numero:</td>
 				<td><form:input path="numero" size="100" /></td>
 			</tr>
 			<tr>
-				<td>CEP:</td>
-				<td><form:input path="cep" size="8" /></td>
-			</tr>
-			<tr>
 				<td>Bairro:</td>
-				<td><form:input path="bairro" size="100" /></td>
+				<td><form:input id="bairro" path="bairro" size="100" /></td>
 			</tr>
 			<tr>
 				<td>Cidade:</td>
-				<td><form:input path="cidade" size="100" /></td>
+				<td><form:input id="cidade" path="cidade" size="100" /></td>
 			</tr>
 			<tr>
 				<td>Estado:</td>
-				<td><form:select path="estado">
+				<td><form:select path="estado" id="uf">
 						<form:options items="${estados}" />
 					</form:select></td>
 			</tr>
 			<tr>
 				<td>Subcategorias:</td>
-				<td>
-					<form:checkboxes items="${subcategorias }" path="subcategorias" itemLabel="title" itemValue="codigo"/>
-				</td>
+				<td><form:checkboxes items="${subcategorias }"
+						path="subcategorias" itemLabel="title" itemValue="codigo" /></td>
 			</tr>
 			<tr>
 				<td>Estrelas:</td>

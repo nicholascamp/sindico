@@ -3,7 +3,7 @@
  */
 package com.sindico.utils;
 
-import java.security.MessageDigest;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 /**
  * @author Lucas
@@ -11,21 +11,12 @@ import java.security.MessageDigest;
  */
 public class StringUtils {
 
-	public static String encodePassword(final String password) throws Exception {
+	public static String encodePassword(final String password, final String salt)
+			throws Exception {
 
-		try {
-			MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-			byte messageDigest[] = algorithm.digest(password.getBytes("UTF-8"));
-
-			StringBuilder hexString = new StringBuilder();
-			for (byte b : messageDigest) {
-				hexString.append(String.format("%02X", 0xFF & b));
-			}
-			return hexString.toString();
-		} catch (Exception e) {
-			System.err.println(e.toString());
-			throw e;
-		}
+		ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(256);
+		shaPasswordEncoder.setIterations(1024);
+		return shaPasswordEncoder.encodePassword(password, salt);
 	}
 
 }

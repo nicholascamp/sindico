@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sindico.entity.Usuario;
+import com.sindico.enums.TipoUsuario;
 import com.sindico.service.impl.SindicoUserDetailsServiceImpl;
+import com.sindico.utils.StringUtils;
 
 /**
  * Servlet implementation class UsuarioController.
@@ -22,18 +24,21 @@ public class UsuarioController {
 	@Autowired
 	private SindicoUserDetailsServiceImpl	sindicoUserDetailsServiceImpl;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/criaUsuario.html")
+	@RequestMapping(method = RequestMethod.GET, value = "/usuario/cria")
 	public ModelAndView usuarioForm() {
+		ModelAndView modelAndView = new ModelAndView("usuario/criaUsuario",
+				"usuario", new Usuario());
 
-		System.out.println("Cria Usuario");
-		return new ModelAndView("/criaUsuario", "usuario", new Usuario());
+		modelAndView.addObject("tipos", TipoUsuario.values());
+
+		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/login.html")
+	@RequestMapping(method = RequestMethod.GET, value = "usuario/login")
 	public ModelAndView usuarioLogin() {
 
 		System.out.println("Loga Usuario");
-		return new ModelAndView("/login");
+		return new ModelAndView("usuario/login");
 	}
 
 	/**
@@ -46,15 +51,15 @@ public class UsuarioController {
 	 * @return the string
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/criaUsuario", method = RequestMethod.POST)
-	public String addContact(@ModelAttribute("usuario") final Usuario usuario,
+	@RequestMapping(value = "/usuario/cria", method = RequestMethod.POST)
+	public String addUsuario(@ModelAttribute("usuario") final Usuario usuario,
 			final BindingResult result) throws Exception {
 
-		// String password = usuario.getPassword();
-		// usuario.setPassword(StringUtils.encodePassword(password));
+		usuario.setPassword(StringUtils.encodePassword(usuario.getPassword(),
+				usuario.getUsername()));
 		sindicoUserDetailsServiceImpl.criarUsuario(usuario);
 
-		return "redirect:/login.html";
+		return "redirect:/usuario/login";
 	}
 
 	/**
@@ -62,8 +67,8 @@ public class UsuarioController {
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping("/usuarios.html")
-	public ModelAndView showContacts() {
+	@RequestMapping("/usuario/lista")
+	public ModelAndView showUsuarios() {
 
 		return new ModelAndView("usuario", "command", new Usuario());
 	}
