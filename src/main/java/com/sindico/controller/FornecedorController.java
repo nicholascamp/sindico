@@ -4,8 +4,9 @@
 package com.sindico.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sindico.entity.Fornecedor;
+import com.sindico.entity.Subcategoria;
 import com.sindico.enums.Estado;
 import com.sindico.enums.Estrela;
 import com.sindico.service.FornecedorService;
@@ -92,7 +94,7 @@ public class FornecedorController {
 				"/fornecedor/criaFornecedor", "fornecedor", new Fornecedor());
 		modelAndView.addObject("estrelas", Estrela.values());
 		modelAndView.addObject("estados", Estado.values());
-		modelAndView.addObject("subcategorias",
+		modelAndView.addObject("subcategoriasFornecedor",
 				subcategoriaService.listSubcategorias());
 
 		return modelAndView;
@@ -166,14 +168,15 @@ public class FornecedorController {
 	protected void initBinder(HttpServletRequest request,
 			ServletRequestDataBinder binder) throws Exception {
 		binder.registerCustomEditor(
-		        List.class,
+		        Collection.class,
 		        "subcategorias",
-		        new CustomCollectionEditor(List.class) {
-		            protected Object convertElement(Object element) {
-		                return (element == null ? null : subcategoriaService.getSubcategoria((Long) element));
-		            }
-		        }
-		    );
+				new CustomCollectionEditor(ArrayList.class) {
+					protected Object convertElement(Object objeto) {				
+						Subcategoria subcategoria = subcategoriaService.getSubcategoria(Long.parseLong(objeto.toString()));								
+
+						return subcategoria;
+					}
+				});
 		
 		binder.registerCustomEditor(Estado.class, "estado", new PropertyEditorSupport() {
 	        public void setAsText(String id) {

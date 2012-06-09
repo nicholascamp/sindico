@@ -87,7 +87,7 @@
 			<tr>
 				<td>Subcategorias:</td>
 				<td>
-					<form:checkboxes items="${subcategorias }" path="subcategorias" itemLabel="title" itemValue="codigo"/>
+					<form:checkboxes items="${subcategoriasFornecedor }" path="subcategorias" itemLabel="title" itemValue="codigo"/>
 				</td>
 			</tr>
 			<tr>
