@@ -68,8 +68,8 @@ public class FornecedorServiceImpl implements FornecedorService {
 	 * .String)
 	 */
 	@Override
-	public List<Fornecedor> buscarFornecedorPorEmail(final String email) {
-		return fornecedorDAO.buscarFornecedorPorEmail(email);
+	public List<Fornecedor> listarFornecedorPorEmail(final String email) {
+		return fornecedorDAO.listarFornecedorPorEmail(email);
 	}
 
 	/*
@@ -80,8 +80,8 @@ public class FornecedorServiceImpl implements FornecedorService {
 	 * .String)
 	 */
 	@Override
-	public List<Fornecedor> buscarFornecedorPorNome(final String nome) {
-		return fornecedorDAO.buscarFornecedorPorNome(nome);
+	public List<Fornecedor> listarFornecedorPorNome(final String nome) {
+		return fornecedorDAO.listarFornecedorPorNome(nome);
 	}
 
 	/*
@@ -92,8 +92,8 @@ public class FornecedorServiceImpl implements FornecedorService {
 	 * .lang.String)
 	 */
 	@Override
-	public List<Fornecedor> buscarFornecedorPorEndereco(final String endereco) {
-		return fornecedorDAO.buscarFornecedorPorEndereco(endereco);
+	public List<Fornecedor> listarFornecedorPorEndereco(final String endereco) {
+		return fornecedorDAO.listarFornecedorPorEndereco(endereco);
 	}
 
 	/*
@@ -115,6 +115,18 @@ public class FornecedorServiceImpl implements FornecedorService {
 	@Override
 	public Fornecedor getFornecedor(final Long id) {
 		return fornecedorDAO.getFornecedor(id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.FornecedorService#listarFornecedoresPorCNPJ(java.
+	 * lang.String)
+	 */
+	@Override
+	public List<Fornecedor> listarFornecedoresPorCNPJ(final String cnpj) {
+		return fornecedorDAO.listarFornecedorPorCNPJ(cnpj);
 	}
 
 }

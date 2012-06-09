@@ -63,7 +63,7 @@ public interface FornecedorService {
 	 * @return the list
 	 */
 	@Transactional
-	List<Fornecedor> buscarFornecedorPorEmail(String email);
+	List<Fornecedor> listarFornecedorPorEmail(String email);
 
 	/**
 	 * Buscar fornecedor por nome.
@@ -73,7 +73,7 @@ public interface FornecedorService {
 	 * @return the list
 	 */
 	@Transactional
-	List<Fornecedor> buscarFornecedorPorNome(String nome);
+	List<Fornecedor> listarFornecedorPorNome(String nome);
 
 	/**
 	 * Buscar fornecedor por endereco.
@@ -83,7 +83,7 @@ public interface FornecedorService {
 	 * @return the list
 	 */
 	@Transactional
-	List<Fornecedor> buscarFornecedorPorEndereco(String endereco);
+	List<Fornecedor> listarFornecedorPorEndereco(String endereco);
 
 	/**
 	 * Remover fornecedor.
@@ -93,5 +93,12 @@ public interface FornecedorService {
 	 */
 	@Transactional
 	void removerFornecedor(Long id);
+
+	/**
+	 * @param cnpj
+	 * @return
+	 */
+	@Transactional
+	List<Fornecedor> listarFornecedoresPorCNPJ(String cnpj);
 
 }

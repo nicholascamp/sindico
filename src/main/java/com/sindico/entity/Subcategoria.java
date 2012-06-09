@@ -25,20 +25,25 @@ public class Subcategoria {
 	@Id
 	@GeneratedValue
 	@Column(name = "SUBCATEGORIA_ID")
-	private Long		codigo;
+	private Long					codigo;
 
 	/** The categoria. */
 	@ManyToOne
 	@JoinColumn(name = "CATEGORIA_ID")
 	@NotNull(message = "Subcategoria deve pertencer a uma Categoria")
-	private Categoria	categoria;
+	private Categoria				categoria;										// Pode
+																					// ter
+																					// mais
+																					// de
+																					// uma
+																					// categoria
 
 	/** The title. */
 	@Column(name = "TITLE", length = 200, nullable = false, unique = true)
-	private String		title;
-	
-	@ManyToMany(mappedBy="subcategorias")
-	private Collection<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+	private String					title;
+
+	@ManyToMany(mappedBy = "subcategorias")
+	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
 
 	/**
 	 * Gets the codigo.
@@ -97,12 +102,22 @@ public class Subcategoria {
 		this.title = title;
 	}
 
-	public void setFornecedores(Collection<Fornecedor> fornecedores) {
+	public void setFornecedores(final Collection<Fornecedor> fornecedores) {
 		this.fornecedores = fornecedores;
 	}
 
 	public Collection<Fornecedor> getFornecedores() {
 		return fornecedores;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.title;
 	}
 
 }

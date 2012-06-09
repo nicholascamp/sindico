@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,11 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.Email;
 import org.hibernate.validator.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.sindico.enums.TipoUsuario;
 
@@ -26,7 +31,7 @@ import com.sindico.enums.TipoUsuario;
  */
 @Entity
 @Table(name = "USUARIO")
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, UserDetails {
 
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 4246251615358359325L;
@@ -42,9 +47,14 @@ public class Usuario implements Serializable {
 	private String				nome;
 
 	/** The senha. */
-	@Column(name = "SENHA", length = 20, nullable = false)
+	@Column(name = "PASSWORD", nullable = false)
 	@NotNull(message = "Usuário deve ter uma senha")
-	private String				senha;
+	private String				password;
+
+	/** The username. */
+	@Column(name = "USERNAME", nullable = false, unique = true)
+	@NotNull(message = "Usuário deve ter um login")
+	private String				username;
 
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20)
@@ -65,6 +75,7 @@ public class Usuario implements Serializable {
 	/** The email. */
 	@Column(name = "EMAIL", length = 50, nullable = false, unique = true)
 	@NotNull(message = "Usuário deve possuir um email")
+	@Email
 	private String				email;
 
 	/** The recebe cotacao. */
@@ -81,26 +92,31 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
 	private Collection<Cotacao>	cotacoes			= new ArrayList<Cotacao>();
 
-	/**
-	 * Instantiates a new usuario.
-	 */
-	public Usuario() {
-	}
+	/** The admin. */
+	@Column(name = "ADMIN")
+	private boolean				admin				= false;
 
 	/**
 	 * Instantiates a new usuario.
 	 * 
 	 * @param nome
 	 *            the nome
-	 * @param senha
-	 *            the senha
+	 * @param password
+	 *            the password
 	 * @param email
 	 *            the email
 	 */
-	public Usuario(final String nome, final String senha, final String email) {
+	public Usuario(final String nome, final String password, final String email) {
 		this.nome = nome;
-		this.senha = senha;
+		this.password = password;
 		this.email = email;
+	}
+
+	/**
+	 * 
+	 */
+	public Usuario() {
+		super();
 	}
 
 	/**
@@ -139,25 +155,6 @@ public class Usuario implements Serializable {
 	 */
 	public void setNome(final String nome) {
 		this.nome = nome;
-	}
-
-	/**
-	 * Gets the senha.
-	 * 
-	 * @return the senha
-	 */
-	public String getSenha() {
-		return senha;
-	}
-
-	/**
-	 * Sets the senha.
-	 * 
-	 * @param senha
-	 *            the new senha
-	 */
-	public void setSenha(final String senha) {
-		this.senha = senha;
 	}
 
 	/**
@@ -310,6 +307,123 @@ public class Usuario implements Serializable {
 	 */
 	public void setCotacoes(final Collection<Cotacao> cotacoes) {
 		this.cotacoes = cotacoes;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#getAuthorities
+	 * ()
+	 */
+	@SuppressWarnings("deprecation")
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+
+		if (isAdmin()) {
+			authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+		} else {
+			authorities.add(new GrantedAuthorityImpl("ROLE_USUARIO"));
+		}
+
+		return authorities;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#getPassword()
+	 */
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#getUsername()
+	 */
+	@Override
+	public String getUsername() {
+		return username;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#isAccountNonExpired
+	 * ()
+	 */
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#isAccountNonLocked
+	 * ()
+	 */
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.springframework.security.core.userdetails.UserDetails#
+	 * isCredentialsNonExpired()
+	 */
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	/**
+	 * Checks if is admin.
+	 * 
+	 * @return true, if is admin
+	 */
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	/**
+	 * Sets the admin.
+	 * 
+	 * @param admin
+	 *            the new admin
+	 */
+	public void setAdmin(final boolean admin) {
+		this.admin = admin;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
+	public void setUsername(final String username) {
+		this.username = username;
 	}
 
 }

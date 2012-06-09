@@ -99,7 +99,7 @@ public class FornecedorDAO {
 	 * @return the list
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Fornecedor> buscarFornecedorPorEmail(final String email) {
+	public List<Fornecedor> listarFornecedorPorEmail(final String email) {
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select fornecedor from Fornecedor fornecedor WHERE fornecedor.email like '%"
@@ -117,7 +117,7 @@ public class FornecedorDAO {
 	 * @return the list
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Fornecedor> buscarFornecedorPorNome(final String nome) {
+	public List<Fornecedor> listarFornecedorPorNome(final String nome) {
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select fornecedor from Fornecedor fornecedor WHERE fornecedor.nome like '%"
@@ -135,13 +135,31 @@ public class FornecedorDAO {
 	 * @return the list
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Fornecedor> buscarFornecedorPorEndereco(final String endereco) {
+	public List<Fornecedor> listarFornecedorPorEndereco(final String endereco) {
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		Query query = sessionFactory
 				.getCurrentSession()
 				.createQuery(
 						"select fornecedor from Fornecedor fornecedor WHERE fornecedor.endereco like '%"
 								+ endereco + "%'");
+		fornecedores = query.list();
+
+		return fornecedores;
+	}
+
+	/**
+	 * Listar fornecedor por cnpj.
+	 * 
+	 * @param cnpj
+	 *            the cnpj
+	 * @return the list
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Fornecedor> listarFornecedorPorCNPJ(final String cnpj) {
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select fornecedor from Fornecedor fornecedor WHERE fornecedor.cnpj like '%"
+						+ cnpj + "%'");
 		fornecedores = query.list();
 
 		return fornecedores;
