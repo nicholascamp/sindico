@@ -29,7 +29,7 @@
 				</tr>
 				<tr>
 					<td>
-						<form:button value="Criar">Criar</form:button>
+						<form:button value="Editar">Editar</form:button>
 					</td>
 				</tr>
 			</table>
