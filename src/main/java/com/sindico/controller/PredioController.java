@@ -71,7 +71,7 @@ public class PredioController {
 		modelAndView.addObject("tipos", TipoPredio.values());
 		modelAndView.addObject("estados", Estado.values());
 		modelAndView.addObject("gerentes",
-				gerenteAdministradoraService.listaGerentes());
+				gerenteAdministradoraService.listGerentes());
 		System.out.println("Cria Predio");
 		return modelAndView;
 	}
@@ -163,7 +163,7 @@ public class PredioController {
 		modelAndView.addObject("tipos", TipoPredio.values());
 		modelAndView.addObject("estados", Estado.values());
 		modelAndView.addObject("gerentes",
-				gerenteAdministradoraService.listaGerentes());
+				gerenteAdministradoraService.listGerentes());
 		System.out.println("Atualiza Predio");
 
 		return modelAndView;

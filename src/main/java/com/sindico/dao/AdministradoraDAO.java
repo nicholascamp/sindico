@@ -23,13 +23,29 @@ public class AdministradoraDAO {
 		sessionFactory.getCurrentSession().save(administradora);
 		return administradora;
 	}
+	
+	public Administradora atualizaAdministradota(final Administradora administradora) {
+		sessionFactory.getCurrentSession().update(administradora);
+		return administradora;
+	}
 
-	public void removeAdministradora(final Long id) {
+
+	public Administradora getAdministradora(final Long id) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select administradora from Administradora administradora where administradora = "
+						+ id);
+
+		return (Administradora) query.uniqueResult();
+	}
+
+	public boolean removeAdministradora(final Long id) {
 		Administradora administradora = (Administradora) sessionFactory
 				.getCurrentSession().load(Administradora.class, id);
 		if (administradora != null) {
 			sessionFactory.getCurrentSession().delete(administradora);
+			return true;
 		}
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -41,12 +41,14 @@ public class GerenteAdministradoraDAO {
 	}
 
 
-	public void removeGerenteAdministradora(final Long id) {
+	public boolean removeGerenteAdministradora(final Long id) {
 		GerenteAdministradora gerenteAdministradora = (GerenteAdministradora) sessionFactory.getCurrentSession().load(
 				GerenteAdministradora.class, id);
 		if (gerenteAdministradora != null) {
 			sessionFactory.getCurrentSession().delete(gerenteAdministradora);
+			return true;
 		}
+		return false;
 	}
 
 
