@@ -44,7 +44,7 @@
 								<c:url value="/fornecedor/deleta" var="Deletar" >
 									<c:param name="id" value="${fornecedor.codigo}" />
 								</c:url>
-								<a href="${Deletar}" title="Deletar Fornecedor">Deletar</a>
+								<a href="javascript:deleteEntity('${Deletar }');" title="Deletar Fornecedor">Deletar</a>
 							</td>
 						</tr>
 					</c:forEach>

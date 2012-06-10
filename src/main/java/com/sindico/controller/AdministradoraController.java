@@ -16,17 +16,17 @@ import com.sindico.service.AdministradoraService;
 public class AdministradoraController {
 	
 	@Autowired
-	AdministradoraService service;
+	AdministradoraService administradoraService;
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/administradora/lista")
 	public ModelAndView indexAdministradora(){
-		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras", service.listAdministradoras());
+		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras", administradoraService.listAdministradoras());
 		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/administradora/mostra")
 	public ModelAndView showAdministradora(Long id){
-		ModelAndView mv = new ModelAndView("/administradora/administradora", "administradora", service.getAdministradora(id));
+		ModelAndView mv = new ModelAndView("/administradora/administradora", "administradora", administradoraService.getAdministradora(id));
 		return mv;
 	}
 	
@@ -38,14 +38,14 @@ public class AdministradoraController {
 	
 	@RequestMapping(method=RequestMethod.POST, value = "/administradora/cria")
 	public ModelAndView createAdministradora(@ModelAttribute("administradora") final Administradora administradora){
-		service.createAdministradora(administradora);
+		administradoraService.createAdministradora(administradora);
 		ModelAndView mv = new ModelAndView("/administradora/administradora", "administradora", administradora);
 		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/administradora/edita")
 	public ModelAndView editAdministradora(Long id){
-		ModelAndView mv = new ModelAndView("/administradora/editAdministradora", "administradora", service.getAdministradora(id));
+		ModelAndView mv = new ModelAndView("/administradora/editAdministradora", "administradora", administradoraService.getAdministradora(id));
 		return mv;
 	}
 	
@@ -57,7 +57,7 @@ public class AdministradoraController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/administradora/deleta")
 	public ModelAndView deleteAdministradora(Long id){
-		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras", service.listAdministradoras());
+		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras", administradoraService.listAdministradoras());
 		return mv;
 	}
 }
