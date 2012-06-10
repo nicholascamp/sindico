@@ -13,7 +13,7 @@
 
 <body>
 	<h1>CRIA USUARIO</h1>
-	<form:form commandName="usuario" method="POST" action="cria">
+	<form:form commandName="usuario" method="POST" action="cadastro">
 		<table>
 			<tr>
 				<td>Nome:</td>
@@ -45,7 +45,9 @@
 			</tr>
 			<tr>
 				<td>Tipo:</td>
-				<td><form:options items="${tipos}" path="tipo" size="100" /></td>
+				<td><form:select path="tipo">
+						<form:options items="${tipos}" path="tipo" size="100" />
+					</form:select></td>
 			</tr>
 			<tr>
 				<td><form:button value="Criar">Criar</form:button></td>

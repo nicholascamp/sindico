@@ -31,6 +31,28 @@
 		</constructor-arg>
 	</bean>
 
+<!-- 	<bean id="validatorFactory" -->
+<!-- 		class="org.springmodules.validation.commons.DefaultValidatorFactory"> -->
+<!-- 		<property name="validationConfigLocations"> -->
+<!-- 			<list> -->
+<!-- 				<value>/WEB-INF/validation.xml</value> -->
+<!-- 				<value>/WEB-INF/validator-rules.xml</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="beanValidator" -->
+<!-- 		class="org.springmodules.validation.commons.DefaultBeanValidator"> -->
+<!-- 		<property name="validatorFactory" ref="validatorFactory" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="messageSource" -->
+<!-- 		class="org.springframework.context.support.ResourceBundleMessageSource"> -->
+<!-- 		<property name="basenames"> -->
+<!-- 			<value>application</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">

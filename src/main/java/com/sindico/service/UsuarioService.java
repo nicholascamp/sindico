@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Usuario;
+import com.sindico.entity.UsuarioSimples;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -38,6 +39,9 @@ public interface UsuarioService {
 	@Transactional
 	public Usuario atualizaUsuario(final Usuario usuario);
 
+	@Transactional
+	public Usuario setAdmin(Long id);
+
 	/**
 	 * Recupera usuario.
 	 * 
@@ -46,7 +50,7 @@ public interface UsuarioService {
 	 * @return the usuario
 	 */
 	@Transactional
-	public Usuario getUsuario(final Long id);
+	public UsuarioSimples getUsuario(final Long id);
 
 	/**
 	 * Gets the usuario nome.
@@ -56,7 +60,7 @@ public interface UsuarioService {
 	 * @return the usuario nome
 	 */
 	@Transactional
-	public Collection<Usuario> getUsuarioNome(final String nome);
+	public Collection<UsuarioSimples> getUsuarioNome(final String nome);
 
 	/**
 	 * Gets the usuario email.
@@ -66,17 +70,7 @@ public interface UsuarioService {
 	 * @return the usuario email
 	 */
 	@Transactional
-	public Collection<Usuario> getUsuarioEmail(final String email);
-
-	/**
-	 * Gets the usuario predio.
-	 * 
-	 * @param predio
-	 *            the predio
-	 * @return the usuario predio
-	 */
-	@Transactional
-	public Collection<Usuario> getUsuarioPredio(final String predio);
+	public Collection<UsuarioSimples> getUsuarioEmail(final String email);
 
 	/**
 	 * Removes the usuario.
@@ -93,7 +87,7 @@ public interface UsuarioService {
 	 * @return the list
 	 */
 	@Transactional
-	public List<Usuario> getLista();
+	public List<UsuarioSimples> getLista();
 
 	/**
 	 * Load by username.

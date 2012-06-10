@@ -3,6 +3,7 @@
  */
 package com.sindico.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.sindico.dao.UsuarioDAO;
 import com.sindico.entity.Usuario;
+import com.sindico.entity.UsuarioSimples;
 import com.sindico.service.UsuarioService;
 
 // TODO: Auto-generated Javadoc
@@ -55,8 +57,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 * @see com.sindico.service.UsuarioService#getUsuario(java.lang.Long)
 	 */
 	@Override
-	public Usuario getUsuario(final Long id) {
-		return usuarioDAO.getUsuario(id);
+	public UsuarioSimples getUsuario(final Long id) {
+		return new UsuarioSimples(usuarioDAO.getUsuario(id));
 	}
 
 	/*
@@ -65,8 +67,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 * @see com.sindico.service.UsuarioService#getUsuarioNome(java.lang.String)
 	 */
 	@Override
-	public Collection<Usuario> getUsuarioNome(final String nome) {
-		return usuarioDAO.getUsuarioNome(nome);
+	public Collection<UsuarioSimples> getUsuarioNome(final String nome) {
+
+		List<UsuarioSimples> usuarios = new ArrayList<UsuarioSimples>();
+		for (Usuario usuario : usuarioDAO.getUsuarioNome(nome)) {
+			usuarios.add(new UsuarioSimples(usuario));
+		}
+		return usuarios;
 	}
 
 	/*
@@ -75,19 +82,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 * @see com.sindico.service.UsuarioService#getUsuarioEmail(java.lang.String)
 	 */
 	@Override
-	public Collection<Usuario> getUsuarioEmail(final String email) {
-		return usuarioDAO.getUsuarioEmail(email);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.sindico.service.UsuarioService#getUsuarioPredio(java.lang.String)
-	 */
-	@Override
-	public Collection<Usuario> getUsuarioPredio(final String predio) {
-		return usuarioDAO.getUsuarioPredio(predio);
+	public Collection<UsuarioSimples> getUsuarioEmail(final String email) {
+		List<UsuarioSimples> usuarios = new ArrayList<UsuarioSimples>();
+		for (Usuario usuario : usuarioDAO.getUsuarioEmail(email)) {
+			usuarios.add(new UsuarioSimples(usuario));
+		}
+		return usuarios;
 	}
 
 	/*
@@ -106,8 +106,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 * @see com.sindico.service.UsuarioService#getLista()
 	 */
 	@Override
-	public List<Usuario> getLista() {
-		return usuarioDAO.getLista();
+	public List<UsuarioSimples> getLista() {
+		List<UsuarioSimples> usuarios = new ArrayList<UsuarioSimples>();
+		for (Usuario usuario : usuarioDAO.getLista()) {
+			usuarios.add(new UsuarioSimples(usuario));
+		}
+		return usuarios;
 	}
 
 	/*
@@ -118,6 +122,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario loadByUsername(final String username) {
 		return usuarioDAO.loadByUsername(username);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.sindico.service.UsuarioService#setAdmin(java.lang.Long)
+	 */
+	@Override
+	public Usuario setAdmin(final Long id) {
+		return usuarioDAO.setAdmin(id);
 	}
 
 }

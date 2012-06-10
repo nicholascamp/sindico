@@ -1,16 +1,22 @@
 package com.sindico.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sindico.entity.Usuario;
+import com.sindico.entity.UsuarioSimples;
 import com.sindico.enums.TipoUsuario;
+import com.sindico.service.UsuarioService;
 import com.sindico.service.impl.SindicoUserDetailsServiceImpl;
 import com.sindico.utils.StringUtils;
 
@@ -24,21 +30,56 @@ public class UsuarioController {
 	@Autowired
 	private SindicoUserDetailsServiceImpl	sindicoUserDetailsServiceImpl;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/usuario/cria")
+	@Autowired
+	private UsuarioService					usuarioService;
+
+	@RequestMapping(method = RequestMethod.GET, value = "/cadastro")
 	public ModelAndView usuarioForm() {
-		ModelAndView modelAndView = new ModelAndView("usuario/criaUsuario",
-				"usuario", new Usuario());
+		ModelAndView modelAndView = new ModelAndView("cadastro", "usuario",
+				new Usuario());
 
 		modelAndView.addObject("tipos", TipoUsuario.values());
 
 		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "usuario/login")
-	public ModelAndView usuarioLogin() {
+	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista")
+	public ModelAndView indexUsuario() {
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
+				"usuario", new UsuarioSimples());
+		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(
+				usuarioService.getLista());
+		pagedListHolder.setPageSize(20);
 
-		System.out.println("Loga Usuario");
-		return new ModelAndView("usuario/login");
+		List<UsuarioSimples> pagedListUsuarios = pagedListHolder.getPageList();
+
+		modelAndView.addObject("usuarios", pagedListUsuarios);
+
+		return modelAndView;
+	}
+
+	@RequestMapping(method = RequestMethod.PUT, value = "/usuario/admin")
+	public ModelAndView updateUsuarioAdmin(@RequestParam final Long id) {
+		ModelAndView modelAndView = new ModelAndView("/usuario/lista");
+		usuarioService.setAdmin(id);
+		return modelAndView;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/usuario/mostra")
+	public ModelAndView showFornecedor(final Long id) {
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuario",
+				"usuario", new UsuarioSimples());
+
+		modelAndView.addObject("usuario", usuarioService.getUsuario(id));
+		return modelAndView;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/login")
+	public ModelAndView usuarioLogin(
+			@RequestParam(required = false) final String errorMessage) {
+
+		return new ModelAndView("login")
+				.addObject("errorMessage", errorMessage);
 	}
 
 	/**
@@ -51,7 +92,7 @@ public class UsuarioController {
 	 * @return the string
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/usuario/cria", method = RequestMethod.POST)
+	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
 	public String addUsuario(@ModelAttribute("usuario") final Usuario usuario,
 			final BindingResult result) throws Exception {
 
@@ -59,17 +100,7 @@ public class UsuarioController {
 				usuario.getUsername()));
 		sindicoUserDetailsServiceImpl.criarUsuario(usuario);
 
-		return "redirect:/usuario/login";
+		return "redirect:/login";
 	}
 
-	/**
-	 * Show contacts.
-	 * 
-	 * @return the model and view
-	 */
-	@RequestMapping("/usuario/lista")
-	public ModelAndView showUsuarios() {
-
-		return new ModelAndView("usuario", "command", new Usuario());
-	}
 }

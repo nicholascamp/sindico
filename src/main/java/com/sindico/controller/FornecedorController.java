@@ -42,6 +42,7 @@ public class FornecedorController {
 	@Autowired
 	FornecedorService	fornecedorService;
 
+	/** The subcategoria service. */
 	@Autowired
 	SubcategoriaService	subcategoriaService;
 
@@ -65,6 +66,13 @@ public class FornecedorController {
 		return modelAndView;
 	}
 
+	/**
+	 * List fornecedor by nome.
+	 * 
+	 * @param nome
+	 *            the nome
+	 * @return the model and view
+	 */
 	@RequestMapping(
 			method = RequestMethod.GET, value = "/fornecedor/lista/nome")
 	public ModelAndView listFornecedorByNome(@RequestParam final String nome) {
@@ -81,6 +89,13 @@ public class FornecedorController {
 		return modelAndView;
 	}
 
+	/**
+	 * List fornecedor by endereco.
+	 * 
+	 * @param endereco
+	 *            the endereco
+	 * @return the model and view
+	 */
 	@RequestMapping(
 			method = RequestMethod.GET, value = "/fornecedor/lista/endereco")
 	public ModelAndView listFornecedorByEndereco(
@@ -98,6 +113,13 @@ public class FornecedorController {
 		return modelAndView;
 	}
 
+	/**
+	 * List fornecedor by email.
+	 * 
+	 * @param email
+	 *            the email
+	 * @return the model and view
+	 */
 	@RequestMapping(
 			method = RequestMethod.GET, value = "/fornecedor/lista/email")
 	public ModelAndView listFornecedorByEmail(@RequestParam final String email) {
@@ -114,6 +136,13 @@ public class FornecedorController {
 		return modelAndView;
 	}
 
+	/**
+	 * List fornecedor by cnpj.
+	 * 
+	 * @param cnpj
+	 *            the cnpj
+	 * @return the model and view
+	 */
 	@RequestMapping(
 			method = RequestMethod.GET, value = "/fornecedor/lista/cnpj")
 	public ModelAndView listFornecedorByCNPJ(@RequestParam final String cnpj) {
@@ -216,8 +245,8 @@ public class FornecedorController {
 	/**
 	 * Destroy categoria.
 	 * 
-	 * @param categoria
-	 *            the categoria
+	 * @param fornecedor
+	 *            the fornecedor
 	 * @return the model and view
 	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/fornecedor/deleta")
@@ -229,18 +258,14 @@ public class FornecedorController {
 	}
 
 	/**
+	 * Inits the binder.
 	 * 
-	 * BUSCAS POR: NOME, EMAIL, ENDERECO E CNPJ
-	 */
-
-	/**
-	 * USUARIO, FORNECEDOR
-	 * 
-	 * COTACOES, UPLOAD
-	 * 
-	 * 
-	 * WEBSERVICE CORREIOS
-	 * 
+	 * @param request
+	 *            the request
+	 * @param binder
+	 *            the binder
+	 * @throws Exception
+	 *             the exception
 	 */
 	@InitBinder
 	protected void initBinder(final HttpServletRequest request,

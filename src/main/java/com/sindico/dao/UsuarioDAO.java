@@ -57,16 +57,26 @@ public class UsuarioDAO {
 				id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Collection<Usuario> getUsuarioNome(final String nome) {
-		return new ArrayList<Usuario>();
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"SELECT usuario FROM Usuario usuario WHERE usuario.nome like '%"
+						+ nome + "'%");
+		usuarios = query.list();
+
+		return usuarios;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Collection<Usuario> getUsuarioEmail(final String email) {
-		return new ArrayList<Usuario>();
-	}
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"SELECT usuario FROM Usuario usuario WHERE usuario.nome like '%"
+						+ email + "'%");
+		usuarios = query.list();
 
-	public Collection<Usuario> getUsuarioPredio(final String predio) {
-		return new ArrayList<Usuario>();
+		return usuarios;
 	}
 
 	/**
@@ -109,5 +119,16 @@ public class UsuarioDAO {
 						"SELECT usuario FROM Usuario usuario WHERE usuario.username = :username")
 				.setParameter("username", username);
 		return (Usuario) query.uniqueResult();
+	}
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	public Usuario setAdmin(final Long id) {
+		Usuario usuario = (Usuario) this.sessionFactory.getCurrentSession()
+				.load(Usuario.class, id);
+		usuario.setAdmin(true);
+		return usuario;
 	}
 }

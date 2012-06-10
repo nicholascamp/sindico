@@ -56,8 +56,8 @@ public class CategoriaController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/mostra")
 	public ModelAndView showCategoria(final Long id) {
-		ModelAndView modelAndView = new ModelAndView("/categoria/categoria", "categoria",
-				new Categoria());
+		ModelAndView modelAndView = new ModelAndView("/categoria/categoria",
+				"categoria", new Categoria());
 
 		modelAndView.addObject("categoria", categoriaService.getCategoria(id));
 		return modelAndView;
@@ -70,8 +70,8 @@ public class CategoriaController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/cria")
 	public ModelAndView newCategoria() {
-		ModelAndView modelAndView = new ModelAndView("/categoria/criaCategoria",
-				"categoria", new Categoria());
+		ModelAndView modelAndView = new ModelAndView(
+				"/categoria/criaCategoria", "categoria", new Categoria());
 
 		return modelAndView;
 	}
@@ -105,7 +105,8 @@ public class CategoriaController {
 	public ModelAndView editCategoria(final Long id) {
 		Categoria categoria = categoriaService.getCategoria(id);
 
-		return new ModelAndView("/categoria/editaCategoria", "categoria", categoria);
+		return new ModelAndView("/categoria/editaCategoria", "categoria",
+				categoria);
 	}
 
 	/**
@@ -131,7 +132,7 @@ public class CategoriaController {
 	 *            the categoria
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.DELETE, value = "/categoria/deleta")
+	@RequestMapping(method = RequestMethod.GET, value = "/categoria/deleta")
 	public ModelAndView destroyCategoria(final Categoria categoria) {
 		categoriaService.removeCategoria(categoria.getCodigo());
 

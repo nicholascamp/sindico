@@ -25,7 +25,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.sindico.enums.TipoUsuario;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Usuario.
  */
@@ -66,7 +65,7 @@ public class Usuario implements Serializable, UserDetails {
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
-	private Date				dataCadastro;
+	private Date				dataCadastro		= new Date();
 
 	/** The data nascimento. */
 	@Column(name = "DATA_NASCIMENTO")
