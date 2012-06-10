@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -79,7 +80,7 @@ public class Fornecedor {
 	private String						cnpj;
 
 	/** The subcategorias. */
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "FORNECEDOR_SUBCATEGORIA", joinColumns = @JoinColumn(
 			name = "FORNECEDOR_ID"), inverseJoinColumns = @JoinColumn(
 			name = "SUBCATEGORIA_ID"))

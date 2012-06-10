@@ -49,7 +49,7 @@ public class Administradora {
 	/** The enderecos. */
 	@Embedded
 	@JoinTable(name = "ENDERECO")
-	private Collection<Endereco>				enderecos	= new ArrayList<Endereco>();
+	private Endereco				enderecos;
 
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20)
@@ -145,7 +145,7 @@ public class Administradora {
 	 * 
 	 * @return the enderecos
 	 */
-	public Collection<Endereco> getEnderecos() {
+	public Endereco getEnderecos() {
 		return enderecos;
 	}
 
@@ -155,7 +155,7 @@ public class Administradora {
 	 * @param enderecos
 	 *            the new enderecos
 	 */
-	public void setEnderecos(final Collection<Endereco> enderecos) {
+	public void setEnderecos(final Endereco enderecos) {
 		this.enderecos = enderecos;
 	}
 

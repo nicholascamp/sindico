@@ -158,7 +158,7 @@ public class FornecedorController {
 				"/fornecedor/criaFornecedor", "fornecedor", new Fornecedor());
 		modelAndView.addObject("estrelas", Estrela.values());
 		modelAndView.addObject("estados", Estado.values());
-		modelAndView.addObject("subcategorias",
+		modelAndView.addObject("subcategoriasFornecedor",
 				subcategoriaService.listSubcategorias());
 
 		return modelAndView;

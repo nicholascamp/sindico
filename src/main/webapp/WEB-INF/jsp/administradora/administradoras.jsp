@@ -12,7 +12,7 @@
 		<title>Sindico.com</title>
 	</head>
 	<body>
-		<h1>FORNECEDORES</h1>
+		<h1>ADMINISTRADORAS</h1>
 		<div>
 			
 		</div>
@@ -24,38 +24,38 @@
 					<th>Editar</th>
 					<th>Deletar</th>
 				</tr>
-				<c:if test="${! empty fornecedores}">
-					<c:forEach items="${fornecedores }" var="fornecedor">
+				<c:if test="${! empty administradoras}">
+					<c:forEach items="${administradoras }" var="administradora">
 						<tr>
-							<td>${fornecedor.nome }</td>
+							<td>${administradora.nome }</td>
 							<td>
-								<c:url value="/fornecedor/mostra" var="Consultar">
-									<c:param name="id" value="${fornecedor.codigo}" />
+								<c:url value="/administradora/mostra" var="Consultar">
+									<c:param name="id" value="${administradora.codigo}" />
 								</c:url>
-								<a href="${Consultar}" title="Consulta Fornecedor">Consultar</a>
+								<a href="${Consultar}" title="Consulta Administradora">Consultar</a>
 							</td>
 							<td>
-								<c:url value="/fornecedor/edita"  var="Editar">
-									<c:param name="id" value="${fornecedor.codigo}" />
+								<c:url value="/administradora/edita"  var="Editar">
+									<c:param name="id" value="${administradora.codigo}" />
 								</c:url>
-								<a href="${Editar}" title="Editar Fornecedor">Editar</a>
+								<a href="${Editar}" title="Editar Administradora">Editar</a>
 							</td>
 							<td>
-								<c:url value="/fornecedor/deleta" var="Deletar" >
-									<c:param name="id" value="${fornecedor.codigo}" />
+								<c:url value="/administradora/deleta" var="Deletar" >
+									<c:param name="id" value="${administradora.codigo}" />
 								</c:url>
-								<a href="javascript:deleteEntity('${Deletar }');" title="Deletar Fornecedor">Deletar</a>
+								<a href="javascript:deleteEntity('${Deletar }');" title="Deletar Administradora">Deletar</a>
 							</td>
 						</tr>
 					</c:forEach>
 				</c:if>
 			</table>
-			<c:if test="${empty fornecedores}">
-				<p>Nenhum fornecedor encontrado</p>
+			<c:if test="${empty administradora}">
+				<p>Nenhuma administradora encontrada</p>
 			</c:if>
 		</div>
 		<div>
-			<a href="/sindico/fornecedor/cria" title="Criar fornecedor">Novo Fornecedor</a>
+			<a href="/sindico/administradora/cria" title="Criar Administradora">Nova Administradora</a>
 		</div>
 	</body>
 </html>

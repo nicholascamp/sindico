@@ -82,7 +82,7 @@
 				<td>Subcategorias:</td>
 				<td>
 					<c:forEach items="${fornecedor.subcategorias }" var="subcategoria">
-						${subcategoria },
+						${subcategoria.title },
 					</c:forEach>
 				</td>
 			</tr>

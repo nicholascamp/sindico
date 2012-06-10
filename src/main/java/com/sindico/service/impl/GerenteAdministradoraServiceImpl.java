@@ -30,8 +30,28 @@ public class GerenteAdministradoraServiceImpl implements
 	 * @see com.sindico.service.GerenteAdministradoraService#listaGerentes()
 	 */
 	@Override
-	public List<GerenteAdministradora> listaGerentes() {
+	public List<GerenteAdministradora> listGerentes() {
 		return gerenteAdministradoraDAO.getLista();
+	}
+
+	@Override
+	public GerenteAdministradora getGerente(Long id) {
+		return gerenteAdministradoraDAO.getGerenteAdministradora(id);
+	}
+
+	@Override
+	public GerenteAdministradora createGerente(GerenteAdministradora gerente) {
+		return gerenteAdministradoraDAO.criaGerenteAdministradora(gerente);
+	}
+
+	@Override
+	public GerenteAdministradora updateGerente(GerenteAdministradora gerente) {
+		return gerenteAdministradoraDAO.atualizaGerenteAdministradora(gerente);
+	}
+
+	@Override
+	public boolean removeGerente(Long id) {
+		return gerenteAdministradoraDAO.removeGerenteAdministradora(id);
 	}
 
 }

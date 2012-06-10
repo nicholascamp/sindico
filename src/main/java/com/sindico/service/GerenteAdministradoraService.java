@@ -22,6 +22,17 @@ public interface GerenteAdministradoraService {
 	 * @return the list
 	 */
 	@Transactional
-	List<GerenteAdministradora> listaGerentes();
-
+	List<GerenteAdministradora> listGerentes();
+	
+	@Transactional
+	GerenteAdministradora getGerente(Long id);
+	
+	@Transactional
+	GerenteAdministradora createGerente(GerenteAdministradora gerente);
+	
+	@Transactional
+	GerenteAdministradora updateGerente(GerenteAdministradora gerente);
+	
+	@Transactional
+	boolean removeGerente(Long id);
 }

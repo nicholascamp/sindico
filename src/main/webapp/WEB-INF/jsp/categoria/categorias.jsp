@@ -37,7 +37,7 @@
 								</c:url> <a href="${Editar}" title="Editar Categoria">Editar</a></td>
 							<td><c:url value="/categoria/deleta" var="Deletar">
 									<c:param name="id" value="${categoria.codigo}" />
-								</c:url> <a href="${Deletar}" title="Deletar Categoria">Deletar</a></td>
+								</c:url> <a href="javascript:deleteEntity('${Deletar }');" title="Deletar Categoria">Deletar</a></td>
 						</tr>
 					</c:forEach>
 				</c:if>
