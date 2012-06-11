@@ -62,7 +62,7 @@
 						<td><c:url value="/fornecedor/edita" var="Editar">
 								<c:param name="id" value="${fornecedor.codigo}" />
 							</c:url> <a href="${Editar}" title="Editar Fornecedor">Editar</a></td>
-						<td><c:url value="/fornecedor/deleta" var="Deletar">
+						<td><c:url value="deleta" var="Deletar">
 								<c:param name="id" value="${fornecedor.codigo}" />
 							</c:url> <a href="javascript:deleteEntity('${Deletar }');"
 							title="Deletar Fornecedor">Deletar</a></td>
