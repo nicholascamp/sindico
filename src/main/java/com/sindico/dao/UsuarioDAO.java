@@ -62,7 +62,7 @@ public class UsuarioDAO {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"SELECT usuario FROM Usuario usuario WHERE usuario.nome like '%"
-						+ nome + "'%");
+						+ nome + "%'");
 		usuarios = query.list();
 
 		return usuarios;
@@ -72,8 +72,8 @@ public class UsuarioDAO {
 	public Collection<Usuario> getUsuarioEmail(final String email) {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"SELECT usuario FROM Usuario usuario WHERE usuario.nome like '%"
-						+ email + "'%");
+				"SELECT usuario FROM Usuario usuario WHERE usuario.email like '%"
+						+ email + "%'");
 		usuarios = query.list();
 
 		return usuarios;
@@ -125,10 +125,11 @@ public class UsuarioDAO {
 	 * @param id
 	 * @return
 	 */
-	public Usuario setAdmin(final Long id) {
+	public Usuario setAdmin(final Long id, final boolean admin) {
 		Usuario usuario = (Usuario) this.sessionFactory.getCurrentSession()
 				.load(Usuario.class, id);
-		usuario.setAdmin(true);
+		usuario.setAdmin(admin);
 		return usuario;
 	}
+
 }

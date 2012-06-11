@@ -50,7 +50,7 @@
 		</tr>
 		<tr>
 			<td>Qtdade cotações:</td>
-			<td>${usuario.cotacoes.size()}</td>
+			<td>${usuario.qtdadeCotacoes}</td>
 		</tr>
 	</table>
 	<div>

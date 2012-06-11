@@ -58,10 +58,41 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista/nome")
+	public ModelAndView indexUsuarioNome(@RequestParam final String nome) {
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
+				"usuario", new UsuarioSimples());
+		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(
+				usuarioService.getUsuarioNome(nome));
+		pagedListHolder.setPageSize(20);
+
+		List<UsuarioSimples> pagedListUsuarios = pagedListHolder.getPageList();
+
+		modelAndView.addObject("usuarios", pagedListUsuarios);
+
+		return modelAndView;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista/email")
+	public ModelAndView indexUsuarioEmail(@RequestParam final String email) {
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
+				"usuario", new UsuarioSimples());
+		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(
+				usuarioService.getUsuarioEmail(email));
+		pagedListHolder.setPageSize(20);
+
+		List<UsuarioSimples> pagedListUsuarios = pagedListHolder.getPageList();
+
+		modelAndView.addObject("usuarios", pagedListUsuarios);
+
+		return modelAndView;
+	}
+
 	@RequestMapping(method = RequestMethod.PUT, value = "/usuario/admin")
-	public ModelAndView updateUsuarioAdmin(@RequestParam final Long id) {
+	public ModelAndView updateUsuarioAdmin(@RequestParam final Long id,
+			@RequestParam final boolean admin) {
 		ModelAndView modelAndView = new ModelAndView("/usuario/lista");
-		usuarioService.setAdmin(id);
+		usuarioService.setAdmin(id, admin);
 		return modelAndView;
 	}
 

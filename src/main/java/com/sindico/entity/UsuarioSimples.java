@@ -43,7 +43,7 @@ public class UsuarioSimples {
 	private TipoUsuario	tipo;
 
 	/** The qtade cotacoes. */
-	private int			qtadeCotacoes;
+	private int			qtdadeCotacoes;
 
 	/** The admin. */
 	private boolean		admin			= false;
@@ -58,7 +58,7 @@ public class UsuarioSimples {
 		this.email = usuario.getEmail();
 		this.recebeCotacao = usuario.isRecebeCotacao();
 		this.tipo = usuario.getTipo();
-		this.qtadeCotacoes = usuario.getCotacoes().size();
+		this.qtdadeCotacoes = usuario.getCotacoes().size();
 		this.admin = usuario.isAdmin();
 	}
 
@@ -225,8 +225,8 @@ public class UsuarioSimples {
 	 * 
 	 * @return the qtade cotacoes
 	 */
-	public int getQtadeCotacoes() {
-		return qtadeCotacoes;
+	public int getQtdadeCotacoes() {
+		return qtdadeCotacoes;
 	}
 
 	/**
@@ -235,8 +235,8 @@ public class UsuarioSimples {
 	 * @param qtadeCotacoes
 	 *            the new qtade cotacoes
 	 */
-	public void setQtadeCotacoes(final int qtadeCotacoes) {
-		this.qtadeCotacoes = qtadeCotacoes;
+	public void setQtdadeCotacoes(final int qtdadeCotacoes) {
+		this.qtdadeCotacoes = qtdadeCotacoes;
 	}
 
 	/**

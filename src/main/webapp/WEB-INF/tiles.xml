@@ -3,34 +3,34 @@
 
 <tiles-definitions>
 
-	<definition name="baseLayout" template="/jsp/layout/layout.jsp">
+	<definition name="baseLayout" template="/WEB-INF/jsp/layout/layout.jsp">
 		<put-attribute name="title" value="Sindico.com" />
-		<put-attribute name="header" value="/jsp/layout/header.jsp" />
-		<put-attribute name="navigation" value="/jsp/layout/navigation.jsp" />
+		<put-attribute name="header" value="/WEB-INF/jsp/layout/header.jsp" />
+		<put-attribute name="navigation" value="/WEB-INF/jsp/layout/navigation.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/layout/footer.jsp" />
 	</definition>
 	
 	<definition name="listaCategorias" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com - Categorias" />
-		<put-attribute name="body" value="/jsp/categoria/categorias.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/categoria/categorias.jsp" />
 	</definition>
 	<definition name="mostraCategoria" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com - Categorias" />
-		<put-attribute name="body" value="/jsp/categoria/categoria.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/categoria/categoria.jsp" />
 	</definition>
 	<definition name="criaCategoria" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com - Categorias" />
-		<put-attribute name="body" value="/jsp/categoria/criaCategoria.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/categoria/criaCategoria.jsp" />
 	</definition>
 	<definition name="editaCategoria" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com - Categorias" />
-		<put-attribute name="body" value="/jsp/categoria/editaCategoria.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/categoria/editaCategoria.jsp" />
 	</definition>
 	
 	<definition name="index" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com" />
-		<put-attribute name="body" value="/jsp/welcome.jsp" />
+		<put-attribute name="body" value="/index.jsp" />
 	</definition>
 </tiles-definitions>
 

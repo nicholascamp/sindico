@@ -4,7 +4,6 @@
 package com.sindico.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +66,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 * @see com.sindico.service.UsuarioService#getUsuarioNome(java.lang.String)
 	 */
 	@Override
-	public Collection<UsuarioSimples> getUsuarioNome(final String nome) {
+	public List<UsuarioSimples> getUsuarioNome(final String nome) {
 
 		List<UsuarioSimples> usuarios = new ArrayList<UsuarioSimples>();
 		for (Usuario usuario : usuarioDAO.getUsuarioNome(nome)) {
@@ -82,7 +81,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 * @see com.sindico.service.UsuarioService#getUsuarioEmail(java.lang.String)
 	 */
 	@Override
-	public Collection<UsuarioSimples> getUsuarioEmail(final String email) {
+	public List<UsuarioSimples> getUsuarioEmail(final String email) {
 		List<UsuarioSimples> usuarios = new ArrayList<UsuarioSimples>();
 		for (Usuario usuario : usuarioDAO.getUsuarioEmail(email)) {
 			usuarios.add(new UsuarioSimples(usuario));
@@ -130,8 +129,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 * @see com.sindico.service.UsuarioService#setAdmin(java.lang.Long)
 	 */
 	@Override
-	public Usuario setAdmin(final Long id) {
-		return usuarioDAO.setAdmin(id);
+	public Usuario setAdmin(final Long id, final boolean admin) {
+		return usuarioDAO.setAdmin(id, admin);
 	}
 
 }

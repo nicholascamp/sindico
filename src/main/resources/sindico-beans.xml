@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
@@ -21,6 +21,19 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<bean id="tilesviewResolver"
+		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver"
+		p:order="0" />
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+
 	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
 
 	<bean class="java.util.ArrayList" id="entityPackages">
@@ -31,26 +44,26 @@
 		</constructor-arg>
 	</bean>
 
-<!-- 	<bean id="validatorFactory" -->
-<!-- 		class="org.springmodules.validation.commons.DefaultValidatorFactory"> -->
-<!-- 		<property name="validationConfigLocations"> -->
-<!-- 			<list> -->
-<!-- 				<value>/WEB-INF/validation.xml</value> -->
-<!-- 				<value>/WEB-INF/validator-rules.xml</value> -->
-<!-- 			</list> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="beanValidator" -->
-<!-- 		class="org.springmodules.validation.commons.DefaultBeanValidator"> -->
-<!-- 		<property name="validatorFactory" ref="validatorFactory" /> -->
-<!-- 	</bean> -->
+	<!-- <bean id="validatorFactory" -->
+	<!-- class="org.springmodules.validation.commons.DefaultValidatorFactory"> -->
+	<!-- <property name="validationConfigLocations"> -->
+	<!-- <list> -->
+	<!-- <value>/WEB-INF/validation.xml</value> -->
+	<!-- <value>/WEB-INF/validator-rules.xml</value> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+	<!-- <bean id="beanValidator" -->
+	<!-- class="org.springmodules.validation.commons.DefaultBeanValidator"> -->
+	<!-- <property name="validatorFactory" ref="validatorFactory" /> -->
+	<!-- </bean> -->
 
-<!-- 	<bean id="messageSource" -->
-<!-- 		class="org.springframework.context.support.ResourceBundleMessageSource"> -->
-<!-- 		<property name="basenames"> -->
-<!-- 			<value>application</value> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
+	<!-- <bean id="messageSource" -->
+	<!-- class="org.springframework.context.support.ResourceBundleMessageSource"> -->
+	<!-- <property name="basenames"> -->
+	<!-- <value>application</value> -->
+	<!-- </property> -->
+	<!-- </bean> -->
 
 
 
