@@ -133,8 +133,8 @@ public class CategoriaController {
 	 * @return the model and view
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/categoria/deleta")
-	public ModelAndView destroyCategoria(final Categoria categoria) {
-		categoriaService.removeCategoria(categoria.getCodigo());
+	public ModelAndView destroyCategoria(final Long id) {
+		categoriaService.removeCategoria(id);
 
 		return new ModelAndView("/categoria/categorias", "categorias",
 				categoriaService.listCategorias());

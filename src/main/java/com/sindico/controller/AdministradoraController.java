@@ -45,7 +45,7 @@ public class AdministradoraController {
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/administradora/edita")
 	public ModelAndView editAdministradora(Long id){
-		ModelAndView mv = new ModelAndView("/administradora/editAdministradora", "administradora", administradoraService.getAdministradora(id));
+		ModelAndView mv = new ModelAndView("/administradora/editaAdministradora", "administradora", administradoraService.getAdministradora(id));
 		return mv;
 	}
 	
@@ -57,6 +57,7 @@ public class AdministradoraController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/administradora/deleta")
 	public ModelAndView deleteAdministradora(Long id){
+		administradoraService.removeAdministradora(id);
 		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras", administradoraService.listAdministradoras());
 		return mv;
 	}

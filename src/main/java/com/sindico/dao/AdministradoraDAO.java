@@ -52,7 +52,7 @@ public class AdministradoraDAO {
 	public List<Administradora> getLista() {
 		List<Administradora> administradoras = new ArrayList<Administradora>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"select administradora from Usuario administradora");
+				"select administradora from Administradora administradora");
 		administradoras = query.list();
 
 		return administradoras;
