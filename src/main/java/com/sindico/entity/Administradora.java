@@ -5,12 +5,10 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -18,6 +16,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.NotNull;
+
+import com.sindico.enums.Estado;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -46,10 +46,29 @@ public class Administradora {
 	@Column(name = "CNPJ", length = 20, unique = true)
 	private String								cnpj;
 
-	/** The enderecos. */
-	@Embedded
-	@JoinTable(name = "ENDERECO")
-	private Endereco				enderecos;
+	/** The bairro. */
+	@Column(name = "BAIRRO", nullable = false, length = 100)
+	private String					bairro;
+
+	/** The cep. */
+	@Column(name = "CEP", nullable = false, length = 10)
+	private String					cep;
+
+	/** The cidade. */
+	@Column(name = "CIDADE", nullable = false, length = 100)
+	private String					cidade;
+
+	/** The endereco. */
+	@Column(name = "RUA", nullable = false)
+	private String					endereco;
+
+	/** The estado. */
+	@Column(name = "ESTADO", nullable = false, length = 2)
+	private Estado					estado;
+
+	/** The numero. */
+	@Column(name = "NUMERO", nullable = false)
+	private int						numero;
 
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20)
@@ -140,23 +159,52 @@ public class Administradora {
 		this.cnpj = cnpj;
 	}
 
-	/**
-	 * Gets the enderecos.
-	 * 
-	 * @return the enderecos
-	 */
-	public Endereco getEnderecos() {
-		return enderecos;
+	public String getBairro() {
+		return bairro;
 	}
 
-	/**
-	 * Sets the enderecos.
-	 * 
-	 * @param enderecos
-	 *            the new enderecos
-	 */
-	public void setEnderecos(final Endereco enderecos) {
-		this.enderecos = enderecos;
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	/**

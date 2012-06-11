@@ -49,10 +49,10 @@
 						</tr>
 					</c:forEach>
 				</c:if>
-			</table>
-			<c:if test="${empty administradora}">
-				<p>Nenhuma administradora encontrada</p>
-			</c:if>
+				<c:if test="${empty administradoras}">
+					<p>Nenhuma administradora encontrada</p>
+				</c:if>
+			</table>			
 		</div>
 		<div>
 			<a href="/sindico/administradora/cria" title="Criar Administradora">Nova Administradora</a>

@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<td>Rua:</td>
-				<td>${administradora.rua }</td>
+				<td>${administradora.endereco }</td>
 			</tr>
 			<tr>
 				<td>Bairro:</td>
@@ -71,5 +71,6 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<a href="/sindico/administradora/lista" title="Listar Administradora">Listar Administradoras</a>
 	</body>
 </html>

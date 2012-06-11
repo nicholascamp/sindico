@@ -88,7 +88,12 @@
 			<tr>
 				<td>Subcategorias:</td>
 				<td>
-					<form:checkboxes items="${subcategoriasFornecedor }" path="subcategorias" itemLabel="title" itemValue="codigo" />
+					<c:if test="${empty subcategoriasFornecedor }">
+						Nenhum subcategoria registrada no Sistema.
+					</c:if>
+					<c:if test="${!empty subcategoriasFornecedor }">
+						<form:checkboxes items="${subcategoriasFornecedor }" path="subcategorias" itemLabel="title" itemValue="codigo" />
+					</c:if>					
 				</td>
 			</tr>
 			<tr>
@@ -97,7 +102,7 @@
 			<tr>
 				<td>
 					<c:if test="${fornecedor.estrelas == 1 }">
-						<form:radiobutton path="estrelas" value="1" label="1" checked />
+						<form:radiobutton path="estrelas" value="1" label="1" selected="true" />
 					</c:if>
 					<c:if test="${fornecedor.estrelas != 1 }">
 						<form:radiobutton path="estrelas" value="1" label="1" />
@@ -107,7 +112,7 @@
 			<tr>
 				<td>
 					<c:if test="${fornecedor.estrelas == 2 }">
-						<form:radiobutton path="estrelas" value="2" label="2" checked />
+						<form:radiobutton path="estrelas" value="2" label="2" selected="true" />
 					</c:if>
 					<c:if test="${fornecedor.estrelas != 2 }">
 						<form:radiobutton path="estrelas" value="2" label="2" />
@@ -117,7 +122,7 @@
 			<tr>
 				<td>
 					<c:if test="${fornecedor.estrelas == 3 }">
-						<form:radiobutton path="estrelas" value="3" label="3" checked />
+						<form:radiobutton path="estrelas" value="3" label="3" selected="true" />
 					</c:if>
 					<c:if test="${fornecedor.estrelas != 3 }">
 						<form:radiobutton path="estrelas" value="3" label="3" />
@@ -125,26 +130,30 @@
 				</td>
 			</tr>
 			<tr>
-				<c:if test="${fornecedor.estrelas == 4 }">
-						<form:radiobutton path="estrelas" value="4" label="4" checked />
+				<td>
+					<c:if test="${fornecedor.estrelas == 4 }">
+						<form:radiobutton path="estrelas" value="4" label="4" selected="true" />
 					</c:if>
 					<c:if test="${fornecedor.estrelas != 4 }">
 						<form:radiobutton path="estrelas" value="4" label="4" />
 					</c:if>
+				</td>
 			</tr>
 			<tr>
-				<c:if test="${fornecedor.estrelas == 5 }">
-						<form:radiobutton path="estrelas" value="5" label="5" checked />
+				<td>
+					<c:if test="${fornecedor.estrelas == 5 }">
+						<form:radiobutton path="estrelas" value="5" label="5" selected="true" />
 					</c:if>
 					<c:if test="${fornecedor.estrelas != 5 }">
 						<form:radiobutton path="estrelas" value="5" label="5" />
 					</c:if>
+				</td>				
 			</tr>
 			<tr>
 				<td>Anunciante:</td>
 				<td>
 					<c:if test="${fornecedor.anunciante == true }">
-						<form:checkbox path="anunciante" checked />
+						<form:checkbox path="anunciante" checked="true" />
 					</c:if>
 					<c:if test="${fornecedor.anunciante == false }">
 						<form:checkbox path="anunciante" />
@@ -155,7 +164,7 @@
 				<td>Aprovado:</td>
 				<td>
 					<c:if test="${fornecedor.aprovado == true }">
-						<form:checkbox path="aprovado" checked/>
+						<form:checkbox path="aprovado" checked="true"/>
 					</c:if>	
 					<c:if test="${fornecedor.aprovado == false }">
 						<form:checkbox path="aprovado"/>
@@ -166,7 +175,7 @@
 				<td>Recebe Cotacao:</td>
 				<td>
 					<c:if test="${fornecedor.recebeCotacaoEmail == true }">
-						<form:checkbox path="recebeCotacaoEmail" checked />
+						<form:checkbox path="recebeCotacaoEmail" checked="true" />
 					</c:if>
 					<c:if test="${fornecedor.recebeCotacaoEmail == false }">
 						<form:checkbox path="recebeCotacaoEmail" />
@@ -177,7 +186,7 @@
 				<td>Recebe News:</td>
 				<td>
 					<c:if test="${fornecedor.recebeNewsEmail == true }">
-						<form:checkbox path="recebeNewsEmail" checked />
+						<form:checkbox path="recebeNewsEmail" checked="true" />
 					</c:if>
 					<c:if test="${fornecedor.recebeNewsEmail == false }">
 						<form:checkbox path="recebeNewsEmail" />

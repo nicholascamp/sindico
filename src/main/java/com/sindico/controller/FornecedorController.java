@@ -222,9 +222,12 @@ public class FornecedorController {
 	@RequestMapping(method = RequestMethod.GET, value = "/fornecedor/edita")
 	public ModelAndView editFornecedor(final Long id) {
 		Fornecedor fornecedor = fornecedorService.getFornecedor(id);
-
-		return new ModelAndView("/fornecedor/editaFornecedor", "fornecedor",
-				fornecedor);
+		ModelAndView modelAndView = new ModelAndView("/fornecedor/editaFornecedor", "fornecedor",	fornecedor);
+		modelAndView.addObject("estrelas", Estrela.values());
+		modelAndView.addObject("estados", Estado.values());
+		modelAndView.addObject("subcategoriasFornecedor",
+				subcategoriaService.listSubcategorias());
+		return modelAndView;
 	}
 
 	/**
@@ -234,7 +237,7 @@ public class FornecedorController {
 	 *            the fornecedor
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.PUT, value = "/fornecedor/edita")
+	@RequestMapping(method = RequestMethod.POST, value = "/fornecedor/edita")
 	public ModelAndView updateFornecedor(final Fornecedor fornecedor) {
 		fornecedorService.atualizarFornecedor(fornecedor);
 
