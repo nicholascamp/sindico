@@ -51,6 +51,7 @@ public class AdministradoraController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/administradora/edita")
 	public ModelAndView updateAdministradora(@ModelAttribute("administradora") Administradora administradora){
+		administradoraService.updateAdministradora(administradora);
 		ModelAndView mv = new ModelAndView("/administradora/administradora", "administradora", administradora);
 		return mv;
 	}
