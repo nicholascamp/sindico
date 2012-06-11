@@ -26,6 +26,9 @@ public interface CotacaoService {
 	 */
 	@Transactional
 	List<Cotacao> listarPorFornecedor(Long fornecedorId);
+	
+	@Transactional
+	List<Cotacao> listCotacoes();
 
 	/**
 	 * Criar cotacao.
@@ -46,6 +49,9 @@ public interface CotacaoService {
 	 */
 	@Transactional
 	Cotacao atualizarCotacao(Cotacao cotacao);
+	
+	@Transactional
+	Cotacao getCotacao(Long id);
 
 	/**
 	 * Listar respostas.
@@ -56,5 +62,8 @@ public interface CotacaoService {
 	 */
 	@Transactional
 	Cotacao listarRespostas(Long id);
+	
+	@Transactional
+	boolean removerCotacao(Long id);
 
 }

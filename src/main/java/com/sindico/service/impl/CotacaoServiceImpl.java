@@ -44,7 +44,7 @@ public class CotacaoServiceImpl implements CotacaoService {
 	 */
 	@Override
 	public Cotacao criarCotacao(final Cotacao cotacao) {
-		return null;
+		return cotacaoDAO.criaCotacao(cotacao);
 	}
 
 	/*
@@ -56,7 +56,7 @@ public class CotacaoServiceImpl implements CotacaoService {
 	 */
 	@Override
 	public Cotacao atualizarCotacao(final Cotacao cotacao) {
-		return null;
+		return cotacaoDAO.atualizaCotacao(cotacao);
 	}
 
 	/*
@@ -67,6 +67,29 @@ public class CotacaoServiceImpl implements CotacaoService {
 	@Override
 	public Cotacao listarRespostas(final Long id) {
 		return null;
+	}
+
+	@Override
+	public List<Cotacao> listCotacoes() {
+		// TODO Auto-generated method stub
+		return cotacaoDAO.getLista();
+	}
+
+	@Override
+	public boolean removerCotacao(Long id) {
+		// TODO Auto-generated method stub
+		Cotacao cotacao = cotacaoDAO.getCotacao(id);
+		if(cotacao != null){
+			cotacaoDAO.removeCotacao(id);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Cotacao getCotacao(Long id) {
+		// TODO Auto-generated method stub
+		return cotacaoDAO.getCotacao(id);
 	}
 
 }

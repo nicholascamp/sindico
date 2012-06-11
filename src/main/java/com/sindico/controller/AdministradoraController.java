@@ -55,8 +55,8 @@ public class AdministradoraController {
 		return mv;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/administradora/deleta")
-	public ModelAndView deleteAdministradora(Long id){
+	@RequestMapping(method = RequestMethod.GET, value = "/administradora/deleta")
+	public ModelAndView destroyAdministradora(Long id){
 		administradoraService.removeAdministradora(id);
 		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras", administradoraService.listAdministradoras());
 		return mv;
