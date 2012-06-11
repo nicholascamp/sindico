@@ -3,7 +3,6 @@
  */
 package com.sindico.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -39,8 +38,17 @@ public interface UsuarioService {
 	@Transactional
 	public Usuario atualizaUsuario(final Usuario usuario);
 
+	/**
+	 * Sets the admin.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param admin
+	 *            the admin
+	 * @return the usuario
+	 */
 	@Transactional
-	public Usuario setAdmin(Long id);
+	public Usuario setAdmin(Long id, boolean admin);
 
 	/**
 	 * Recupera usuario.
@@ -60,7 +68,7 @@ public interface UsuarioService {
 	 * @return the usuario nome
 	 */
 	@Transactional
-	public Collection<UsuarioSimples> getUsuarioNome(final String nome);
+	public List<UsuarioSimples> getUsuarioNome(final String nome);
 
 	/**
 	 * Gets the usuario email.
@@ -70,7 +78,7 @@ public interface UsuarioService {
 	 * @return the usuario email
 	 */
 	@Transactional
-	public Collection<UsuarioSimples> getUsuarioEmail(final String email);
+	public List<UsuarioSimples> getUsuarioEmail(final String email);
 
 	/**
 	 * Removes the usuario.

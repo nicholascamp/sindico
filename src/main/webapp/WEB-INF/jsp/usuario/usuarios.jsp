@@ -37,7 +37,6 @@
 				<th>Nome</th>
 				<th>Consultar</th>
 				<th>Editar</th>
-				<th>Deletar</th>
 			</tr>
 			<c:if test="${! empty usuarios}">
 				<c:forEach items="${usuarios }" var="usuario">
@@ -47,13 +46,14 @@
 								<c:param name="id" value="${usuario.id}" />
 							</c:url> <a href="${Consultar}" title="Consulta Usuario">Consultar</a>
 						</td>
-						<td><c:url value="/usuario/edita" var="Editar">
+						<td><c:url value="/usuario/admin" var="Admin">
 								<c:param name="id" value="${usuario.id}" />
-							</c:url> <a href="${Editar}" title="Editar Fornecedor">Editar</a></td>
-						<td><c:url value="/usuario/deleta" var="Deletar">
-								<c:param name="id" value="${usuario.id}" />
-							</c:url> <a href="javascript:deleteEntity('${Deletar }');"
-							title="Deletar Fornecedor">Deletar</a></td>
+								<c:param name="admin" value="${! usuario.admin}" />
+							</c:url> <c:if test="${usuario.admin == false}">
+							<a href="${Admin}"  title="Tornar Admin">Tornar Admin</a>
+							</c:if>  <c:if test="${usuario.admin == true}">
+							<a href="${Admin}" title="Retirar Admin">Retirar Admin</a>
+							</c:if> </td>
 					</tr>
 				</c:forEach>
 			</c:if>
