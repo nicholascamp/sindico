@@ -37,12 +37,14 @@ public class CepController {
 	 *             the malformed url exception
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/cep")
-	public Cep recuperaCEP(@RequestParam final String cep) throws JAXBException, MalformedURLException {
+	public Cep recuperaCEP(@RequestParam final String cep)
+			throws JAXBException, MalformedURLException {
 
 		JAXBContext jc = JAXBContext.newInstance(Cep.class);
 
 		Unmarshaller u = jc.createUnmarshaller();
-		URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=xml");
+		URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep="
+				+ cep + "&formato=xml");
 		// URL url = new
 		// URL("http://grepcep.com/callws.do?token=201206051808195DJAWAZWXEUGXD6MOSX3R&cep="
 		// + cep

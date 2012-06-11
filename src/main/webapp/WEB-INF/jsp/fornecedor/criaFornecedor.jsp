@@ -11,8 +11,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js">
-	
 </script>
+<script type="text/javascript" src="/sindico/javascript/actions.js">
+</script>
+
 
 <title>Sindico.com</title>
 </head>
@@ -62,7 +64,8 @@
 			</tr>
 			<tr>
 				<td>CEP:</td>
-				<td><form:input id="cep" path="cep" size="8" onblur="" /></td>
+				<td><form:input id="cep" path="cep" size="8"
+						onblur="javascript:sendRequest('GET', 'http://cep.republicavirtual.com.br/web_cep.php?cep=09607030&formato=javascript');" /></td>
 			</tr>
 			<tr>
 				<td>Endereco:</td>
