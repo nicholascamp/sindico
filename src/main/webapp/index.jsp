@@ -19,6 +19,7 @@
 		<a href="/sindico/subcategoria/lista.html">Gerenciar Subcategorias</a> <br />
 		<a href="/sindico/fornecedor/lista.html">Gerenciar Fornecedores</a> <br/>
 		<a href="/sindico/administradora/lista.html">Gerenciar Administradoras</a> <br/>
+		<a href="/sindico/cotacao/lista.html">Gerenciar Cotações</a> <br />
 		<a href="/sindico/usuario/lista.html">Gerenciar Usuarios</a> <br/>
 		
 		<br/><br/><br/>

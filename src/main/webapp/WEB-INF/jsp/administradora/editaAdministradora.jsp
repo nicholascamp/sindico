@@ -18,7 +18,10 @@
 	<form:form commandName="administradora" action="edita" method="POST">
 		<table>
 			<tr>
-				<td>Nome:</td>
+				<td>
+					<input type="hidden" name="codigo" value="${administradora.codigo }" />
+					Nome:
+				</td>
 				<td><form:input path="nome" value="${administradora.nome }" /></td>
 			</tr>
 			<tr>
