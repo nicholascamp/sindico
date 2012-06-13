@@ -44,6 +44,11 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="appConfiguration"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations" value="classpath:appConfiguration.properties" />
+	</bean>
+
 	<!-- <bean id="validatorFactory" -->
 	<!-- class="org.springmodules.validation.commons.DefaultValidatorFactory"> -->
 	<!-- <property name="validationConfigLocations"> -->

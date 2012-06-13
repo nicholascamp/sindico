@@ -18,42 +18,49 @@ function logout(url) {
 }
 
 function createRequestObject() {
-	var req;
-	try {
-		// Firefox, Opera, Safari
-		req = new XMLHttpRequest();
-	} catch (e) {
-		// Internet Explorer
-		try {
-			// For IE 6
-			req = new ActiveXObject("Msxml2.XMLHTTP");
-		} catch (e) {
-			try {
-				// For IE 5
-				req = new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (e) {
-				alert('Your browser is not IE 5 or higher, or Firefox or Safari or Opera');
-			}
-		}
-	}
-	return req;
+    var tmpXmlHttpObject;
+    
+    //depending on what the browser supports, use the right way to create the XMLHttpRequest object
+    if (window.XMLHttpRequest) { 
+        // Mozilla, Safari would use this method ...
+        tmpXmlHttpObject = new XMLHttpRequest();
+	
+    } else if (window.ActiveXObject) { 
+        // IE would use this method ...
+        tmpXmlHttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    return tmpXmlHttpObject;
 }
 
-// Make the XMLHttpRequest Object
+//call the above function to create the XMLHttpRequest object
 var http = createRequestObject();
-function sendRequest(method, url) {
-	if (method == 'get' || method == 'GET') {
-		http.open(method, url, true);
-		http.onreadystatechange = handleResponse;
-		http.send(null);
-	}
+
+function makeGetRequest(cep) {
+    //make a connection to the server ... specifying that you intend to make a GET request 
+    //to the server. Specifiy the page name and the URL parameters to send
+    http.open('get', 'http://localhost:8080/sindico/cep?cep=' + '09607030');
+	
+    //assign a handler for the response
+    http.onreadystatechange = processResponse;
+	
+    //actually send the request to the server
+    http.send(null);
 }
 
-function handleResponse() {
-	if (http.readyState == 4 && http.status == 200) {
-		var response = http.responseText;
-		if (response) {
-			document.getElementById("ajax_res").innerHTML = response;
-		}
-	}
+function processResponse() {
+    //check if the response has been received from the server
+    if(http.readyState == 4){
+	
+        //read and assign the response from the server
+        var response = http.responseText;
+		
+        //do additional parsing of the response, if needed
+		
+        //in this case simply assign the response to the contents of the <div> on the page. 
+        document.forms[0].endereco.value = 'teste';
+		
+        //If the server returned an error message like a 404 error, that message would be shown within the div tag!!. 
+        //So it may be worth doing some basic error before setting the contents of the <div>
+    }
 }
