@@ -35,6 +35,9 @@ public class Cotacao {
 	/** The data. */
 	@Column(name = "DATA")
 	private Date					data;
+	
+	@Column(name = "DATA_ATUALIZACAO")
+	private Date dataAtualizacao;
 
 	/** The subcategoria. */
 	@ManyToOne(optional = false)
@@ -65,7 +68,6 @@ public class Cotacao {
 	@JoinTable(name = "COTACAO_FORNECEDOR", joinColumns = @JoinColumn(
 			name = "COTACAO_ID"), inverseJoinColumns = @JoinColumn(
 			name = "FORNECEDOR_ID"))
-	@NotNull
 	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
 
 	/** The fornecedor vencedor. */
@@ -84,6 +86,14 @@ public class Cotacao {
 		this.titulo = titulo;
 	}
 
+	public Date getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	public void setDataAtualizacao(Date dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
+	}
+	
 	/**
 	 * Gets the codigo.
 	 * 
