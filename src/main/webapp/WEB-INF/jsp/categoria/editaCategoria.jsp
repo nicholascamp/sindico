@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>EDITA CATEGORIA</h1>
-<form:form commandName="categoria" method="POST" action="edita">
+<form:form commandName="categoria" method="POST" action="/sindico/categoria/editaCategoria">
 	<input type="hidden" name="codigo" value="${categoria.codigo }" />
 	<table>
 		<tr>

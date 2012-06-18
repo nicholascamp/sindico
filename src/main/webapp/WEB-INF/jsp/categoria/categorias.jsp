@@ -16,8 +16,6 @@
 <title>Sindico.com</title>
 </head>
 <body>
-	<h1>CATEGORIAS</h1>
-	<div></div>
 	<div>
 		<table style="margin: 10px;">
 			<tr>
@@ -30,13 +28,13 @@
 				<c:forEach items="${categorias }" var="categoria">
 					<tr>
 						<td>${categoria.nome }</td>
-						<td><c:url value="/categoria/mostra" var="Consultar">
+						<td><c:url value="/mostraCategoria" var="Consultar">
 								<c:param name="id" value="${categoria.codigo}" />
 							</c:url> <a href="${Consultar}" title="Consulta Categoria">Consultar</a></td>
-						<td><c:url value="/categoria/edita" var="Editar">
+						<td><c:url value="/editaCategoria" var="Editar">
 								<c:param name="id" value="${categoria.codigo}" />
 							</c:url> <a href="${Editar}" title="Editar Categoria">Editar</a></td>
-						<td><c:url value="/categoria/deleta" var="Deletar">
+						<td><c:url value="/deletaCategoria" var="Deletar">
 								<c:param name="id" value="${categoria.codigo}" />
 							</c:url> 
 							<a href="javascript:deleteEntity('${Deletar }');"
@@ -50,8 +48,11 @@
 		</c:if>
 	</div>
 	<div>
-		<a href="/sindico/categoria/cria" title="Criar Categoria">Nova
+		<a href="<c:url value="/criaCategoria"/>" title="Criar Categoria">Nova
 			Categoria</a>
 	</div>
+	</br>
+	</br>
+	</br>
 </body>
 </html>

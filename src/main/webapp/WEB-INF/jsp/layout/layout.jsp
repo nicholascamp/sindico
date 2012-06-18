@@ -1,9 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="sindico"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@include file="/WEB-INF/tags/taglib_includes.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,15 +15,56 @@
 	<div>
 		<tiles:insertAttribute name="header" />
 		<div>
-			<tiles:insertAttribute name="navigation" />
-			<a href="<c:url value="/j_spring_security_logout" />"> Logout</a>
+			<sec:authorize ifAnyGranted="ROLE_USUARIO">
+				<tiles:insertAttribute name="navigation" />
+			</sec:authorize>
+			<hr noshade="noshade" size="1" width="100%">
+			<sec:authorize ifNotGranted="ROLE_USUARIO">
+				<h3>Faça Login</h3>
+
+				<form name="f" action="<c:url value='/j_spring_security_check'/>"
+					method="POST">
+					<table>
+						<tr>
+							<td>Usuário:</td>
+							<td><input type='text' name='j_username'
+								value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>' /></td>
+						</tr>
+						<tr>
+							<td>Senha:</td>
+							<td><input type='password' name='j_password'></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"
+								name="_spring_security_remember_me"></td>
+							<td>Salvar usuário</td>
+						</tr>
+
+						<tr>
+							<td colspan='2'><input name="submit" type="submit"></td>
+						</tr>
+					</table>
+				</form>
+				</br>
+				</br>
+				<h3>
+					Ou <a href="<c:url value='/cadastro'/>">Cadastre-se</a>
+				</h3>
+				</br>
+				</br>
+				</br>
+			</sec:authorize>
 		</div>
 
 		<div>
 			<tiles:insertAttribute name="body" />
 		</div>
 
-		<tiles:insertAttribute name="footer" />
+			<hr noshade="noshade" size="1" width="100%">
+			<sec:authorize ifAnyGranted="ROLE_USUARIO">
+				<a href="<c:url value="/j_spring_security_logout" />"> Logout</a>
+			</sec:authorize>
+			<tiles:insertAttribute name="footer" />
 	</div>
 </body>
 </html>

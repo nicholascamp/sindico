@@ -5,6 +5,6 @@
 	</tr>
 </table>
 <div>
-	<a href="/sindico/categoria/lista" title="Lista Categorias">Listar Categorias</a>
+	<a href="/sindico/listaCategorias" title="Lista Categorias">Listar Categorias</a>
 </div>
 	
