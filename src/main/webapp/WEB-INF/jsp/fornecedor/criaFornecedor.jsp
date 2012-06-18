@@ -27,11 +27,11 @@
 				<td><form:input path="title" size="100" /></td>
 			</tr>
 			<tr>
-				<td>Nome:</td>
+				<td>Razão Social:</td>
 				<td><form:input path="nome" size="100" /></td>
 			</tr>
 			<tr>
-				<td>Nome Principal:</td>
+				<td>Nome Fantasia:</td>
 				<td><form:input path="nomePrincipal" size="100" /></td>
 			</tr>
 			<tr>
