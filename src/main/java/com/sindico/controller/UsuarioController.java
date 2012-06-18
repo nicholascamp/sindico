@@ -144,17 +144,27 @@ public class UsuarioController {
 		usuario.setPassword(encodedPassword);
 		sindicoUserDetailsServiceImpl.criarUsuario(usuario);
 
-		// Loga o usuário.
+		/*
+		 * Início do processo de login de usuário.
+		 */
+
+		// Gera-se um token com o username e o password.
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(usuario.getUsername(),
 				plainTextPassword);
 
-		// generate session if one doesn't exist
+		// Adquire-se uma sessão, caso não exista.
 		request.getSession();
 
+		// ?
 		token.setDetails(new WebAuthenticationDetails(request));
-		Authentication authenticatedUser = authenticationManager.authenticate(token);
 
+		// Realiza a autenticação do usuário e o insere no contexto.
+		Authentication authenticatedUser = authenticationManager.authenticate(token);
 		SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+
+		/*
+		 * Fim do processo de login de usuário.
+		 */
 
 		return "redirect:/index";
 	}
