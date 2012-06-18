@@ -13,6 +13,10 @@
 
 <body>
 	<h1>CRIA USUARIO</h1>
+	<sec:authorize ifAnyGranted="ROLE_USUARIO">
+            Bem vindo usuário <sec:authentication
+			property="principal.username" />
+	</sec:authorize>
 	<form:form commandName="usuario" method="POST" action="cadastro">
 		<table>
 			<tr>
@@ -25,7 +29,7 @@
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td><form:input path="password" size="100" /></td>
+				<td><form:password path="password" size="100" /></td>
 			</tr>
 			<tr>
 				<td>Email:</td>

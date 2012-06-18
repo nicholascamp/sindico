@@ -215,6 +215,20 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
+		
+		<!-- Commons -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.1</version>
+		</dependency>
 
 		<!-- MySQL -->
 		<dependency>
@@ -272,6 +286,8 @@
 			<version>1.8.0</version>
 		</dependency>
 	</dependencies>
+
+
 	<build>
 		<finalName>sindico</finalName>
 		<plugins>
@@ -280,20 +296,6 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<configuration>
 					<contextPath>/sindico</contextPath>
-					<!-- <contextHandlers> -->
-					<!-- <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext"> -->
-					<!-- <war>target/dependency/administrativo.war</war> -->
-					<!-- <contextPath>/administrativo</contextPath> -->
-					<!-- </contextHandler> -->
-					<!-- <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext"> -->
-					<!-- <war>target/dependency/guideline.war</war> -->
-					<!-- <contextPath>/guideline</contextPath> -->
-					<!-- </contextHandler> -->
-					<!-- <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext"> -->
-					<!-- <war>target/dependency/upload.war</war> -->
-					<!-- <contextPath>/upload</contextPath> -->
-					<!-- </contextHandler> -->
-					<!-- </contextHandlers> -->
 				</configuration>
 			</plugin>
 		</plugins>

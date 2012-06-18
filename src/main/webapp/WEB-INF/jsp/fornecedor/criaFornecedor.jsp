@@ -20,7 +20,7 @@
 </head>
 <body>
 	<h1>CRIA FORNECEDOR</h1>
-	<form:form commandName="fornecedor" method="POST" action="cria">
+	<form:form id="fornecedor" commandName="fornecedor" method="POST" action="cria">
 		<table>
 			<tr>
 				<td>Título:</td>
@@ -65,7 +65,7 @@
 			<tr>
 				<td>CEP:</td>
 				<td><form:input id="cep" path="cep" size="8"
-						onblur="javascript:sendRequest('GET', 'http://cep.republicavirtual.com.br/web_cep.php?cep=09607030&formato=javascript');" /></td>
+						onblur="javascript:makeGetRequest(09607030);" /></td>
 			</tr>
 			<tr>
 				<td>Endereco:</td>

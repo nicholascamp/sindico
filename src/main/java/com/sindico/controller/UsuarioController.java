@@ -2,8 +2,16 @@ package com.sindico.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,15 +36,27 @@ import com.sindico.utils.StringUtils;
 public class UsuarioController {
 
 	@Autowired
-	private SindicoUserDetailsServiceImpl	sindicoUserDetailsServiceImpl;
+	private SindicoUserDetailsServiceImpl sindicoUserDetailsServiceImpl;
 
 	@Autowired
-	private UsuarioService					usuarioService;
+	@Qualifier("org.springframework.security.authenticationManager")
+	protected AuthenticationManager authenticationManager;
+
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastro")
 	public ModelAndView usuarioForm() {
-		ModelAndView modelAndView = new ModelAndView("cadastro", "usuario",
-				new Usuario());
+		ModelAndView modelAndView = new ModelAndView("cadastro", "usuario", new Usuario());
+
+		modelAndView.addObject("tipos", TipoUsuario.values());
+
+		return modelAndView;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/")
+	public ModelAndView usuarioIndexForm() {
+		ModelAndView modelAndView = new ModelAndView("index", "usuario", new Usuario());
 
 		modelAndView.addObject("tipos", TipoUsuario.values());
 
@@ -45,10 +65,8 @@ public class UsuarioController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista")
 	public ModelAndView indexUsuario() {
-		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
-				"usuario", new UsuarioSimples());
-		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(
-				usuarioService.getLista());
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios", "usuario", new UsuarioSimples());
+		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(usuarioService.getLista());
 		pagedListHolder.setPageSize(20);
 
 		List<UsuarioSimples> pagedListUsuarios = pagedListHolder.getPageList();
@@ -60,8 +78,7 @@ public class UsuarioController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista/nome")
 	public ModelAndView indexUsuarioNome(@RequestParam final String nome) {
-		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
-				"usuario", new UsuarioSimples());
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios", "usuario", new UsuarioSimples());
 		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(
 				usuarioService.getUsuarioNome(nome));
 		pagedListHolder.setPageSize(20);
@@ -75,8 +92,7 @@ public class UsuarioController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista/email")
 	public ModelAndView indexUsuarioEmail(@RequestParam final String email) {
-		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
-				"usuario", new UsuarioSimples());
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios", "usuario", new UsuarioSimples());
 		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(
 				usuarioService.getUsuarioEmail(email));
 		pagedListHolder.setPageSize(20);
@@ -89,8 +105,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/usuario/admin")
-	public ModelAndView updateUsuarioAdmin(@RequestParam final Long id,
-			@RequestParam final boolean admin) {
+	public ModelAndView updateUsuarioAdmin(@RequestParam final Long id, @RequestParam final boolean admin) {
 		ModelAndView modelAndView = new ModelAndView("/usuario/lista");
 		usuarioService.setAdmin(id, admin);
 		return modelAndView;
@@ -98,19 +113,16 @@ public class UsuarioController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/usuario/mostra")
 	public ModelAndView showFornecedor(final Long id) {
-		ModelAndView modelAndView = new ModelAndView("/usuario/usuario",
-				"usuario", new UsuarioSimples());
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuario", "usuario", new UsuarioSimples());
 
 		modelAndView.addObject("usuario", usuarioService.getUsuario(id));
 		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/login")
-	public ModelAndView usuarioLogin(
-			@RequestParam(required = false) final String errorMessage) {
+	public ModelAndView usuarioLogin(@RequestParam(required = false) final String errorMessage) {
 
-		return new ModelAndView("login")
-				.addObject("errorMessage", errorMessage);
+		return new ModelAndView("login").addObject("errorMessage", errorMessage);
 	}
 
 	/**
@@ -124,14 +136,37 @@ public class UsuarioController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
-	public String addUsuario(@ModelAttribute("usuario") final Usuario usuario,
-			final BindingResult result) throws Exception {
+	public String addUsuario(@ModelAttribute("usuario") final Usuario usuario, final BindingResult result,
+			final HttpServletRequest request) throws Exception {
 
-		usuario.setPassword(StringUtils.encodePassword(usuario.getPassword(),
-				usuario.getUsername()));
+		String plainTextPassword = usuario.getPassword();
+		String encodedPassword = StringUtils.encodePassword(plainTextPassword, usuario.getUsername());
+		usuario.setPassword(encodedPassword);
 		sindicoUserDetailsServiceImpl.criarUsuario(usuario);
 
-		return "redirect:/login";
+		/*
+		 * Início do processo de login de usuário.
+		 */
+
+		// Gera-se um token com o username e o password.
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(usuario.getUsername(),
+				plainTextPassword);
+
+		// Adquire-se uma sessão, caso não exista.
+		request.getSession();
+
+		// ?
+		token.setDetails(new WebAuthenticationDetails(request));
+
+		// Realiza a autenticação do usuário e o insere no contexto.
+		Authentication authenticatedUser = authenticationManager.authenticate(token);
+		SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+
+		/*
+		 * Fim do processo de login de usuário.
+		 */
+
+		return "redirect:/index";
 	}
 
 }

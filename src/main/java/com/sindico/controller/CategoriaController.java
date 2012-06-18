@@ -24,25 +24,23 @@ public class CategoriaController {
 
 	/** The categoria service. */
 	@Autowired
-	private CategoriaService	categoriaService;
+	private CategoriaService categoriaService;
 
 	/**
 	 * Index categoria.
 	 * 
 	 * @return the model and view
 	 */
-	@SuppressWarnings("unchecked")
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/lista")
+	@RequestMapping(method = RequestMethod.GET, value = "/listaCategorias")
 	public ModelAndView indexCategoria() {
-		ModelAndView modelAndView = new ModelAndView("/categoria/categorias",
-				"categoria", new Categoria());
-		PagedListHolder<Categoria> pagedListHolder = new PagedListHolder<Categoria>(
-				categoriaService.listCategorias());
+		ModelAndView modelAndView = new ModelAndView("/categoria/categorias", "categoria", new Categoria());
+		PagedListHolder<Categoria> pagedListHolder = new PagedListHolder<Categoria>(categoriaService.listCategorias());
 		pagedListHolder.setPageSize(20);
 
 		List<Categoria> pagedListCategorias = pagedListHolder.getPageList();
 
 		modelAndView.addObject("categorias", pagedListCategorias);
+		modelAndView.setViewName("listaCategorias");
 
 		return modelAndView;
 	}
@@ -54,12 +52,12 @@ public class CategoriaController {
 	 *            the id
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/mostra")
+	@RequestMapping(method = RequestMethod.GET, value = "/mostraCategoria")
 	public ModelAndView showCategoria(final Long id) {
-		ModelAndView modelAndView = new ModelAndView("/categoria/categoria",
-				"categoria", new Categoria());
+		ModelAndView modelAndView = new ModelAndView("/categoria/categoria", "categoria", new Categoria());
 
 		modelAndView.addObject("categoria", categoriaService.getCategoria(id));
+		modelAndView.setViewName("mostraCategoria");
 		return modelAndView;
 	}
 
@@ -68,10 +66,11 @@ public class CategoriaController {
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/cria")
+	@RequestMapping(method = RequestMethod.GET, value = "/criaCategoria")
 	public ModelAndView newCategoria() {
-		ModelAndView modelAndView = new ModelAndView(
-				"/categoria/criaCategoria", "categoria", new Categoria());
+		ModelAndView modelAndView = new ModelAndView("/categoria/criaCategoria", "categoria", new Categoria());
+
+		modelAndView.setViewName("criaCategoria");
 
 		return modelAndView;
 	}
@@ -85,13 +84,14 @@ public class CategoriaController {
 	 *            the result
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.POST, value = "/categoria/cria")
-	public ModelAndView createCategoria(
-			@ModelAttribute("categoria") final Categoria categoria,
+	@RequestMapping(method = RequestMethod.POST, value = "/criaCategoria")
+	public ModelAndView createCategoria(@ModelAttribute("categoria") final Categoria categoria,
 			final BindingResult result) {
 		categoriaService.createCategoria(categoria);
 
-		return new ModelAndView("/categoria/categoria", "categoria", categoria);
+		ModelAndView modelAndView = new ModelAndView("/categoria/categoria", "categoria", categoria);
+		modelAndView.setViewName("mostraCategoria");
+		return modelAndView;
 	}
 
 	/**
@@ -101,12 +101,13 @@ public class CategoriaController {
 	 *            the id
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/edita")
+	@RequestMapping(method = RequestMethod.GET, value = "/editaCategoria")
 	public ModelAndView editCategoria(final Long id) {
 		Categoria categoria = categoriaService.getCategoria(id);
 
-		return new ModelAndView("/categoria/editaCategoria", "categoria",
-				categoria);
+		ModelAndView modelAndView = new ModelAndView("/categoria/editaCategoria", "categoria", categoria);
+		modelAndView.setViewName("editaCategoria");
+		return modelAndView;
 	}
 
 	/**
@@ -116,13 +117,15 @@ public class CategoriaController {
 	 *            the categoria
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.POST, value = "/categoria/edita")
+	@RequestMapping(method = RequestMethod.POST, value = "/editaCategoria")
 	public ModelAndView updateCategoria(final Categoria categoria) {
 		System.out.println(categoria.getNome());
 		System.out.println(categoria.getCodigo());
 		categoriaService.updateCategoria(categoria);
+		ModelAndView modelAndView = new ModelAndView("/categoria/editaCategoria", "categoria", categoria);
+		modelAndView.setViewName("mostraCategoria");
 
-		return new ModelAndView("/categoria/categoria", "categoria", categoria);
+		return modelAndView;
 	}
 
 	/**
@@ -132,11 +135,13 @@ public class CategoriaController {
 	 *            the categoria
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/deleta")
+	@RequestMapping(method = RequestMethod.GET, value = "/deletaCategoria")
 	public ModelAndView destroyCategoria(final Long id) {
 		categoriaService.removeCategoria(id);
 
-		return new ModelAndView("/categoria/categorias", "categorias",
+		ModelAndView modelAndView = new ModelAndView("/categoria/categorias", "categorias",
 				categoriaService.listCategorias());
+		modelAndView.setViewName("listaCategorias");
+		return modelAndView;
 	}
 }
