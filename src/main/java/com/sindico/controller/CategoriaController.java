@@ -101,7 +101,7 @@ public class CategoriaController {
 	 *            the id
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/categoria/edita")
+	@RequestMapping(method = RequestMethod.GET, value = "/editaCategoria")
 	public ModelAndView editCategoria(final Long id) {
 		Categoria categoria = categoriaService.getCategoria(id);
 

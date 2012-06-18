@@ -15,6 +15,7 @@ import javax.xml.bind.Unmarshaller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sindico.entity.Cep;
@@ -38,6 +39,7 @@ public class CepController {
 	 *             the malformed url exception
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/cep")
+	@ResponseBody
 	public HttpServletResponse recuperaCEP(final HttpServletRequest req,
 			final HttpServletResponse response) throws JAXBException,
 			MalformedURLException {
