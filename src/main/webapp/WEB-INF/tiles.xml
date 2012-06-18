@@ -30,7 +30,7 @@
 	
 	<definition name="index" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com" />
-		<put-attribute name="body" value="/index.jsp" />
 	</definition>
+	
 </tiles-definitions>
 

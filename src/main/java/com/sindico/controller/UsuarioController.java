@@ -43,6 +43,16 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/")
+	public ModelAndView usuarioIndexForm() {
+		ModelAndView modelAndView = new ModelAndView("index", "usuario",
+				new Usuario());
+
+		modelAndView.addObject("tipos", TipoUsuario.values());
+
+		return modelAndView;
+	}
+
 	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista")
 	public ModelAndView indexUsuario() {
 		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
@@ -131,7 +141,10 @@ public class UsuarioController {
 				usuario.getUsername()));
 		sindicoUserDetailsServiceImpl.criarUsuario(usuario);
 
-		return "redirect:/login";
+		// Loga o usuário.
+		sindicoUserDetailsServiceImpl.loadUserByUsername(usuario.getUsername());
+
+		return "redirect:/index";
 	}
 
 }
