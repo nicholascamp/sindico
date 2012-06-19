@@ -252,7 +252,7 @@ public class FornecedorController {
 	 *            the fornecedor
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.DELETE, value = "/fornecedor/deleta")
+	@RequestMapping(method = RequestMethod.GET, value = "/fornecedor/deleta")
 	public ModelAndView destroyFornecedor(final Fornecedor fornecedor) {
 		fornecedorService.removerFornecedor(fornecedor.getCodigo());
 

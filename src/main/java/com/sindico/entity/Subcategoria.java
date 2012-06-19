@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.NotNull;
@@ -20,6 +21,14 @@ import org.hibernate.validator.NotNull;
 @Entity
 @Table(name = "SUBCATEGORIA")
 public class Subcategoria {
+
+	public Collection<Cotacao> getCotacoes() {
+		return cotacoes;
+	}
+
+	public void setCotacoes(Collection<Cotacao> cotacoes) {
+		this.cotacoes = cotacoes;
+	}
 
 	/** The codigo. */
 	@Id
@@ -44,6 +53,9 @@ public class Subcategoria {
 
 	@ManyToMany(mappedBy = "subcategorias")
 	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
+	
+	@OneToMany(mappedBy = "subcategoria")
+	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
 
 	/**
 	 * Gets the codigo.

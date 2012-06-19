@@ -40,19 +40,19 @@ public class CotacaoController {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/cotacao/lista")
 	public ModelAndView indexCotacao(){
-		ModelAndView mv = new ModelAndView("/cotacoes", "cotacoes", cotacaoService.listCotacoes());
+		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes", cotacaoService.listCotacoes());
 		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/cotacao/mostra")
 	public ModelAndView showCotacao(Long id){
-		ModelAndView mv = new ModelAndView("/cotacao", "cotacao", cotacaoService.getCotacao(id));
+		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.getCotacao(id));
 		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/cotacao/cria")
 	public ModelAndView newCotacao(){
-		ModelAndView mv = new ModelAndView("/criaCotacao", "cotacao", new Cotacao());
+		ModelAndView mv = new ModelAndView("/cotacao/criaCotacao", "cotacao", new Cotacao());
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		return mv;
 	}
@@ -66,27 +66,27 @@ public class CotacaoController {
 		// COMO ACHAR O GERENTE DA ADMINISTRADORA
 		// COMO ACHAR O USUARIO
 		
-		ModelAndView mv = new ModelAndView("/cotacao", "cotacao", cotacaoService.criarCotacao(cotacao));
+		ModelAndView mv = new ModelAndView("cotacao/cotacao", "cotacao", cotacaoService.criarCotacao(cotacao));
 		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/cotacao/edita")
 	public ModelAndView editCotacao(Long id){
-		ModelAndView mv = new ModelAndView("/editaCotacao", "cotacao", cotacaoService.getCotacao(id));
+		ModelAndView mv = new ModelAndView("/cotacao/editaCotacao", "cotacao", cotacaoService.getCotacao(id));
 		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/cotacao/edita")
 	public ModelAndView updateCotacao(@ModelAttribute("cotacao") Cotacao cotacao){
 		cotacao.setDataAtualizacao(new Date());
-		ModelAndView mv = new ModelAndView("/cotacao", "cotacao", cotacaoService.atualizarCotacao(cotacao));
+		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.atualizarCotacao(cotacao));
 		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/cotacao/deleta")
 	public ModelAndView destroyCotacao(Long id){
 		cotacaoService.removerCotacao(id);
-		ModelAndView mv = new ModelAndView("/cotacoes", "cotacoes", cotacaoService.listCotacoes());
+		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes", cotacaoService.listCotacoes());
 		return mv;
 	}
 	
