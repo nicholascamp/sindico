@@ -47,7 +47,7 @@ public class UsuarioController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastro")
 	public ModelAndView usuarioForm() {
-		ModelAndView modelAndView = new ModelAndView("cadastro", "usuario", new Usuario());
+		ModelAndView modelAndView = new ModelAndView("/usuario/criaUsuario", "usuario", new Usuario());
 
 		modelAndView.addObject("tipos", TipoUsuario.values());
 
