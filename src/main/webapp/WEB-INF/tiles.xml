@@ -24,16 +24,19 @@
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/categoria/categorias.jsp" />
 	</definition>
+	
 	<definition name="mostraCategoria" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com - Categorias" />
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/categoria/categoria.jsp" />
 	</definition>
+	
 	<definition name="criaCategoria" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com - Categorias" />
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/categoria/criaCategoria.jsp" />
 	</definition>
+	
 	<definition name="editaCategoria" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com - Categorias" />
 		<put-attribute name="body"
@@ -48,10 +51,124 @@
 			value="/WEB-INF/jsp/subcategoria/subcategorias.jsp" />
 	</definition>
 
+	<definition name="mostraSubcategoria" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Subcategorias" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/subcategoria/subcategoria.jsp" />
+	</definition>
+	
+	<definition name="criaSubcategoria" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Subcategorias" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/subcategoria/criaSubcategoria.jsp" />
+	</definition>
+	
+	<definition name="editaSubcategoria" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Subcategorias" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/subcategoria/editaSubcategoria.jsp" />
+	</definition>
+
 	<!-- Fornecedor -->
+
+	<definition name="listaFornecedores" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Fornecedores" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/fornecedor/fornecedores.jsp" />
+	</definition>
+
+	<definition name="mostraFornecedor" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Fornecedores" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/fornecedor/fornecedor.jsp" />
+	</definition>
+	
+	<definition name="criaFornecedor" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Fornecedores" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/fornecedor/criaFornecedor.jsp" />
+	</definition>
+	
+	<definition name="editaFornecedor" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Fornecedores" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/fornecedor/editaFornecedor.jsp" />
+	</definition>
+
 	<!-- Prédio -->
+	<definition name="listaPredios" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Predios" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/predio/predios.jsp" />
+	</definition>
+
+	<definition name="mostraPredio" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Predios" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/predio/predio.jsp" />
+	</definition>
+	
+	<definition name="criaPredio" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Predios" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/predio/criaPredio.jsp" />
+	</definition>
+	
+	<definition name="editaPredio" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Predios" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/predio/editaPredio.jsp" />
+	</definition>
+
 	<!-- Usuário -->
+	<definition name="listaUsuarios" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Usuarios" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/usuario/usuarios.jsp" />
+	</definition>
+
+	<definition name="mostraUsuario" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Usuarios" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/usuario/usuario.jsp" />
+	</definition>
+	
+	<definition name="criaUsuario" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Usuarios" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/usuario/criaUsuario.jsp" />
+	</definition>
+	
+	<definition name="editaUsuario" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Usuarios" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/usuario/editaUsuario.jsp" />
+	</definition>
+	
 	<!-- Administradora -->
+	<definition name="listaAdministradoras" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Administradoras" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/administradora/administradoras.jsp" />
+	</definition>
+
+	<definition name="mostraAdministradora" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Administradoras" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/administradora/administradora.jsp" />
+	</definition>
+	
+	<definition name="criaAdministradora" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Administradoras" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/administradora/criaAdministradora.jsp" />
+	</definition>
+	
+	<definition name="editaAdministradora" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Administradoras" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/administradora/editaAdministradora.jsp" />
+	</definition>
 
 
 

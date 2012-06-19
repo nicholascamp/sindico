@@ -22,14 +22,6 @@ import org.hibernate.validator.NotNull;
 @Table(name = "SUBCATEGORIA")
 public class Subcategoria {
 
-	public Collection<Cotacao> getCotacoes() {
-		return cotacoes;
-	}
-
-	public void setCotacoes(Collection<Cotacao> cotacoes) {
-		this.cotacoes = cotacoes;
-	}
-
 	/** The codigo. */
 	@Id
 	@GeneratedValue
@@ -40,12 +32,7 @@ public class Subcategoria {
 	@ManyToOne
 	@JoinColumn(name = "CATEGORIA_ID")
 	@NotNull(message = "Subcategoria deve pertencer a uma Categoria")
-	private Categoria				categoria;										// Pode
-																					// ter
-																					// mais
-																					// de
-																					// uma
-																					// categoria
+	private Categoria				categoria;
 
 	/** The title. */
 	@Column(name = "TITLE", length = 200, nullable = false, unique = true)
@@ -53,9 +40,9 @@ public class Subcategoria {
 
 	@ManyToMany(mappedBy = "subcategorias")
 	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
-	
+
 	@OneToMany(mappedBy = "subcategoria")
-	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	private Collection<Cotacao>		cotacoes		= new ArrayList<Cotacao>();
 
 	/**
 	 * Gets the codigo.
@@ -120,6 +107,14 @@ public class Subcategoria {
 
 	public Collection<Fornecedor> getFornecedores() {
 		return fornecedores;
+	}
+
+	public Collection<Cotacao> getCotacoes() {
+		return cotacoes;
+	}
+
+	public void setCotacoes(final Collection<Cotacao> cotacoes) {
+		this.cotacoes = cotacoes;
 	}
 
 	/*

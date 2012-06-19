@@ -18,7 +18,6 @@ import org.hibernate.validator.NotNull;
 
 import com.sindico.enums.Status;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Cotacao.
  */
@@ -35,12 +34,12 @@ public class Cotacao {
 	/** The data. */
 	@Column(name = "DATA")
 	private Date					data;
-	
+
 	@Column(name = "DATA_ATUALIZACAO")
-	private Date dataAtualizacao;
+	private Date					dataAtualizacao;
 
 	/** The subcategoria. */
-	@ManyToOne(optional = false)
+	@ManyToOne
 	@JoinColumn(name = "SUBCATEGORIA_ID")
 	@NotNull
 	private Subcategoria			subcategoria;
@@ -65,9 +64,7 @@ public class Cotacao {
 
 	/** The fornecedores. */
 	@ManyToMany
-	@JoinTable(name = "COTACAO_FORNECEDOR", joinColumns = @JoinColumn(
-			name = "COTACAO_ID"), inverseJoinColumns = @JoinColumn(
-			name = "FORNECEDOR_ID"))
+	@JoinTable(name = "COTACAO_FORNECEDOR")
 	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
 
 	/** The fornecedor vencedor. */
@@ -75,7 +72,7 @@ public class Cotacao {
 	@JoinColumn(name = "FORNECEDOR_ID")
 	private Fornecedor				fornecedorVencedor;
 
-	@Column(name = "TITULO", columnDefinition = "TEXT", nullable = false)
+	@Column(name = "TITULO", nullable = false)
 	private String					titulo;
 
 	public String getTitulo() {
@@ -90,10 +87,10 @@ public class Cotacao {
 		return dataAtualizacao;
 	}
 
-	public void setDataAtualizacao(Date dataAtualizacao) {
+	public void setDataAtualizacao(final Date dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
 	}
-	
+
 	/**
 	 * Gets the codigo.
 	 * 

@@ -81,7 +81,7 @@ public class CotacaoDAO {
 	public List<Cotacao> getLista() {
 		List<Cotacao> cotacao = new ArrayList<Cotacao>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"SELECT cotacao FROM Cotacao cotacao");
+				"select cotacao from Cotacao cotacao");
 		cotacao = query.list();
 
 		return cotacao;
