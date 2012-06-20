@@ -18,25 +18,25 @@
 	<h1>FORNECEDORES</h1>
 	<div>
 		<br>
-		<form:form action="<c:url value="/listaFornecedoresPorNome" />" method="GET"
+		<form:form action="/sindico/listaFornecedoresPorNome" method="GET"
 			commandName="fornecedor">
 				Buscar Por Nome: <form:input path="nome" />
 			<input type="submit" value="Buscar Fornecedores" />
 		</form:form>
 		<br>
-		<form:form action="<c:url value="/listaFornecedoresPorEndereco" />" method="GET"
+		<form:form action="/sindico/listaFornecedoresPorEndereco" method="GET"
 			commandName="fornecedor">
 				Buscar Por Endereco: <form:input path="endereco" />
 			<input type="submit" value="Buscar Fornecedores" />
 		</form:form>
 		<br>
-		<form:form action="<c:url value="/listaFornecedoresPorEmail" />" method="GET"
+		<form:form action="/sindico/listaFornecedoresPorEmail" method="GET"
 			commandName="fornecedor">
 				Buscar Por Email: <form:input path="email" />
 			<input type="submit" value="Buscar Fornecedores" />
 		</form:form>
 		<br>
-		<form:form action="<c:url value="/listaFornecedoresPorCNPJ" />" method="GET"
+		<form:form action="/sindico/listaFornecedoresPorCNPJ" method="GET"
 			commandName="fornecedor">
 				Buscar Por CNPJ: <form:input path="cnpj" />
 			<input type="submit" value="Buscar Fornecedores" />

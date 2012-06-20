@@ -61,7 +61,7 @@
 			</tr>
 		</table>
 		<div>
-			<a href="/sindico/cotacao/lista" title="Lista Cotações">Listar Cotações</a>
+			<a href="<c:url value='/listaCotacoes' />" title="Lista Cotações">Listar Cotações</a>
 		</div>
 	</body>
 </html>

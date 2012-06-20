@@ -7,70 +7,61 @@
 <title>Sindico.com</title>
 </head>
 <body>
-	<form:form action="<c:url value='/listaPrediosPorNome' />" method="GET"
+
+	<form:form action="/sindico/listaPrediosPorNome" method="GET"
 		commandName="predio">
 		Buscar Por Nome: <form:input path="nome" />
 		<input type="submit" value="Buscar Predios" />
 	</form:form>
-	<form:form action="<c:url value='/listaPrediosPorEndereco' />" method="GET"
-		commandName="predio">
+	<form:form action="/sindico/listaPrediosPorEndereco"
+		method="GET" commandName="predio">
 		Buscar Por Endereço: <form:input path="endereco" />
 		<input type="submit" value="Buscar Predios" />
 	</form:form>
-	<center>
-		<table style="border-collapse: collapse;" width="500" border="1"
-			bordercolor="#006699">
-			<tbody>
-				<tr bgcolor="lightblue">
-					<th>Nome</th>
-					<th>CNPJ</th>
-					<th>Endereço</th>
-					<th>Nro de Aptos</th>
-					<th>Tipo</th>
-					<th>Gerente</th>
-					<th>Recebe Cotação ?</th>
-					<th></th>
-				</tr>
-				<c:if test="${! empty predios}">
-					<c:forEach var="predio" items="${predios}">
-						<tr>
-							<td><c:out value="${predio.nome}"></c:out></td>
-							<td><c:out value="${predio.cnpj}"></c:out></td>
-							<td><c:out value="${predio.endereco}"></c:out></td>
-							<td><c:out value="${predio.numeroApartamentos}"></c:out></td>
-							<td><c:out value="${predio.tipo}"></c:out></td>
-							<td><c:if test="${!empty predio.gerente} }">
-									<c:out value="${predio.gerente.nome}" />
-								</c:if> <c:if test="${empty predio.gerente} }">
-									<c:out value="Não Possui Gerente" />
-								</c:if></td>
-							<td><c:out value="${predio.gerenteRecebeCotacao}"></c:out></td>
-							<td><a href="<c:url value="/editaPredio" var="Editar">
-								<c:param name="id" value="${predio.id}" />
-							</c:url>">Editar</a>
-								<a
-								href="javascript:deleteEntity('deleta?id=${predio.id}');">Deletar</a></td>
-
-						</tr>
-					</c:forEach>
-				</c:if>
-				<c:if test="${empty predios}">
+	<div>
+		<table style="margin: 10px;">
+			<tr>
+				<th>Nome</th>
+				<th>Consultar</th>
+				<th>Editar</th>
+				<th>Deletar</th>
+			</tr>
+			<c:if test="${! empty predios}">
+				<c:forEach items="${predios }" var="predio">
 					<tr>
-						<td colspan="7" align="center">Nenhum prédio encontrado</td>
+						<td>${predio.nome }</td>
+						<td><c:url value="/mostraPredio" var="Consultar">
+								<c:param name="id" value="${predio.id}" />
+							</c:url> <a href="${Consultar}" title="Consulta Predio">Consultar</a></td>
+						<td><c:url value="/editaPredio" var="Editar">
+								<c:param name="id" value="${predio.id}" />
+							</c:url> <a href="${Editar}" title="Editar Categoria">Editar</a></td>
+						<td><c:url value="/deletaPredio" var="Deletar">
+								<c:param name="id" value="${predio.id}" />
+							</c:url> <a href="javascript:deleteEntity('${Deletar }');"
+							title="Deletar Prédio">Deletar</a></td>
 					</tr>
-				</c:if>
-			</tbody>
+				</c:forEach>
+			</c:if>
 		</table>
-		<a href="<c:url value='/criaPredio' />">Novo Prédio</a>
-		<!-- 		<div class="paging"> -->
-		<%-- 			<c:if test="${!predios.firstPage}"> --%>
-		<!-- 				<a href="predios.html?page=previous"><b>&lt;&lt; Prev</b></a> -->
-		<!--             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-		<%--           </c:if> --%>
-		<%-- 			<c:if test="${!predios.lastPage}"> --%>
-		<!-- 				<a href="predios.html?page=next"><b>Next &gt;&gt;</b></a> -->
-		<%-- 			</c:if> --%>
-		<!-- 		</div> -->
+		<c:if test="${empty predios}">
+			<p>Nenhum predio encontrado</p>
+		</c:if>
+	</div>
+	<div>
+		<a href="<c:url value="/criaPredio"/>" title="Criar Prédio">Novo
+			Prédio</a>
+	</div>
+
+	<!-- 		<div class="paging"> -->
+	<%-- 			<c:if test="${!predios.firstPage}"> --%>
+	<!-- 				<a href="predios.html?page=previous"><b>&lt;&lt; Prev</b></a> -->
+	<!--             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+	<%--           </c:if> --%>
+	<%-- 			<c:if test="${!predios.lastPage}"> --%>
+	<!-- 				<a href="predios.html?page=next"><b>Next &gt;&gt;</b></a> -->
+	<%-- 			</c:if> --%>
+	<!-- 		</div> -->
 
 	</center>
 

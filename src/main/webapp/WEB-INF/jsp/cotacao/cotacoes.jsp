@@ -27,19 +27,19 @@
 						<tr>
 							<td>${cotacao.codigo }</td>
 							<td>
-								<c:url value="/cotacao/mostra" var="Consultar">
+								<c:url value="/mostraCotacao" var="Consultar">
 									<c:param name="id" value="${cotacao.codigo}" />
 								</c:url>
 								<a href="${Consultar}" title="Consulta Cotação">Consultar</a>
 							</td>
 							<td>
-								<c:url value="/cotacao/edita"  var="Editar">
+								<c:url value="/editaCotacao"  var="Editar">
 									<c:param name="id" value="${cotacao.codigo}" />
 								</c:url>
 								<a href="${Editar}" title="Editar Cotação">Editar</a>
 							</td>
 							<td>
-								<c:url value="deleta" var="Deletar" >
+								<c:url value="/deletaCotacao" var="Deletar" >
 									<c:param name="id" value="${cotacao.codigo}" />
 								</c:url>
 								<a id="delete" href="javascript:deleteEntity('${Deletar }');" title="Deletar Cotação">Deletar</a>
@@ -53,7 +53,7 @@
 			</c:if>
 		</div>
 		<div>
-			<a href="/sindico/cotacao/cria" title="Criar Cotação">Nova Cotação</a>
+			<a href="<c:url value='/criaCotacao' />" title="Criar Cotação">Nova Cotação</a>
 		</div>
 	</body>
 </html>

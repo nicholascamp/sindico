@@ -14,52 +14,63 @@ import com.sindico.service.AdministradoraService;
 @Controller
 @SessionAttributes
 public class AdministradoraController {
-	
+
 	@Autowired
 	AdministradoraService administradoraService;
-	
-	@RequestMapping(method=RequestMethod.GET, value = "/administradora/lista")
-	public ModelAndView indexAdministradora(){
-		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras", administradoraService.listAdministradoras());
+
+	@RequestMapping(method = RequestMethod.GET, value = "/listaAdministradoras")
+	public ModelAndView indexAdministradora() {
+		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras",
+				administradoraService.listAdministradoras());
+		mv.setViewName("listaAdministradoras");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value = "/administradora/mostra")
-	public ModelAndView showAdministradora(Long id){
-		ModelAndView mv = new ModelAndView("/administradora/administradora", "administradora", administradoraService.getAdministradora(id));
+
+	@RequestMapping(method = RequestMethod.GET, value = "/mostraAdministradora")
+	public ModelAndView showAdministradora(final Long id) {
+		ModelAndView mv = new ModelAndView("/administradora/administradora", "administradora",
+				administradoraService.getAdministradora(id));
+		mv.setViewName("mostraAdministradora");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value = "/administradora/cria")
-	public ModelAndView newAdministradora(){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/criaAdministradora")
+	public ModelAndView newAdministradora() {
 		ModelAndView mv = new ModelAndView("/administradora/criaAdministradora", "administradora", new Administradora());
+		mv.setViewName("criaAdministradora");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.POST, value = "/administradora/cria")
-	public ModelAndView createAdministradora(@ModelAttribute("administradora") final Administradora administradora){
+
+	@RequestMapping(method = RequestMethod.POST, value = "/criaAdministradora")
+	public ModelAndView createAdministradora(@ModelAttribute("administradora") final Administradora administradora) {
 		administradoraService.createAdministradora(administradora);
 		ModelAndView mv = new ModelAndView("/administradora/administradora", "administradora", administradora);
+		mv.setViewName("mostraAdministradora");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value = "/administradora/edita")
-	public ModelAndView editAdministradora(Long id){
-		ModelAndView mv = new ModelAndView("/administradora/editaAdministradora", "administradora", administradoraService.getAdministradora(id));
+
+	@RequestMapping(method = RequestMethod.GET, value = "/editaAdministradora")
+	public ModelAndView editAdministradora(final Long id) {
+		ModelAndView mv = new ModelAndView("/administradora/editaAdministradora", "administradora",
+				administradoraService.getAdministradora(id));
+		mv.setViewName("editaAdministradora");
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/administradora/edita")
-	public ModelAndView updateAdministradora(@ModelAttribute("administradora") Administradora administradora){
+
+	@RequestMapping(method = RequestMethod.POST, value = "/editaAdministradora")
+	public ModelAndView updateAdministradora(@ModelAttribute("administradora") final Administradora administradora) {
 		administradoraService.updateAdministradora(administradora);
 		ModelAndView mv = new ModelAndView("/administradora/administradora", "administradora", administradora);
+		mv.setViewName("mostraAdministradora");
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/administradora/deleta")
-	public ModelAndView destroyAdministradora(Long id){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/deletaAdministradora")
+	public ModelAndView destroyAdministradora(final Long id) {
 		administradoraService.removeAdministradora(id);
-		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras", administradoraService.listAdministradoras());
+		ModelAndView mv = new ModelAndView("/administradora/administradoras", "administradoras",
+				administradoraService.listAdministradoras());
+		mv.setViewName("listaAdministradoras");
 		return mv;
 	}
 }

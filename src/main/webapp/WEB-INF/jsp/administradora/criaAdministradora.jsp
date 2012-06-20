@@ -15,7 +15,7 @@
 	<title>Sindico.com</title>
 </head>
 <body>
-	<form:form commandName="administradora" action="cria" method="POST">
+	<form:form commandName="administradora" action="/sindico/criaAdministradora" method="POST">
 		<table>
 			<tr>
 				<td>Nome:</td>

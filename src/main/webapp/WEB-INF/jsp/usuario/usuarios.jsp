@@ -18,13 +18,13 @@
 	<h1>USUARIOS</h1>
 	<div>
 		<br>
-		<form:form action="/sindico/usuario/lista/nome" method="GET"
+		<form:form action="/sindico/listaUsuariosPorNome" method="GET"
 			commandName="usuario">
 				Buscar Por Nome: <form:input path="nome" />
 			<input type="submit" value="Buscar Usuarios" />
 		</form:form>
 		<br>
-		<form:form action="/sindico/usuario/lista/email" method="GET"
+		<form:form action="/sindico/listaUsuariosPorEmail" method="GET"
 			commandName="usuario">
 				Buscar Por Email: <form:input path="email" />
 			<input type="submit" value="Buscar Usuarios" />
@@ -42,7 +42,7 @@
 				<c:forEach items="${usuarios }" var="usuario">
 					<tr>
 						<td>${usuario.nome }</td>
-						<td><c:url value="/usuario/mostra" var="Consultar">
+						<td><c:url value="/mostraUsuario" var="Consultar">
 								<c:param name="id" value="${usuario.id}" />
 							</c:url> <a href="${Consultar}" title="Consulta Usuario">Consultar</a>
 						</td>

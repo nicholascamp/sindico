@@ -71,6 +71,6 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<a href="/sindico/administradora/lista" title="Listar Administradora">Listar Administradoras</a>
+		<a href="<c:url value='/listaAdministradoras' />" title="Listar Administradora">Listar Administradoras</a>
 	</body>
 </html>

@@ -15,7 +15,7 @@
 	<title>Sindico.com</title>
 </head>
 <body>
-	<form:form commandName="cotacao" action="cria" method="POST">
+	<form:form commandName="cotacao" action="/sindico/criaCotacao" method="POST">
 		<table>
 			<tr>
 				<td>Subcategoria:</td>

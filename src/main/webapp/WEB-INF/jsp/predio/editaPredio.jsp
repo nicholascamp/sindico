@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<form:form commandName="predio" method="put" action="/predio/edita">
+	<form:form commandName="predio" method="put" action="/sindico/editaPredio">
 	Nome: <br />
 		<form:input path="nome" />
 		<br />
@@ -61,7 +61,7 @@
 		<input type="submit" value="Atualizar Predio" />
 	</form:form>
 	
-	<a href="/sindico/predio/lista.html">Cancelar</a>
+	<a href="<c:url value='/listaPredios' />">Cancelar</a>
 
 </body>
 </html>

@@ -12,8 +12,8 @@
 	</head>
 	<body>
 		<div>
-			<a href="/administradora/cria">Criar Administradora</a>
-			<a href="/gerente/cria" title="Criar Gerente de Administradora">Criar Gerente</a>
+			<a href="<c:url value='/criaAdministradora' />">Criar Administradora</a>
+			<a href="<c:url value='/criaGerente' />" title="Criar Gerente de Administradora">Criar Gerente</a>
 		</div>
 	</body>
 </html>

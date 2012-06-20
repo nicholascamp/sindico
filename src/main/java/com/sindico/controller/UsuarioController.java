@@ -36,20 +36,19 @@ import com.sindico.utils.StringUtils;
 public class UsuarioController {
 
 	@Autowired
-	private SindicoUserDetailsServiceImpl	sindicoUserDetailsServiceImpl;
+	private SindicoUserDetailsServiceImpl sindicoUserDetailsServiceImpl;
 
 	@Autowired
 	@Qualifier("org.springframework.security.authenticationManager")
-	protected AuthenticationManager			authenticationManager;
+	protected AuthenticationManager authenticationManager;
 
 	@Autowired
-	private UsuarioService					usuarioService;
+	private UsuarioService usuarioService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastro")
 	public ModelAndView usuarioForm() {
 
-		ModelAndView modelAndView = new ModelAndView("/usuario/criaUsuario",
-				"usuario", new Usuario());
+		ModelAndView modelAndView = new ModelAndView("/usuario/criaUsuario", "usuario", new Usuario());
 
 		modelAndView.addObject("tipos", TipoUsuario.values());
 		modelAndView.setViewName("cadastro");
@@ -59,33 +58,30 @@ public class UsuarioController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	public ModelAndView usuarioIndexForm() {
-		ModelAndView modelAndView = new ModelAndView("index", "usuario",
-				new Usuario());
+		ModelAndView modelAndView = new ModelAndView("index", "usuario", new Usuario());
 
 		modelAndView.addObject("tipos", TipoUsuario.values());
 
 		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista")
+	@RequestMapping(method = RequestMethod.GET, value = "/listaUsuarios")
 	public ModelAndView indexUsuario() {
-		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
-				"usuario", new UsuarioSimples());
-		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(
-				usuarioService.getLista());
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios", "usuario", new UsuarioSimples());
+		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(usuarioService.getLista());
 		pagedListHolder.setPageSize(20);
 
 		List<UsuarioSimples> pagedListUsuarios = pagedListHolder.getPageList();
 
 		modelAndView.addObject("usuarios", pagedListUsuarios);
+		modelAndView.setViewName("listaUsuarios");
 
 		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista/nome")
+	@RequestMapping(method = RequestMethod.GET, value = "/listaUsuariosPorNome")
 	public ModelAndView indexUsuarioNome(@RequestParam final String nome) {
-		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
-				"usuario", new UsuarioSimples());
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios", "usuario", new UsuarioSimples());
 		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(
 				usuarioService.getUsuarioNome(nome));
 		pagedListHolder.setPageSize(20);
@@ -93,14 +89,14 @@ public class UsuarioController {
 		List<UsuarioSimples> pagedListUsuarios = pagedListHolder.getPageList();
 
 		modelAndView.addObject("usuarios", pagedListUsuarios);
+		modelAndView.setViewName("listaUsuarios");
 
 		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista/email")
+	@RequestMapping(method = RequestMethod.GET, value = "/listaUsuariosPorEmail")
 	public ModelAndView indexUsuarioEmail(@RequestParam final String email) {
-		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
-				"usuario", new UsuarioSimples());
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios", "usuario", new UsuarioSimples());
 		PagedListHolder<UsuarioSimples> pagedListHolder = new PagedListHolder<UsuarioSimples>(
 				usuarioService.getUsuarioEmail(email));
 		pagedListHolder.setPageSize(20);
@@ -108,33 +104,31 @@ public class UsuarioController {
 		List<UsuarioSimples> pagedListUsuarios = pagedListHolder.getPageList();
 
 		modelAndView.addObject("usuarios", pagedListUsuarios);
+		modelAndView.setViewName("listaUsuarios");
 
 		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/usuario/admin")
-	public ModelAndView updateUsuarioAdmin(@RequestParam final Long id,
-			@RequestParam final boolean admin) {
+	public ModelAndView updateUsuarioAdmin(@RequestParam final Long id, @RequestParam final boolean admin) {
 		ModelAndView modelAndView = new ModelAndView("/usuario/lista");
 		usuarioService.setAdmin(id, admin);
 		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/usuario/mostra")
+	@RequestMapping(method = RequestMethod.GET, value = "/mostraUsuario")
 	public ModelAndView showFornecedor(final Long id) {
-		ModelAndView modelAndView = new ModelAndView("/usuario/usuario",
-				"usuario", new UsuarioSimples());
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuario", "usuario", new UsuarioSimples());
 
 		modelAndView.addObject("usuario", usuarioService.getUsuario(id));
+		modelAndView.setViewName("mostraUsuario");
 		return modelAndView;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/login")
-	public ModelAndView usuarioLogin(
-			@RequestParam(required = false) final String errorMessage) {
+	public ModelAndView usuarioLogin(@RequestParam(required = false) final String errorMessage) {
 
-		return new ModelAndView("login")
-				.addObject("errorMessage", errorMessage);
+		return new ModelAndView("login").addObject("errorMessage", errorMessage);
 	}
 
 	/**
@@ -148,13 +142,11 @@ public class UsuarioController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
-	public String addUsuario(@ModelAttribute("usuario") final Usuario usuario,
-			final BindingResult result, final HttpServletRequest request)
-			throws Exception {
+	public String addUsuario(@ModelAttribute("usuario") final Usuario usuario, final BindingResult result,
+			final HttpServletRequest request) throws Exception {
 
 		String plainTextPassword = usuario.getPassword();
-		String encodedPassword = StringUtils.encodePassword(plainTextPassword,
-				usuario.getUsername());
+		String encodedPassword = StringUtils.encodePassword(plainTextPassword, usuario.getUsername());
 		usuario.setPassword(encodedPassword);
 		sindicoUserDetailsServiceImpl.criarUsuario(usuario);
 
@@ -163,8 +155,8 @@ public class UsuarioController {
 		 */
 
 		// Gera-se um token com o username e o password.
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-				usuario.getUsername(), plainTextPassword);
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(usuario.getUsername(),
+				plainTextPassword);
 
 		// Adquire-se uma sessão, caso não exista.
 		request.getSession();
@@ -173,8 +165,7 @@ public class UsuarioController {
 		token.setDetails(new WebAuthenticationDetails(request));
 
 		// Realiza a autenticação do usuário e o insere no contexto.
-		Authentication authenticatedUser = authenticationManager
-				.authenticate(token);
+		Authentication authenticatedUser = authenticationManager.authenticate(token);
 		SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
 
 		/*

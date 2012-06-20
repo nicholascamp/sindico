@@ -15,7 +15,56 @@
 		<h1>Predio ${predio.nome}</h1>
 		<table style="margin: 10px;">
 			<tr>
-				<td> ?</td>
+				<td>Data de cadastro:</td>
+				<td>${predio.dataCadastro }</td>
+			</tr>
+			<tr>
+				<td>Qtdade Aptos:</td>
+				<td>${predio.numeroApartamentos }</td>
+			</tr>
+			<tr>
+				<td>Tipo:</td>
+				<td>${predio.tipo }</td>
+			</tr>
+			<tr>
+				<td>Gerente:</td>
+				<td>${predio.gerente }</td>
+			</tr>
+			<tr>
+				<td>Gerente recebe cotação?:</td>
+				<td>${predio.gerenteRecebeCotacao }</td>
+			</tr>
+			<tr>
+				<td>CNPJ:</td>
+				<td>${predio.cnpj }</td>
+			</tr>
+			<tr>
+				<td>Foto:</td>
+				<td>Incluir tag de foto</td>
+			</tr>
+			<tr>
+				<td>Endereco:</td>
+				<td>${predio.endereco }</td>
+			</tr>
+			<tr>
+				<td>Numero:</td>
+				<td>${predio.numero }</td>
+			</tr>
+			<tr>
+				<td>CEP:</td>
+				<td>${predio.cep }</td>
+			</tr>
+			<tr>
+				<td>Bairro:</td>
+				<td>${predio.bairro }</td>
+			</tr>
+			<tr>
+				<td>Cidade:</td>
+				<td>${predio.cidade }</td>
+			</tr>
+			<tr>
+				<td>Estado:</td>
+				<td>${predio.estado }</td>
 			</tr>
 		</table>
 		<div>

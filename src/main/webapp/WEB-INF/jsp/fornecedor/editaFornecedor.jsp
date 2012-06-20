@@ -16,7 +16,7 @@
 </head>
 <body>
 	<h1>CRIA FORNECEDOR</h1>
-	<form:form commandName="fornecedor" method="POST" action="<c:url value="/editaFornecedor" />">
+	<form:form commandName="fornecedor" method="POST" action="/sindico/editaFornecedor" >
 		<input type="hidden" name="codigo" value="${fornecedor.codigo }" />
 		<table>
 			<tr>

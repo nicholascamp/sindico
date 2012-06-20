@@ -34,69 +34,77 @@ public class CotacaoController {
 
 	@Autowired
 	CotacaoService cotacaoService;
-	
+
 	@Autowired
 	SubcategoriaService subcategoriaService;
-	
-	@RequestMapping(method=RequestMethod.GET, value="/cotacao/lista")
-	public ModelAndView indexCotacao(){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/listaCotacoes")
+	public ModelAndView indexCotacao() {
 		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes", cotacaoService.listCotacoes());
+		mv.setViewName("listaCotacoes");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value="/cotacao/mostra")
-	public ModelAndView showCotacao(Long id){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/mostraCotacao")
+	public ModelAndView showCotacao(final Long id) {
 		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.getCotacao(id));
+		mv.setViewName("mostraCotacao");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value="/cotacao/cria")
-	public ModelAndView newCotacao(){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/criaCotacao")
+	public ModelAndView newCotacao() {
 		ModelAndView mv = new ModelAndView("/cotacao/criaCotacao", "cotacao", new Cotacao());
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
+		mv.setViewName("criaCotacao");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.POST, value="/cotacao/cria")
-	public ModelAndView createCotacao(@ModelAttribute("cotacao") Cotacao cotacao){
+
+	@RequestMapping(method = RequestMethod.POST, value = "/criaCotacao")
+	public ModelAndView createCotacao(@ModelAttribute("cotacao") final Cotacao cotacao) {
 		cotacao.setData(new Date());
 		cotacao.setStatus(Status.ABERTO);
 		cotacao.setImpropria(false);
 		cotacao.setDataAtualizacao(new Date());
 		// COMO ACHAR O GERENTE DA ADMINISTRADORA
 		// COMO ACHAR O USUARIO
-		
+
 		ModelAndView mv = new ModelAndView("cotacao/cotacao", "cotacao", cotacaoService.criarCotacao(cotacao));
+		mv.setViewName("mostraCotacao");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value="/cotacao/edita")
-	public ModelAndView editCotacao(Long id){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/editaCotacao")
+	public ModelAndView editCotacao(final Long id) {
 		ModelAndView mv = new ModelAndView("/cotacao/editaCotacao", "cotacao", cotacaoService.getCotacao(id));
+		mv.setViewName("editaCotacao");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.POST, value="/cotacao/edita")
-	public ModelAndView updateCotacao(@ModelAttribute("cotacao") Cotacao cotacao){
+
+	@RequestMapping(method = RequestMethod.POST, value = "/editaCotacao")
+	public ModelAndView updateCotacao(@ModelAttribute("cotacao") final Cotacao cotacao) {
 		cotacao.setDataAtualizacao(new Date());
 		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.atualizarCotacao(cotacao));
+		mv.setViewName("mostraCotacao");
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value="/cotacao/deleta")
-	public ModelAndView destroyCotacao(Long id){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/deletaCotacao")
+	public ModelAndView destroyCotacao(final Long id) {
 		cotacaoService.removerCotacao(id);
 		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes", cotacaoService.listCotacoes());
+		mv.setViewName("listaCotacoes");
 		return mv;
 	}
-	
+
 	@InitBinder
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-	    binder.registerCustomEditor(Subcategoria.class, "subcategoria", new PropertyEditorSupport() {
-	        public void setAsText(String id) {
-				Subcategoria subcategoria = (Subcategoria) subcategoriaService.getSubcategoria(Long.parseLong(id));
-	            setValue(subcategoria);
-	        }
-	    });
+	protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) throws Exception {
+		binder.registerCustomEditor(Subcategoria.class, "subcategoria", new PropertyEditorSupport() {
+			@Override
+			public void setAsText(final String id) {
+				Subcategoria subcategoria = subcategoriaService.getSubcategoria(Long.parseLong(id));
+				setValue(subcategoria);
+			}
+		});
 	}
 }

@@ -15,7 +15,7 @@
 	<title>Sindico.com</title>
 </head>
 <body>
-	<form:form commandName="administradora" action="edita" method="POST">
+	<form:form commandName="administradora" action="/sindico/editaAdministradora" method="POST">
 		<table>
 			<tr>
 				<td>
@@ -70,6 +70,6 @@
 			</tr>
 		</table>
 	</form:form>	
-	<a href="/sindico/administradora/lista" title="Cancelar Edição">Cancelar</a>
+	<a href="<c:url value='listaAdministradoras'/>" title="Cancelar Edição">Cancelar</a>
 </body>
 </html>
