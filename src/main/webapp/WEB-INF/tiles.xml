@@ -16,6 +16,11 @@
 	<definition name="index" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com" />
 	</definition>
+	
+	<definition name="cadastro" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com" />
+		<put-attribute name="body" value="/WEB-INF/jsp/usuario/criaUsuario.jsp" />
+	</definition>
 
 	<!-- Categoria -->
 

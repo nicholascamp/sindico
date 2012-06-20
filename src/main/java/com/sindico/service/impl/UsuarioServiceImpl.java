@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.sindico.dao.UsuarioDAO;
@@ -23,6 +24,7 @@ import com.sindico.service.UsuarioService;
 @Service("usuarioService")
 public class UsuarioServiceImpl implements UsuarioService {
 
+	/** The usuario dao. */
 	@Autowired
 	private UsuarioDAO	usuarioDAO;
 
@@ -131,6 +133,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario setAdmin(final Long id, final boolean admin) {
 		return usuarioDAO.setAdmin(id, admin);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.sindico.service.UsuarioService#getLoggedUser()
+	 */
+	@Override
+	public Usuario getLoggedUser() {
+
+		Usuario usuario = (Usuario) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+
+		return usuario;
 	}
 
 }

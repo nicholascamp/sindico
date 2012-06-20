@@ -106,4 +106,13 @@ public interface UsuarioService {
 	 */
 	@Transactional
 	public Usuario loadByUsername(final String username);
+
+	/**
+	 * Gets the logged user.
+	 * 
+	 * @return the logged user
+	 */
+	@Transactional
+	public Usuario getLoggedUser();
+
 }
