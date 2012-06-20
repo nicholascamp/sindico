@@ -24,82 +24,113 @@ import com.sindico.service.SubcategoriaService;
 public class SubcategoriaController {
 
 	@Autowired
-	SubcategoriaService subcategoriaService;
-	
+	SubcategoriaService	subcategoriaService;
+
 	@Autowired
-	CategoriaService categoriaService;
-	
-	@RequestMapping(method=RequestMethod.GET, value = "/subcategoria/lista")
-	public ModelAndView indexSubcategoria(){
-		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias", "subcategorias", subcategoriaService.listSubcategorias());
-		//mv.addObject("categorias", categoriaService.listCategorias());
-		//mv.addObject("categoria", new Categoria());
-		
+	CategoriaService	categoriaService;
+
+	@RequestMapping(method = RequestMethod.GET, value = "/listaSubcategorias")
+	public ModelAndView indexSubcategoria() {
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias",
+				"subcategorias", subcategoriaService.listSubcategorias());
+		mv.setViewName("listaSubcategorias");
+		// mv.addObject("categorias", categoriaService.listCategorias());
+		// mv.addObject("categoria", new Categoria());
+
 		return mv;
 	}
-	
-	@RequestMapping(method=RequestMethod.GET, value = "/subcategoria/mostra")
-	public ModelAndView showSubcategoria(long id){
-		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria", "subcategoria", subcategoriaService.getSubcategoria(id));
-		
+
+	@RequestMapping(method = RequestMethod.GET, value = "/mostraSubcategoria")
+	public ModelAndView showSubcategoria(final long id) {
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria",
+				"subcategoria", subcategoriaService.getSubcategoria(id));
+		mv.setViewName("mostraSubcategoria");
+
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/subcategoria/cria")
-	public ModelAndView newSubcategoria(){
-		ModelAndView mv = new ModelAndView("/subcategoria/criaSubcategoria", "subcategoria", new Subcategoria());
+
+	@RequestMapping(method = RequestMethod.GET, value = "/criaSubcategoria")
+	public ModelAndView newSubcategoria() {
+		ModelAndView mv = new ModelAndView("/subcategoria/criaSubcategoria",
+				"subcategoria", new Subcategoria());
 		mv.addObject("categorias", categoriaService.listCategorias());
-		
+
+		mv.setViewName("criaSubcategoria");
+
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/subcategoria/cria")
-	public ModelAndView createSubcategoria(@ModelAttribute("subcategoria")  Subcategoria subcategoria){
-		System.out.println(subcategoria.getCategoria().getNome());
-		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria", "subcategoria", subcategoriaService.createSubcategoria(subcategoria));
-		
+
+	@RequestMapping(method = RequestMethod.POST, value = "/criaSubcategoria")
+	public ModelAndView createSubcategoria(
+			@ModelAttribute("subcategoria") final Subcategoria subcategoria) {
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria",
+				"subcategoria",
+				subcategoriaService.createSubcategoria(subcategoria));
+
+		mv.setViewName("mostraSubcategoria");
+
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/subcategoria/edita")
-	public ModelAndView editSubcategoria(long id){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/editaSubcategoria")
+	public ModelAndView editSubcategoria(final long id) {
 		Subcategoria subcategoria = subcategoriaService.getSubcategoria(id);
-		
-		ModelAndView mv = new ModelAndView("/subcategoria/editaSubcategoria", "subcategoria", subcategoria);
+
+		ModelAndView mv = new ModelAndView("/subcategoria/editaSubcategoria",
+				"subcategoria", subcategoria);
 		mv.addObject("categorias", categoriaService.listCategorias());
-		
+
+		mv.setViewName("editaSubcategoria");
+
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/subcategoria/edita")
-	public ModelAndView updateSubcategoria(Subcategoria subcategoria){
-		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria", "subcategoria",subcategoriaService.updateSubcategoria(subcategoria));
-		
+
+	@RequestMapping(method = RequestMethod.POST, value = "/editaSubcategoria")
+	public ModelAndView updateSubcategoria(final Subcategoria subcategoria) {
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria",
+				"subcategoria",
+				subcategoriaService.updateSubcategoria(subcategoria));
+
+		mv.setViewName("mostraSubcategoria");
+
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/subcategoria/deleta")
-	public ModelAndView destroySubcategoria(long id){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/deletaSubcategoria")
+	public ModelAndView destroySubcategoria(final long id) {
 		subcategoriaService.removeSubcategoria(id);
-		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias", "subcategorias", subcategoriaService.listSubcategorias());
-		
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias",
+				"subcategorias", subcategoriaService.listSubcategorias());
+
+		mv.setViewName("listaSubcategorias");
+
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/subcategoria/listaPorCategoria")
-	public ModelAndView showSubcategoriaPorCategoria(Categoria categoria){
-		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias", "subcategorias", subcategoriaService.listSubcategoriasPorCategoria(categoria));
-		
+
+	@RequestMapping(
+			method = RequestMethod.GET,
+			value = "/listaSubcategoriasPorCategoria")
+	public ModelAndView showSubcategoriaPorCategoria(final Categoria categoria) {
+		ModelAndView mv = new ModelAndView("/subcategoria/subcategorias",
+				"subcategorias",
+				subcategoriaService.listSubcategoriasPorCategoria(categoria));
+
+		mv.setViewName("listaSubcategorias");
+
 		return mv;
 	}
-	
+
 	@InitBinder
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-	    binder.registerCustomEditor(Categoria.class, "categoria", new PropertyEditorSupport() {
-	        public void setAsText(String id) {
-				Categoria categoria = (Categoria) categoriaService.getCategoria(Long.parseLong(id));
-	            setValue(categoria);
-	        }
-	    });
+	protected void initBinder(final HttpServletRequest request,
+			final ServletRequestDataBinder binder) throws Exception {
+		binder.registerCustomEditor(Categoria.class, "categoria",
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Categoria categoria = categoriaService
+								.getCategoria(Long.parseLong(id));
+						setValue(categoria);
+					}
+				});
 	}
 }

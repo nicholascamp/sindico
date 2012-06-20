@@ -7,12 +7,12 @@
 <title>Sindico.com</title>
 </head>
 <body>
-	<form:form action="/predio/buscarPredioPorNome" method="GET"
+	<form:form action="<c:url value='/listaPrediosPorNome' />" method="GET"
 		commandName="predio">
 		Buscar Por Nome: <form:input path="nome" />
 		<input type="submit" value="Buscar Predios" />
 	</form:form>
-	<form:form action="/predio/buscarPredioPorEndereco" method="GET"
+	<form:form action="<c:url value='/listaPrediosPorEndereco' />" method="GET"
 		commandName="predio">
 		Buscar Por Endereço: <form:input path="endereco" />
 		<input type="submit" value="Buscar Predios" />
@@ -45,7 +45,9 @@
 									<c:out value="Não Possui Gerente" />
 								</c:if></td>
 							<td><c:out value="${predio.gerenteRecebeCotacao}"></c:out></td>
-							<td><a href="edita.html?id=${predio.id}">Editar</a>
+							<td><a href="<c:url value="/editaPredio" var="Editar">
+								<c:param name="id" value="${predio.id}" />
+							</c:url>">Editar</a>
 								<a
 								href="javascript:deleteEntity('deleta?id=${predio.id}');">Deletar</a></td>
 
@@ -59,7 +61,7 @@
 				</c:if>
 			</tbody>
 		</table>
-		<a href="/sindico/predio/cria.html">Novo Prédio</a>
+		<a href="<c:url value='/criaPredio' />">Novo Prédio</a>
 		<!-- 		<div class="paging"> -->
 		<%-- 			<c:if test="${!predios.firstPage}"> --%>
 		<!-- 				<a href="predios.html?page=previous"><b>&lt;&lt; Prev</b></a> -->

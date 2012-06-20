@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<h1>CRIA SUBCATEGORIA</h1>
-		<form:form commandName="subcategoria" method="POST" action="cria">
+		<form:form commandName="subcategoria" method="POST" action="/sindico/criaSubcategoria">
 			<table>
 				<tr>
 					<td>Nome: </td>

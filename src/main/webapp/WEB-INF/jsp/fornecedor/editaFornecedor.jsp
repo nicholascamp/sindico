@@ -16,7 +16,7 @@
 </head>
 <body>
 	<h1>CRIA FORNECEDOR</h1>
-	<form:form commandName="fornecedor" method="POST" action="edita">
+	<form:form commandName="fornecedor" method="POST" action="<c:url value="/editaFornecedor" />">
 		<input type="hidden" name="codigo" value="${fornecedor.codigo }" />
 		<table>
 			<tr>
@@ -199,6 +199,6 @@
 		</table>
 	</form:form>
 	
-	<a href="/sindico/fornecedor/lista.html">Cancelar</a>
+	<a href="<c:url value="/listaFornecedores" />">Cancelar</a>
 </body>
 </html>

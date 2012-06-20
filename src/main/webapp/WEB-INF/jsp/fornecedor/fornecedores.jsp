@@ -18,25 +18,25 @@
 	<h1>FORNECEDORES</h1>
 	<div>
 		<br>
-		<form:form action="/sindico/fornecedor/lista/nome" method="GET"
+		<form:form action="<c:url value="/listaFornecedoresPorNome" />" method="GET"
 			commandName="fornecedor">
 				Buscar Por Nome: <form:input path="nome" />
 			<input type="submit" value="Buscar Fornecedores" />
 		</form:form>
 		<br>
-		<form:form action="/sindico/fornecedor/lista/endereco" method="GET"
+		<form:form action="<c:url value="/listaFornecedoresPorEndereco" />" method="GET"
 			commandName="fornecedor">
 				Buscar Por Endereco: <form:input path="endereco" />
 			<input type="submit" value="Buscar Fornecedores" />
 		</form:form>
 		<br>
-		<form:form action="/sindico/fornecedor/lista/email" method="GET"
+		<form:form action="<c:url value="/listaFornecedoresPorEmail" />" method="GET"
 			commandName="fornecedor">
 				Buscar Por Email: <form:input path="email" />
 			<input type="submit" value="Buscar Fornecedores" />
 		</form:form>
 		<br>
-		<form:form action="/sindico/fornecedor/lista/cnpj" method="GET"
+		<form:form action="<c:url value="/listaFornecedoresPorCNPJ" />" method="GET"
 			commandName="fornecedor">
 				Buscar Por CNPJ: <form:input path="cnpj" />
 			<input type="submit" value="Buscar Fornecedores" />
@@ -55,14 +55,14 @@
 				<c:forEach items="${fornecedores }" var="fornecedor">
 					<tr>
 						<td>${fornecedor.nome }</td>
-						<td><c:url value="/fornecedor/mostra" var="Consultar">
+						<td><c:url value="/mostraFornecedor" var="Consultar">
 								<c:param name="id" value="${fornecedor.codigo}" />
 							</c:url> <a href="${Consultar}" title="Consulta Fornecedor">Consultar</a>
 						</td>
-						<td><c:url value="/fornecedor/edita" var="Editar">
+						<td><c:url value="/editaFornecedor" var="Editar">
 								<c:param name="id" value="${fornecedor.codigo}" />
 							</c:url> <a href="${Editar}" title="Editar Fornecedor">Editar</a></td>
-						<td><c:url value="deleta" var="Deletar">
+						<td><c:url value="/deletaFornecedor" var="Deletar">
 								<c:param name="id" value="${fornecedor.codigo}" />
 							</c:url> <a href="javascript:deleteEntity('${Deletar }');"
 							title="Deletar Fornecedor">Deletar</a></td>
@@ -75,7 +75,7 @@
 		</c:if>
 	</div>
 	<div>
-		<a href="/sindico/fornecedor/cria" title="Criar fornecedor">Novo
+		<a href="<c:url value="/criaFornecedor" />" title="Criar fornecedor">Novo
 			Fornecedor</a>
 	</div>
 </body>

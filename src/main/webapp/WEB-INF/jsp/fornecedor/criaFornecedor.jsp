@@ -20,7 +20,7 @@
 </head>
 <body>
 	<h1>CRIA FORNECEDOR</h1>
-	<form:form id="fornecedor" commandName="fornecedor" method="POST" action="cria">
+	<form:form id="fornecedor" commandName="fornecedor" method="POST" action="<c:url value="/criaFornecedor" />">
 		<table>
 			<tr>
 				<td>Título:</td>

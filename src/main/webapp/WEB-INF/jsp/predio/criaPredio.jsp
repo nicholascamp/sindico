@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<form:form commandName="predio" method="post" action="/sindico/predio/cria">
+	<form:form commandName="predio" method="post" action="/sindico/criaPredio">
 	Nome: <br />
 		<form:input path="nome" />
 		<br />

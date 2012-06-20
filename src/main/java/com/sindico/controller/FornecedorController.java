@@ -51,7 +51,7 @@ public class FornecedorController {
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/fornecedor/lista")
+	@RequestMapping(method = RequestMethod.GET, value = "/listaFornecedores")
 	public ModelAndView indexFornecedor() {
 		ModelAndView modelAndView = new ModelAndView(
 				"/fornecedor/fornecedores", "fornecedor", new Fornecedor());
@@ -62,6 +62,8 @@ public class FornecedorController {
 		List<Fornecedor> pagedListFornecedores = pagedListHolder.getPageList();
 
 		modelAndView.addObject("fornecedores", pagedListFornecedores);
+
+		modelAndView.setViewName("listaFornecedores");
 
 		return modelAndView;
 	}
@@ -74,7 +76,7 @@ public class FornecedorController {
 	 * @return the model and view
 	 */
 	@RequestMapping(
-			method = RequestMethod.GET, value = "/fornecedor/lista/nome")
+			method = RequestMethod.GET, value = "/listaFornecedoresPorNome")
 	public ModelAndView listFornecedorByNome(@RequestParam final String nome) {
 		ModelAndView modelAndView = new ModelAndView(
 				"/fornecedor/fornecedores", "fornecedor", new Fornecedor());
@@ -85,6 +87,8 @@ public class FornecedorController {
 		List<Fornecedor> pagedListFornecedores = pagedListHolder.getPageList();
 
 		modelAndView.addObject("fornecedores", pagedListFornecedores);
+
+		modelAndView.setViewName("listaFornecedores");
 
 		return modelAndView;
 	}
@@ -97,7 +101,7 @@ public class FornecedorController {
 	 * @return the model and view
 	 */
 	@RequestMapping(
-			method = RequestMethod.GET, value = "/fornecedor/lista/endereco")
+			method = RequestMethod.GET, value = "/listaFornecedoresPorEndereco")
 	public ModelAndView listFornecedorByEndereco(
 			@RequestParam final String endereco) {
 		ModelAndView modelAndView = new ModelAndView(
@@ -109,6 +113,7 @@ public class FornecedorController {
 		List<Fornecedor> pagedListFornecedores = pagedListHolder.getPageList();
 
 		modelAndView.addObject("fornecedores", pagedListFornecedores);
+		modelAndView.setViewName("listaFornecedores");
 
 		return modelAndView;
 	}
@@ -121,7 +126,7 @@ public class FornecedorController {
 	 * @return the model and view
 	 */
 	@RequestMapping(
-			method = RequestMethod.GET, value = "/fornecedor/lista/email")
+			method = RequestMethod.GET, value = "/listaFornecedoresPorEmail")
 	public ModelAndView listFornecedorByEmail(@RequestParam final String email) {
 		ModelAndView modelAndView = new ModelAndView(
 				"/fornecedor/fornecedores", "fornecedor", new Fornecedor());
@@ -132,6 +137,7 @@ public class FornecedorController {
 		List<Fornecedor> pagedListFornecedores = pagedListHolder.getPageList();
 
 		modelAndView.addObject("fornecedores", pagedListFornecedores);
+		modelAndView.setViewName("listaFornecedores");
 
 		return modelAndView;
 	}
@@ -144,7 +150,7 @@ public class FornecedorController {
 	 * @return the model and view
 	 */
 	@RequestMapping(
-			method = RequestMethod.GET, value = "/fornecedor/lista/cnpj")
+			method = RequestMethod.GET, value = "/listaFornecedoresPorCNPJ")
 	public ModelAndView listFornecedorByCNPJ(@RequestParam final String cnpj) {
 		ModelAndView modelAndView = new ModelAndView(
 				"/fornecedor/fornecedores", "fornecedor", new Fornecedor());
@@ -156,6 +162,8 @@ public class FornecedorController {
 
 		modelAndView.addObject("fornecedores", pagedListFornecedores);
 
+		modelAndView.setViewName("listaFornecedores");
+
 		return modelAndView;
 	}
 
@@ -166,13 +174,15 @@ public class FornecedorController {
 	 *            the id
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/fornecedor/mostra")
+	@RequestMapping(method = RequestMethod.GET, value = "/mostraFornecedor")
 	public ModelAndView showFornecedor(final Long id) {
 		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedor",
 				"fornecedor", new Fornecedor());
 
 		modelAndView.addObject("fornecedor",
 				fornecedorService.getFornecedor(id));
+
+		modelAndView.setViewName("mostraFornecedor");
 		return modelAndView;
 	}
 
@@ -181,7 +191,7 @@ public class FornecedorController {
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/fornecedor/cria")
+	@RequestMapping(method = RequestMethod.GET, value = "/criaFornecedor")
 	public ModelAndView newFornecedor() {
 		ModelAndView modelAndView = new ModelAndView(
 				"/fornecedor/criaFornecedor", "fornecedor", new Fornecedor());
@@ -189,6 +199,8 @@ public class FornecedorController {
 		modelAndView.addObject("estados", Estado.values());
 		modelAndView.addObject("subcategoriasFornecedor",
 				subcategoriaService.listSubcategorias());
+
+		modelAndView.setViewName("criaFornecedor");
 
 		return modelAndView;
 	}
@@ -202,14 +214,19 @@ public class FornecedorController {
 	 *            the result
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.POST, value = "/fornecedor/cria")
+	@RequestMapping(method = RequestMethod.POST, value = "/criaFornecedor")
 	public ModelAndView createFornecedor(
 			@ModelAttribute("fornecedor") final Fornecedor fornecedor,
 			final BindingResult result) {
+
 		fornecedorService.criarFornecedor(fornecedor);
 
-		return new ModelAndView("/fornecedor/fornecedor", "fornecedor",
-				fornecedor);
+		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedor",
+				"fornecedor", fornecedor);
+
+		modelAndView.setViewName("mostraFornecedor");
+
+		return modelAndView;
 	}
 
 	/**
@@ -219,14 +236,17 @@ public class FornecedorController {
 	 *            the id
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/fornecedor/edita")
+	@RequestMapping(method = RequestMethod.GET, value = "/editaFornecedor")
 	public ModelAndView editFornecedor(final Long id) {
 		Fornecedor fornecedor = fornecedorService.getFornecedor(id);
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/editaFornecedor", "fornecedor",	fornecedor);
+		ModelAndView modelAndView = new ModelAndView(
+				"/fornecedor/editaFornecedor", "fornecedor", fornecedor);
 		modelAndView.addObject("estrelas", Estrela.values());
 		modelAndView.addObject("estados", Estado.values());
 		modelAndView.addObject("subcategoriasFornecedor",
 				subcategoriaService.listSubcategorias());
+
+		modelAndView.setViewName("editaFornecedor");
 		return modelAndView;
 	}
 
@@ -237,12 +257,15 @@ public class FornecedorController {
 	 *            the fornecedor
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.POST, value = "/fornecedor/edita")
+	@RequestMapping(method = RequestMethod.POST, value = "/editaFornecedor")
 	public ModelAndView updateFornecedor(final Fornecedor fornecedor) {
 		fornecedorService.atualizarFornecedor(fornecedor);
 
-		return new ModelAndView("/fornecedor/fornecedor", "fornecedor",
-				fornecedor);
+		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedor",
+				"fornecedor", fornecedor);
+
+		modelAndView.setViewName("mostraFornecedor");
+		return modelAndView;
 	}
 
 	/**
@@ -252,12 +275,12 @@ public class FornecedorController {
 	 *            the fornecedor
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/fornecedor/deleta")
-	public ModelAndView destroyFornecedor(final Fornecedor fornecedor) {
+	@RequestMapping(method = RequestMethod.GET, value = "/deletaFornecedor")
+	public String destroyFornecedor(final Fornecedor fornecedor) {
+
 		fornecedorService.removerFornecedor(fornecedor.getCodigo());
 
-		return new ModelAndView("/fornecedor/fornecedores", "fornecedores",
-				fornecedorService.listarFornecedores());
+		return "redirect:/listaFornecedores";
 	}
 
 	/**

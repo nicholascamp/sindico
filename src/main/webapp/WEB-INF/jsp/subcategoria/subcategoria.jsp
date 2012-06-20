@@ -20,7 +20,7 @@
 			</tr>
 		</table>
 		<div>
-			<a href="/sindico/subcategoria/lista" title="Lista Subcategorias">Listar Subcategorias</a>
+			<a href="<c:url value='/listaSubcategorias'/>" title="Lista Subcategorias">Listar Subcategorias</a>
 		</div>
 	</body>
 </html>

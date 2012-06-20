@@ -136,7 +136,7 @@
 			</tr>
 		</table>
 		<div>
-			<a href="/sindico/fornecedor/lista" title="Lista Fornecedores">Listar Fornecedores</a>
+			<a href="<c:url value="listaFornecedores" />" title="Lista Fornecedores">Listar Fornecedores</a>
 		</div>
 	</body>
 </html>

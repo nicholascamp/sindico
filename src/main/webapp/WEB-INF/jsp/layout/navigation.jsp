@@ -2,12 +2,12 @@
 
 <table style="margin: 10px;">
 	<tr>
-		<th><a href="/sindico/predio/lista.html">Prédios</a></th>
+		<th><a href="<c:url value="/listaPredios" />">Prédios</a></th>
 		<th><a href="<c:url value="/listaCategorias" />"> Categorias</a></th>
-		<th><a href="/sindico/subcategoria/lista.html">Subcategorias</a></th>
-		<th><a href="/sindico/fornecedor/lista.html">Fornecedores</a></th>
-		<th><a href="/sindico/administradora/lista.html">Administradoras</a></th>
-		<th><a href="/sindico/cotacao/lista.html">Cotações</a></th>
-		<th><a href="/sindico/usuario/lista.html">Usuarios</a></th>
+		<th><a href="<c:url value="/listaSubcategorias" />">Subcategorias</a></th>
+		<th><a href="<c:url value="/listaFornecedores" />">Fornecedores</a></th>
+		<th><a href="<c:url value="/listaAdministradoras" />">Administradoras</a></th>
+		<th><a href="<c:url value="/listaCotacoes" />">Cotações</a></th>
+		<th><a href="<c:url value="/listaUsuarios" />">Usuarios</a></th>
 	</tr>
 </table>
