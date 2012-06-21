@@ -5,14 +5,6 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="sindico"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
-<head>
-
-<title>Sindico.com</title>
-</head>
-
-<body>
 	<form:form commandName="predio" method="put" action="/sindico/editaPredio">
 	Nome: <br />
 		<form:input path="nome" />
@@ -62,6 +54,3 @@
 	</form:form>
 	
 	<a href="<c:url value='/listaPredios' />">Cancelar</a>
-
-</body>
-</html>

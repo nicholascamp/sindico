@@ -52,7 +52,6 @@ public class Cotacao {
 	private boolean					impropria;
 
 	/** The usuario. */
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "USUARIO_ID")
 	private Usuario					usuario;

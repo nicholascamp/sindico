@@ -1,12 +1,5 @@
 <%@ include file="/WEB-INF/tags/taglib_includes.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script type="text/javascript" src="/sindico/javascript/actions.js"></script>
-<title>Sindico.com</title>
-</head>
-<body>
 
 	<form:form action="/sindico/listaPrediosPorNome" method="GET"
 		commandName="predio">
@@ -64,6 +57,3 @@
 	<!-- 		</div> -->
 
 	</center>
-
-</body>
-</html>

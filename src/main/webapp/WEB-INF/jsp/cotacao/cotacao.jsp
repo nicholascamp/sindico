@@ -4,14 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="sindico"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-	
-		<title>Sindico.com</title>
-	</head>
-	<body>
 		<h1>Cotacao ${cotacao.codigo}</h1>
 		<table style="margin: 10px;">
 			<tr>
@@ -42,12 +34,20 @@
 				<td>Fornecedores Concorrentes:</td>
 				<td>
 					<table>
-						<c:forEach items="${cotacao.fornecedores } var="fornecedor">
+						<c:if test="${empty cotacao.forcecedores }">
 							<tr>
-								<td>Nome:</td>
-								<td>${fornecedor.nome }</td>
+								<td>Nenhum fornecedor encontrado.</td>
 							</tr>
-						</c:forEach>
+						</c:if>
+						<c:if test="${! empty cotacao.forcecedores }">
+							<c:forEach items="${cotacao.fornecedores } var="fornecedor">
+								<tr>
+									<td>Nome:</td>
+									<td>${fornecedor.nome }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						
 					</table>
 				</td>
 			</tr>	
@@ -63,5 +63,3 @@
 		<div>
 			<a href="<c:url value='/listaCotacoes' />" title="Lista Cotações">Listar Cotações</a>
 		</div>
-	</body>
-</html>

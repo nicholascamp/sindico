@@ -69,7 +69,7 @@ public class CotacaoController {
 		// COMO ACHAR O GERENTE DA ADMINISTRADORA
 		// COMO ACHAR O USUARIO
 
-		ModelAndView mv = new ModelAndView("cotacao/cotacao", "cotacao", cotacaoService.criarCotacao(cotacao));
+		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.criarCotacao(cotacao));
 		mv.setViewName("mostraCotacao");
 		return mv;
 	}

@@ -198,8 +198,7 @@
 		<put-attribute name="title" value="Sindico.com - Cotacoes" />
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/cotacao/editaCotacao.jsp" />
-	</definition>
-	
+	</definition>	
 	
 
 
