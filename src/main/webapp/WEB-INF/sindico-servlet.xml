@@ -22,9 +22,32 @@
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
 	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="defaultContentType" value="application/json" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<ref bean="mappingJacksonJsonView" />
+			</list>
+		</property>
+	</bean>
+	<bean name="mappingJacksonJsonView"
+		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 
-	<mvc:resources mapping="/javascript/**" location="js/" />
+	<mvc:resources mapping="/javascript/**" location="WEB-INF/javascript/" />
 	<mvc:default-servlet-handler />
 
 	<bean id="viewResolver"

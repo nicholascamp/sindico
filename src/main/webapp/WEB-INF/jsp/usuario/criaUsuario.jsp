@@ -13,10 +13,14 @@
 
 <body>
 	<h1>CRIA USUARIO</h1>
-	<sec:authorize ifAnyGranted="ROLE_USUARIO">
-            Bem vindo usuário <sec:authentication
-			property="principal.username" />
-	</sec:authorize>
+	
+	<c:if test="${not empty param.login_error}">
+      <font color="red">
+        Your login attempt was not successful, try again.<br/><br/>
+        Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>.
+      </font>
+    </c:if>
+    
 	<form:form commandName="usuario" method="POST" action="cadastro">
 		<table>
 			<tr>

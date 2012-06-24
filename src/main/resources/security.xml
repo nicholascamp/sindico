@@ -22,19 +22,28 @@
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/predio*" access="ROLE_USUARIO" />
-		<security:intercept-url pattern="/categoria*" access="ROLE_USUARIO" />
-		<security:intercept-url pattern="/subcategoria*" access="ROLE_USUARIO" />
-		<security:intercept-url pattern="/fornecedor*" access="ROLE_USUARIO" />
-		<security:intercept-url pattern="/administradora*" access="ROLE_USUARIO" />
-		<security:intercept-url pattern="/cotacao*" access="ROLE_USUARIO" />
-		<security:intercept-url pattern="/usuario*" access="ROLE_USUARIO" />
+		<security:intercept-url pattern="/predio*"
+			access="ROLE_USUARIO" />
+		<security:intercept-url pattern="/categoria*"
+			access="ROLE_USUARIO" />
+		<security:intercept-url pattern="/subcategoria*"
+			access="ROLE_USUARIO" />
+		<security:intercept-url pattern="/fornecedor*"
+			access="ROLE_USUARIO" />
+		<security:intercept-url pattern="/administradora*"
+			access="ROLE_USUARIO" />
+		<security:intercept-url pattern="/cotacao*"
+			access="ROLE_USUARIO" />
+		<security:intercept-url pattern="/usuario*"
+			access="ROLE_USUARIO" />
 		<security:http-basic />
-		<!-- <security:access-denied-handler error-page="/index.jsp?errorMessage=Voce 
-			não possui permissao para acessar esta área do site." /> -->
-		<security:logout invalidate-session="true" logout-success-url="/" />
-		
-		<security:remember-me key="0a9ecae931165aae735f97dcca72ecfb1e00b0b854730cbc575930a742d1c6d3" />
+		<security:access-denied-handler
+			error-page="/index.jsp?errorMessage=Voce não possui permissao para acessar esta área do site." />
+		<security:logout invalidate-session="true"
+			logout-success-url="/" />
+
+		<security:remember-me
+			key="0a9ecae931165aae735f97dcca72ecfb1e00b0b854730cbc575930a742d1c6d3" />
 	</security:http>
 
 	<bean id="sindicoUserDetailsService" class="com.sindico.service.impl.SindicoUserDetailsServiceImpl">

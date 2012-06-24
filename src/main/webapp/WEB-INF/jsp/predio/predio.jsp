@@ -60,5 +60,5 @@
 			</tr>
 		</table>
 		<div>
-			<a href="/sindico/predio/lista" title="Lista Predios">Listar Predios</a>
+			<a href="/sindico/listaPredios" title="Lista Predios">Listar Predios</a>
 		</div>

@@ -5,15 +5,33 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="sindico"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="/sindico/javascript/libs/jquery.fileupload.js"></script>
+<script>
+	$(function() {
+		$('#fileupload').fileupload({
+			dataType : 'json',
+			done : function(e, data) {
+				$.each(data.result, function(index, file) {
+					$('<p/>').text(file.name).appendTo(document.body);
+				});
+			}
+		});
+	});
+</script>
+</head>
+<body>
 	<h1>CRIA FORNECEDOR</h1>
-	<form:form id="fornecedor" commandName="fornecedor" method="POST" action="/sindico/criaFornecedor">
+	<form:form id="fornecedor" commandName="fornecedor" method="POST"
+		action="/sindico/criaFornecedor">
 		<table>
 			<tr>
 				<td>Título:</td>
 				<td><form:input path="title" size="100" /></td>
 			</tr>
 			<tr>
-				<td>Razão Social:</td>
+				<td>Razã Social:</td>
 				<td><form:input path="nome" size="100" /></td>
 			</tr>
 			<tr>
@@ -45,13 +63,13 @@
 				<td><form:input path="cnpj" size="100" /></td>
 			</tr>
 			<tr>
-				<td>logo ?:</td>
-				<td><form:input path="logo" size="100" /></td>
+				<td>Logotipo:</td>
+				<td><input id="logo" type="file" name="logo" path="logo">
 			</tr>
 			<tr>
 				<td>CEP:</td>
 				<td><form:input id="cep" path="cep" size="8"
-						onblur="javascript:makeGetRequest(09607030);" /></td>
+						onblur="javascript:getCep(cep.value);" /></td>
 			</tr>
 			<tr>
 				<td>Endereco:</td>
@@ -71,7 +89,7 @@
 			</tr>
 			<tr>
 				<td>Estado:</td>
-				<td><form:select path="estado" id="uf">
+				<td><form:select path="estado" id="estado">
 						<form:options items="${estados}" />
 					</form:select></td>
 			</tr>
@@ -119,3 +137,7 @@
 			</tr>
 		</table>
 	</form:form>
+
+
+</body>
+</html>
