@@ -151,6 +151,12 @@
 	</definition>
 	
 	<!-- Administradora -->
+	<definition name="administradoraIndex" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Administradoras" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/administradora/administradoraIndex.jsp" />
+	</definition>
+	
 	<definition name="listaAdministradoras" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com - Administradoras" />
 		<put-attribute name="body"
@@ -198,6 +204,31 @@
 		<put-attribute name="title" value="Sindico.com - Cotacoes" />
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/cotacao/editaCotacao.jsp" />
+	</definition>	
+	
+	<!-- Gerente Administradora -->
+	<definition name="listaGerentes" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Gerentes" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/gerente/gerentes.jsp" />
+	</definition>
+
+	<definition name="mostraGerente" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Gerentes" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/gerente/gerente.jsp" />
+	</definition>
+	
+	<definition name="criaGerente" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Gerentes" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/gerente/criaGerente.jsp" />
+	</definition>
+	
+	<definition name="editaGerente" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Gerentes" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/gerente/editaGerente.jsp" />
 	</definition>	
 	
 
