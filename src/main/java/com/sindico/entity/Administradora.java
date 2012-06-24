@@ -19,7 +19,6 @@ import org.hibernate.validator.NotNull;
 
 import com.sindico.enums.Estado;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Administradora.
  */
@@ -48,27 +47,27 @@ public class Administradora {
 
 	/** The bairro. */
 	@Column(name = "BAIRRO", nullable = false, length = 100)
-	private String					bairro;
+	private String								bairro;
 
 	/** The cep. */
 	@Column(name = "CEP", nullable = false, length = 10)
-	private String					cep;
+	private String								cep;
 
 	/** The cidade. */
 	@Column(name = "CIDADE", nullable = false, length = 100)
-	private String					cidade;
+	private String								cidade;
 
 	/** The endereco. */
 	@Column(name = "RUA", nullable = false)
-	private String					endereco;
+	private String								endereco;
 
 	/** The estado. */
 	@Column(name = "ESTADO", nullable = false, length = 2)
-	private Estado					estado;
+	private Estado								estado;
 
 	/** The numero. */
 	@Column(name = "NUMERO", nullable = false)
-	private int						numero;
+	private int									numero;
 
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20)
@@ -163,7 +162,7 @@ public class Administradora {
 		return bairro;
 	}
 
-	public void setBairro(String bairro) {
+	public void setBairro(final String bairro) {
 		this.bairro = bairro;
 	}
 
@@ -171,7 +170,7 @@ public class Administradora {
 		return cep;
 	}
 
-	public void setCep(String cep) {
+	public void setCep(final String cep) {
 		this.cep = cep;
 	}
 
@@ -179,7 +178,7 @@ public class Administradora {
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade(final String cidade) {
 		this.cidade = cidade;
 	}
 
@@ -187,7 +186,7 @@ public class Administradora {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(final String endereco) {
 		this.endereco = endereco;
 	}
 
@@ -195,7 +194,7 @@ public class Administradora {
 		return estado;
 	}
 
-	public void setEstado(Estado estado) {
+	public void setEstado(final Estado estado) {
 		this.estado = estado;
 	}
 
@@ -203,7 +202,7 @@ public class Administradora {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(final int numero) {
 		this.numero = numero;
 	}
 
