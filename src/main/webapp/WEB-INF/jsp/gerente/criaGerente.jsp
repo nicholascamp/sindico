@@ -41,7 +41,7 @@
 			<td><strong>Administradora:</strong></td>
 			<td>
 				<form:select path="administradora">
-					<form:options items="${administradoras }" itemLabel="nome" itemValue="codigo" />
+					<form:options items="${administradoras }" itemLabel="nome" itemValue="id" />
 				</form:select>
 			</td>
 		</tr>

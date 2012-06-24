@@ -11,7 +11,7 @@
 		<tr>
 			<td><strong>Nome:</strong></td>
 			<td>
-				<input type="hidden" name="codigo" value="${gerente.codigo }" />
+				<input type="hidden" name="id" value="${gerente.id }" />
 				<form:input path="nome" value="${gerente.nome }" />
 			</td>
 		</tr>
@@ -50,14 +50,14 @@
 			<td><strong>Administradora:</strong></td>
 			<td>
 				<form:select path="administradora">
-					<form:options items="${administradoras }" itemLabel="nome" itemValue="codigo" />
+					<form:options items="${administradoras }" itemLabel="nome" itemValue="id" />
 				</form:select>
 			</td>
 		</tr>
 		<tr>
 			<td><strong>Prédios:</strong></td>
 			<td>
-				<form:checkboxes items="${predios }" path="predios" itemLabel="nome" itemValue="codigo" />
+				<form:checkboxes items="${predios }" path="predios" itemLabel="nome" itemValue="id" />
 			</td>
 		</tr>
 		<tr>
