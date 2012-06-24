@@ -46,7 +46,7 @@
 								<c:param name="id" value="${usuario.id}" />
 							</c:url> <a href="${Consultar}" title="Consulta Usuario">Consultar</a>
 						</td>
-						<td><c:url value="/usuario/admin" var="Admin">
+						<td><c:url value="/usuario/admin" var="Admin" >
 								<c:param name="id" value="${usuario.id}" />
 								<c:param name="admin" value="${! usuario.admin}" />
 							</c:url> <c:if test="${usuario.admin == false}">

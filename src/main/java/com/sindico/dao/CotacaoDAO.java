@@ -54,8 +54,10 @@ public class CotacaoDAO {
 	 * @return the cotacao
 	 */
 	public Cotacao getCotacao(final Long id) {
-		return (Cotacao) sessionFactory.getCurrentSession().load(Cotacao.class,
-				id);
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select cotacao from Cotacao cotacao where cotacao.id = " + id);
+
+		return (Cotacao) query.uniqueResult();
 	}
 
 	/**

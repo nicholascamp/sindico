@@ -10,7 +10,7 @@
 			<tr>
 				<td>Subcategoria:</td>
 				<td><form:checkboxes items="${subcategorias }" path="subcategoria"
-				itemLabel="title" itemValue="codigo"/></td>
+				itemLabel="title" itemValue="id"/></td>
 			</tr>
 			<tr>
 				<td colspan="2">Descrição:</td>				

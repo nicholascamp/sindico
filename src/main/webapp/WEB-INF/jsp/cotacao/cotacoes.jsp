@@ -16,22 +16,22 @@
 				<c:if test="${! empty cotacoes}">
 					<c:forEach items="${cotacoes }" var="cotacao">
 						<tr>
-							<td>${cotacao.codigo }</td>
+							<td>${cotacao.id }</td>
 							<td>
 								<c:url value="/mostraCotacao" var="Consultar">
-									<c:param name="id" value="${cotacao.codigo}" />
+									<c:param name="id" value="${cotacao.id}" />
 								</c:url>
 								<a href="${Consultar}" title="Consulta Cotação">Consultar</a>
 							</td>
 							<td>
 								<c:url value="/editaCotacao"  var="Editar">
-									<c:param name="id" value="${cotacao.codigo}" />
+									<c:param name="id" value="${cotacao.id}" />
 								</c:url>
 								<a href="${Editar}" title="Editar Cotação">Editar</a>
 							</td>
 							<td>
 								<c:url value="/deletaCotacao" var="Deletar" >
-									<c:param name="id" value="${cotacao.codigo}" />
+									<c:param name="id" value="${cotacao.id}" />
 								</c:url>
 								<a id="delete" href="javascript:deleteEntity('${Deletar }');" title="Deletar Cotação">Deletar</a>
 							</td>

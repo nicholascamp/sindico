@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 		<h1>EDITA SUBCATEGORIA</h1>
 		<form:form commandName="subcategoria" method="POST" action="/sindico/editaSubcategoria">
-			<input type="hidden" name="codigo" value="${subcategoria.codigo}" />
+			<input type="hidden" name="id" value="${subcategoria.id}" />
 			<table>
 				<tr>
 					<td>Nome: </td>
@@ -16,7 +16,7 @@
 				<tr>
 					<td>Categoria:</td>
 					<td><form:select path="categoria">
-						<form:options items="${categorias }" itemValue="codigo" itemLabel="nome"/>
+						<form:options items="${categorias }" itemValue="id" itemLabel="nome"/>
 					</form:select></td>
 				</tr>
 				<tr>

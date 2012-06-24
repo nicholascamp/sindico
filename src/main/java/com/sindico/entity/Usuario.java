@@ -35,7 +35,6 @@ public class Usuario implements Serializable, UserDetails {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 4246251615358359325L;
 
-	/** The codigo. */
 	@Id
 	@GeneratedValue
 	private Long				id;

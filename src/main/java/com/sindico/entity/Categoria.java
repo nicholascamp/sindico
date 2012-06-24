@@ -28,11 +28,10 @@ public class Categoria implements Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -7373446708020048049L;
 
-	/** The codigo. */
 	@Id
 	@GeneratedValue
 	@Column(name = "CATEGORIA_ID")
-	private Long				codigo;
+	private Long				id;
 
 	/** The nome. */
 	@Column(name = "NOME", length = 100, nullable = false, unique = true)
@@ -64,23 +63,12 @@ public class Categoria implements Serializable {
 		this.subcategorias = subcategorias;
 	}
 
-	/**
-	 * Gets the codigo.
-	 * 
-	 * @return the codigo
-	 */
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
-	/**
-	 * Sets the codigo.
-	 * 
-	 * @param codigo
-	 *            the new codigo
-	 */
-	public void setCodigo(final Long codigo) {
-		this.codigo = codigo;
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
 	/**

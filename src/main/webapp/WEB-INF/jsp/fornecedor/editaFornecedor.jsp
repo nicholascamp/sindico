@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<h1>CRIA FORNECEDOR</h1>
 	<form:form commandName="fornecedor" method="POST" action="/sindico/editaFornecedor" >
-		<input type="hidden" name="codigo" value="${fornecedor.codigo }" />
+		<input type="hidden" name="id" value="${fornecedor.id }" />
 		<table>
 			<tr>
 				<td>Título:</td>
@@ -82,7 +82,7 @@
 						Nenhum subcategoria registrada no Sistema.
 					</c:if>
 					<c:if test="${!empty subcategoriasFornecedor }">
-						<form:checkboxes items="${subcategoriasFornecedor }" path="subcategorias" itemLabel="title" itemValue="codigo" />
+						<form:checkboxes items="${subcategoriasFornecedor }" path="subcategorias" itemLabel="title" itemValue="id" />
 					</c:if>					
 				</td>
 			</tr>

@@ -31,7 +31,7 @@
 				<td><form:input path="title" size="100" /></td>
 			</tr>
 			<tr>
-				<td>Razã Social:</td>
+				<td>Razão Social:</td>
 				<td><form:input path="nome" size="100" /></td>
 			</tr>
 			<tr>
@@ -96,7 +96,7 @@
 			<tr>
 				<td>Subcategorias:</td>
 				<td><form:checkboxes items="${subcategoriasFornecedor }"
-						path="subcategorias" itemLabel="title" itemValue="codigo" /></td>
+						path="subcategorias" itemLabel="title" itemValue="id" /></td>
 			</tr>
 			<tr>
 				<td>Estrelas:</td>

@@ -21,19 +21,19 @@
 							<td>${subcategoria.categoria.nome }</td>
 							<td>
 								<c:url value="/mostraSubcategoria" var="Consultar">
-									<c:param name="id" value="${subcategoria.codigo}" />
+									<c:param name="id" value="${subcategoria.id}" />
 								</c:url>
 								<a href="${Consultar}" title="Consulta Subcategoria">Consultar</a>
 							</td>
 							<td>
 								<c:url value="/editaSubcategoria"  var="Editar">
-									<c:param name="id" value="${subcategoria.codigo}" />
+									<c:param name="id" value="${subcategoria.id}" />
 								</c:url>
 								<a href="${Editar}" title="Editar Subcategoria">Editar</a>
 							</td>
 							<td>
 								<c:url value="/deletaSubcategoria" var="Deletar" >
-									<c:param name="id" value="${subcategoria.codigo}" />
+									<c:param name="id" value="${subcategoria.id}" />
 								</c:url>
 								<a id="delete" href="javascript:deleteEntity('${Deletar }');" title="Deletar Subcategoria">Deletar</a>
 							</td>

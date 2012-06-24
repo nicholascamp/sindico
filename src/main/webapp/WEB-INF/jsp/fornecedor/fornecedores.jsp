@@ -45,14 +45,14 @@
 					<tr>
 						<td>${fornecedor.nome }</td>
 						<td><c:url value="/mostraFornecedor" var="Consultar">
-								<c:param name="id" value="${fornecedor.codigo}" />
+								<c:param name="id" value="${fornecedor.id}" />
 							</c:url> <a href="${Consultar}" title="Consulta Fornecedor">Consultar</a>
 						</td>
 						<td><c:url value="/editaFornecedor" var="Editar">
-								<c:param name="id" value="${fornecedor.codigo}" />
+								<c:param name="id" value="${fornecedor.id}" />
 							</c:url> <a href="${Editar}" title="Editar Fornecedor">Editar</a></td>
 						<td><c:url value="/deletaFornecedor" var="Deletar">
-								<c:param name="id" value="${fornecedor.codigo}" />
+								<c:param name="id" value="${fornecedor.id}" />
 							</c:url> <a href="javascript:deleteEntity('${Deletar }');"
 							title="Deletar Fornecedor">Deletar</a></td>
 					</tr>

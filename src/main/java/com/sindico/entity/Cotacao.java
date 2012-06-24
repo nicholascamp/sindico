@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,11 +14,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import javax.persistence.Entity;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.NotNull;
 
 import com.sindico.enums.Status;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Cotacao.
  */
@@ -25,16 +28,16 @@ import com.sindico.enums.Status;
 @Table(name = "COTACAO")
 public class Cotacao {
 
-	/** The codigo. */
 	@Id
 	@GeneratedValue
 	@Column(name = "COTACAO_ID")
-	private Long					codigo;
+	private Long					id;
 
 	/** The data. */
 	@Column(name = "DATA")
 	private Date					data;
 
+	/** The data atualizacao. */
 	@Column(name = "DATA_ATUALIZACAO")
 	private Date					dataAtualizacao;
 
@@ -48,6 +51,7 @@ public class Cotacao {
 	@Column(name = "STATUS")
 	private Status					status;
 
+	/** The impropria. */
 	@Column(name = "IMPROPRIA")
 	private boolean					impropria;
 
@@ -64,6 +68,7 @@ public class Cotacao {
 	/** The fornecedores. */
 	@ManyToMany
 	@JoinTable(name = "COTACAO_FORNECEDOR")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
 
 	/** The fornecedor vencedor. */
@@ -71,42 +76,65 @@ public class Cotacao {
 	@JoinColumn(name = "FORNECEDOR_ID")
 	private Fornecedor				fornecedorVencedor;
 
+	/** The titulo. */
 	@Column(name = "TITULO", nullable = false)
 	private String					titulo;
 
+	/**
+	 * Gets the titulo.
+	 * 
+	 * @return the titulo
+	 */
 	public String getTitulo() {
 		return titulo;
 	}
 
+	/**
+	 * Sets the titulo.
+	 * 
+	 * @param titulo
+	 *            the new titulo
+	 */
 	public void setTitulo(final String titulo) {
 		this.titulo = titulo;
 	}
 
+	/**
+	 * Gets the data atualizacao.
+	 * 
+	 * @return the data atualizacao
+	 */
 	public Date getDataAtualizacao() {
 		return dataAtualizacao;
 	}
 
+	/**
+	 * Sets the data atualizacao.
+	 * 
+	 * @param dataAtualizacao
+	 *            the new data atualizacao
+	 */
 	public void setDataAtualizacao(final Date dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
 	/**
-	 * Gets the codigo.
+	 * Gets the id.
 	 * 
-	 * @return the codigo
+	 * @return the id
 	 */
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * Sets the codigo.
+	 * Sets the id.
 	 * 
-	 * @param codigo
-	 *            the new codigo
+	 * @param id
+	 *            the new id
 	 */
-	public void setCodigo(final Long codigo) {
-		this.codigo = codigo;
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
 	/**
@@ -166,10 +194,21 @@ public class Cotacao {
 		this.status = status;
 	}
 
+	/**
+	 * Checks if is impropria.
+	 * 
+	 * @return true, if is impropria
+	 */
 	public boolean isImpropria() {
 		return impropria;
 	}
 
+	/**
+	 * Sets the impropria.
+	 * 
+	 * @param impropria
+	 *            the new impropria
+	 */
 	public void setImpropria(final boolean impropria) {
 		this.impropria = impropria;
 	}

@@ -19,7 +19,7 @@
 		<table>
 			<tr>
 				<td>
-					<input type="hidden" name="codigo" value="${administradora.codigo }" />
+					<input type="hidden" name="id" value="${administradora.id }" />
 					Nome:
 				</td>
 				<td><form:input path="nome" value="${administradora.nome }" /></td>

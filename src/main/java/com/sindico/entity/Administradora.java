@@ -19,6 +19,7 @@ import org.hibernate.validator.NotNull;
 
 import com.sindico.enums.Estado;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Administradora.
  */
@@ -26,11 +27,11 @@ import com.sindico.enums.Estado;
 @Table(name = "ADMINISTRADORA")
 public class Administradora {
 
-	/** The codigo. */
+	/** The id. */
 	@Id
 	@GeneratedValue
 	@Column(name = "ADMINISTRADORA_ID")
-	private Long								codigo;
+	private Long								id;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
@@ -83,22 +84,22 @@ public class Administradora {
 	private Collection<GerenteAdministradora>	gerentes	= new ArrayList<GerenteAdministradora>();
 
 	/**
-	 * Gets the codigo.
+	 * Gets the id.
 	 * 
-	 * @return the codigo
+	 * @return the id
 	 */
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * Sets the codigo.
+	 * Sets the id.
 	 * 
-	 * @param codigo
-	 *            the new codigo
+	 * @param id
+	 *            the new id
 	 */
-	public void setCodigo(final Long codigo) {
-		this.codigo = codigo;
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
 	/**
@@ -158,50 +159,116 @@ public class Administradora {
 		this.cnpj = cnpj;
 	}
 
+	/**
+	 * Gets the bairro.
+	 * 
+	 * @return the bairro
+	 */
 	public String getBairro() {
 		return bairro;
 	}
 
+	/**
+	 * Sets the bairro.
+	 * 
+	 * @param bairro
+	 *            the new bairro
+	 */
 	public void setBairro(final String bairro) {
 		this.bairro = bairro;
 	}
 
+	/**
+	 * Gets the cep.
+	 * 
+	 * @return the cep
+	 */
 	public String getCep() {
 		return cep;
 	}
 
+	/**
+	 * Sets the cep.
+	 * 
+	 * @param cep
+	 *            the new cep
+	 */
 	public void setCep(final String cep) {
 		this.cep = cep;
 	}
 
+	/**
+	 * Gets the cidade.
+	 * 
+	 * @return the cidade
+	 */
 	public String getCidade() {
 		return cidade;
 	}
 
+	/**
+	 * Sets the cidade.
+	 * 
+	 * @param cidade
+	 *            the new cidade
+	 */
 	public void setCidade(final String cidade) {
 		this.cidade = cidade;
 	}
 
+	/**
+	 * Gets the endereco.
+	 * 
+	 * @return the endereco
+	 */
 	public String getEndereco() {
 		return endereco;
 	}
 
+	/**
+	 * Sets the endereco.
+	 * 
+	 * @param endereco
+	 *            the new endereco
+	 */
 	public void setEndereco(final String endereco) {
 		this.endereco = endereco;
 	}
 
+	/**
+	 * Gets the estado.
+	 * 
+	 * @return the estado
+	 */
 	public Estado getEstado() {
 		return estado;
 	}
 
+	/**
+	 * Sets the estado.
+	 * 
+	 * @param estado
+	 *            the new estado
+	 */
 	public void setEstado(final Estado estado) {
 		this.estado = estado;
 	}
 
+	/**
+	 * Gets the numero.
+	 * 
+	 * @return the numero
+	 */
 	public int getNumero() {
 		return numero;
 	}
 
+	/**
+	 * Sets the numero.
+	 * 
+	 * @param numero
+	 *            the new numero
+	 */
 	public void setNumero(final int numero) {
 		this.numero = numero;
 	}

@@ -22,11 +22,10 @@ import org.hibernate.validator.NotNull;
 @Table(name = "GERENTE_ADMINISTRADORA")
 public class GerenteAdministradora {
 
-	/** The codigo. */
 	@Id
 	@GeneratedValue
 	@Column(name = "GERENTE_ID")
-	private Long				codigo;
+	private Long				id;
 
 	/** The administradora. */
 	@ManyToOne
@@ -91,23 +90,12 @@ public class GerenteAdministradora {
 		this.cotacoes = cotacoes;
 	}
 
-	/**
-	 * Gets the codigo.
-	 * 
-	 * @return the codigo
-	 */
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
-	/**
-	 * Sets the codigo.
-	 * 
-	 * @param codigo
-	 *            the new codigo
-	 */
-	public void setCodigo(final Long codigo) {
-		this.codigo = codigo;
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
 	/**

@@ -22,11 +22,10 @@ import org.hibernate.validator.NotNull;
 @Table(name = "SUBCATEGORIA")
 public class Subcategoria {
 
-	/** The codigo. */
 	@Id
 	@GeneratedValue
 	@Column(name = "SUBCATEGORIA_ID")
-	private Long					codigo;
+	private Long					id;
 
 	/** The categoria. */
 	@ManyToOne
@@ -44,23 +43,12 @@ public class Subcategoria {
 	@OneToMany(mappedBy = "subcategoria")
 	private Collection<Cotacao>		cotacoes		= new ArrayList<Cotacao>();
 
-	/**
-	 * Gets the codigo.
-	 * 
-	 * @return the codigo
-	 */
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
-	/**
-	 * Sets the codigo.
-	 * 
-	 * @param codigo
-	 *            the new codigo
-	 */
-	public void setCodigo(final Long codigo) {
-		this.codigo = codigo;
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
 	/**

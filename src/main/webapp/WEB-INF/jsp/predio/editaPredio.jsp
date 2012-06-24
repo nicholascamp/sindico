@@ -5,6 +5,8 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="sindico"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<h1>PRÉDIO ${predio.nome}</h1>
+
 <form:form commandName="predio" method="PUT"
 	action="/sindico/editaPredio">
 	<table>

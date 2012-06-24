@@ -27,11 +27,10 @@ import com.sindico.enums.Estado;
 @Table(name = "FORNECEDOR")
 public class Fornecedor {
 
-	/** The codigo. */
 	@Id
 	@GeneratedValue
 	@Column(name = "FORNECEDOR_ID")
-	private Long						codigo;
+	private Long						id;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
@@ -80,7 +79,7 @@ public class Fornecedor {
 	private String						cnpj;
 
 	/** The subcategorias. */
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "FORNECEDOR_SUBCATEGORIA", joinColumns = @JoinColumn(
 			name = "FORNECEDOR_ID"), inverseJoinColumns = @JoinColumn(
 			name = "SUBCATEGORIA_ID"))
@@ -186,23 +185,12 @@ public class Fornecedor {
 		this.cotacoesVencedoras = cotacoesVencedoras;
 	}
 
-	/**
-	 * Gets the codigo.
-	 * 
-	 * @return the codigo
-	 */
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
-	/**
-	 * Sets the codigo.
-	 * 
-	 * @param codigo
-	 *            the new codigo
-	 */
-	public void setCodigo(final Long codigo) {
-		this.codigo = codigo;
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
 	/**

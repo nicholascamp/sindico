@@ -76,10 +76,10 @@ public class CotacaoServiceImpl implements CotacaoService {
 	}
 
 	@Override
-	public boolean removerCotacao(Long id) {
+	public boolean removerCotacao(final Long id) {
 		// TODO Auto-generated method stub
 		Cotacao cotacao = cotacaoDAO.getCotacao(id);
-		if(cotacao != null){
+		if (cotacao != null) {
 			cotacaoDAO.removeCotacao(id);
 			return true;
 		}
@@ -87,9 +87,9 @@ public class CotacaoServiceImpl implements CotacaoService {
 	}
 
 	@Override
-	public Cotacao getCotacao(Long id) {
-		// TODO Auto-generated method stub
-		return cotacaoDAO.getCotacao(id);
+	public Cotacao getCotacao(final Long id) {
+		Cotacao cotacao = cotacaoDAO.getCotacao(id);
+		return cotacao;
 	}
 
 }

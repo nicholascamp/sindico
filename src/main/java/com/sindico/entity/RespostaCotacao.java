@@ -21,11 +21,10 @@ import org.hibernate.validator.NotNull;
 @Table(name = "RESPOSTA_COTACAO")
 public class RespostaCotacao {
 
-	/** The codigo. */
 	@Id
 	@GeneratedValue
 	@Column(name = "RESPOSTA_COTACAO_ID")
-	private Long				codigo;
+	private Long				id;
 
 	/** The primeira resposta. */
 	@Column(name = "PRIMEIRA_RESPOSTA", columnDefinition = "TEXT")
@@ -73,23 +72,12 @@ public class RespostaCotacao {
 	@Column(name = "ARQUIVO_FOTO")
 	private String				arquivoFoto;
 
-	/**
-	 * Gets the codigo.
-	 * 
-	 * @return the codigo
-	 */
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
-	/**
-	 * Sets the codigo.
-	 * 
-	 * @param codigo
-	 *            the new codigo
-	 */
-	public void setCodigo(final Long codigo) {
-		this.codigo = codigo;
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
 	/**

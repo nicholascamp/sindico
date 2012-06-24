@@ -21,7 +21,6 @@ import javax.persistence.Table;
 @Table(name = "BANNER")
 public class Banner {
 
-	/** The codigo. */
 	@Id
 	@GeneratedValue
 	private Long			id;

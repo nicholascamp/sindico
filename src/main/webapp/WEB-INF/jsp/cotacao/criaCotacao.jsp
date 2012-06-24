@@ -11,7 +11,7 @@
 				<td>Subcategoria:</td>
 				<td>
 					<form:select path="subcategoria">
-						<form:options items="${subcategorias }" itemLabel="title" itemValue="codigo" />
+						<form:options items="${subcategorias }" itemLabel="title" itemValue="id" />
 					</form:select>
 				</td>
 			</tr>

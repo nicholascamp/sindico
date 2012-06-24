@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="sindico"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-		<h1>Cotação ${cotacao.codigo}</h1>
+		<h1>Cotação ${cotacao.id}</h1>
 		<table style="margin: 10px;">		
 			<tr>
 				<td>Status:</td>

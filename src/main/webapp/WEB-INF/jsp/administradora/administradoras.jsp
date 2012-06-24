@@ -30,19 +30,19 @@
 							<td>${administradora.nome }</td>
 							<td>
 								<c:url value="/mostraAdministradora" var="Consultar">
-									<c:param name="id" value="${administradora.codigo}" />
+									<c:param name="id" value="${administradora.id}" />
 								</c:url>
 								<a href="${Consultar}" title="Consulta Administradora">Consultar</a>
 							</td>
 							<td>
 								<c:url value="/editaAdministradora"  var="Editar">
-									<c:param name="id" value="${administradora.codigo}" />
+									<c:param name="id" value="${administradora.id}" />
 								</c:url>
 								<a href="${Editar}" title="Editar Administradora">Editar</a>
 							</td>
 							<td>
 								<c:url value="/deletaAdministradora" var="Deletar" >
-									<c:param name="id" value="${administradora.codigo}" />
+									<c:param name="id" value="${administradora.id}" />
 								</c:url>
 								<a href="javascript:deleteEntity('${Deletar }');" title="Deletar Administradora">Deletar</a>
 							</td>
