@@ -28,6 +28,7 @@ import com.sindico.service.UsuarioService;
 import com.sindico.service.impl.SindicoUserDetailsServiceImpl;
 import com.sindico.utils.StringUtils;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class UsuarioController.
  */
@@ -35,16 +36,24 @@ import com.sindico.utils.StringUtils;
 @SessionAttributes
 public class UsuarioController {
 
+	/** The sindico user details service impl. */
 	@Autowired
 	private SindicoUserDetailsServiceImpl	sindicoUserDetailsServiceImpl;
 
+	/** The authentication manager. */
 	@Autowired
 	@Qualifier("org.springframework.security.authenticationManager")
 	protected AuthenticationManager			authenticationManager;
 
+	/** The usuario service. */
 	@Autowired
 	private UsuarioService					usuarioService;
 
+	/**
+	 * Usuario form.
+	 * 
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastro")
 	public ModelAndView usuarioForm() {
 
@@ -57,6 +66,11 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	/**
+	 * Usuario index form.
+	 * 
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	public ModelAndView usuarioIndexForm() {
 		ModelAndView modelAndView = new ModelAndView("index", "usuario",
@@ -67,6 +81,11 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	/**
+	 * Index usuario.
+	 * 
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/listaUsuarios")
 	public ModelAndView indexUsuario() {
 		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
@@ -83,6 +102,13 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	/**
+	 * Index usuario nome.
+	 * 
+	 * @param nome
+	 *            the nome
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/listaUsuariosPorNome")
 	public ModelAndView indexUsuarioNome(@RequestParam final String nome) {
 		ModelAndView modelAndView = new ModelAndView("/usuario/usuarios",
@@ -99,6 +125,13 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	/**
+	 * Index usuario email.
+	 * 
+	 * @param email
+	 *            the email
+	 * @return the model and view
+	 */
 	@RequestMapping(
 			method = RequestMethod.GET, value = "/listaUsuariosPorEmail")
 	public ModelAndView indexUsuarioEmail(@RequestParam final String email) {
@@ -116,14 +149,34 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/usuario/admin")
+	// Alterar para PUT
+	/**
+	 * Update usuario admin.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param admin
+	 *            the admin
+	 * @return the model and view
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/tornarAdmin")
 	public ModelAndView updateUsuarioAdmin(@RequestParam final Long id,
 			@RequestParam final boolean admin) {
-		ModelAndView modelAndView = new ModelAndView("/usuario/lista");
-		usuarioService.setAdmin(id, admin);
+		ModelAndView modelAndView = new ModelAndView("/usuario/usuario",
+				"usuario", new UsuarioSimples());
+		modelAndView.addObject("usuario",
+				new UsuarioSimples(usuarioService.setAdmin(id, admin)));
+		modelAndView.setViewName("mostraUsuario");
 		return modelAndView;
 	}
 
+	/**
+	 * Show fornecedor.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/mostraUsuario")
 	public ModelAndView showFornecedor(final Long id) {
 		ModelAndView modelAndView = new ModelAndView("/usuario/usuario",
@@ -134,6 +187,13 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	/**
+	 * Usuario login.
+	 * 
+	 * @param errorMessage
+	 *            the error message
+	 * @return the model and view
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/login")
 	public ModelAndView usuarioLogin(
 			@RequestParam(required = false) final String errorMessage) {
@@ -149,8 +209,11 @@ public class UsuarioController {
 	 *            the usuario
 	 * @param result
 	 *            the result
+	 * @param request
+	 *            the request
 	 * @return the string
 	 * @throws Exception
+	 *             the exception
 	 */
 	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
 	public String addUsuario(@ModelAttribute("usuario") final Usuario usuario,

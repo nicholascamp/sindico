@@ -41,85 +41,95 @@ import com.sindico.service.UsuarioService;
 public class CotacaoController {
 
 	@Autowired
-	CotacaoService cotacaoService;
+	CotacaoService					cotacaoService;
 
 	@Autowired
-	SubcategoriaService subcategoriaService;
-	
+	SubcategoriaService				subcategoriaService;
+
 	@Autowired
-	FornecedorService fornecedorService;
-	
+	FornecedorService				fornecedorService;
+
 	@Autowired
-	UsuarioService usuarioService;
-	
+	UsuarioService					usuarioService;
+
 	@Autowired
-	GerenteAdministradoraService gerenteAdminService;
-	
+	GerenteAdministradoraService	gerenteAdminService;
+
 	@RequestMapping(method = RequestMethod.GET, value = "/listaCotacoes")
 	public ModelAndView indexCotacao() {
-		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes", cotacaoService.listCotacoes());
+		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes",
+				cotacaoService.listCotacoes());
 		mv.setViewName("listaCotacoes");
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/mostraCotacao")
 	public ModelAndView showCotacao(final Long id) {
-		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.getCotacao(id));
+		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",
+				cotacaoService.getCotacao(id));
 		mv.setViewName("mostraCotacao");
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/criaCotacao")
 	public ModelAndView newCotacao() {
-		ModelAndView mv = new ModelAndView("/cotacao/criaCotacao", "cotacao", new Cotacao());
+		ModelAndView mv = new ModelAndView("/cotacao/criaCotacao", "cotacao",
+				new Cotacao());
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		mv.setViewName("criaCotacao");
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/criaCotacao")
-	public ModelAndView createCotacao(@ModelAttribute("cotacao") final Cotacao cotacao) {
+	public ModelAndView createCotacao(
+			@ModelAttribute("cotacao") final Cotacao cotacao) {
 		cotacao.setData(new Date());
 		cotacao.setStatus(Status.ABERTO);
 		cotacao.setImpropria(false);
 		cotacao.setDataAtualizacao(new Date());
 		Usuario user = usuarioService.getLoggedUser();
-		System.out.println(user.getNome() + " " + user.getId());
-		//cotacao.setUsuario(user);
+		cotacao.setUsuario(user);
 		// COMO ACHAR O GERENTE DA ADMINISTRADORA
 
-		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.criarCotacao(cotacao));
+		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",
+				cotacaoService.criarCotacao(cotacao));
 		mv.setViewName("mostraCotacao");
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/editaCotacao")
 	public ModelAndView editCotacao(final Long id) {
-		ModelAndView mv = new ModelAndView("/cotacao/editaCotacao", "cotacao", cotacaoService.getCotacao(id));
+		ModelAndView mv = new ModelAndView("/cotacao/editaCotacao", "cotacao",
+				cotacaoService.getCotacao(id));
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		mv.setViewName("editaCotacao");
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/editaCotacao")
-	public ModelAndView updateCotacao(@ModelAttribute("cotacao") final Cotacao cotacao) {
+	public ModelAndView updateCotacao(
+			@ModelAttribute("cotacao") final Cotacao cotacao) {
 		cotacao.setDataAtualizacao(new Date());
-		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.atualizarCotacao(cotacao));
+		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",
+				cotacaoService.atualizarCotacao(cotacao));
 		mv.setViewName("mostraCotacao");
 		return mv;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/editaCotacaoAdmin")
-	public ModelAndView editCotacaoAdmin(Long id){
-		ModelAndView mv = new ModelAndView("/cotacao/editaCotacaoAdmin", "cotacao", cotacaoService.getCotacao(id));
+	public ModelAndView editCotacaoAdmin(final Long id) {
+		ModelAndView mv = new ModelAndView("/cotacao/editaCotacaoAdmin",
+				"cotacao", cotacaoService.getCotacao(id));
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		mv.setViewName("editaCotacaoAdmin");
 		return mv;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/editaCotacaoAdmin")
-	public ModelAndView updateCotacaoAdmin(@ModelAttribute("cotacao") final Cotacao cotacao){
-		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.atualizarCotacao(cotacao));
+	public ModelAndView updateCotacaoAdmin(
+			@ModelAttribute("cotacao") final Cotacao cotacao) {
+		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",
+				cotacaoService.atualizarCotacao(cotacao));
 		mv.setViewName("mostraCotacao");
 		return mv;
 	}
@@ -127,51 +137,63 @@ public class CotacaoController {
 	@RequestMapping(method = RequestMethod.GET, value = "/deletaCotacao")
 	public ModelAndView destroyCotacao(final Long id) {
 		cotacaoService.removerCotacao(id);
-		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes", cotacaoService.listCotacoes());
+		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes",
+				cotacaoService.listCotacoes());
 		mv.setViewName("listaCotacoes");
 		return mv;
 	}
-	
 
 	@InitBinder
-	protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) throws Exception {
-		binder.registerCustomEditor(Usuario.class, "usuario", new PropertyEditorSupport() {
-			@Override
-			public void setAsText(final String id) {
-				Usuario usuario = usuarioService.buscaUsuario(Long.parseLong(id));
-				setValue(usuario);
-			}
-		});
-		
-		binder.registerCustomEditor(Subcategoria.class, "subcategoria", new PropertyEditorSupport() {
-			@Override
-			public void setAsText(final String id) {
-				Subcategoria subcategoria = subcategoriaService.getSubcategoria(Long.parseLong(id));
-				setValue(subcategoria);
-			}
-		});
-		
-		binder.registerCustomEditor(List.class, "fornecedores", new CustomCollectionEditor(List.class) {
-			@Override
-			protected Object convertElement(final Object element) {
-				return (element == null ? null : fornecedorService.getFornecedor(Long.parseLong((String) element)));
-			}
-		});
-		
-		binder.registerCustomEditor(Fornecedor.class, "fornecedorVencedor", new PropertyEditorSupport() {
-			@Override
-			public void setAsText(final String id) {
-				Fornecedor fornecedor = fornecedorService.getFornecedor(Long.parseLong(id));
-				setValue(fornecedor);
-			}
-		});
-		
-		binder.registerCustomEditor(GerenteAdministradora.class, "gerenteAdmin", new PropertyEditorSupport() {
-			@Override
-			public void setAsText(final String id) {
-				GerenteAdministradora gerenteAdmin = gerenteAdminService.getGerente(Long.parseLong(id));
-				setValue(gerenteAdmin);
-			}
-		});
+	protected void initBinder(final HttpServletRequest request,
+			final ServletRequestDataBinder binder) throws Exception {
+		binder.registerCustomEditor(Usuario.class, "usuario",
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Usuario usuario = usuarioService.buscaUsuario(Long
+								.parseLong(id));
+						setValue(usuario);
+					}
+				});
+
+		binder.registerCustomEditor(Subcategoria.class, "subcategoria",
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Subcategoria subcategoria = subcategoriaService
+								.getSubcategoria(Long.parseLong(id));
+						setValue(subcategoria);
+					}
+				});
+
+		binder.registerCustomEditor(List.class, "fornecedores",
+				new CustomCollectionEditor(List.class) {
+					@Override
+					protected Object convertElement(final Object element) {
+						return (element == null ? null
+								: fornecedorService.getFornecedor(Long
+										.parseLong((String) element)));
+					}
+				});
+
+		binder.registerCustomEditor(Fornecedor.class, "fornecedorVencedor",
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Fornecedor fornecedor = fornecedorService
+								.getFornecedor(Long.parseLong(id));
+						setValue(fornecedor);
+					}
+				});
+
+		binder.registerCustomEditor(GerenteAdministradora.class,
+				"gerenteAdmin", new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						GerenteAdministradora gerenteAdmin = gerenteAdminService
+								.getGerente(Long.parseLong(id));
+						setValue(gerenteAdmin);
+					}
+				});
 	}
 }
