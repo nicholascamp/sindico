@@ -4,10 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="sindico"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-		<h1>Cotacao ${cotacao.codigo}</h1>
-		<table style="margin: 10px;">
-			
-			
+		<h1>Cotação ${cotacao.codigo}</h1>
+		<table style="margin: 10px;">		
 			<tr>
 				<td>Status:</td>
 				<td>${cotacao.status }</td>
@@ -18,10 +16,10 @@
 			</tr>
 			<tr>
 				<td>Usuário:</td>
-				<c:if test="${! empty cotacao.usuarioSimples }">
+				<c:if test="${! empty cotacao.usuario }">
 					<td>${cotacao.usuario.nome }</td>
 				</c:if>
-				<c:if test="${empty cotacao.usuarioSimples }">
+				<c:if test="${empty cotacao.usuario }">
 					<td>Sem usuário</td>
 				</c:if>
 			</tr>
@@ -36,20 +34,12 @@
 			</tr>	
 			<tr>
 				<td>Fornecedores Concorrentes:</td>
-				<td>
-					<c:if test="${empty cotacao.fornecedores }">
-							<tr>
-								<td>Nenhum fornecedor encontrado.</td>
-							</tr>
-						</c:if>
-						<c:if test="${! empty cotacao.fornecedores }">
-							<c:forEach items="${cotacao.fornecedores } var="fornecedor">
-								<div>
-									<label>Nome:</label> ${fornecedor.nome }								
-								</div>
-							</c:forEach>
-						</c:if>
-				</td>
+				<c:if test="${empty cotacao.fornecedores }">
+					<td>Nenhum fornecedor encontrado.</td>
+				</c:if>
+				<c:if test="${! empty cotacao.fornecedores }">
+					<td>Há fornecedores</td>
+				</c:if>
 			</tr>	
 			<tr>
 				<td>Fornecedor Vencedor da Cotação:</td>

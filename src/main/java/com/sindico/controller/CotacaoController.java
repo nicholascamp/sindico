@@ -116,7 +116,7 @@ public class CotacaoController {
 
 	@InitBinder
 	protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) throws Exception {
-		binder.registerCustomEditor(Usuario.class, "usuarioSimples", new PropertyEditorSupport() {
+		binder.registerCustomEditor(Usuario.class, "usuario", new PropertyEditorSupport() {
 			@Override
 			public void setAsText(final String id) {
 				Usuario usuario = usuarioService.buscaUsuario(Long.parseLong(id));
