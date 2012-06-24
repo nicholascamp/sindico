@@ -54,7 +54,7 @@
 		</tr>
 	</table>
 	<div>
-		<a href="/sindico/usuario/lista" title="Lista Usuarios">Listar
+		<a href="<c:url value='/listaUsuarios' />" title="Lista Usuarios">Listar
 			Usuarios</a>
 	</div>
 </body>

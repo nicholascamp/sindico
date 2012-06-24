@@ -60,11 +60,11 @@
 			<tiles:insertAttribute name="body" />
 		</div>
 
-			<hr noshade="noshade" size="1" width="100%">
-			<sec:authorize ifAnyGranted="ROLE_USUARIO">
-				<a href="<c:url value="/j_spring_security_logout" />"> Logout</a>
-			</sec:authorize>
-			<tiles:insertAttribute name="footer" />
+		<hr noshade="noshade" size="1" width="100%">
+		<sec:authorize ifAnyGranted="ROLE_USUARIO">
+			<a href="<c:url value="/j_spring_security_logout" />"> Logout</a>
+		</sec:authorize>
+		<tiles:insertAttribute name="footer" />
 	</div>
 </body>
 </html>
