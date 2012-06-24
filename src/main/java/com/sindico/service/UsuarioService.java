@@ -37,6 +37,9 @@ public interface UsuarioService {
 	 */
 	@Transactional
 	public Usuario atualizaUsuario(final Usuario usuario);
+	
+	@Transactional
+	public Usuario buscaUsuario(Long id);
 
 	/**
 	 * Sets the admin.

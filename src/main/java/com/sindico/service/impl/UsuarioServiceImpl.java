@@ -149,4 +149,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuario;
 	}
 
+	@Override
+	public Usuario buscaUsuario(Long id) {
+		// TODO Auto-generated method stub
+		return usuarioDAO.getUsuario(id);
+	}
+
 }
