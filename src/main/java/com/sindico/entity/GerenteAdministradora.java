@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.NotNull;
 
 /**
@@ -35,6 +38,7 @@ public class GerenteAdministradora {
 
 	/** The predios. */
 	@OneToMany(mappedBy = "gerente")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Predio>	predios		= new ArrayList<Predio>();
 
 	/** The data cadastro. */
@@ -68,7 +72,8 @@ public class GerenteAdministradora {
 	private String				senha;
 
 	/** The cotacoes. */
-	@OneToMany(mappedBy = "gerenteAdmin")
+	@OneToMany(mappedBy = "gerenteAdmin", fetch = FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Cotacao>	cotacoes	= new ArrayList<Cotacao>();
 
 	/**
