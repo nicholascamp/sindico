@@ -151,6 +151,12 @@
 	</definition>
 	
 	<!-- Administradora -->
+	<definition name="administradoraIndex" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Administradoras" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/administradora/administradoraIndex.jsp" />
+	</definition>
+	
 	<definition name="listaAdministradoras" extends="baseLayout">
 		<put-attribute name="title" value="Sindico.com - Administradoras" />
 		<put-attribute name="body"

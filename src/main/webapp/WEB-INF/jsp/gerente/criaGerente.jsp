@@ -48,7 +48,7 @@
 		<tr>
 			<td><strong>Prédios:</strong></td>
 			<td>
-				<form:checkboxes items="${predios }" path="predios" itemLabel="nome" itemValue="codigo" />
+				<form:checkboxes items="${predios }" path="predios" itemLabel="nome" itemValue="id" />
 			</td>
 		</tr>
 		<tr>

@@ -1,7 +1,15 @@
 package com.sindico.controller;
 
+import java.beans.PropertyEditorSupport;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +35,13 @@ public class AdministradoraController {
 	
 	@Autowired
 	PredioService predioService;
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/administradoraIndex")
+	public ModelAndView index(){
+		ModelAndView mv = new ModelAndView("/administradora/administradoraIndex");
+		mv.setViewName("administradoraIndex");
+		return mv;
+	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/listaAdministradoras")
 	public ModelAndView indexAdministradora() {
@@ -144,5 +159,23 @@ public class AdministradoraController {
 		ModelAndView mv = new ModelAndView("/gerente/gerentes", "gerentes", gerenteService.listGerentes());
 		mv.setViewName("listaGerentes");
 		return mv;
+	}
+	
+	@InitBinder
+	protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) throws Exception {
+		binder.registerCustomEditor(List.class, "predios", new CustomCollectionEditor(List.class) {
+			@Override
+			protected Object convertElement(final Object element) {
+				return (element == null ? null : predioService.getPredio(Long.parseLong((String) element)));
+			}
+		});
+
+		binder.registerCustomEditor(Administradora.class, "administradora", new PropertyEditorSupport() {
+			@Override
+			public void setAsText(final String id) {
+				Administradora admin = administradoraService.getAdministradora(Long.parseLong(id));
+				setValue(admin);
+			}
+		});
 	}
 }

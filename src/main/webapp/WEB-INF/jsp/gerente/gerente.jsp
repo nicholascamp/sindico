@@ -29,11 +29,11 @@
 	</tr>
 	<tr>
 		<td><strong>Data de Cadastro:</strong></td>
-		<td>${gerente.dataCadastro }</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td><strong>Administradora:</strong></td>
-		<td>${gerente.administradora }</td>
+		<td>${gerente.administradora.nome }</td>
 	</tr>
 	<tr>
 		<td><strong>Prédios:</strong></td>
@@ -43,5 +43,5 @@
 	</tr>
 </table>
 <div>
-	<a href="/sindico/listaCategorias" title="Lista Categorias">Listar Categorias</a>
+	<a href="/sindico/listaGerentes" title="Lista Gerentes">Listar Gerentes</a>
 </div>
