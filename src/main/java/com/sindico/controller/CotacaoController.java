@@ -96,6 +96,7 @@ public class CotacaoController {
 	@RequestMapping(method = RequestMethod.GET, value = "/editaCotacao")
 	public ModelAndView editCotacao(final Long id) {
 		ModelAndView mv = new ModelAndView("/cotacao/editaCotacao", "cotacao", cotacaoService.getCotacao(id));
+		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		mv.setViewName("editaCotacao");
 		return mv;
 	}
@@ -103,6 +104,21 @@ public class CotacaoController {
 	@RequestMapping(method = RequestMethod.POST, value = "/editaCotacao")
 	public ModelAndView updateCotacao(@ModelAttribute("cotacao") final Cotacao cotacao) {
 		cotacao.setDataAtualizacao(new Date());
+		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.atualizarCotacao(cotacao));
+		mv.setViewName("mostraCotacao");
+		return mv;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/editaCotacaoAdmin")
+	public ModelAndView editCotacaoAdmin(Long id){
+		ModelAndView mv = new ModelAndView("/cotacao/editaCotacaoAdmin", "cotacao", cotacaoService.getCotacao(id));
+		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
+		mv.setViewName("editaCotacaoAdmin");
+		return mv;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/editaCotacaoAdmin")
+	public ModelAndView updateCotacaoAdmin(@ModelAttribute("cotacao") final Cotacao cotacao){
 		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.atualizarCotacao(cotacao));
 		mv.setViewName("mostraCotacao");
 		return mv;
@@ -115,6 +131,7 @@ public class CotacaoController {
 		mv.setViewName("listaCotacoes");
 		return mv;
 	}
+	
 
 	@InitBinder
 	protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) throws Exception {

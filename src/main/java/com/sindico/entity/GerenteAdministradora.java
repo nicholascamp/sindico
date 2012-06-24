@@ -31,7 +31,7 @@ public class GerenteAdministradora {
 	private Long				id;
 
 	/** The administradora. */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ADMINISTRADORA_ID")
 	@NotNull(message = "Gerente deve pertencer a uma Administradora")
 	private Administradora		administradora;
