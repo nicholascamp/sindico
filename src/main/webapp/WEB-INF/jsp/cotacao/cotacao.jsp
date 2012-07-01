@@ -38,7 +38,11 @@
 					<td>Nenhum fornecedor encontrado.</td>
 				</c:if>
 				<c:if test="${! empty cotacao.fornecedores }">
-					<td>Há fornecedores</td>
+					<td>
+						<c:forEach items="${cotacao.fornecedores }" var="fornecedor">
+							${fornecedor.nome }, &nbsp;
+						</c:forEach>
+					</td>
 				</c:if>
 			</tr>	
 			<tr>

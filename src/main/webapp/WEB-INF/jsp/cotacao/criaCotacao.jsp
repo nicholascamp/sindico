@@ -19,10 +19,11 @@
 				<tr>
 					<td>Subcategoria:</td>
 					<td>
-						<c:if test="${ !empty subcategoria }">
-							<form:label path="subcategoria" value="${subcategoria.id }">${subcategoria.title }</form:label>
+						<c:if test="${ !empty cotacao.subcategoria }">
+							<input type="hidden" name="subcategoria" value="${cotacao.subcategoria.id }" />
+							<label>${cotacao.subcategoria.title }</label>
 						</c:if>
-						<c:if test="${ empty subcategoria }">
+						<c:if test="${ empty cotacao.subcategoria }">
 							Selecione uma Subcategoria.
 						</c:if>
 					</td>

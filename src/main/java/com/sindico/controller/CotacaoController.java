@@ -4,6 +4,7 @@
 package com.sindico.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -54,8 +56,6 @@ public class CotacaoController {
 
 	@Autowired
 	GerenteAdministradoraService	gerenteAdminService;
-	
-	protected Subcategoria subcategoria;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/listaCotacoes")
 	public ModelAndView indexCotacao() {
@@ -88,8 +88,6 @@ public class CotacaoController {
 		
 		ModelAndView mv = new ModelAndView("/cotacao/criCotacao", "cotacao", cotacao);
 		mv.addObject("fornecedores", fornecedorService.listarFornecedorPorSubcategoria(cotacao.getSubcategoria()));
-		mv.addObject("subcategoria", cotacao.getSubcategoria());
-		subcategoria = cotacao.getSubcategoria();
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		mv.setViewName("criaCotacao");
 		return mv;
@@ -98,13 +96,11 @@ public class CotacaoController {
 	@RequestMapping(method = RequestMethod.POST, value = "/criaCotacao")
 	public ModelAndView createCotacao(
 			@ModelAttribute("cotacao") final Cotacao cotacao) {
-		//System.out.println(cotacao.getSubcategoria());
 		
 		cotacao.setData(new Date());
 		cotacao.setStatus(Status.ABERTO);
 		cotacao.setImpropria(false);
 		cotacao.setDataAtualizacao(new Date());
-		cotacao.setSubcategoria(subcategoria);
 		Usuario user = usuarioService.getLoggedUser();
 		cotacao.setUsuario(user);
 		// COMO ACHAR O GERENTE DA ADMINISTRADORA
@@ -117,9 +113,10 @@ public class CotacaoController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/editaCotacao")
 	public ModelAndView editCotacao(final Long id) {
+		Cotacao cotacao = cotacaoService.getCotacao(id);
 		ModelAndView mv = new ModelAndView("/cotacao/editaCotacao", "cotacao",
-				cotacaoService.getCotacao(id));
-		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
+				cotacao);
+		
 		mv.setViewName("editaCotacao");
 		return mv;
 	}
@@ -128,6 +125,7 @@ public class CotacaoController {
 	public ModelAndView updateCotacao(
 			@ModelAttribute("cotacao") final Cotacao cotacao) {
 		cotacao.setDataAtualizacao(new Date());
+		cotacao.setUsuario(usuarioService.getLoggedUser());
 		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",
 				cotacaoService.atualizarCotacao(cotacao));
 		mv.setViewName("mostraCotacao");
@@ -174,12 +172,14 @@ public class CotacaoController {
 						setValue(usuario);
 					}
 				});
+		
+		binder.registerCustomEditor(Date.class, null, 
+    			new CustomDateEditor(new SimpleDateFormat("dd/mm/yy"), false));
 
-		binder.registerCustomEditor(Subcategoria.class, "subcategoria",
+		binder.registerCustomEditor(Subcategoria.class,
 				new PropertyEditorSupport() {
 					@Override
 					public void setAsText(final String id) {
-						System.out.println(id);
 						Subcategoria subcategoria = subcategoriaService
 								.getSubcategoria(Long.parseLong(id));						
 						setValue(subcategoria);

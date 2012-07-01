@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sindico.dao.CotacaoDAO;
+import com.sindico.dao.RespostaCotacaoDAO;
 import com.sindico.entity.Cotacao;
+import com.sindico.entity.RespostaCotacao;
 import com.sindico.service.CotacaoService;
 
 // TODO: Auto-generated Javadoc
@@ -23,6 +25,9 @@ public class CotacaoServiceImpl implements CotacaoService {
 
 	@Autowired
 	CotacaoDAO	cotacaoDAO;
+	
+	@Autowired
+	RespostaCotacaoDAO respostaCotacaoDAO;
 
 	/*
 	 * (non-Javadoc)
@@ -90,6 +95,31 @@ public class CotacaoServiceImpl implements CotacaoService {
 	public Cotacao getCotacao(final Long id) {
 		Cotacao cotacao = cotacaoDAO.getCotacao(id);
 		return cotacao;
+	}
+
+	@Override
+	public RespostaCotacao getRespostaCotacao(Long id) {
+		return respostaCotacaoDAO.getRespostaCotacao(id);
+	}
+
+	@Override
+	public List<RespostaCotacao> listRespostasCotacao() {
+		return respostaCotacaoDAO.getLista();
+	}
+
+	@Override
+	public RespostaCotacao updateRespostaCotacao(RespostaCotacao respostaCotacao) {
+		return respostaCotacaoDAO.atualizaRespostaCotacao(respostaCotacao);
+	}
+
+	@Override
+	public void removeRespostaCotacao(Long id) {
+		respostaCotacaoDAO.removeRespostaCotacao(id);
+	}
+
+	@Override
+	public RespostaCotacao criaRespostaCotacao(RespostaCotacao respostaCotacao) {
+		return respostaCotacaoDAO.criaRespostaCotacao(respostaCotacao);
 	}
 
 }
