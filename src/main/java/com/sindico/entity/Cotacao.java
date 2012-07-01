@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -79,6 +80,9 @@ public class Cotacao {
 	/** The titulo. */
 	@Column(name = "TITULO", nullable = false)
 	private String					titulo;
+	
+	@OneToMany(mappedBy = "cotacao")
+	private Collection<RespostaCotacao> respostasCotacao = new ArrayList<RespostaCotacao>();
 
 	/**
 	 * Gets the titulo.

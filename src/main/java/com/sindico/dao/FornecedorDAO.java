@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Fornecedor;
+import com.sindico.entity.Subcategoria;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -162,6 +163,22 @@ public class FornecedorDAO {
 						+ cnpj + "%'");
 		fornecedores = query.list();
 
+		return fornecedores;
+	}
+
+	public List<Fornecedor> listarFornecedorPorSubcategoria(
+			Subcategoria subcategoria) {
+		List<Fornecedor> fornecedoresAux = getLista();
+		
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		for(Fornecedor fornecedor : fornecedoresAux){
+			for(Subcategoria subcategoriaAux : fornecedor.getSubcategorias()){
+				if(subcategoriaAux.getId().equals(subcategoria.getId())){
+					fornecedores.add(fornecedor);
+					break;
+				}					
+			}
+		}
 		return fornecedores;
 	}
 

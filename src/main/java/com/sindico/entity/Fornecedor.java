@@ -130,6 +130,9 @@ public class Fornecedor {
 	@Column(name = "RECEBE_NEWS_EMAIL")
 	private boolean						recebeNewsEmail;
 
+	@OneToMany(mappedBy = "fornecedor")
+	private Collection<RespostaCotacao> respostasCotacao = new ArrayList<RespostaCotacao>();
+	
 	/** The cotacoes. */
 	@ManyToMany(mappedBy = "fornecedores")
 	private Collection<Cotacao>			cotacoes			= new ArrayList<Cotacao>();

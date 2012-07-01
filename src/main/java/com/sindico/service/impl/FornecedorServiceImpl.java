@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.sindico.dao.FornecedorDAO;
 import com.sindico.entity.Fornecedor;
+import com.sindico.entity.Subcategoria;
 import com.sindico.service.FornecedorService;
 
 // TODO: Auto-generated Javadoc
@@ -127,6 +128,12 @@ public class FornecedorServiceImpl implements FornecedorService {
 	@Override
 	public List<Fornecedor> listarFornecedoresPorCNPJ(final String cnpj) {
 		return fornecedorDAO.listarFornecedorPorCNPJ(cnpj);
+	}
+
+	@Override
+	public List<Fornecedor> listarFornecedorPorSubcategoria(
+			Subcategoria subcategoria) {
+		return fornecedorDAO.listarFornecedorPorSubcategoria(subcategoria);
 	}
 
 }

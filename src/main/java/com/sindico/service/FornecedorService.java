@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Fornecedor;
+import com.sindico.entity.Subcategoria;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -74,6 +75,9 @@ public interface FornecedorService {
 	 */
 	@Transactional
 	List<Fornecedor> listarFornecedorPorNome(String nome);
+	
+	@Transactional
+	List<Fornecedor> listarFornecedorPorSubcategoria(Subcategoria subcategoria);
 
 	/**
 	 * Buscar fornecedor por endereco.

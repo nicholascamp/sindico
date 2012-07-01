@@ -1,14 +1,18 @@
 package com.sindico.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.NotNull;
@@ -90,6 +94,18 @@ public class Predio implements Serializable {
 	/** The gerente recebe cotacao. */
 	@Column(name = "GERENTE_COTACAO")
 	private boolean gerenteRecebeCotacao;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "predio")
+	private Collection<Usuario> usuarios = new ArrayList<Usuario>();
+
+		
+	public Collection<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Collection<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 
 	/**
 	 * Instantiates a new predio.

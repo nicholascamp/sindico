@@ -76,6 +76,17 @@ public class CotacaoController {
 		ModelAndView mv = new ModelAndView("/cotacao/criaCotacao", "cotacao",
 				new Cotacao());
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
+		mv.addObject("fornecedores", null);
+		mv.setViewName("criaCotacao");
+		return mv;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/carregaFornecedores")
+	public ModelAndView buscarFornecedoresPorSubcategoria(@ModelAttribute("cotacao") Cotacao cotacao){		
+		
+		ModelAndView mv = new ModelAndView("/cotacao/criCotacao", "cotacao", cotacao);
+		mv.addObject("fornecedores", fornecedorService.listarFornecedorPorSubcategoria(cotacao.getSubcategoria()));
+		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		mv.setViewName("criaCotacao");
 		return mv;
 	}
@@ -83,6 +94,8 @@ public class CotacaoController {
 	@RequestMapping(method = RequestMethod.POST, value = "/criaCotacao")
 	public ModelAndView createCotacao(
 			@ModelAttribute("cotacao") final Cotacao cotacao) {
+		System.out.println(cotacao.getSubcategoria());
+		
 		cotacao.setData(new Date());
 		cotacao.setStatus(Status.ABERTO);
 		cotacao.setImpropria(false);
@@ -141,7 +154,8 @@ public class CotacaoController {
 				cotacaoService.listCotacoes());
 		mv.setViewName("listaCotacoes");
 		return mv;
-	}
+	}	
+	
 
 	@InitBinder
 	protected void initBinder(final HttpServletRequest request,

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.NotNull;
@@ -25,6 +26,14 @@ public class RespostaCotacao {
 	@GeneratedValue
 	@Column(name = "RESPOSTA_COTACAO_ID")
 	private Long				id;
+	
+	@ManyToOne
+	@JoinColumn(name = "COTACAO_ID")
+	private Cotacao cotacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "FORNECEDOR_ID")
+	private Fornecedor fornecedor;
 
 	/** The primeira resposta. */
 	@Column(name = "PRIMEIRA_RESPOSTA", columnDefinition = "TEXT")
@@ -71,6 +80,22 @@ public class RespostaCotacao {
 	/** The arquivo foto. */
 	@Column(name = "ARQUIVO_FOTO")
 	private String				arquivoFoto;
+			
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	public Cotacao getCotacao() {
+		return cotacao;
+	}
+
+	public void setCotacao(Cotacao cotacao) {
+		this.cotacao = cotacao;
+	}
 
 	public Long getId() {
 		return id;

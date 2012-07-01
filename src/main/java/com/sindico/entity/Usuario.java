@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -93,6 +95,18 @@ public class Usuario implements Serializable, UserDetails {
 	/** The admin. */
 	@Column(name = "ADMIN")
 	private boolean				admin				= false;
+	
+	@ManyToOne
+	@JoinColumn(name = "PREDIO_ID")
+	private Predio predio;
+	
+	public Predio getPredio() {
+		return predio;
+	}
+
+	public void setPredio(Predio predio) {
+		this.predio = predio;
+	}
 
 	/**
 	 * Instantiates a new usuario.
