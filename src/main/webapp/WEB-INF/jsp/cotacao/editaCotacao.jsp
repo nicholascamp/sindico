@@ -11,10 +11,15 @@
 	<table>
 		<tr>
 			<td>Subcategoria:</td>
-			<td><form:select path="subcategoria">
-					<form:options items="${subcategorias }" itemLabel="title"
-						itemValue="id" />
-				</form:select>
+			<td><form:label path="subcategoria" value="${subcategoria.id }">${subcategoria.title }</form:label></td>
+		</tr>
+		<tr>
+			<td>Fornecedores:</td>
+			<td>
+				<c:forEach items="${fornecedores }" var="fornecedor">
+					${fornecedor.nome }, &nbsp;
+				</c:forEach>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">Descrição:</td>

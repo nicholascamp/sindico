@@ -54,6 +54,8 @@ public class CotacaoController {
 
 	@Autowired
 	GerenteAdministradoraService	gerenteAdminService;
+	
+	protected Subcategoria subcategoria;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/listaCotacoes")
 	public ModelAndView indexCotacao() {
@@ -86,6 +88,8 @@ public class CotacaoController {
 		
 		ModelAndView mv = new ModelAndView("/cotacao/criCotacao", "cotacao", cotacao);
 		mv.addObject("fornecedores", fornecedorService.listarFornecedorPorSubcategoria(cotacao.getSubcategoria()));
+		mv.addObject("subcategoria", cotacao.getSubcategoria());
+		subcategoria = cotacao.getSubcategoria();
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		mv.setViewName("criaCotacao");
 		return mv;
@@ -94,12 +98,13 @@ public class CotacaoController {
 	@RequestMapping(method = RequestMethod.POST, value = "/criaCotacao")
 	public ModelAndView createCotacao(
 			@ModelAttribute("cotacao") final Cotacao cotacao) {
-		System.out.println(cotacao.getSubcategoria());
+		//System.out.println(cotacao.getSubcategoria());
 		
 		cotacao.setData(new Date());
 		cotacao.setStatus(Status.ABERTO);
 		cotacao.setImpropria(false);
 		cotacao.setDataAtualizacao(new Date());
+		cotacao.setSubcategoria(subcategoria);
 		Usuario user = usuarioService.getLoggedUser();
 		cotacao.setUsuario(user);
 		// COMO ACHAR O GERENTE DA ADMINISTRADORA
@@ -174,8 +179,9 @@ public class CotacaoController {
 				new PropertyEditorSupport() {
 					@Override
 					public void setAsText(final String id) {
+						System.out.println(id);
 						Subcategoria subcategoria = subcategoriaService
-								.getSubcategoria(Long.parseLong(id));
+								.getSubcategoria(Long.parseLong(id));						
 						setValue(subcategoria);
 					}
 				});

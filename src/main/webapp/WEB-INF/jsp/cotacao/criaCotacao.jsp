@@ -20,7 +20,7 @@
 					<td>Subcategoria:</td>
 					<td>
 						<c:if test="${ !empty subcategoria }">
-							${subcategoria }
+							<form:label path="subcategoria" value="${subcategoria.id }">${subcategoria.title }</form:label>
 						</c:if>
 						<c:if test="${ empty subcategoria }">
 							Selecione uma Subcategoria.
@@ -33,11 +33,11 @@
 					</td>
 					<td>
 						<c:if test="${ empty fornecedores }">
-							Selecione uma Subcategoria.
+							Nenhum fornecedor encontrado para a Subcategoria selecionada.
 						</c:if>
 						<c:if test="${ !empty fornecedores }">
 							<form:select path="fornecedores" multiple="true" size="10">
-								<form:options items="${fornecedores }" itemLabel="title" itemValue="id" />
+								<form:options items="${fornecedores }" itemLabel="nome" itemValue="id" />
 							</form:select>
 						</c:if>						
 					</td>
