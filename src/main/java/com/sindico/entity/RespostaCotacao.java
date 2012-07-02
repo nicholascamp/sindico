@@ -38,6 +38,9 @@ public class RespostaCotacao {
 	/** The primeira resposta. */
 	@Column(name = "PRIMEIRA_RESPOSTA", columnDefinition = "TEXT")
 	private String				primeiraResposta;
+	
+	@Column(name = "ULTIMA_RESPOSTA", columnDefinition = "TEXT")
+	private String ultimaResposta;
 
 	/** The valor. */
 	@Column(name = "VALOR", nullable = false)
@@ -77,10 +80,20 @@ public class RespostaCotacao {
 																			// QUE
 																			// É
 
+	
+	
 	/** The arquivo foto. */
 	@Column(name = "ARQUIVO_FOTO")
 	private String				arquivoFoto;
 			
+	public String getUltimaResposta() {
+		return ultimaResposta;
+	}
+
+	public void setUltimaResposta(String ultimaResposta) {
+		this.ultimaResposta = ultimaResposta;
+	}
+
 	public Fornecedor getFornecedor() {
 		return fornecedor;
 	}
