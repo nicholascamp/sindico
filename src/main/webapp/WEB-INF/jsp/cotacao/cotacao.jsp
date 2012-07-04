@@ -60,5 +60,9 @@
 			</tr>
 		</table>
 		<div>
+			<c:url value="/listaRespostaCotacaoPorCotacao" var="Resposta">
+				<c:param name="id" value="${cotacao.id }" />
+			</c:url>
+			<a href="${Resposta }">Listar Respostas das Cotações</a>
 			<a href="<c:url value='/listaCotacoes' />" title="Lista Cotações">Listar Cotações</a>
 		</div>

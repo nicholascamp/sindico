@@ -32,6 +32,10 @@ public class RespostaCotacao {
 	private Cotacao cotacao;
 	
 	@ManyToOne
+	@JoinColumn(name = "PREDIO_ID")
+	private Predio predio;
+	
+	@ManyToOne
 	@JoinColumn(name = "FORNECEDOR_ID")
 	private Fornecedor fornecedor;
 
@@ -86,6 +90,14 @@ public class RespostaCotacao {
 	@Column(name = "ARQUIVO_FOTO")
 	private String				arquivoFoto;
 			
+	public Predio getPredio() {
+		return predio;
+	}
+
+	public void setPredio(Predio predio) {
+		this.predio = predio;
+	}
+
 	public String getUltimaResposta() {
 		return ultimaResposta;
 	}

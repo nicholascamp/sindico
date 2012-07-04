@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Predio;
+import com.sindico.entity.Usuario;
 
 /**
  * The Interface PredioService.
@@ -80,5 +81,8 @@ public interface PredioService {
 	 */
 	@Transactional
 	Predio getPredio(Long id);
+	
+	@Transactional
+	Predio getPredioUsuario(Usuario usuario);
 
 }

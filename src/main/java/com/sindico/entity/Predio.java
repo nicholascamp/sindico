@@ -97,8 +97,19 @@ public class Predio implements Serializable {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "predio")
 	private Collection<Usuario> usuarios = new ArrayList<Usuario>();
+	
+	@OneToMany(mappedBy = "predio")
+	private Collection<RespostaCotacao> respostasCotacao = new ArrayList<RespostaCotacao>();
+	
+	
+	public Collection<RespostaCotacao> getRespostasCotacao() {
+		return respostasCotacao;
+	}
 
-		
+	public void setRespostasCotacao(Collection<RespostaCotacao> respostasCotacao) {
+		this.respostasCotacao = respostasCotacao;
+	}
+
 	public Collection<Usuario> getUsuarios() {
 		return usuarios;
 	}
