@@ -100,16 +100,12 @@ public class Usuario implements Serializable, UserDetails {
 	/** The admin. */
 	@Column(name = "ADMIN")
 	private boolean				admin				= false;
-	
-	@ManyToOne
-	@JoinColumn(name = "PREDIO_ID")
-	private Predio predio;
-	
+
 	public Predio getPredio() {
 		return predio;
 	}
 
-	public void setPredio(Predio predio) {
+	public void setPredio(final Predio predio) {
 		this.predio = predio;
 	}
 
