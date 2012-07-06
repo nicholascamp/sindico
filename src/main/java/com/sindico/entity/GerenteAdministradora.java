@@ -33,6 +33,7 @@ public class GerenteAdministradora {
 	/** The administradora. */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ADMINISTRADORA_ID")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@NotNull(message = "Gerente deve pertencer a uma Administradora")
 	private Administradora		administradora;
 

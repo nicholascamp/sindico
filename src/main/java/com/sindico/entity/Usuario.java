@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -50,6 +52,7 @@ public class Usuario implements Serializable, UserDetails {
 	private String				password;
 
 	/** The username. */
+	// Retirar
 	@Column(name = "USERNAME", nullable = false, unique = true)
 	@NotNull(message = "Usuário deve ter um login")
 	private String				username;
@@ -89,6 +92,10 @@ public class Usuario implements Serializable, UserDetails {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
 	private Collection<Cotacao>	cotacoes			= new ArrayList<Cotacao>();
+
+	@ManyToOne
+	@JoinColumn(name = "PREDIO_ID")
+	private Predio				predio;
 
 	/** The admin. */
 	@Column(name = "ADMIN")
