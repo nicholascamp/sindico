@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.sindico.dao.PredioDAO;
 import com.sindico.entity.Predio;
+import com.sindico.entity.Usuario;
 import com.sindico.service.PredioService;
 
 /**
@@ -102,5 +103,10 @@ public class PredioServiceImpl implements PredioService {
 	public Predio getPredio(final Long id) {
 		Predio predio = predioDAO.getPredio(id);
 		return predio;
+	}
+
+	@Override
+	public Predio getPredioUsuario(Usuario usuario) {
+		return predioDAO.getPredio(usuario);
 	}
 }

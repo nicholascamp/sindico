@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.NotNull;
@@ -25,10 +26,25 @@ public class RespostaCotacao {
 	@GeneratedValue
 	@Column(name = "RESPOSTA_COTACAO_ID")
 	private Long				id;
+	
+	@ManyToOne
+	@JoinColumn(name = "COTACAO_ID")
+	private Cotacao cotacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "PREDIO_ID")
+	private Predio predio;
+	
+	@ManyToOne
+	@JoinColumn(name = "FORNECEDOR_ID")
+	private Fornecedor fornecedor;
 
 	/** The primeira resposta. */
 	@Column(name = "PRIMEIRA_RESPOSTA", columnDefinition = "TEXT")
 	private String				primeiraResposta;
+	
+	@Column(name = "ULTIMA_RESPOSTA", columnDefinition = "TEXT")
+	private String ultimaResposta;
 
 	/** The valor. */
 	@Column(name = "VALOR", nullable = false)
@@ -65,9 +81,43 @@ public class RespostaCotacao {
 	@Column(name = "PARCELA_PARA")
 	private int					parcelaPara;
 
+	
+	
 	/** The arquivo foto. */
 	@Column(name = "ARQUIVO_FOTO")
 	private String				arquivoFoto;
+			
+	public Predio getPredio() {
+		return predio;
+	}
+
+	public void setPredio(Predio predio) {
+		this.predio = predio;
+	}
+
+	public String getUltimaResposta() {
+		return ultimaResposta;
+	}
+
+	public void setUltimaResposta(String ultimaResposta) {
+		this.ultimaResposta = ultimaResposta;
+	}
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	public Cotacao getCotacao() {
+		return cotacao;
+	}
+
+	public void setCotacao(Cotacao cotacao) {
+		this.cotacao = cotacao;
+	}
 
 	public Long getId() {
 		return id;

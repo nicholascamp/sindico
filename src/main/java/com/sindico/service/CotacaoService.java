@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Cotacao;
+import com.sindico.entity.RespostaCotacao;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -65,5 +66,19 @@ public interface CotacaoService {
 	
 	@Transactional
 	boolean removerCotacao(Long id);
-
+	
+	@Transactional
+	RespostaCotacao getRespostaCotacao(Long id);
+	
+	@Transactional
+	List<RespostaCotacao> listRespostasCotacao();
+	
+	@Transactional
+	RespostaCotacao updateRespostaCotacao(RespostaCotacao respostaCotacao);
+	
+	@Transactional
+	void removeRespostaCotacao(Long id);
+	
+	@Transactional
+	RespostaCotacao criaRespostaCotacao(RespostaCotacao respostaCotacao);
 }

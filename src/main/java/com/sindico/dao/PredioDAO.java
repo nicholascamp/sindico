@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sindico.entity.Predio;
+import com.sindico.entity.Usuario;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -84,6 +85,12 @@ public class PredioDAO {
 		predio = query.list();
 
 		return predio;
+	}
+	
+	public Predio getPredio(Usuario usuario){		
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select usuario.predio from Usuario usuario WHERE usuario.id = " + usuario.getId());
+		return (Predio) query.uniqueResult();
 	}
 
 	/**

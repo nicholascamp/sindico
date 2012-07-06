@@ -38,7 +38,11 @@
 					<td>Nenhum fornecedor encontrado.</td>
 				</c:if>
 				<c:if test="${! empty cotacao.fornecedores }">
-					<td>Há fornecedores</td>
+					<td>
+						<c:forEach items="${cotacao.fornecedores }" var="fornecedor">
+							${fornecedor.nome }, &nbsp;
+						</c:forEach>
+					</td>
 				</c:if>
 			</tr>	
 			<tr>
@@ -56,5 +60,9 @@
 			</tr>
 		</table>
 		<div>
+			<c:url value="/listaRespostaCotacaoPorCotacao" var="Resposta">
+				<c:param name="id" value="${cotacao.id }" />
+			</c:url>
+			<a href="${Resposta }">Listar Respostas das Cotações</a>
 			<a href="<c:url value='/listaCotacoes' />" title="Lista Cotações">Listar Cotações</a>
 		</div>

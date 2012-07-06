@@ -100,6 +100,18 @@ public class Usuario implements Serializable, UserDetails {
 	/** The admin. */
 	@Column(name = "ADMIN")
 	private boolean				admin				= false;
+	
+	@ManyToOne
+	@JoinColumn(name = "PREDIO_ID")
+	private Predio predio;
+	
+	public Predio getPredio() {
+		return predio;
+	}
+
+	public void setPredio(Predio predio) {
+		this.predio = predio;
+	}
 
 	/**
 	 * Instantiates a new usuario.

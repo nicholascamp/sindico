@@ -4,6 +4,7 @@
 package com.sindico.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -76,6 +78,17 @@ public class CotacaoController {
 		ModelAndView mv = new ModelAndView("/cotacao/criaCotacao", "cotacao",
 				new Cotacao());
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
+		mv.addObject("fornecedores", null);
+		mv.setViewName("criaCotacao");
+		return mv;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/carregaFornecedores")
+	public ModelAndView buscarFornecedoresPorSubcategoria(@ModelAttribute("cotacao") Cotacao cotacao){		
+		
+		ModelAndView mv = new ModelAndView("/cotacao/criCotacao", "cotacao", cotacao);
+		mv.addObject("fornecedores", fornecedorService.listarFornecedorPorSubcategoria(cotacao.getSubcategoria()));
+		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		mv.setViewName("criaCotacao");
 		return mv;
 	}
@@ -83,6 +96,7 @@ public class CotacaoController {
 	@RequestMapping(method = RequestMethod.POST, value = "/criaCotacao")
 	public ModelAndView createCotacao(
 			@ModelAttribute("cotacao") final Cotacao cotacao) {
+		
 		cotacao.setData(new Date());
 		cotacao.setStatus(Status.ABERTO);
 		cotacao.setImpropria(false);
@@ -99,9 +113,10 @@ public class CotacaoController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/editaCotacao")
 	public ModelAndView editCotacao(final Long id) {
+		Cotacao cotacao = cotacaoService.getCotacao(id);
 		ModelAndView mv = new ModelAndView("/cotacao/editaCotacao", "cotacao",
-				cotacaoService.getCotacao(id));
-		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
+				cotacao);
+		
 		mv.setViewName("editaCotacao");
 		return mv;
 	}
@@ -110,6 +125,7 @@ public class CotacaoController {
 	public ModelAndView updateCotacao(
 			@ModelAttribute("cotacao") final Cotacao cotacao) {
 		cotacao.setDataAtualizacao(new Date());
+		cotacao.setUsuario(usuarioService.getLoggedUser());
 		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",
 				cotacaoService.atualizarCotacao(cotacao));
 		mv.setViewName("mostraCotacao");
@@ -141,7 +157,8 @@ public class CotacaoController {
 				cotacaoService.listCotacoes());
 		mv.setViewName("listaCotacoes");
 		return mv;
-	}
+	}	
+	
 
 	@InitBinder
 	protected void initBinder(final HttpServletRequest request,
@@ -155,13 +172,16 @@ public class CotacaoController {
 						setValue(usuario);
 					}
 				});
+		
+		binder.registerCustomEditor(Date.class, null, 
+    			new CustomDateEditor(new SimpleDateFormat("dd/mm/yy"), false));
 
-		binder.registerCustomEditor(Subcategoria.class, "subcategoria",
+		binder.registerCustomEditor(Subcategoria.class,
 				new PropertyEditorSupport() {
 					@Override
 					public void setAsText(final String id) {
 						Subcategoria subcategoria = subcategoriaService
-								.getSubcategoria(Long.parseLong(id));
+								.getSubcategoria(Long.parseLong(id));						
 						setValue(subcategoria);
 					}
 				});
