@@ -231,8 +231,37 @@
 			value="/WEB-INF/jsp/gerente/editaGerente.jsp" />
 	</definition>	
 	
+	<!-- Resposta Cotação -->
+	<definition name="listaRespostaCotacao" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Resposta Cotação" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/cotacao/respostaCotacao/respostas.jsp" />
+	</definition>
 
 
+	<definition name="listaRespostaCotacaoPorCotacao" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Resposta Cotação" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/cotacao/respostaCotacao/respostas.jsp" />
+	</definition>
+	
+	<definition name="mostraRespostaCotacao" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Gerentes" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/cotacao/respostaCotacao/resposta.jsp" />
+	</definition>
+	
+	<definition name="criaRespostaCotacao" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Resposta Cotação" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/cotacao/respostaCotacao/criaResposta.jsp" />
+	</definition>
+	
+	<definition name="editaRespostaCotacao" extends="baseLayout">
+		<put-attribute name="title" value="Sindico.com - Resposta Cotação" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/cotacao/respostaCotacao/editaResposta.jsp" />
+	</definition>	
 
 
 </tiles-definitions>

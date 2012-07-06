@@ -70,8 +70,8 @@ public class CotacaoServiceImpl implements CotacaoService {
 	 * @see com.sindico.service.CotacaoService#listarRespostas(java.lang.Long)
 	 */
 	@Override
-	public Cotacao listarRespostas(final Long id) {
-		return null;
+	public List<RespostaCotacao> listarRespostas(final Long id) {
+		return respostaCotacaoDAO.getLista(id);
 	}
 
 	@Override

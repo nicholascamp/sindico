@@ -59,4 +59,14 @@ public class RespostaCotacaoDAO {
 
 		return respostaCotacao;
 	}
+	
+	public List<RespostaCotacao> getLista(Long cotacaoId){
+		List<RespostaCotacao> respostaCotacao = new ArrayList<RespostaCotacao>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select respostaCotacao from RespostaCotacao respostaCotacao where respostaCotacao.cotacao = " 
+				+ cotacaoId);
+		respostaCotacao = query.list();
+
+		return respostaCotacao;
+	}
 }
