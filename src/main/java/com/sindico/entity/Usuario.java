@@ -51,12 +51,6 @@ public class Usuario implements Serializable, UserDetails {
 	@NotNull(message = "Usuário deve ter uma senha")
 	private String				password;
 
-	/** The username. */
-	// Retirar
-	@Column(name = "USERNAME", nullable = false, unique = true)
-	@NotNull(message = "Usuário deve ter um login")
-	private String				username;
-
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20)
 	private String				telefone;
@@ -359,17 +353,6 @@ public class Usuario implements Serializable, UserDetails {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.springframework.security.core.userdetails.UserDetails#getUsername()
-	 */
-	@Override
-	public String getUsername() {
-		return username;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * org.springframework.security.core.userdetails.UserDetails#isAccountNonExpired
 	 * ()
 	 */
@@ -435,8 +418,15 @@ public class Usuario implements Serializable, UserDetails {
 		this.password = password;
 	}
 
-	public void setUsername(final String username) {
-		this.username = username;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#getUsername()
+	 */
+	@Override
+	public String getUsername() {
+		return email;
 	}
 
 }

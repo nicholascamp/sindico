@@ -167,19 +167,32 @@ public class FornecedorDAO {
 	}
 
 	public List<Fornecedor> listarFornecedorPorSubcategoria(
-			Subcategoria subcategoria) {
+			final Subcategoria subcategoria) {
 		List<Fornecedor> fornecedoresAux = getLista();
-		
+
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
-		for(Fornecedor fornecedor : fornecedoresAux){
-			for(Subcategoria subcategoriaAux : fornecedor.getSubcategorias()){
-				if(subcategoriaAux.getId().equals(subcategoria.getId())){
+		for (Fornecedor fornecedor : fornecedoresAux) {
+			for (Subcategoria subcategoriaAux : fornecedor.getSubcategorias()) {
+				if (subcategoriaAux.getId().equals(subcategoria.getId())) {
 					fornecedores.add(fornecedor);
 					break;
-				}					
+				}
 			}
 		}
 		return fornecedores;
+	}
+
+	/**
+	 * @param email
+	 * @return
+	 */
+	public Fornecedor loadByEmail(final String email) {
+		Query query = sessionFactory
+				.getCurrentSession()
+				.createQuery(
+						"SELECT fornecedor FROM Fornecedor fornecedor WHERE fornecedor.email = :email")
+				.setParameter("email", email);
+		return (Fornecedor) query.uniqueResult();
 	}
 
 }

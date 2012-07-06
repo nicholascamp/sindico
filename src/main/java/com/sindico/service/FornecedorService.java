@@ -75,7 +75,7 @@ public interface FornecedorService {
 	 */
 	@Transactional
 	List<Fornecedor> listarFornecedorPorNome(String nome);
-	
+
 	@Transactional
 	List<Fornecedor> listarFornecedorPorSubcategoria(Subcategoria subcategoria);
 
@@ -104,5 +104,12 @@ public interface FornecedorService {
 	 */
 	@Transactional
 	List<Fornecedor> listarFornecedoresPorCNPJ(String cnpj);
+
+	/**
+	 * @param email
+	 * @return
+	 */
+	@Transactional
+	Fornecedor loadByUsername(String email);
 
 }

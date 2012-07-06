@@ -132,8 +132,19 @@ public class FornecedorServiceImpl implements FornecedorService {
 
 	@Override
 	public List<Fornecedor> listarFornecedorPorSubcategoria(
-			Subcategoria subcategoria) {
+			final Subcategoria subcategoria) {
 		return fornecedorDAO.listarFornecedorPorSubcategoria(subcategoria);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.FornecedorService#loadByUsername(java.lang.String)
+	 */
+	@Override
+	public Fornecedor loadByUsername(final String email) {
+		return fornecedorDAO.loadByEmail(email);
 	}
 
 }

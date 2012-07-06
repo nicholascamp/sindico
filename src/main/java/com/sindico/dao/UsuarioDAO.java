@@ -112,12 +112,12 @@ public class UsuarioDAO {
 	 * @param username
 	 * @return
 	 */
-	public Usuario loadByUsername(final String username) {
+	public Usuario loadByUsername(final String email) {
 		Query query = sessionFactory
 				.getCurrentSession()
 				.createQuery(
-						"SELECT usuario FROM Usuario usuario WHERE usuario.username = :username")
-				.setParameter("username", username);
+						"SELECT usuario FROM Usuario usuario WHERE usuario.email = :email")
+				.setParameter("email", email);
 		return (Usuario) query.uniqueResult();
 	}
 

@@ -1,8 +1,10 @@
 package com.sindico.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.sindico.enums.Estado;
 
@@ -25,121 +30,131 @@ import com.sindico.enums.Estado;
  */
 @Entity
 @Table(name = "FORNECEDOR")
-public class Fornecedor {
+public class Fornecedor implements Serializable, UserDetails {
+
+	/**
+	 * 
+	 */
+	private static final long					serialVersionUID	= 1L;
 
 	@Id
 	@GeneratedValue
 	@Column(name = "FORNECEDOR_ID")
-	private Long						id;
+	private Long								id;
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
-	private Date						dataCadastro;
+	private Date								dataCadastro;
 
 	/** The nome. */
 	@Column(name = "NOME", nullable = false, length = 100)
 	@NotNull(message = "Fornecedor necessita de um nome")
-	private String						nome;
+	private String								nome;
 
 	/** The nome principal. */
 	@Column(name = "NOME_PRINCIPAL", nullable = false)
-	private String						nomePrincipal;
+	private String								nomePrincipal;
 
 	/** The logo. */
 	@Column(name = "LOGO")
-	private String						logo;
+	private String								logo;
 
 	/** The bairro. */
 	@Column(name = "BAIRRO", nullable = false, length = 100)
-	private String						bairro;
+	private String								bairro;
 
 	/** The cep. */
 	@Column(name = "CEP", nullable = false, length = 10)
-	private String						cep;
+	private String								cep;
 
 	/** The cidade. */
 	@Column(name = "CIDADE", nullable = false, length = 100)
-	private String						cidade;
+	private String								cidade;
 
 	/** The endereco. */
 	@Column(name = "RUA", nullable = false)
-	private String						endereco;
+	private String								endereco;
 
 	/** The estado. */
 	@Column(name = "ESTADO", nullable = false, length = 2)
-	private Estado						estado;
+	private Estado								estado;
 
 	/** The numero. */
 	@Column(name = "NUMERO", nullable = false)
-	private int							numero;
+	private int									numero;
 
 	/** The cnpj. */
 	@Column(name = "CNPJ", length = 20, nullable = false, unique = true)
 	@NotNull(message = "Fornecedor necessita de um CNPJ")
-	private String						cnpj;
+	private String								cnpj;
 
 	/** The subcategorias. */
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "FORNECEDOR_SUBCATEGORIA", joinColumns = @JoinColumn(
 			name = "FORNECEDOR_ID"), inverseJoinColumns = @JoinColumn(
 			name = "SUBCATEGORIA_ID"))
-	private Collection<Subcategoria>	subcategorias		= new ArrayList<Subcategoria>();
+	private Collection<Subcategoria>			subcategorias		= new ArrayList<Subcategoria>();
 
 	/** The estrelas. */
 	@Column(name = "ESTRELAS")
-	private int							estrelas;
+	private int									estrelas;
 
 	/** The anunciante. */
 	@Column(name = "ANUNCIANTE")
-	private boolean						anunciante;
+	private boolean								anunciante;
 
 	/** The aprovado. */
 	@Column(name = "APROVADO")
-	private boolean						aprovado;
+	private boolean								aprovado;
 
 	/** The telefone. */
 	@Column(name = "TELEFONE", length = 20, nullable = false)
 	@NotNull(message = "Fornecedor necessita de um telefone")
-	private String						telefone;
+	private String								telefone;
 
 	/** The celular. */
 	@Column(name = "CELULAR", length = 20)
-	private String						celular;
+	private String								celular;
 
 	/** The slogan. */
 	@Column(name = "SLOGAN")
-	private String						slogan;
+	private String								slogan;
 
 	/** The descricao. */
 	@Column(name = "DESCRICAO")
-	private String						descricao;
+	private String								descricao;
 
 	/** The title. */
 	@Column(name = "TITLE")
-	private String						title;
+	private String								title;
 
 	/** The email. */
 	@Column(name = "email")
-	private String						email;
+	private String								email;
+
+	/** The senha. */
+	@Column(name = "PASSWORD", nullable = false)
+	@NotNull(message = "Usuário deve ter uma senha")
+	private String								password;
 
 	/** The recebe cotacao email. */
 	@Column(name = "RECEBE_COTACAO_EMAIL")
-	private boolean						recebeCotacaoEmail;
+	private boolean								recebeCotacaoEmail;
 
 	/** The recebe news email. */
 	@Column(name = "RECEBE_NEWS_EMAIL")
-	private boolean						recebeNewsEmail;
+	private boolean								recebeNewsEmail;
 
 	@OneToMany(mappedBy = "fornecedor")
-	private Collection<RespostaCotacao> respostasCotacao = new ArrayList<RespostaCotacao>();
-	
+	private final Collection<RespostaCotacao>	respostasCotacao	= new ArrayList<RespostaCotacao>();
+
 	/** The cotacoes. */
 	@ManyToMany(mappedBy = "fornecedores")
-	private Collection<Cotacao>			cotacoes			= new ArrayList<Cotacao>();
+	private Collection<Cotacao>					cotacoes			= new ArrayList<Cotacao>();
 
 	/** The cotacoes vencedoras. */
 	@OneToMany(mappedBy = "fornecedorVencedor")
-	private Collection<Cotacao>			cotacoesVencedoras	= new ArrayList<Cotacao>();
+	private Collection<Cotacao>					cotacoesVencedoras	= new ArrayList<Cotacao>();
 
 	/**
 	 * Instantiates a new fornecedor.
@@ -631,6 +646,94 @@ public class Fornecedor {
 	 */
 	public void setRecebeNewsEmail(final boolean recebeNewsEmail) {
 		this.recebeNewsEmail = recebeNewsEmail;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
+	public Collection<RespostaCotacao> getRespostasCotacao() {
+		return respostasCotacao;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#getAuthorities
+	 * ()
+	 */
+	@SuppressWarnings("deprecation")
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+
+		authorities.add(new GrantedAuthorityImpl("ROLE_FORNECEDOR"));
+
+		return authorities;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#getUsername()
+	 */
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#isAccountNonExpired
+	 * ()
+	 */
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#isAccountNonLocked
+	 * ()
+	 */
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.springframework.security.core.userdetails.UserDetails#
+	 * isCredentialsNonExpired()
+	 */
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 }
