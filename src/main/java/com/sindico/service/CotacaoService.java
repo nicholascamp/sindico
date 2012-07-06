@@ -62,7 +62,7 @@ public interface CotacaoService {
 	 * @return the cotacao
 	 */
 	@Transactional
-	Cotacao listarRespostas(Long id);
+	List<RespostaCotacao> listarRespostas(Long id);
 	
 	@Transactional
 	boolean removerCotacao(Long id);

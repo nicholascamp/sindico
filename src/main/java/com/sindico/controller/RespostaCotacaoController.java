@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sindico.entity.Cotacao;
 import com.sindico.entity.RespostaCotacao;
 import com.sindico.service.CotacaoService;
 import com.sindico.service.PredioService;
@@ -26,6 +27,8 @@ public class RespostaCotacaoController {
 	@Autowired
 	UsuarioService usuarioService;
 	
+	Cotacao cotacao;
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/listaRespostaCotacao")
 	public ModelAndView index(){
 		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/respostas", "respostas", service.listRespostasCotacao());
@@ -34,23 +37,25 @@ public class RespostaCotacaoController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/listaRespostaCotacaoPorCotacao")
-	public ModelAndView indexCotacao(Long id){
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/respostas", "respostas", service.listarRespostas(id));
+	public ModelAndView indexCotacao(Long cotacaoId){
+		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/respostas", "respostas", service.listarRespostas(cotacaoId));
+		cotacao = service.getCotacao(cotacaoId);
+		mv.addObject("cotacao", cotacao);
 		mv.setViewName("listaRespostaCotacaoPorCotacao");
 		return mv;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/mostraRespostaCotacao")
-	public ModelAndView showCotacao(Long id){
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/resposta", "resposta", service.getCotacao(id));
+	public ModelAndView showRespostaCotacao(Long id){
+		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/resposta", "resposta", service.getRespostaCotacao(id));
 		mv.setViewName("mostraRespostaCotacao");
 		return mv;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/criaRespostaCotacao")
-	public ModelAndView newRespostaCotacao(Long id) {
+	public ModelAndView newRespostaCotacao() {
 		RespostaCotacao resposta =  new RespostaCotacao();
-		resposta.setCotacao(service.getCotacao(id));
+		resposta.setCotacao(cotacao);
 		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
 		mv.setViewName("criaRespostaCotacao");
 		return mv;

@@ -36,6 +36,6 @@
 	</c:if>
 </div>
 <div>
-	<a href="<c:url value='/criaResposta' />" title="Criar Resposta">Nova
+	<a href="<c:url value='/criaRespostaCotacao' />" title="Criar Resposta">Nova
 		Resposta</a>
 </div>
