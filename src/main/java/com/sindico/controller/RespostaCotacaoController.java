@@ -1,7 +1,16 @@
 package com.sindico.controller;
 
+import java.beans.PropertyEditorSupport;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,8 +18,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sindico.entity.Cotacao;
+import com.sindico.entity.Fornecedor;
 import com.sindico.entity.RespostaCotacao;
+import com.sindico.entity.Usuario;
 import com.sindico.service.CotacaoService;
+import com.sindico.service.FornecedorService;
 import com.sindico.service.PredioService;
 import com.sindico.service.UsuarioService;
 
@@ -26,6 +38,9 @@ public class RespostaCotacaoController {
 	
 	@Autowired
 	UsuarioService usuarioService;
+	
+	@Autowired
+	FornecedorService fornecedorService;
 	
 	Cotacao cotacao;
 	
@@ -91,7 +106,42 @@ public class RespostaCotacaoController {
 		service.removeRespostaCotacao(id);
 		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/respostas", "respostas", service.listarRespostas(idCotacao));
 		mv.setViewName("listaRespostaCotacaoPorCotacao");
-		return mv;
+		return mv;		
+	}
+	
+	@InitBinder
+	protected void initBinder(final HttpServletRequest request,
+			final ServletRequestDataBinder binder) throws Exception {
+		binder.registerCustomEditor(Usuario.class, "usuario",
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Usuario usuario = usuarioService.buscaUsuario(Long
+								.parseLong(id));
+						setValue(usuario);
+					}
+				});
 		
+		binder.registerCustomEditor(Date.class, 
+    			new CustomDateEditor(new SimpleDateFormat("dd/mm/yy"), false));
+
+		binder.registerCustomEditor(Fornecedor.class, "fornecedor",
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Fornecedor fornecedor = fornecedorService.getFornecedor(Long.parseLong(id));
+						setValue(fornecedor);
+					}
+				});
+
+		binder.registerCustomEditor(Fornecedor.class, "fornecedorVencedor",
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Fornecedor fornecedor = fornecedorService
+								.getFornecedor(Long.parseLong(id));
+						setValue(fornecedor);
+					}
+				});
 	}
 }

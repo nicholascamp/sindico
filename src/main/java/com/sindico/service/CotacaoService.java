@@ -74,6 +74,9 @@ public interface CotacaoService {
 	List<RespostaCotacao> listRespostasCotacao();
 	
 	@Transactional
+	List<RespostaCotacao> listRespostaCotacao(Long idCotacao, Long idFornecedor);
+	
+	@Transactional
 	RespostaCotacao updateRespostaCotacao(RespostaCotacao respostaCotacao);
 	
 	@Transactional

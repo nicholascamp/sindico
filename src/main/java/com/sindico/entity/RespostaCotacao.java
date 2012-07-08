@@ -1,11 +1,6 @@
 package com.sindico.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -67,11 +62,8 @@ public class RespostaCotacao {
 	private String				prazo;
 
 	/** The lista respostas. */
-	@ElementCollection
-	@CollectionTable(
-			name = "RESPOSTA_COTACAO_LISTA", joinColumns = @JoinColumn(
-					name = "RESPOSTA_COTACAO_ID", columnDefinition = "TEXT"))
-	private Collection<String>	listaRespostas	= new ArrayList<String>();
+	@Column(name = "RESPOSTA")
+	private String	resposta;	
 
 	/** The atende area. */
 	@Column(name = "ATENDE_AREA")
@@ -210,24 +202,13 @@ public class RespostaCotacao {
 	public void setPrazo(final String prazo) {
 		this.prazo = prazo;
 	}
-
-	/**
-	 * Gets the lista respostas.
-	 * 
-	 * @return the lista respostas
-	 */
-	public Collection<String> getListaRespostas() {
-		return listaRespostas;
+	
+	public String getResposta() {
+		return resposta;
 	}
 
-	/**
-	 * Sets the lista respostas.
-	 * 
-	 * @param listaRespostas
-	 *            the new lista respostas
-	 */
-	public void setListaRespostas(final Collection<String> listaRespostas) {
-		this.listaRespostas = listaRespostas;
+	public void setResposta(String resposta) {
+		this.resposta = resposta;
 	}
 
 	/**

@@ -5,6 +5,39 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="sindico"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+<c:if test="${ ! empty respostas }">
+	<form:form commandName="respostas" method="GET">
+		<c:forEach items="${respostas }" var="resposta">
+			<table>
+				<tr>
+					<td>Valor:</td>
+					<td>${resposta.valor }</td>
+				</tr>
+				<tr>
+					<td>Condição:</td>
+					<td>${resposta.condicao }</td>
+				</tr>
+				<tr>
+					<td>Garantia:</td>
+					<td>${ resposta.garantia }</td>
+				</tr>
+				<tr>
+					<td>Prazo:</td>
+					<td>${resposta.prazo }</td>
+				</tr>
+				<tr>
+					<td>Primeira Parcela para:</td>
+					<td>${resposta.parcelaPara }</td>
+				</tr>
+				<tr>
+					<td>Descrição Proposta:</td>
+					<td>${resposta.primeiraResposta }</td>
+				</tr>
+			</table>
+		</c:forEach>
+	</form:form>
+</c:if>
+
 <form:form commandName="resposta" method="POST">
 	<table>
 		<tr>

@@ -122,4 +122,11 @@ public class CotacaoServiceImpl implements CotacaoService {
 		return respostaCotacaoDAO.criaRespostaCotacao(respostaCotacao);
 	}
 
+	@Override
+	public List<RespostaCotacao> listRespostaCotacao(Long idCotacao,
+			Long idFornecedor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
