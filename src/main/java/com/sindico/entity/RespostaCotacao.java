@@ -1,5 +1,7 @@
 package com.sindico.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,13 +35,9 @@ public class RespostaCotacao {
 	@ManyToOne
 	@JoinColumn(name = "FORNECEDOR_ID")
 	private Fornecedor fornecedor;
-
-	/** The primeira resposta. */
-	@Column(name = "PRIMEIRA_RESPOSTA", columnDefinition = "TEXT")
-	private String				primeiraResposta;
 	
-	@Column(name = "ULTIMA_RESPOSTA", columnDefinition = "TEXT")
-	private String ultimaResposta;
+	@Column(name = "DATA_CRIACAO")
+	private Date data;
 
 	/** The valor. */
 	@Column(name = "VALOR", nullable = false)
@@ -72,7 +70,6 @@ public class RespostaCotacao {
 	/** The parcela para. */
 	@Column(name = "PARCELA_PARA")
 	private int					parcelaPara;
-
 	
 	
 	/** The arquivo foto. */
@@ -85,14 +82,6 @@ public class RespostaCotacao {
 
 	public void setPredio(Predio predio) {
 		this.predio = predio;
-	}
-
-	public String getUltimaResposta() {
-		return ultimaResposta;
-	}
-
-	public void setUltimaResposta(String ultimaResposta) {
-		this.ultimaResposta = ultimaResposta;
 	}
 
 	public Fornecedor getFornecedor() {
@@ -111,31 +100,20 @@ public class RespostaCotacao {
 		this.cotacao = cotacao;
 	}
 
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(final Long id) {
 		this.id = id;
-	}
-
-	/**
-	 * Gets the primeira resposta.
-	 * 
-	 * @return the primeira resposta
-	 */
-	public String getPrimeiraResposta() {
-		return primeiraResposta;
-	}
-
-	/**
-	 * Sets the primeira resposta.
-	 * 
-	 * @param primeiraResposta
-	 *            the new primeira resposta
-	 */
-	public void setPrimeiraResposta(final String primeiraResposta) {
-		this.primeiraResposta = primeiraResposta;
 	}
 
 	/**

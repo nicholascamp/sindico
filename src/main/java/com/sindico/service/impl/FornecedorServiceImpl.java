@@ -3,6 +3,7 @@
  */
 package com.sindico.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,9 +132,25 @@ public class FornecedorServiceImpl implements FornecedorService {
 	}
 
 	@Override
-	public List<Fornecedor> listarFornecedorPorSubcategoria(
+	public List<Fornecedor> listarFornecedor(
 			final Subcategoria subcategoria) {
-		return fornecedorDAO.listarFornecedorPorSubcategoria(subcategoria);
+		List<Fornecedor> fornecedoresAux = fornecedorDAO.listarFornecedor(subcategoria);
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		List<Fornecedor> fornecedoresAnunciantes = new ArrayList<Fornecedor>();
+		
+		for(Fornecedor fornecedor : fornecedoresAux){
+			if(fornecedor.isAnunciante()){
+				if(fornecedoresAnunciantes.size() < 10)
+					fornecedoresAnunciantes.add(fornecedor);
+			}
+			else{
+				if(fornecedores.size() < 30)
+					fornecedores.add(fornecedor);
+			}
+		}
+		
+		fornecedores.addAll(0, fornecedoresAnunciantes);
+		return fornecedores;
 	}
 
 	/*

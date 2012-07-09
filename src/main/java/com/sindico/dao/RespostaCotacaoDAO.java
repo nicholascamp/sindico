@@ -54,7 +54,7 @@ public class RespostaCotacaoDAO {
 	public List<RespostaCotacao> getLista() {
 		List<RespostaCotacao> respostaCotacao = new ArrayList<RespostaCotacao>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"select respostaCotacao from RespostaCotacao respostaCotacao");
+				"select respostaCotacao from RespostaCotacao respostaCotacao order by respostaCotacao.data desc");
 		respostaCotacao = query.list();
 
 		return respostaCotacao;
@@ -63,19 +63,21 @@ public class RespostaCotacaoDAO {
 	public List<RespostaCotacao> getLista(Long cotacaoId){
 		List<RespostaCotacao> respostaCotacao = new ArrayList<RespostaCotacao>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"select respostaCotacao from RespostaCotacao respostaCotacao where respostaCotacao.cotacao = " 
-				+ cotacaoId);
-		respostaCotacao = query.list();
-
+				"select respostaCotacao from RespostaCotacao respostaCotacao where respostaCotacao.cotacao.id = " 
+				+ cotacaoId + " order by respostaCotacao.data desc");
+		respostaCotacao = query.list();		
+		
 		return respostaCotacao;
 	}
 	
 	public List<RespostaCotacao> getLista(Long cotacaoId, Long fornecedorId){
 		List<RespostaCotacao> respostaCotacao = new ArrayList<RespostaCotacao>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"select respostaCotacao from RespostaCotacao respostaCotacao where respostaCotacao.cotacao = " 
-				+ cotacaoId + " and respostaCotacao.fornecedor = " + fornecedorId);
+				"select respostaCotacao from RespostaCotacao respostaCotacao where respostaCotacao.cotacao.id = " 
+				+ cotacaoId + " and respostaCotacao.fornecedor.id = " + fornecedorId + " order by respostaCotacao.data desc");
 		respostaCotacao = query.list();
+		
 		return respostaCotacao;		
-	}
+	}	
+	
 }

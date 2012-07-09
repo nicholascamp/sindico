@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -82,8 +83,28 @@ public class Cotacao {
 	@Column(name = "TITULO", nullable = false)
 	private String					titulo;
 	
+	@OneToOne
+	@JoinColumn(name = "RESPOSTA_COTACAO_VENCEDORA")
+	private RespostaCotacao respostaCotacaoVencedora;
+
 	@OneToMany(mappedBy = "cotacao")
 	private Collection<RespostaCotacao> respostasCotacao = new ArrayList<RespostaCotacao>();
+	
+	public RespostaCotacao getRespostaCotacaoVencedora() {
+		return respostaCotacaoVencedora;
+	}
+
+	public void setRespostaCotacaoVencedora(RespostaCotacao respostaCotacaoVencedora) {
+		this.respostaCotacaoVencedora = respostaCotacaoVencedora;
+	}
+
+	public Collection<RespostaCotacao> getRespostasCotacao() {
+		return respostasCotacao;
+	}
+
+	public void setRespostasCotacao(Collection<RespostaCotacao> respostasCotacao) {
+		this.respostasCotacao = respostasCotacao;
+	}
 
 	/**
 	 * Gets the titulo.

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Cotacao;
+import com.sindico.entity.Usuario;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -84,6 +85,15 @@ public class CotacaoDAO {
 		List<Cotacao> cotacao = new ArrayList<Cotacao>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select cotacao from Cotacao cotacao");
+		cotacao = query.list();
+
+		return cotacao;
+	}
+	
+	public List<Cotacao> getLista(Long idUsuario){
+		List<Cotacao> cotacao = new ArrayList<Cotacao>();
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select cotacao from Cotacao cotacao where cotacao.usuario.id = " + idUsuario);
 		cotacao = query.list();
 
 		return cotacao;

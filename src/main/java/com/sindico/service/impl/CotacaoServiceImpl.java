@@ -3,6 +3,7 @@
  */
 package com.sindico.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,20 +65,15 @@ public class CotacaoServiceImpl implements CotacaoService {
 		return cotacaoDAO.atualizaCotacao(cotacao);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.sindico.service.CotacaoService#listarRespostas(java.lang.Long)
-	 */
-	@Override
-	public List<RespostaCotacao> listarRespostas(final Long id) {
-		return respostaCotacaoDAO.getLista(id);
-	}
-
 	@Override
 	public List<Cotacao> listCotacoes() {
 		// TODO Auto-generated method stub
 		return cotacaoDAO.getLista();
+	}
+	
+	@Override
+	public List<Cotacao> listCotacoes(Long usuarioId){
+		return cotacaoDAO.getLista(usuarioId);
 	}
 
 	@Override
@@ -103,14 +99,30 @@ public class CotacaoServiceImpl implements CotacaoService {
 	}
 
 	@Override
-	public List<RespostaCotacao> listRespostasCotacao() {
-		return respostaCotacaoDAO.getLista();
+	public List<RespostaCotacao> listRespostasCotacao() {		
+		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO.getLista();
+		return preencheRespostaCotacao(respostaCotacao);
+	}
+
+	@Override
+	public List<RespostaCotacao> listRespostasCotacao(Long idCotacao,
+			Long idFornecedor) {
+		// TODO Auto-generated method stub
+		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO.getLista(idCotacao, idFornecedor);
+		return preencheRespostaCotacao(respostaCotacao);
+	}
+	
+	@Override
+	public List<RespostaCotacao> listRespostasCotacao(Long idCotacao){
+		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO.getLista(idCotacao);
+		return preencheRespostaCotacao(respostaCotacao);
 	}
 
 	@Override
 	public RespostaCotacao updateRespostaCotacao(RespostaCotacao respostaCotacao) {
 		return respostaCotacaoDAO.atualizaRespostaCotacao(respostaCotacao);
 	}
+	
 
 	@Override
 	public void removeRespostaCotacao(Long id) {
@@ -121,12 +133,22 @@ public class CotacaoServiceImpl implements CotacaoService {
 	public RespostaCotacao criaRespostaCotacao(RespostaCotacao respostaCotacao) {
 		return respostaCotacaoDAO.criaRespostaCotacao(respostaCotacao);
 	}
-
-	@Override
-	public List<RespostaCotacao> listRespostaCotacao(Long idCotacao,
-			Long idFornecedor) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public List<RespostaCotacao> preencheRespostaCotacao(List<RespostaCotacao> respostaCotacao){
+		List<RespostaCotacao> aux = new ArrayList<RespostaCotacao>();
+		
+		for(RespostaCotacao resposta : respostaCotacao){
+			if(verificaExistenciaFornecedor(aux, resposta))
+				aux.add(resposta);
+		}
+		return aux;
 	}
-
+	
+	public boolean verificaExistenciaFornecedor(List<RespostaCotacao> respostas, RespostaCotacao resposta){
+		for(RespostaCotacao respostaAux : respostas){
+			if(respostaAux.getFornecedor().equals(resposta.getFornecedor()))
+				return false;
+		}
+		return true;
+	}
 }

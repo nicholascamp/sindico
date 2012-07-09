@@ -77,7 +77,7 @@ public interface FornecedorService {
 	List<Fornecedor> listarFornecedorPorNome(String nome);
 
 	@Transactional
-	List<Fornecedor> listarFornecedorPorSubcategoria(Subcategoria subcategoria);
+	List<Fornecedor> listarFornecedor(Subcategoria subcategoria);
 
 	/**
 	 * Buscar fornecedor por endereco.

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sindico.entity.Cotacao;
 import com.sindico.entity.Fornecedor;
 import com.sindico.entity.GerenteAdministradora;
+import com.sindico.entity.RespostaCotacao;
 import com.sindico.entity.Subcategoria;
 import com.sindico.entity.Usuario;
 import com.sindico.enums.Status;
@@ -64,6 +65,14 @@ public class CotacaoController {
 		mv.setViewName("listaCotacoes");
 		return mv;
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/listaCotacoesPorUsuario")
+	public ModelAndView indexCotacaoPorUsuario(){
+		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacaoes", 
+				cotacaoService.listCotacoes(usuarioService.getLoggedUser().getId()));
+		mv.setViewName("listaCotacaoesPorUsuario");
+		return mv;
+	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/mostraCotacao")
 	public ModelAndView showCotacao(final Long id) {
@@ -87,7 +96,7 @@ public class CotacaoController {
 	public ModelAndView buscarFornecedoresPorSubcategoria(@ModelAttribute("cotacao") Cotacao cotacao){		
 		
 		ModelAndView mv = new ModelAndView("/cotacao/criCotacao", "cotacao", cotacao);
-		mv.addObject("fornecedores", fornecedorService.listarFornecedorPorSubcategoria(cotacao.getSubcategoria()));
+		mv.addObject("fornecedores", fornecedorService.listarFornecedor(cotacao.getSubcategoria()));
 		mv.addObject("subcategorias", subcategoriaService.listSubcategorias());
 		mv.setViewName("criaCotacao");
 		return mv;
@@ -146,6 +155,21 @@ public class CotacaoController {
 			@ModelAttribute("cotacao") final Cotacao cotacao) {
 		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",
 				cotacaoService.atualizarCotacao(cotacao));
+		mv.setViewName("mostraCotacao");
+		return mv;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/encerraCotacao")
+	public ModelAndView encerraCotacao(Long idRespostaCotacao){
+		RespostaCotacao respostaCotacao = cotacaoService.getRespostaCotacao(idRespostaCotacao);
+		
+		Cotacao cotacao = respostaCotacao.getCotacao();
+		cotacao.setRespostaCotacaoVencedora(respostaCotacao);
+		cotacao.setStatus(Status.FECHADO);
+		cotacao.setDataAtualizacao(new Date());
+		cotacao.setFornecedorVencedor(respostaCotacao.getFornecedor());
+		
+		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao", cotacaoService.atualizarCotacao(cotacao));
 		mv.setViewName("mostraCotacao");
 		return mv;
 	}

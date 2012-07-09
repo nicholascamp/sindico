@@ -30,6 +30,9 @@ public interface CotacaoService {
 	
 	@Transactional
 	List<Cotacao> listCotacoes();
+	
+	@Transactional
+	List<Cotacao> listCotacoes(Long usuarioId);
 
 	/**
 	 * Criar cotacao.
@@ -53,16 +56,6 @@ public interface CotacaoService {
 	
 	@Transactional
 	Cotacao getCotacao(Long id);
-
-	/**
-	 * Listar respostas.
-	 * 
-	 * @param id
-	 *            the id
-	 * @return the cotacao
-	 */
-	@Transactional
-	List<RespostaCotacao> listarRespostas(Long id);
 	
 	@Transactional
 	boolean removerCotacao(Long id);
@@ -74,7 +67,10 @@ public interface CotacaoService {
 	List<RespostaCotacao> listRespostasCotacao();
 	
 	@Transactional
-	List<RespostaCotacao> listRespostaCotacao(Long idCotacao, Long idFornecedor);
+	List<RespostaCotacao> listRespostasCotacao(Long idCotacao, Long idFornecedor);
+	
+	@Transactional
+	List<RespostaCotacao> listRespostasCotacao(Long idCotacao);
 	
 	@Transactional
 	RespostaCotacao updateRespostaCotacao(RespostaCotacao respostaCotacao);

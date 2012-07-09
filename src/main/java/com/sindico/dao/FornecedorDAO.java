@@ -86,7 +86,7 @@ public class FornecedorDAO {
 	public List<Fornecedor> getLista() {
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"select fornecedor from Fornecedor fornecedor");
+				"select fornecedor from Fornecedor fornecedor order by fornecedor.estrelas desc");
 		fornecedores = query.list();
 
 		return fornecedores;
@@ -166,7 +166,7 @@ public class FornecedorDAO {
 		return fornecedores;
 	}
 
-	public List<Fornecedor> listarFornecedorPorSubcategoria(
+	public List<Fornecedor> listarFornecedor(
 			final Subcategoria subcategoria) {
 		List<Fornecedor> fornecedoresAux = getLista();
 
