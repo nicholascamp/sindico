@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.sindico.dao.CotacaoDAO;
 import com.sindico.dao.RespostaCotacaoDAO;
 import com.sindico.entity.Cotacao;
+import com.sindico.entity.Predio;
 import com.sindico.entity.RespostaCotacao;
 import com.sindico.service.CotacaoService;
 
@@ -74,6 +75,11 @@ public class CotacaoServiceImpl implements CotacaoService {
 	@Override
 	public List<Cotacao> listCotacoes(Long usuarioId){
 		return cotacaoDAO.getLista(usuarioId);
+	}
+	
+	@Override
+	public List<Cotacao> listCotacoes(Predio predio){
+		return cotacaoDAO.getLista(predio);
 	}
 
 	@Override

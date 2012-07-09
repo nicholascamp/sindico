@@ -83,6 +83,5 @@ public interface PredioService {
 	Predio getPredio(Long id);
 	
 	@Transactional
-	Predio getPredioUsuario(Usuario usuario);
-
+	Predio getPredio(Usuario usuario);
 }

@@ -106,7 +106,7 @@ public class PredioServiceImpl implements PredioService {
 	}
 
 	@Override
-	public Predio getPredioUsuario(Usuario usuario) {
+	public Predio getPredio(Usuario usuario) {
 		return predioDAO.getPredio(usuario);
 	}
 }

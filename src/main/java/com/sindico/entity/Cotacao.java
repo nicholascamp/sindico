@@ -62,6 +62,10 @@ public class Cotacao {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USUARIO_ID")
 	private Usuario					usuario;
+	
+	@ManyToOne
+	@JoinColumn(name = "PREDIO_ID")
+	private Predio predio;
 
 	/** The gerente admin. */
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -315,4 +319,11 @@ public class Cotacao {
 		this.fornecedorVencedor = fornecedorVencedor;
 	}
 
+	public Predio getPredio() {
+		return predio;
+	}
+
+	public void setPredio(Predio predio) {
+		this.predio = predio;
+	}
 }

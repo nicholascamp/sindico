@@ -32,6 +32,7 @@ import com.sindico.enums.Status;
 import com.sindico.service.CotacaoService;
 import com.sindico.service.FornecedorService;
 import com.sindico.service.GerenteAdministradoraService;
+import com.sindico.service.PredioService;
 import com.sindico.service.SubcategoriaService;
 import com.sindico.service.UsuarioService;
 
@@ -57,6 +58,9 @@ public class CotacaoController {
 
 	@Autowired
 	GerenteAdministradoraService	gerenteAdminService;
+	
+	@Autowired
+	PredioService predioService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/listaCotacoes")
 	public ModelAndView indexCotacao() {
@@ -71,6 +75,14 @@ public class CotacaoController {
 		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacaoes", 
 				cotacaoService.listCotacoes(usuarioService.getLoggedUser().getId()));
 		mv.setViewName("listaCotacaoesPorUsuario");
+		return mv;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/listaCotacoesPorPredio")
+	public ModelAndView indexCotacaoPorPredio(){
+		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes",
+				cotacaoService.listCotacoes(usuarioService.getLoggedUser().getPredio()));
+		mv.setViewName("listaCotacoesPorPredio");
 		return mv;
 	}
 

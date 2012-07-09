@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.entity.Cotacao;
+import com.sindico.entity.Predio;
 import com.sindico.entity.RespostaCotacao;
 
 // TODO: Auto-generated Javadoc
@@ -33,6 +34,9 @@ public interface CotacaoService {
 	
 	@Transactional
 	List<Cotacao> listCotacoes(Long usuarioId);
+	
+	@Transactional
+	List<Cotacao> listCotacoes(Predio predio);
 
 	/**
 	 * Criar cotacao.

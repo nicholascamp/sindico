@@ -105,6 +105,9 @@ public class Predio implements Serializable {
 
 	@OneToMany(mappedBy = "predio")
 	private final Collection<RespostaCotacao>	respostasCotacao	= new ArrayList<RespostaCotacao>();
+	
+	@OneToMany(mappedBy = "predio")
+	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>(); 
 
 	/**
 	 * Instantiates a new predio.
@@ -405,6 +408,14 @@ public class Predio implements Serializable {
 
 	public Collection<RespostaCotacao> getRespostasCotacao() {
 		return respostasCotacao;
+	}
+
+	public Collection<Cotacao> getCotacoes() {
+		return cotacoes;
+	}
+
+	public void setCotacoes(Collection<Cotacao> cotacoes) {
+		this.cotacoes = cotacoes;
 	}
 
 }
