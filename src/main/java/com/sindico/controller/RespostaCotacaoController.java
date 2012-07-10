@@ -31,109 +31,135 @@ import com.sindico.service.UsuarioService;
 @Controller
 @SessionAttributes
 public class RespostaCotacaoController {
-	
+
 	@Autowired
-	CotacaoService service;
-	
+	CotacaoService		service;
+
 	@Autowired
-	PredioService predioService;
-	
+	PredioService		predioService;
+
 	@Autowired
-	UsuarioService usuarioService;
-	
+	UsuarioService		usuarioService;
+
 	@Autowired
-	FornecedorService fornecedorService;
-	
-	Cotacao cotacao;
-	
+	FornecedorService	fornecedorService;
+
+	Cotacao				cotacao;
+
 	@RequestMapping(method = RequestMethod.GET, value = "/listaRespostaCotacao")
-	public ModelAndView index(){
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/respostas", "respostas", service.listRespostasCotacao());
+	public ModelAndView index() {
+		ModelAndView mv = new ModelAndView(
+				"/cotacao/respostaCotacao/respostas", "respostas",
+				service.listRespostasCotacao());
 		mv.setViewName("listaRespostaCotacao");
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/listaRespostaCotacaoPorCotacao")
-	public ModelAndView indexCotacao(Long cotacaoId){
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/respostas", "respostas", service.listRespostasCotacao(cotacaoId));
+
+	@RequestMapping(
+			method = RequestMethod.GET,
+			value = "/listaRespostaCotacaoPorCotacao")
+	public ModelAndView indexCotacao(final Long cotacaoId) {
+		ModelAndView mv = new ModelAndView(
+				"/cotacao/respostaCotacao/respostas", "respostas",
+				service.listRespostasCotacao(cotacaoId));
 		cotacao = service.getCotacao(cotacaoId);
 		mv.addObject("cotacao", cotacao);
 		mv.setViewName("listaRespostaCotacaoPorCotacao");
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/mostraRespostaCotacao")
-	public ModelAndView showRespostaCotacao(Long id){
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/resposta", "resposta", service.getRespostaCotacao(id));
+
+	@RequestMapping(
+			method = RequestMethod.GET, value = "/mostraRespostaCotacao")
+	public ModelAndView showRespostaCotacao(final Long id) {
+		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/resposta",
+				"resposta", service.getRespostaCotacao(id));
 		mv.setViewName("mostraRespostaCotacao");
 		return mv;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/criaRespostaCotacao")
-	public ModelAndView newRespostaCotacao() {		
+	public ModelAndView newRespostaCotacao() {
 		cotacao.setStatus(Status.TRABALHO);
 		cotacao.setDataAtualizacao(new Date());
 		service.atualizarCotacao(cotacao);
-		
+
 		// TODO: VERIFICAR SE USUARIO EH FORNECEDOR
-		
-		RespostaCotacao resposta =  new RespostaCotacao();
+
+		RespostaCotacao resposta = new RespostaCotacao();
 		resposta.setCotacao(cotacao);
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
+		ModelAndView mv = new ModelAndView(
+				"/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
 		mv.setViewName("criaRespostaCotacao");
 		return mv;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/criaRespostaCotacao")
-	public ModelAndView newRespostaCotacao(Long idRespostaCotacao){
-		RespostaCotacao respostaAnterior = service.getRespostaCotacao(idRespostaCotacao);		
-		List<RespostaCotacao> respostas = service.listRespostasCotacao(respostaAnterior.getCotacao().getId(), respostaAnterior.getFornecedor().getId());
-		
+	public ModelAndView newRespostaCotacao(final Long idRespostaCotacao) {
+		RespostaCotacao respostaAnterior = service
+				.getRespostaCotacao(idRespostaCotacao);
+		List<RespostaCotacao> respostas = service.listRespostasCotacao(
+				respostaAnterior.getCotacao().getId(), respostaAnterior
+						.getFornecedor().getId());
+
 		RespostaCotacao resposta = new RespostaCotacao();
 		resposta.setCotacao(respostaAnterior.getCotacao());
 		resposta.setFornecedor(respostaAnterior.getFornecedor());
 		resposta.setPredio(respostaAnterior.getPredio());
-		
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
+
+		ModelAndView mv = new ModelAndView(
+				"/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
 		mv.addObject("respostas", respostas);
 		mv.setViewName("criaRespostaCotacao");
 		return mv;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/criaRespostaCotacao")
-	public ModelAndView createRespostaCotacao(@ModelAttribute("resposta") RespostaCotacao respostaCotacao){		
-		respostaCotacao.setPredio(predioService.getPredioUsuario(usuarioService.getLoggedUser()));
+	public ModelAndView createRespostaCotacao(
+			@ModelAttribute("resposta") final RespostaCotacao respostaCotacao) {
+		respostaCotacao.setPredio(predioService.getPredio(usuarioService
+				.getLoggedUser()));
 		respostaCotacao.setData(new Date());
 		// TODO Setar Fornecedor
-		
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/mostraResposta", "resposta", service.criaRespostaCotacao(respostaCotacao));
+
+		ModelAndView mv = new ModelAndView(
+				"/cotacao/respostaCotacao/mostraResposta", "resposta",
+				service.criaRespostaCotacao(respostaCotacao));
 		mv.setViewName("mostraResposta");
 		return mv;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/editaRespostaCotacao")
-	public ModelAndView editRespostaCotacao(Long id){
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/editaResposta", "resposta", service.getRespostaCotacao(id));
+	public ModelAndView editRespostaCotacao(final Long id) {
+		ModelAndView mv = new ModelAndView(
+				"/cotacao/respostaCotacao/editaResposta", "resposta",
+				service.getRespostaCotacao(id));
 		mv.setViewName("editaRespostaCotacao");
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/editaRespostaCotacao")
-	public ModelAndView updateRespostaCotacao(@ModelAttribute("resposta") RespostaCotacao respostaCotacao){
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/mostraResposta", "resposta", service.updateRespostaCotacao(respostaCotacao));
+
+	@RequestMapping(
+			method = RequestMethod.POST, value = "/editaRespostaCotacao")
+	public ModelAndView updateRespostaCotacao(
+			@ModelAttribute("resposta") final RespostaCotacao respostaCotacao) {
+		ModelAndView mv = new ModelAndView(
+				"/cotacao/respostaCotacao/mostraResposta", "resposta",
+				service.updateRespostaCotacao(respostaCotacao));
 		mv.setViewName("mostraResposta");
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/deletaRespostaCotacao")
-	public ModelAndView destroyRespostaCotacao(Long id) {
+
+	@RequestMapping(
+			method = RequestMethod.GET, value = "/deletaRespostaCotacao")
+	public ModelAndView destroyRespostaCotacao(final Long id) {
 		long idCotacao = service.getRespostaCotacao(id).getCotacao().getId();
 		service.removeRespostaCotacao(id);
-		ModelAndView mv = new ModelAndView("/cotacao/respostaCotacao/respostas", "respostas", service.listRespostasCotacao(idCotacao));
+		ModelAndView mv = new ModelAndView(
+				"/cotacao/respostaCotacao/respostas", "respostas",
+				service.listRespostasCotacao(idCotacao));
 		mv.setViewName("listaRespostaCotacaoPorCotacao");
-		return mv;		
+		return mv;
 	}
-	
+
 	@InitBinder
 	protected void initBinder(final HttpServletRequest request,
 			final ServletRequestDataBinder binder) throws Exception {
@@ -146,15 +172,16 @@ public class RespostaCotacaoController {
 						setValue(usuario);
 					}
 				});
-		
-		binder.registerCustomEditor(Date.class, 
-    			new CustomDateEditor(new SimpleDateFormat("dd/mm/yy"), false));
+
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				new SimpleDateFormat("dd/mm/yy"), false));
 
 		binder.registerCustomEditor(Fornecedor.class, "fornecedor",
 				new PropertyEditorSupport() {
 					@Override
 					public void setAsText(final String id) {
-						Fornecedor fornecedor = fornecedorService.getFornecedor(Long.parseLong(id));
+						Fornecedor fornecedor = fornecedorService
+								.getFornecedor(Long.parseLong(id));
 						setValue(fornecedor);
 					}
 				});

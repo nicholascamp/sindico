@@ -28,16 +28,12 @@
 				<td><form:input path="nome" size="100" /></td>
 			</tr>
 			<tr>
-				<td>Login:</td>
-				<td><form:input path="username" size="100" /></td>
+				<td>Email:</td>
+				<td><form:input path="email" size="100" /></td>
 			</tr>
 			<tr>
 				<td>Password:</td>
 				<td><form:password path="password" size="100" /></td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td><form:input path="email" size="100" /></td>
 			</tr>
 			<tr>
 				<td>Telefone:</td>
