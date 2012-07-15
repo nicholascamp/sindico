@@ -45,7 +45,7 @@ public class SubcategoriaController {
 		ModelAndView mv = new ModelAndView("/subcategoria/subcategoria",
 				"subcategoria", subcategoriaService.getSubcategoria(id));
 		mv.setViewName("mostraSubcategoria");
-
+		
 		return mv;
 	}
 

@@ -11,10 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.NotNull;
 
 // TODO: Auto-generated Javadoc
@@ -39,8 +36,6 @@ public class Categoria implements Serializable {
 	private String				nome;
 
 	/** The subcategorias. */
-	@Transient
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
 	Collection<Subcategoria>	subcategorias		= new ArrayList<Subcategoria>();
 

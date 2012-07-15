@@ -47,6 +47,10 @@
 				<td><form:input path="email" size="100" /></td>
 			</tr>
 			<tr>
+				<td>Senha:</td>
+				<td><form:password path="password"/> </td>
+			</tr>
+			<tr>
 				<td>Slogan:</td>
 				<td><form:input path="slogan" size="100" /></td>
 			</tr>
@@ -95,8 +99,11 @@
 			</tr>
 			<tr>
 				<td>Subcategorias:</td>
-				<td><form:checkboxes items="${subcategoriasFornecedor }"
-						path="subcategorias" itemLabel="title" itemValue="id" /></td>
+				<td>
+					<form:select path="subcategorias">
+						<form:options items="${subcategoriasFornecedor }" itemLabel="title" itemValue="id" />
+					</form:select>
+				</td>
 			</tr>
 			<tr>
 				<td>Estrelas:</td>

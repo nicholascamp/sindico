@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<td>Descrição Proposta:</td>
-					<td>${resposta.primeiraResposta }</td>
+					<td>${resposta.resposta }</td>
 				</tr>
 			</table>
 		</c:forEach>
@@ -76,11 +76,12 @@
 		</tr>
 		<tr>
 			<td>Descrição Proposta:</td>
-			<td><form:textarea path="primeiraResposta"/></td>
+			<td><form:textarea path="resposta"/></td>
 		</tr>
 		<tr>
 			<td>Arquivo Foto:</td>
 			<td>FAZER</td>
-		</tr>
+		</tr>		
 	</table>
+	<form:button>Criar</form:button>
 </form:form>

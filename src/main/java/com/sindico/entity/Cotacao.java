@@ -6,7 +6,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -59,7 +58,7 @@ public class Cotacao {
 	private boolean					impropria;
 
 	/** The usuario. */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "USUARIO_ID")
 	private Usuario					usuario;
 	
@@ -68,7 +67,7 @@ public class Cotacao {
 	private Predio predio;
 
 	/** The gerente admin. */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "GERENTE_ID")
 	private GerenteAdministradora	gerenteAdmin;
 

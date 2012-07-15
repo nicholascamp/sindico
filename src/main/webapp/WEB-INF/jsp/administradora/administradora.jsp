@@ -51,19 +51,28 @@
 			</tr>
 		</table>
 		<table>
-			<tr>
-				<td>Nome</td>
-				<td>Email</td>
-				<td>Telefone</td>
-				<td>Celular</td>
-			</tr>
-			<c:forEach items="${administradora.gerentes }" var="gerente">
+			<c:if test="${ empty administradora.gerentes }">
 				<tr>
-					<td>${gerente.nome }</td>
-					<td>${gerente.email }</td>
-					<td>${gerente.telefone }</td>
-					<td>${gerente.celular }</td>
+					<td>Nenhum gerente encontrado para a Administradora.</td>
 				</tr>
-			</c:forEach>
+			</c:if>
+			<c:if test="${ ! empty administradora.gerentes }">
+				<tr>
+					<td><strong>Nome</strong></td>
+					<td><strong>Email</strong></td>
+					<td><strong>Telefone</strong></td>
+					<td><strong>Celular</strong></td>
+				</tr>
+				
+				<c:forEach items="${administradora.gerentes }" var="gerente">				
+					<tr>
+						<td>${gerente.nome }</td>
+						<td>${gerente.email }</td>
+						<td>${gerente.telefone }</td>
+						<td>${gerente.celular }</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			
 		</table>
 		<a href="<c:url value='/listaAdministradoras' />" title="Listar Administradora">Listar Administradoras</a>

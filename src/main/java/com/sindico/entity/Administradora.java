@@ -11,10 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.NotNull;
 
 import com.sindico.enums.Estado;
@@ -78,8 +75,6 @@ public class Administradora {
 	@Column(name = "CELULAR", length = 20)
 	private String								celular;
 	/** The gerentes. */
-	@Transient
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "administradora", fetch = FetchType.EAGER)
 	private Collection<GerenteAdministradora>	gerentes	= new ArrayList<GerenteAdministradora>();
 
