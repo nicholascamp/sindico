@@ -121,9 +121,9 @@ public class RespostaCotacaoController {
 		respostaCotacao.setData(new Date());		
 
 		ModelAndView mv = new ModelAndView(
-				"/cotacao/respostaCotacao/mostraResposta", "resposta",
+				"/cotacao/respostaCotacao/resposta", "resposta",
 				service.criaRespostaCotacao(respostaCotacao));
-		mv.setViewName("mostraResposta");
+		mv.setViewName("mostraRespostaCotacao");
 		return mv;
 	}
 
@@ -141,9 +141,9 @@ public class RespostaCotacaoController {
 	public ModelAndView updateRespostaCotacao(
 			@ModelAttribute("resposta") final RespostaCotacao respostaCotacao) {
 		ModelAndView mv = new ModelAndView(
-				"/cotacao/respostaCotacao/mostraResposta", "resposta",
+				"/cotacao/respostaCotacao/resposta", "resposta",
 				service.updateRespostaCotacao(respostaCotacao));
-		mv.setViewName("mostraResposta");
+		mv.setViewName("mostraRespostaCotacao");
 		return mv;
 	}
 
@@ -199,10 +199,6 @@ public class RespostaCotacaoController {
 					@Override
 					public void setAsText(final String id) {
 						Cotacao cotacao = service.getCotacao(Long.parseLong(id));
-						System.out.println("Dados da Cotação: ");
-						System.out.println(cotacao);
-						System.out.println(cotacao.getSubcategoria());
-						System.out.println(cotacao.getUsuario());
 						setValue(cotacao);
 					}
 				});

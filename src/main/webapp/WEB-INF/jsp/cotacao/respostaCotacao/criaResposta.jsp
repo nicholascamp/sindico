@@ -48,13 +48,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Fornecedor:</td>
-			<td>
-				<input type="hidden" name="fornecedor" value="${resposta.fornecedor.id }" />
-				${resposta.fornecedor.nome }
-			</td>
-		</tr>
-		<tr>
 			<td>Valor:</td>
 			<td><form:input path="valor"/></td>
 		</tr>
