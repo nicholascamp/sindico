@@ -25,11 +25,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.sindico.UsuarioForm;
 import com.sindico.enums.TipoUsuario;
 
 /**
  * The Class Usuario.
  */
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "USUARIO")
 public class Usuario implements Serializable, UserDetails {
@@ -89,6 +91,7 @@ public class Usuario implements Serializable, UserDetails {
 
 	@ManyToOne
 	@JoinColumn(name = "PREDIO_ID")
+	@NotNull
 	private Predio				predio;
 
 	/** The admin. */
@@ -124,6 +127,21 @@ public class Usuario implements Serializable, UserDetails {
 	 */
 	public Usuario() {
 		super();
+	}
+
+	/**
+	 * @param usuarioForm
+	 */
+	public Usuario(final UsuarioForm usuarioForm) {
+
+		this.nome = usuarioForm.getNome();
+		this.telefone = usuarioForm.getTelefone();
+		this.celular = usuarioForm.getCelular();
+		this.dataNascimento = usuarioForm.getDataNascimento();
+		this.email = usuarioForm.getEmail();
+		this.recebeCotacao = usuarioForm.isRecebeCotacao();
+		this.tipo = usuarioForm.getTipo();
+
 	}
 
 	/**

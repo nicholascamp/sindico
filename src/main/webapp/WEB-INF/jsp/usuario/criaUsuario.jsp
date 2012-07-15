@@ -48,6 +48,14 @@
 				<td><form:input path="dataNascimento" size="100" /></td>
 			</tr>
 			<tr>
+				<td>CEP:</td>
+				<td><form:input path="cep" size="8"/> </td>
+			</tr>
+			<tr>
+				<td>Numero:</td>
+				<td><form:input path="numero"/> </td>
+			</tr>
+			<tr>
 				<td>Tipo:</td>
 				<td><form:select path="tipo">
 						<form:options items="${tipos}" path="tipo" size="100" />

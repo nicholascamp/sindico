@@ -37,8 +37,8 @@
 		<security:intercept-url pattern="/usuario*"
 			access="ROLE_USUARIO" />
 		<security:http-basic />
-		<security:access-denied-handler
-			error-page="/index.jsp?errorMessage=Voce não possui permissao para acessar esta área do site." />
+<!-- 		<security:access-denied-handler -->
+<!-- 			error-page="/index.jsp?errorMessage=Voce não possui permissao para acessar esta área do site." /> -->
 		<security:logout invalidate-session="true"
 			logout-success-url="/" />
 

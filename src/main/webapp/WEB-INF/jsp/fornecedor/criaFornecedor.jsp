@@ -47,6 +47,10 @@
 				<td><form:input path="email" size="100" /></td>
 			</tr>
 			<tr>
+				<td>Password:</td>
+				<td><form:password path="password"/> </td>
+			</tr>
+			<tr>
 				<td>Slogan:</td>
 				<td><form:input path="slogan" size="100" /></td>
 			</tr>

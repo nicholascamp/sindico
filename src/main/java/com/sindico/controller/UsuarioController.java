@@ -21,9 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sindico.UsuarioForm;
+import com.sindico.entity.CepSimples;
+import com.sindico.entity.Predio;
 import com.sindico.entity.Usuario;
 import com.sindico.entity.UsuarioSimples;
 import com.sindico.enums.TipoUsuario;
+import com.sindico.service.CepService;
+import com.sindico.service.PredioService;
 import com.sindico.service.UsuarioService;
 import com.sindico.service.impl.SindicoUserDetailsServiceImpl;
 import com.sindico.utils.StringUtils;
@@ -49,6 +54,14 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService					usuarioService;
 
+	/** The cep service. */
+	@Autowired
+	private CepService						cepService;
+
+	/** The predio service. */
+	@Autowired
+	private PredioService					predioService;
+
 	/**
 	 * Usuario form.
 	 * 
@@ -58,7 +71,7 @@ public class UsuarioController {
 	public ModelAndView usuarioForm() {
 
 		ModelAndView modelAndView = new ModelAndView("/usuario/criaUsuario",
-				"usuario", new Usuario());
+				"usuario", new UsuarioForm());
 
 		modelAndView.addObject("tipos", TipoUsuario.values());
 		modelAndView.setViewName("cadastro");
@@ -205,8 +218,8 @@ public class UsuarioController {
 	/**
 	 * Adds the contact.
 	 * 
-	 * @param usuario
-	 *            the usuario
+	 * @param usuarioForm
+	 *            the usuario form
 	 * @param result
 	 *            the result
 	 * @param request
@@ -216,11 +229,21 @@ public class UsuarioController {
 	 *             the exception
 	 */
 	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
-	public String addUsuario(@ModelAttribute("usuario") final Usuario usuario,
+	public String createUsuario(
+			@ModelAttribute("usuario") final UsuarioForm usuarioForm,
 			final BindingResult result, final HttpServletRequest request)
 			throws Exception {
 
-		String plainTextPassword = usuario.getPassword();
+		Usuario usuario = new Usuario(usuarioForm);
+		CepSimples cep = cepService.recuperaCep(usuarioForm.getCep());
+		cep.setNumero(usuarioForm.getNumero());
+		Predio predio = new Predio(cep);
+
+		predio = predioService.criarPredio(predio);
+
+		usuario.setPredio(predio);
+
+		String plainTextPassword = usuarioForm.getPassword();
 		String encodedPassword = StringUtils.encodePassword(plainTextPassword,
 				usuario.getUsername());
 		usuario.setPassword(encodedPassword);

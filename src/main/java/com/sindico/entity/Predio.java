@@ -44,7 +44,7 @@ public class Predio implements Serializable {
 	private String								arquivoFoto;
 
 	/** The cnpj. */
-	@Column(name = "CNPJ", length = 20, unique = true, nullable = false)
+	@Column(name = "CNPJ", length = 11, unique = true, nullable = false)
 	@NotNull(message = "Predio deve ter um CNPJ")
 	private String								cnpj;
 
@@ -105,9 +105,9 @@ public class Predio implements Serializable {
 
 	@OneToMany(mappedBy = "predio")
 	private final Collection<RespostaCotacao>	respostasCotacao	= new ArrayList<RespostaCotacao>();
-	
+
 	@OneToMany(mappedBy = "predio")
-	private Collection<Cotacao> cotacoes = new ArrayList<Cotacao>(); 
+	private Collection<Cotacao>					cotacoes			= new ArrayList<Cotacao>();
 
 	/**
 	 * Instantiates a new predio.
@@ -115,6 +115,22 @@ public class Predio implements Serializable {
 	public Predio() {
 		super();
 		this.dataCadastro = new Date();
+	}
+
+	/**
+	 * @param cep2
+	 */
+	public Predio(final CepSimples cep) {
+		this.estado = Estado.fromEstado(cep.getUf());
+		this.cidade = cep.getCidade();
+		this.bairro = cep.getBairro();
+		this.endereco = cep.getTipo_logradouro() + " " + cep.getLogradouro();
+		this.numero = cep.getNumero();
+		this.cep = cep.getCep();
+		this.nome = "Sem nome";
+		this.dataCadastro = new Date();
+		this.cnpj = "0000000000";
+
 	}
 
 	/**
@@ -414,7 +430,7 @@ public class Predio implements Serializable {
 		return cotacoes;
 	}
 
-	public void setCotacoes(Collection<Cotacao> cotacoes) {
+	public void setCotacoes(final Collection<Cotacao> cotacoes) {
 		this.cotacoes = cotacoes;
 	}
 

@@ -27,6 +27,7 @@ import com.sindico.enums.Estado;
 import com.sindico.enums.Estrela;
 import com.sindico.service.FornecedorService;
 import com.sindico.service.SubcategoriaService;
+import com.sindico.utils.StringUtils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,11 +41,11 @@ public class FornecedorController {
 
 	/** The fornecedor service. */
 	@Autowired
-	FornecedorService fornecedorService;
+	FornecedorService	fornecedorService;
 
 	/** The subcategoria service. */
 	@Autowired
-	SubcategoriaService subcategoriaService;
+	SubcategoriaService	subcategoriaService;
 
 	/**
 	 * Index fornecedor.
@@ -53,7 +54,8 @@ public class FornecedorController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/listaFornecedores")
 	public ModelAndView indexFornecedor() {
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedores", "fornecedor", new Fornecedor());
+		ModelAndView modelAndView = new ModelAndView(
+				"/fornecedor/fornecedores", "fornecedor", new Fornecedor());
 		PagedListHolder<Fornecedor> pagedListHolder = new PagedListHolder<Fornecedor>(
 				fornecedorService.listarFornecedores());
 		pagedListHolder.setPageSize(20);
@@ -74,9 +76,11 @@ public class FornecedorController {
 	 *            the nome
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/listaFornecedoresPorNome")
+	@RequestMapping(
+			method = RequestMethod.GET, value = "/listaFornecedoresPorNome")
 	public ModelAndView listFornecedorByNome(@RequestParam final String nome) {
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedores", "fornecedor", new Fornecedor());
+		ModelAndView modelAndView = new ModelAndView(
+				"/fornecedor/fornecedores", "fornecedor", new Fornecedor());
 		PagedListHolder<Fornecedor> pagedListHolder = new PagedListHolder<Fornecedor>(
 				fornecedorService.listarFornecedorPorNome(nome));
 		pagedListHolder.setPageSize(20);
@@ -97,9 +101,12 @@ public class FornecedorController {
 	 *            the endereco
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/listaFornecedoresPorEndereco")
-	public ModelAndView listFornecedorByEndereco(@RequestParam final String endereco) {
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedores", "fornecedor", new Fornecedor());
+	@RequestMapping(
+			method = RequestMethod.GET, value = "/listaFornecedoresPorEndereco")
+	public ModelAndView listFornecedorByEndereco(
+			@RequestParam final String endereco) {
+		ModelAndView modelAndView = new ModelAndView(
+				"/fornecedor/fornecedores", "fornecedor", new Fornecedor());
 		PagedListHolder<Fornecedor> pagedListHolder = new PagedListHolder<Fornecedor>(
 				fornecedorService.listarFornecedorPorEndereco(endereco));
 		pagedListHolder.setPageSize(20);
@@ -119,9 +126,11 @@ public class FornecedorController {
 	 *            the email
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/listaFornecedoresPorEmail")
+	@RequestMapping(
+			method = RequestMethod.GET, value = "/listaFornecedoresPorEmail")
 	public ModelAndView listFornecedorByEmail(@RequestParam final String email) {
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedores", "fornecedor", new Fornecedor());
+		ModelAndView modelAndView = new ModelAndView(
+				"/fornecedor/fornecedores", "fornecedor", new Fornecedor());
 		PagedListHolder<Fornecedor> pagedListHolder = new PagedListHolder<Fornecedor>(
 				fornecedorService.listarFornecedorPorEmail(email));
 		pagedListHolder.setPageSize(20);
@@ -141,9 +150,11 @@ public class FornecedorController {
 	 *            the cnpj
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/listaFornecedoresPorCNPJ")
+	@RequestMapping(
+			method = RequestMethod.GET, value = "/listaFornecedoresPorCNPJ")
 	public ModelAndView listFornecedorByCNPJ(@RequestParam final String cnpj) {
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedores", "fornecedor", new Fornecedor());
+		ModelAndView modelAndView = new ModelAndView(
+				"/fornecedor/fornecedores", "fornecedor", new Fornecedor());
 		PagedListHolder<Fornecedor> pagedListHolder = new PagedListHolder<Fornecedor>(
 				fornecedorService.listarFornecedoresPorCNPJ(cnpj));
 		pagedListHolder.setPageSize(20);
@@ -166,9 +177,11 @@ public class FornecedorController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/mostraFornecedor")
 	public ModelAndView showFornecedor(final Long id) {
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedor", "fornecedor", new Fornecedor());
+		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedor",
+				"fornecedor", new Fornecedor());
 
-		modelAndView.addObject("fornecedor", fornecedorService.getFornecedor(id));
+		modelAndView.addObject("fornecedor",
+				fornecedorService.getFornecedor(id));
 
 		modelAndView.setViewName("mostraFornecedor");
 		return modelAndView;
@@ -181,10 +194,12 @@ public class FornecedorController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/criaFornecedor")
 	public ModelAndView newFornecedor() {
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/criaFornecedor", "fornecedor", new Fornecedor());
+		ModelAndView modelAndView = new ModelAndView(
+				"/fornecedor/criaFornecedor", "fornecedor", new Fornecedor());
 		modelAndView.addObject("estrelas", Estrela.values());
 		modelAndView.addObject("estados", Estado.values());
-		modelAndView.addObject("subcategoriasFornecedor", subcategoriaService.listSubcategorias());
+		modelAndView.addObject("subcategoriasFornecedor",
+				subcategoriaService.listSubcategorias());
 
 		modelAndView.setViewName("criaFornecedor");
 
@@ -199,14 +214,21 @@ public class FornecedorController {
 	 * @param result
 	 *            the result
 	 * @return the model and view
+	 * @throws Exception
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/criaFornecedor")
-	public ModelAndView createFornecedor(@ModelAttribute("fornecedor") final Fornecedor fornecedor,
-			final BindingResult result) {
+	public ModelAndView createFornecedor(
+			@ModelAttribute("fornecedor") final Fornecedor fornecedor,
+			final BindingResult result) throws Exception {
 
+		String plainTextPassword = fornecedor.getPassword();
+		String encodedPassword = StringUtils.encodePassword(plainTextPassword,
+				fornecedor.getUsername());
+		fornecedor.setPassword(encodedPassword);
 		fornecedorService.criarFornecedor(fornecedor);
 
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedor", "fornecedor", fornecedor);
+		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedor",
+				"fornecedor", fornecedor);
 
 		modelAndView.setViewName("mostraFornecedor");
 
@@ -223,10 +245,12 @@ public class FornecedorController {
 	@RequestMapping(method = RequestMethod.GET, value = "/editaFornecedor")
 	public ModelAndView editFornecedor(final Long id) {
 		Fornecedor fornecedor = fornecedorService.getFornecedor(id);
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/editaFornecedor", "fornecedor", fornecedor);
+		ModelAndView modelAndView = new ModelAndView(
+				"/fornecedor/editaFornecedor", "fornecedor", fornecedor);
 		modelAndView.addObject("estrelas", Estrela.values());
 		modelAndView.addObject("estados", Estado.values());
-		modelAndView.addObject("subcategoriasFornecedor", subcategoriaService.listSubcategorias());
+		modelAndView.addObject("subcategoriasFornecedor",
+				subcategoriaService.listSubcategorias());
 
 		modelAndView.setViewName("editaFornecedor");
 		return modelAndView;
@@ -243,7 +267,8 @@ public class FornecedorController {
 	public ModelAndView updateFornecedor(final Fornecedor fornecedor) {
 		fornecedorService.atualizarFornecedor(fornecedor);
 
-		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedor", "fornecedor", fornecedor);
+		ModelAndView modelAndView = new ModelAndView("/fornecedor/fornecedor",
+				"fornecedor", fornecedor);
 
 		modelAndView.setViewName("mostraFornecedor");
 		return modelAndView;
@@ -275,28 +300,34 @@ public class FornecedorController {
 	 *             the exception
 	 */
 	@InitBinder
-	protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) throws Exception {
-		binder.registerCustomEditor(List.class, "subcategorias", new CustomCollectionEditor(List.class) {
-			@Override
-			protected Object convertElement(final Object element) {
-				return (element == null ? null : subcategoriaService.getSubcategoria(Long.parseLong((String) element)));
-			}
-		});
+	protected void initBinder(final HttpServletRequest request,
+			final ServletRequestDataBinder binder) throws Exception {
+		binder.registerCustomEditor(List.class, "subcategorias",
+				new CustomCollectionEditor(List.class) {
+					@Override
+					protected Object convertElement(final Object element) {
+						return (element == null ? null : subcategoriaService
+								.getSubcategoria(Long
+										.parseLong((String) element)));
+					}
+				});
 
-		binder.registerCustomEditor(Estado.class, "estado", new PropertyEditorSupport() {
-			@Override
-			public void setAsText(final String id) {
-				Estado estado = Estado.valueOf(id);
-				setValue(estado);
-			}
-		});
+		binder.registerCustomEditor(Estado.class, "estado",
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Estado estado = Estado.valueOf(id);
+						setValue(estado);
+					}
+				});
 
-		binder.registerCustomEditor(Estrela.class, "estrela", new PropertyEditorSupport() {
-			@Override
-			public void setAsText(final String id) {
-				Estrela estrela = Estrela.valueOf(id);
-				setValue(estrela);
-			}
-		});
+		binder.registerCustomEditor(Estrela.class, "estrela",
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Estrela estrela = Estrela.valueOf(id);
+						setValue(estrela);
+					}
+				});
 	}
 }

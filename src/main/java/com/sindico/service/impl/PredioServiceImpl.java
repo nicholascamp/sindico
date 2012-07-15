@@ -44,6 +44,13 @@ public class PredioServiceImpl implements PredioService {
 	@Override
 	public Predio criarPredio(final Predio predio) {
 
+		Predio predioRecuperado = predioDAO.getPredioPorCEPNumero(
+				predio.getCep(), predio.getNumero());
+
+		if (predioRecuperado != null) {
+			return predioRecuperado;
+		}
+
 		return predioDAO.criaPredio(predio);
 	}
 
@@ -106,7 +113,7 @@ public class PredioServiceImpl implements PredioService {
 	}
 
 	@Override
-	public Predio getPredio(Usuario usuario) {
+	public Predio getPredio(final Usuario usuario) {
 		return predioDAO.getPredio(usuario);
 	}
 }

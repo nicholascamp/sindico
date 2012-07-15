@@ -4,22 +4,20 @@
 package com.sindico.controller;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.sindico.entity.Cep;
 import com.sindico.entity.CepSimples;
+import com.sindico.service.CepService;
 
 /**
  * The Class CepController.
@@ -27,6 +25,9 @@ import com.sindico.entity.CepSimples;
 @Controller
 @SessionAttributes
 public class CepController {
+
+	@Autowired
+	private CepService	cepService;
 
 	/**
 	 * Recupera cep.
@@ -49,18 +50,7 @@ public class CepController {
 
 		String cep = req.getParameter("cep");
 
-		JAXBContext jc = JAXBContext.newInstance(Cep.class);
-
-		Unmarshaller u = jc.createUnmarshaller();
-		URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep="
-				+ cep + "&formato=xml");
-		// URL url = new
-		// URL("http://grepcep.com/callws.do?token=201206051808195DJAWAZWXEUGXD6MOSX3R&cep="
-		// + cep
-		// + "&style=xml");
-		Cep wCep = (Cep) u.unmarshal(url);
-
-		return new CepSimples(wCep);
+		return cepService.recuperaCep(cep);
 
 	}
 }

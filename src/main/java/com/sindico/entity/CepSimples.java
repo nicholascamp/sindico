@@ -9,19 +9,23 @@ package com.sindico.entity;
 public class CepSimples {
 
 	/** The uf. */
-	private String uf;
+	private String	uf;
 
 	/** The cidade. */
-	private String cidade;
+	private String	cidade;
 
 	/** The bairro. */
-	private String bairro;
+	private String	bairro;
 
 	/** The tipo_logradouro. */
-	private String tipo_logradouro;
+	private String	tipo_logradouro;
 
 	/** The logradouro. */
-	private String logradouro;
+	private String	logradouro;
+
+	private Integer	numero;
+
+	private String	cep;
 
 	/**
 	 * Instantiates a new cep simples.
@@ -130,6 +134,22 @@ public class CepSimples {
 	 */
 	public void setLogradouro(final String logradouro) {
 		this.logradouro = logradouro;
+	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(final Integer numero) {
+		this.numero = numero;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(final String cep) {
+		this.cep = cep;
 	}
 
 }

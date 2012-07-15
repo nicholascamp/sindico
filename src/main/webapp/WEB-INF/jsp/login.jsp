@@ -18,7 +18,7 @@
 		method="POST">
 		<table>
 			<tr>
-				<td>User:</td>
+				<td>Email:</td>
 				<td><input type='text' name='j_username'
 					value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>' /></td>
 			</tr>

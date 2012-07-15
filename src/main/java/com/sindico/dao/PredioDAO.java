@@ -86,10 +86,34 @@ public class PredioDAO {
 
 		return predio;
 	}
-	
-	public Predio getPredio(Usuario usuario){		
+
+	/**
+	 * Gets the predio.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 * @return the predio
+	 */
+	public Predio getPredio(final Usuario usuario) {
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"select usuario.predio from Usuario usuario WHERE usuario.id = " + usuario.getId());
+				"select usuario.predio from Usuario usuario WHERE usuario.id = "
+						+ usuario.getId());
+		return (Predio) query.uniqueResult();
+	}
+
+	/**
+	 * Gets the predio por cep numero.
+	 * 
+	 * @param cep
+	 *            the cep
+	 * @param numero
+	 *            the numero
+	 * @return the predio por cep numero
+	 */
+	public Predio getPredioPorCEPNumero(final String cep, final int numero) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select predio from Predio predio WHERE predio.cep = '" + cep
+						+ "' AND predio.numero = " + numero);
 		return (Predio) query.uniqueResult();
 	}
 
@@ -132,9 +156,22 @@ public class PredioDAO {
 	}
 
 	/**
+	 * Buscar predio por cnpj.
 	 * 
-	 * IMPLEMENTAR BUSCA POR CNPJ
-	 * 
+	 * @param cnpj
+	 *            the cnpj
+	 * @return the list
 	 */
+	@SuppressWarnings("unchecked")
+	public List<Predio> buscarPredioPorCNPJ(final String cnpj) {
+		List<Predio> predios = new ArrayList<Predio>();
+
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"SELECT predio FROM Predio predio WHERE predio.cnpj like '%"
+						+ cnpj + "%'");
+		predios = query.list();
+
+		return predios;
+	}
 
 }
