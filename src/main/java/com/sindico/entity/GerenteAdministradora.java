@@ -14,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.NotNull;
 
 /**
@@ -33,13 +31,11 @@ public class GerenteAdministradora {
 	/** The administradora. */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ADMINISTRADORA_ID")
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@NotNull(message = "Gerente deve pertencer a uma Administradora")
 	private Administradora		administradora;
 
 	/** The predios. */
 	@OneToMany(mappedBy = "gerente")
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Predio>	predios		= new ArrayList<Predio>();
 
 	/** The data cadastro. */
@@ -74,7 +70,6 @@ public class GerenteAdministradora {
 
 	/** The cotacoes. */
 	@OneToMany(mappedBy = "gerenteAdmin")
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Cotacao>	cotacoes	= new ArrayList<Cotacao>();
 
 	/**

@@ -69,8 +69,7 @@ public class RespostaCotacao {
 
 	/** The parcela para. */
 	@Column(name = "PARCELA_PARA")
-	private int					parcelaPara;
-	
+	private int					parcelaPara;	
 	
 	/** The arquivo foto. */
 	@Column(name = "ARQUIVO_FOTO")

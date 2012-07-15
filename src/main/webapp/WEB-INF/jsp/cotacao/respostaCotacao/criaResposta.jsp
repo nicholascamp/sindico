@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<td>Descrição Proposta:</td>
-					<td>${resposta.primeiraResposta }</td>
+					<td>${resposta.resposta }</td>
 				</tr>
 			</table>
 		</c:forEach>
@@ -45,13 +45,6 @@
 			<td>
 				<input type="hidden" name="cotacao" value="${resposta.cotacao.id }" />
 				<label>${resposta.cotacao.id }</label>
-			</td>
-		</tr>
-		<tr>
-			<td>Fornecedor:</td>
-			<td>
-				<input type="hidden" name="fornecedor" value="${resposta.fornecedor.id }" />
-				${resposta.fornecedor.nome }
 			</td>
 		</tr>
 		<tr>
@@ -76,11 +69,12 @@
 		</tr>
 		<tr>
 			<td>Descrição Proposta:</td>
-			<td><form:textarea path="primeiraResposta"/></td>
+			<td><form:textarea path="resposta"/></td>
 		</tr>
 		<tr>
 			<td>Arquivo Foto:</td>
 			<td>FAZER</td>
-		</tr>
+		</tr>		
 	</table>
+	<form:button>Criar</form:button>
 </form:form>

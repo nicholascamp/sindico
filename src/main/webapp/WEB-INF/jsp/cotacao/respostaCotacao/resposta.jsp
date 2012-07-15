@@ -12,10 +12,16 @@
 			<td>Cotação:</td>
 			<td>${resposta.cotacao.id }</td>
 		</tr>
+		<c:if test="${ ! empty resposta.fornecedor }">
+			<tr>
+				<td>Fornecedor:</td>
+				<td>${resposta.fornecedor.nome }</td>
+			</tr>
+		</c:if>
 		<tr>
-			<td>Fornecedor:</td>
-			<td>${resposta.fornecedor.nome }</td>
-		</tr>
+			<td>Prédio:</td>
+			<td></td>
+		</tr>		
 		<tr>
 			<td>Valor:</td>
 			<td>${resposta.valor }</td>

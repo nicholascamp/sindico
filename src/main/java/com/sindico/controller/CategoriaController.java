@@ -60,6 +60,8 @@ public class CategoriaController {
 				"categoria", new Categoria());
 
 		modelAndView.addObject("categoria", categoriaService.getCategoria(id));
+		Categoria categoria = categoriaService.getCategoria(id);
+		System.out.println("Subcategorias: " + categoria.getSubcategorias());
 		modelAndView.setViewName("mostraCategoria");
 		return modelAndView;
 	}

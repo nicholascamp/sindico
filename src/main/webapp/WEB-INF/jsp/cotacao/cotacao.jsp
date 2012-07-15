@@ -15,6 +15,10 @@
 				<td>${cotacao.impropria }</td>
 			</tr>
 			<tr>
+				<td>Subcategoria:</td>
+				<td>${cotacao.subcategoria }</td>
+			</tr>
+			<tr>
 				<td>Usuário:</td>
 				<c:if test="${! empty cotacao.usuario }">
 					<td>${cotacao.usuario.nome }</td>
@@ -60,9 +64,13 @@
 			</tr>
 		</table>
 		<div>
-			<c:url value="/listaRespostaCotacaoPorCotacao" var="Resposta">
+			<c:url value="/listaRespostaCotacaoPorCotacao" var="Respostas">
+				<c:param name="cotacaoId" value="${cotacao.id }" />
+			</c:url>
+			<a href="${Respostas }">Listar Respostas da Cotação</a>
+			<c:url value="/criaRespostaCotacao" var="Resposta">
 				<c:param name="id" value="${cotacao.id }" />
 			</c:url>
-			<a href="${Resposta }">Listar Respostas das Cotações</a>
+			<a href="${Resposta }" title="Dar Orçamento">Responder</a>
 			<a href="<c:url value='/listaCotacoes' />" title="Lista Cotações">Listar Cotações</a>
 		</div>

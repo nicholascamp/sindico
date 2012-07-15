@@ -117,13 +117,13 @@ public class CotacaoController {
 	@RequestMapping(method = RequestMethod.POST, value = "/criaCotacao")
 	public ModelAndView createCotacao(
 			@ModelAttribute("cotacao") final Cotacao cotacao) {
-		
 		cotacao.setData(new Date());
 		cotacao.setStatus(Status.ABERTO);
 		cotacao.setImpropria(false);
 		cotacao.setDataAtualizacao(new Date());
 		Usuario user = usuarioService.getLoggedUser();
 		cotacao.setUsuario(user);
+		//cotacao.setPredio(user.getPredio());
 		// COMO ACHAR O GERENTE DA ADMINISTRADORA
 
 		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",
