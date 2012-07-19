@@ -8,6 +8,33 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
+
+	<!-- Configurações de envio de email -->
+	<bean id="protocol" class="java.lang.String">
+		<constructor-arg value="smtp" />
+	</bean>
+	<bean id="starttls" class="java.lang.String">
+		<constructor-arg value="true" />
+	</bean>
+	<bean id="host" class="java.lang.String">
+		<constructor-arg value="smtp.gmail.com" />
+	</bean>
+
+	<bean id="port" class="java.lang.String">
+		<constructor-arg value="587" />
+	</bean>
+
+	<bean id="auth" class="java.lang.String">
+		<constructor-arg value="true" />
+	</bean>
+	<bean id="user" class="java.lang.String">
+		<constructor-arg value="lucas.oliveira@dclick.com.br" />
+	</bean>
+	<bean id="password" class="java.lang.String">
+		<constructor-arg value="extweakpp" />
+	</bean>
+	<!-- Fim das configurações de email -->
+
 	<import resource="classpath:db-config.xml" />
 	<import resource="classpath:security.xml" />
 

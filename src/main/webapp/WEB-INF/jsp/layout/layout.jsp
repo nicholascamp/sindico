@@ -15,11 +15,11 @@
 	<div>
 		<tiles:insertAttribute name="header" />
 		<div>
-			<sec:authorize ifAnyGranted="ROLE_USUARIO">
+			<sec:authorize ifAnyGranted="ROLE_USUARIO, ROLE_FORNECEDOR">
 				<tiles:insertAttribute name="navigation" />
 			</sec:authorize>
 			<hr noshade="noshade" size="1" width="100%">
-			<sec:authorize ifNotGranted="ROLE_USUARIO">
+			<sec:authorize ifNotGranted="ROLE_USUARIO, ROLE_FORNECEDOR">
 				<h3>Faça Login</h3>
 
 				<form name="f" action="<c:url value='/j_spring_security_check'/>"
@@ -61,7 +61,7 @@
 		</div>
 
 		<hr noshade="noshade" size="1" width="100%">
-		<sec:authorize ifAnyGranted="ROLE_USUARIO">
+		<sec:authorize ifAnyGranted="ROLE_USUARIO, ROLE_FORNECEDOR">
 			<a href="<c:url value="/j_spring_security_logout" />"> Logout</a>
 		</sec:authorize>
 		<tiles:insertAttribute name="footer" />
