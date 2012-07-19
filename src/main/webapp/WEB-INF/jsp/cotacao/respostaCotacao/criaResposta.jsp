@@ -43,6 +43,10 @@
 		<tr>
 			<td>Cotação:</td>
 			<td>
+				<input type="hidden" name="predio" value="${resposta.predio.id }">
+				<c:if test="${ ! empty resposta.fornecedor }">
+					<input type="hidden" name="fornecedor" value="${resposta.fornecedor.id }">
+				</c:if>
 				<input type="hidden" name="cotacao" value="${resposta.cotacao.id }" />
 				<label>${resposta.cotacao.id }</label>
 			</td>

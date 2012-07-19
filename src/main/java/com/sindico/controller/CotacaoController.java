@@ -126,7 +126,7 @@ public class CotacaoController {
 		cotacao.setDataAtualizacao(new Date());
 		Usuario user = usuarioService.getLoggedUser();
 		cotacao.setUsuario(user);
-		//cotacao.setPredio(user.getPredio());
+		cotacao.setPredio(user.getPredio());
 		// COMO ACHAR O GERENTE DA ADMINISTRADORA
 
 		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",

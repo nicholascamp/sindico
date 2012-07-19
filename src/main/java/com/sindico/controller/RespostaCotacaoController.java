@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sindico.entity.Cotacao;
 import com.sindico.entity.Fornecedor;
+import com.sindico.entity.Predio;
 import com.sindico.entity.RespostaCotacao;
 import com.sindico.entity.Usuario;
 import com.sindico.enums.Status;
@@ -97,7 +98,6 @@ public class RespostaCotacaoController {
 				resposta.setCotacao(cotacao);
 				resposta.setPredio(cotacao.getPredio());			
 				resposta.setFornecedor(fornecedorService.getLoggedFornecedor());
-				
 				ModelAndView mv = new ModelAndView(
 						"/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
 				mv.setViewName("criaRespostaCotacao");
@@ -138,10 +138,8 @@ public class RespostaCotacaoController {
 	@RequestMapping(method = RequestMethod.POST, value = "/criaRespostaCotacao")
 	public ModelAndView createRespostaCotacao(
 			@ModelAttribute("resposta") final RespostaCotacao respostaCotacao) {
-		respostaCotacao.setPredio(predioService.getPredio(usuarioService
-				.getLoggedUser()));
 		respostaCotacao.setData(new Date());		
-
+		
 		ModelAndView mv = new ModelAndView(
 				"/cotacao/respostaCotacao/resposta", "resposta",
 				service.criaRespostaCotacao(respostaCotacao));
@@ -207,13 +205,22 @@ public class RespostaCotacaoController {
 					}
 				});
 
-		binder.registerCustomEditor(Fornecedor.class, "fornecedorVencedor",
+		binder.registerCustomEditor(Fornecedor.class,
 				new PropertyEditorSupport() {
 					@Override
 					public void setAsText(final String id) {
 						Fornecedor fornecedor = fornecedorService
 								.getFornecedor(Long.parseLong(id));
 						setValue(fornecedor);
+					}
+				});
+		
+		binder.registerCustomEditor(Predio.class,
+				new PropertyEditorSupport() {
+					@Override
+					public void setAsText(final String id) {
+						Predio predio = predioService.getPredio(Long.parseLong(id));
+						setValue(predio);
 					}
 				});
 		binder.registerCustomEditor(Cotacao.class,
