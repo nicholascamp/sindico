@@ -37,7 +37,7 @@ public interface UsuarioService {
 	 */
 	@Transactional
 	public Usuario atualizaUsuario(final Usuario usuario);
-	
+
 	@Transactional
 	public Usuario buscaUsuario(Long id);
 
@@ -117,5 +117,11 @@ public interface UsuarioService {
 	 */
 	@Transactional
 	public Usuario getLoggedUser();
+
+	/**
+	 * @return
+	 */
+	@Transactional
+	public boolean ehUsuarioLogado();
 
 }

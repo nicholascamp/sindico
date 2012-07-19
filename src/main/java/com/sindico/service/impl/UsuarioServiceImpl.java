@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.dao.UsuarioDAO;
 import com.sindico.entity.Usuario;
@@ -150,9 +151,24 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario buscaUsuario(Long id) {
+	public Usuario buscaUsuario(final Long id) {
 		// TODO Auto-generated method stub
 		return usuarioDAO.getUsuario(id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.sindico.service.UsuarioService#ehUsuarioLogado()
+	 */
+	@Override
+	@Transactional
+	public boolean ehUsuarioLogado() {
+		if (SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal().getClass().equals(Usuario.class)) {
+			return true;
+		}
+		return false;
 	}
 
 }
