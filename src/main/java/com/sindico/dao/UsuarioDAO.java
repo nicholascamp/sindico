@@ -53,8 +53,10 @@ public class UsuarioDAO {
 	 * @return the usuario
 	 */
 	public Usuario getUsuario(final Long id) {
-		return (Usuario) sessionFactory.getCurrentSession().load(Usuario.class,
-				id);
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select usuario from Usuario usuario where usuario.id = " + id);
+
+		return (Usuario) query.uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")

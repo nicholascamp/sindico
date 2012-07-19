@@ -77,6 +77,9 @@ public interface CotacaoService {
 	List<RespostaCotacao> listRespostasCotacao(Long idCotacao);
 	
 	@Transactional
+	List<RespostaCotacao> listRespostasCotacaoHistorico(Cotacao cotacao);
+	
+	@Transactional
 	RespostaCotacao updateRespostaCotacao(RespostaCotacao respostaCotacao);
 	
 	@Transactional
@@ -84,4 +87,7 @@ public interface CotacaoService {
 	
 	@Transactional
 	RespostaCotacao criaRespostaCotacao(RespostaCotacao respostaCotacao);
+
+	@Transactional
+	boolean possuiNegociacaoAberta(long cotacaoId, long fornecedorId);	
 }
