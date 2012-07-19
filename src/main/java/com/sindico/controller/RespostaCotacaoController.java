@@ -77,20 +77,42 @@ public class RespostaCotacaoController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/criaRespostaCotacao")
 	public ModelAndView newRespostaCotacao(Cotacao cotacao) {
-		cotacao = service.getCotacao(cotacao.getId());		
-		cotacao.setStatus(Status.TRABALHO);
-		cotacao.setDataAtualizacao(new Date());
-		service.atualizarCotacao(cotacao);
-
-		// TODO: VERIFICAR SE USUARIO EH FORNECEDOR
-		// TODO Setar Fornecedor
-
+		
 		RespostaCotacao resposta = new RespostaCotacao();
-		resposta.setCotacao(cotacao);
-		ModelAndView mv = new ModelAndView(
-				"/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
-		mv.setViewName("criaRespostaCotacao");
-		return mv;
+		
+		if(usuarioService.ehUsuarioLogado()){
+			ModelAndView mv = new ModelAndView(
+					"/cotacao/cotacao", "cotacao", cotacao);
+			mv.addObject("msg", "A abertura de negociação é sempre feita por um Fornecedor.");
+			mv.setViewName("mostraCotacao");
+			return mv;
+		}
+		else{
+			if(!service.possuiNegociacaoAberta(cotacao.getId(), fornecedorService.getLoggedFornecedor().getId())){
+				cotacao = service.getCotacao(cotacao.getId());		
+				cotacao.setStatus(Status.TRABALHO);
+				cotacao.setDataAtualizacao(new Date());
+				service.atualizarCotacao(cotacao);
+
+				resposta.setCotacao(cotacao);
+				resposta.setPredio(cotacao.getPredio());			
+				resposta.setFornecedor(fornecedorService.getLoggedFornecedor());
+				
+				ModelAndView mv = new ModelAndView(
+						"/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
+				mv.setViewName("criaRespostaCotacao");
+				return mv;
+			}
+			else{
+				ModelAndView mv = new ModelAndView(
+						"/cotacao/cotacao", "cotacao", cotacao);
+				mv.addObject("msg", "Fornecedor já possui negociação na Cotação.");
+				mv.setViewName("mostraCotacao");
+				return mv;
+			}
+			
+		}	
+		
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/criaRespostaCotacaoResposta")
@@ -105,7 +127,7 @@ public class RespostaCotacaoController {
 		resposta.setCotacao(respostaAnterior.getCotacao());
 		resposta.setFornecedor(respostaAnterior.getFornecedor());
 		resposta.setPredio(respostaAnterior.getPredio());
-
+		
 		ModelAndView mv = new ModelAndView(
 				"/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
 		mv.addObject("respostas", respostas);

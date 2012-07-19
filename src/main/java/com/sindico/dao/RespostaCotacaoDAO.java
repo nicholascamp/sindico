@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sindico.entity.Cotacao;
-import com.sindico.entity.Fornecedor;
 import com.sindico.entity.RespostaCotacao;
 
 /**

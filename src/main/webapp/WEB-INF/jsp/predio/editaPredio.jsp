@@ -11,7 +11,10 @@
 	action="/sindico/editaPredio">
 	<table>
 		<tr>
-			<td>Nome:</td>
+			<td>
+				<input type="hidden" name="id" value="${predio.id }">
+				Nome:
+			</td>
 			<td><form:input path="nome" size="100" /></td>
 		</tr>
 		<tr>

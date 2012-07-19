@@ -4,6 +4,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="sindico"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+		<c:if test="${ ! empty msg }">
+			<div>
+				<p>${msg }</p>
+			</div>
+		</c:if>
+		
 		<h1>Cotação ${cotacao.id}</h1>
 		<table style="margin: 10px;">		
 			<tr>
@@ -65,26 +71,23 @@
 		</table>
 		<br />
 		<div>
+			<label>Negociações Abertas:</label>
 			<table>
 				<thead>
 					<tr>
 						<th>Fornecedor</th>
-						<th>Data de Criação</th>
 						<th>Valor</th>
 						<th>Condição</th>
 						<th>Garantia</th>
 						<th>Prazo</th>
-						<th>Resposta</th>
 					</tr>
 				</thead>
 				<c:forEach items="${respostas }" var="resposta">
 					<tr>
 						<td>${resposta.fornecedor }</td>
-						<td>${resposta.data }</td>
 						<td>${resposta.valor }</td>
 						<td>${resposta.condicao }</td>
 						<td>${resposta.prazo }</td>
-						<td>${resposta.resposta }</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -97,6 +100,6 @@
 			<c:url value="/criaRespostaCotacao" var="Resposta">
 				<c:param name="id" value="${cotacao.id }" />
 			</c:url>
-			<a href="${Resposta }" title="Dar Orçamento">Primeira Resposta de Fornecedor</a>
+			<a href="${Resposta }" title="Dar Orçamento">Abrir Negociação</a>
 			<a href="<c:url value='/listaCotacoes' />" title="Lista Cotações">Listar Cotações</a>
 		</div>

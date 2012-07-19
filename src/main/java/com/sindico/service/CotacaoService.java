@@ -86,5 +86,8 @@ public interface CotacaoService {
 	void removeRespostaCotacao(Long id);
 	
 	@Transactional
-	RespostaCotacao criaRespostaCotacao(RespostaCotacao respostaCotacao);	
+	RespostaCotacao criaRespostaCotacao(RespostaCotacao respostaCotacao);
+
+	@Transactional
+	boolean possuiNegociacaoAberta(long cotacaoId, long fornecedorId);	
 }
