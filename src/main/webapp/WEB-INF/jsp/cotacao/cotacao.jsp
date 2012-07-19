@@ -63,6 +63,32 @@
 				<td>${cotacao.titulo }</td>
 			</tr>
 		</table>
+		<br />
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>Fornecedor</th>
+						<th>Data de Criação</th>
+						<th>Valor</th>
+						<th>Condição</th>
+						<th>Garantia</th>
+						<th>Prazo</th>
+						<th>Resposta</th>
+					</tr>
+				</thead>
+				<c:forEach items="${respostas }" var="resposta">
+					<tr>
+						<td>${resposta.fornecedor }</td>
+						<td>${resposta.data }</td>
+						<td>${resposta.valor }</td>
+						<td>${resposta.condicao }</td>
+						<td>${resposta.prazo }</td>
+						<td>${resposta.resposta }</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
 		<div>
 			<c:url value="/listaRespostaCotacaoPorCotacao" var="Respostas">
 				<c:param name="cotacaoId" value="${cotacao.id }" />
@@ -71,6 +97,6 @@
 			<c:url value="/criaRespostaCotacao" var="Resposta">
 				<c:param name="id" value="${cotacao.id }" />
 			</c:url>
-			<a href="${Resposta }" title="Dar Orçamento">Responder</a>
+			<a href="${Resposta }" title="Dar Orçamento">Primeira Resposta de Fornecedor</a>
 			<a href="<c:url value='/listaCotacoes' />" title="Lista Cotações">Listar Cotações</a>
 		</div>

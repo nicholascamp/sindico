@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.sindico.dao.CotacaoDAO;
 import com.sindico.dao.RespostaCotacaoDAO;
 import com.sindico.entity.Cotacao;
+import com.sindico.entity.Fornecedor;
 import com.sindico.entity.Predio;
 import com.sindico.entity.RespostaCotacao;
 import com.sindico.service.CotacaoService;
@@ -122,6 +123,19 @@ public class CotacaoServiceImpl implements CotacaoService {
 	public List<RespostaCotacao> listRespostasCotacao(Long idCotacao){
 		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO.getLista(idCotacao);
 		return preencheRespostaCotacao(respostaCotacao);
+	}
+	
+	@Override
+	public List<RespostaCotacao> listRespostasCotacaoHistorico(Cotacao cotacao) {		
+		List<RespostaCotacao> respostaCotacao = new ArrayList<RespostaCotacao>();
+		
+		for(Fornecedor fornecedor : cotacao.getFornecedores()){
+			RespostaCotacao resposta = respostaCotacaoDAO.getRespostaCotacao(cotacao.getId(), fornecedor.getId());
+			
+			if(resposta != null)
+				respostaCotacao.add(resposta);
+		}
+		return respostaCotacao;
 	}
 
 	@Override

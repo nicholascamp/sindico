@@ -72,7 +72,7 @@ public class CotacaoController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/listaCotacoesPorUsuario")
 	public ModelAndView indexCotacaoPorUsuario(){
-		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacaoes", 
+		ModelAndView mv = new ModelAndView("/cotacao/cotacoes", "cotacoes", 
 				cotacaoService.listCotacoes(usuarioService.getLoggedUser().getId()));
 		mv.setViewName("listaCotacaoesPorUsuario");
 		return mv;
@@ -88,8 +88,11 @@ public class CotacaoController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/mostraCotacao")
 	public ModelAndView showCotacao(final Long id) {
+		Cotacao cotacao = cotacaoService.getCotacao(id);
 		ModelAndView mv = new ModelAndView("/cotacao/cotacao", "cotacao",
-				cotacaoService.getCotacao(id));
+				cotacao);
+		
+		mv.addObject("respostas", cotacaoService.listRespostasCotacaoHistorico(cotacao));
 		mv.setViewName("mostraCotacao");
 		return mv;
 	}

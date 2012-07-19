@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sindico.entity.Cotacao;
+import com.sindico.entity.Fornecedor;
 import com.sindico.entity.RespostaCotacao;
 
 /**
@@ -36,10 +38,19 @@ public class RespostaCotacaoDAO {
 
 
 	public RespostaCotacao getRespostaCotacao(final Long id) {
-		return (RespostaCotacao) sessionFactory.getCurrentSession().load(RespostaCotacao.class,
-				id);
-	}
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select resposta from RespostaCotacao resposta where resposta.id = " + id);
 
+		return (RespostaCotacao) query.uniqueResult();
+	}
+	
+	public RespostaCotacao getRespostaCotacao(Long cotacaoId, Long fornecedorId) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select respostaCotacao from RespostaCotacao respostaCotacao where respostaCotacao.cotacao.id = " 
+				+ cotacaoId + " and respostaCotacao.fornecedor.id = " + fornecedorId + " order by respostaCotacao.data desc");
+
+		return (RespostaCotacao) query.uniqueResult();
+	}
 
 	public void removeRespostaCotacao(final Long id) {
 		RespostaCotacao respostaCotacao = (RespostaCotacao) sessionFactory.getCurrentSession().load(

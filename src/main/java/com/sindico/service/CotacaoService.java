@@ -77,11 +77,14 @@ public interface CotacaoService {
 	List<RespostaCotacao> listRespostasCotacao(Long idCotacao);
 	
 	@Transactional
+	List<RespostaCotacao> listRespostasCotacaoHistorico(Cotacao cotacao);
+	
+	@Transactional
 	RespostaCotacao updateRespostaCotacao(RespostaCotacao respostaCotacao);
 	
 	@Transactional
 	void removeRespostaCotacao(Long id);
 	
 	@Transactional
-	RespostaCotacao criaRespostaCotacao(RespostaCotacao respostaCotacao);
+	RespostaCotacao criaRespostaCotacao(RespostaCotacao respostaCotacao);	
 }

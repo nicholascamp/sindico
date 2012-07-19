@@ -36,8 +36,11 @@ public class GerenteAdministradoraDAO {
 
 
 	public GerenteAdministradora getGerenteAdministradora(final Long id) {
-		return (GerenteAdministradora) sessionFactory.getCurrentSession().load(GerenteAdministradora.class,
-				id);
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select gerente from GerenteAdministradora gerente where gerente.id = "
+						+ id);
+
+		return (GerenteAdministradora) query.uniqueResult();
 	}
 
 

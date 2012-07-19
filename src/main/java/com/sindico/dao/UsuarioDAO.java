@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sindico.entity.Cotacao;
 import com.sindico.entity.Usuario;
 
 /**
@@ -53,8 +54,10 @@ public class UsuarioDAO {
 	 * @return the usuario
 	 */
 	public Usuario getUsuario(final Long id) {
-		return (Usuario) sessionFactory.getCurrentSession().load(Usuario.class,
-				id);
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select usuario from Usuario usuario where usuario.id = " + id);
+
+		return (Usuario) query.uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
