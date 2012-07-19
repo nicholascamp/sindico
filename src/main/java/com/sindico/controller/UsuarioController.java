@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -160,6 +161,28 @@ public class UsuarioController {
 		modelAndView.setViewName("listaUsuarios");
 
 		return modelAndView;
+	}
+
+	/**
+	 * Eh usuario logado.
+	 * 
+	 * @return true, if successful
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/ehUsuario")
+	@ResponseBody
+	public boolean ehUsuarioLogado() {
+		return usuarioService.ehUsuarioLogado();
+	}
+
+	/**
+	 * Gets the logged user.
+	 * 
+	 * @return the logged user
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/getLoggedUser")
+	@ResponseBody
+	public UsuarioSimples getLoggedUser() {
+		return new UsuarioSimples(usuarioService.getLoggedUser());
 	}
 
 	// Alterar para PUT
