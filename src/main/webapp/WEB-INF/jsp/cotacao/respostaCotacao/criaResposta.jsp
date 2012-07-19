@@ -19,7 +19,7 @@
 				</tr>
 				<tr>
 					<td>Garantia:</td>
-					<td>${ resposta.garantia }</td>
+					<td>${ resposta.garantia } ano(s)</td>
 				</tr>
 				<tr>
 					<td>Prazo:</td>
@@ -27,7 +27,7 @@
 				</tr>
 				<tr>
 					<td>Primeira Parcela para:</td>
-					<td>${resposta.parcelaPara }</td>
+					<td>${resposta.parcelaPara } dia(s)</td>
 				</tr>
 				<tr>
 					<td>Descrição Proposta:</td>

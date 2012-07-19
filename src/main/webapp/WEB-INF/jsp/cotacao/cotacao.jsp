@@ -84,9 +84,10 @@
 				</thead>
 				<c:forEach items="${respostas }" var="resposta">
 					<tr>
-						<td>${resposta.fornecedor }</td>
-						<td>${resposta.valor }</td>
+						<td>${resposta.fornecedor.nome }</td>
+						<td>R$ ${resposta.valor }</td>
 						<td>${resposta.condicao }</td>
+						<td>${resposta.garantia } ano(s)</td>
 						<td>${resposta.prazo }</td>
 					</tr>
 				</c:forEach>
