@@ -163,10 +163,26 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	/**
+	 * Eh usuario logado.
+	 * 
+	 * @return true, if successful
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/ehUsuario")
 	@ResponseBody
 	public boolean ehUsuarioLogado() {
 		return usuarioService.ehUsuarioLogado();
+	}
+
+	/**
+	 * Gets the logged user.
+	 * 
+	 * @return the logged user
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/getLoggedUser")
+	@ResponseBody
+	public UsuarioSimples getLoggedUser() {
+		return new UsuarioSimples(usuarioService.getLoggedUser());
 	}
 
 	// Alterar para PUT

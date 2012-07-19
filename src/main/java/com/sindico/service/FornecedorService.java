@@ -76,6 +76,13 @@ public interface FornecedorService {
 	@Transactional
 	List<Fornecedor> listarFornecedorPorNome(String nome);
 
+	/**
+	 * Listar fornecedor.
+	 * 
+	 * @param subcategoria
+	 *            the subcategoria
+	 * @return the list
+	 */
 	@Transactional
 	List<Fornecedor> listarFornecedor(Subcategoria subcategoria);
 
@@ -99,17 +106,31 @@ public interface FornecedorService {
 	void removerFornecedor(Long id);
 
 	/**
+	 * Listar fornecedores por cnpj.
+	 * 
 	 * @param cnpj
-	 * @return
+	 *            the cnpj
+	 * @return the list
 	 */
 	@Transactional
 	List<Fornecedor> listarFornecedoresPorCNPJ(String cnpj);
 
 	/**
+	 * Load by username.
+	 * 
 	 * @param email
-	 * @return
+	 *            the email
+	 * @return the fornecedor
 	 */
 	@Transactional
 	Fornecedor loadByUsername(String email);
+
+	/**
+	 * Gets the logged fornecedor.
+	 * 
+	 * @return the logged fornecedor
+	 */
+	@Transactional
+	Fornecedor getLoggedFornecedor();
 
 }

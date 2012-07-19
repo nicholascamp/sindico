@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.dao.FornecedorDAO;
 import com.sindico.entity.Fornecedor;
@@ -131,24 +133,32 @@ public class FornecedorServiceImpl implements FornecedorService {
 		return fornecedorDAO.listarFornecedorPorCNPJ(cnpj);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.FornecedorService#listarFornecedor(com.sindico.entity
+	 * .Subcategoria)
+	 */
 	@Override
-	public List<Fornecedor> listarFornecedor(
-			final Subcategoria subcategoria) {
-		List<Fornecedor> fornecedoresAux = fornecedorDAO.listarFornecedor(subcategoria);
+	public List<Fornecedor> listarFornecedor(final Subcategoria subcategoria) {
+		List<Fornecedor> fornecedoresAux = fornecedorDAO
+				.listarFornecedor(subcategoria);
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		List<Fornecedor> fornecedoresAnunciantes = new ArrayList<Fornecedor>();
-		
-		for(Fornecedor fornecedor : fornecedoresAux){
-			if(fornecedor.isAnunciante()){
-				if(fornecedoresAnunciantes.size() < 10)
+
+		for (Fornecedor fornecedor : fornecedoresAux) {
+			if (fornecedor.isAnunciante()) {
+				if (fornecedoresAnunciantes.size() < 10) {
 					fornecedoresAnunciantes.add(fornecedor);
-			}
-			else{
-				if(fornecedores.size() < 30)
+				}
+			} else {
+				if (fornecedores.size() < 30) {
 					fornecedores.add(fornecedor);
+				}
 			}
 		}
-		
+
 		fornecedores.addAll(0, fornecedoresAnunciantes);
 		return fornecedores;
 	}
@@ -162,6 +172,19 @@ public class FornecedorServiceImpl implements FornecedorService {
 	@Override
 	public Fornecedor loadByUsername(final String email) {
 		return fornecedorDAO.loadByEmail(email);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.sindico.service.FornecedorService#getLoggedFornecedor()
+	 */
+	@Override
+	@Transactional
+	public Fornecedor getLoggedFornecedor() {
+		Fornecedor fornecedor = (Fornecedor) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		return fornecedor;
 	}
 
 }
