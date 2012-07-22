@@ -116,7 +116,7 @@ public class CotacaoServiceImpl implements CotacaoService {
 			Long idFornecedor) {
 		// TODO Auto-generated method stub
 		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO.getLista(idCotacao, idFornecedor);
-		return preencheRespostaCotacao(respostaCotacao);
+		return respostaCotacao;
 	}
 	
 	@Override

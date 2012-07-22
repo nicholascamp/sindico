@@ -52,7 +52,7 @@ public class RespostaCotacao {
 	/** The garantia. */
 	@Column(name = "GARANTIA", nullable = false)
 	@NotNull(message = "Insira um garantia")
-	private int					garantia;
+	private String					garantia;
 
 	/** The prazo. */
 	@Column(name = "PRAZO", length = 100, nullable = false)
@@ -69,7 +69,7 @@ public class RespostaCotacao {
 
 	/** The parcela para. */
 	@Column(name = "PARCELA_PARA")
-	private int					parcelaPara;	
+	private String					parcelaPara;	
 	
 	/** The arquivo foto. */
 	@Column(name = "ARQUIVO_FOTO")
@@ -147,7 +147,7 @@ public class RespostaCotacao {
 	 * 
 	 * @return the garantia
 	 */
-	public int getGarantia() {
+	public String getGarantia() {
 		return garantia;
 	}
 
@@ -157,7 +157,7 @@ public class RespostaCotacao {
 	 * @param garantia
 	 *            the new garantia
 	 */
-	public void setGarantia(final int garantia) {
+	public void setGarantia(final String garantia) {
 		this.garantia = garantia;
 	}
 
@@ -212,7 +212,7 @@ public class RespostaCotacao {
 	 * 
 	 * @return the parcela para
 	 */
-	public int getParcelaPara() {
+	public String getParcelaPara() {
 		return parcelaPara;
 	}
 
@@ -222,7 +222,7 @@ public class RespostaCotacao {
 	 * @param parcelaPara
 	 *            the new parcela para
 	 */
-	public void setParcelaPara(final int parcelaPara) {
+	public void setParcelaPara(final String parcelaPara) {
 		this.parcelaPara = parcelaPara;
 	}
 

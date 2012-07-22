@@ -80,6 +80,7 @@
 						<th>Condição</th>
 						<th>Garantia</th>
 						<th>Prazo</th>
+						<th></th>
 					</tr>
 				</thead>
 				<c:forEach items="${respostas }" var="resposta">
@@ -89,6 +90,13 @@
 						<td>${resposta.condicao }</td>
 						<td>${resposta.garantia } ano(s)</td>
 						<td>${resposta.prazo }</td>
+						<td>
+							<c:url value="/criaRespostaCotacaoResposta" var="Criar">
+								<c:param name="idCotacao" value="${cotacao.id }" />
+								<c:param name="idFornecedor" value="${resposta.fornecedor.id }"></c:param>
+							</c:url>
+							<a href="${Criar }">Ver Negociação</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

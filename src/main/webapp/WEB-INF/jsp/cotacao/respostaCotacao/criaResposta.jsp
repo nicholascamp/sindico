@@ -6,39 +6,41 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <c:if test="${ ! empty respostas }">
-	<form:form commandName="respostas" method="GET">
+	<table>
+		<tr>
+			<th>Valor</th>
+			<th>Condição</th>
+			<th>Garantia</th>
+			<th>Prazo</th>
+			<th>Primeira Parcela para</th>
+			<th>Data</th>
+			<th>Descrição Proposta</th>
+		</tr>
 		<c:forEach items="${respostas }" var="resposta">
-			<table>
-				<tr>
-					<td>Valor:</td>
-					<td>${resposta.valor }</td>
-				</tr>
-				<tr>
-					<td>Condição:</td>
-					<td>${resposta.condicao }</td>
-				</tr>
-				<tr>
-					<td>Garantia:</td>
-					<td>${ resposta.garantia } ano(s)</td>
-				</tr>
-				<tr>
-					<td>Prazo:</td>
-					<td>${resposta.prazo }</td>
-				</tr>
-				<tr>
-					<td>Primeira Parcela para:</td>
-					<td>${resposta.parcelaPara } dia(s)</td>
-				</tr>
-				<tr>
-					<td>Descrição Proposta:</td>
-					<td>${resposta.resposta }</td>
-				</tr>
-			</table>
+			<tr>
+				<td>${resposta.valor }</td>
+				<td>${resposta.condicao }</td>
+				<td>${resposta.garantia } ano(s)</td>
+				<td>${resposta.prazo }</td>
+				<td>${resposta.parcelaPara } dia(s)</td>
+				<td>${resposta.data }</td>
+				<td>${resposta.resposta }</td>				
+			</tr>
 		</c:forEach>
-	</form:form>
+	</table>	
 </c:if>
-
-<form:form commandName="resposta" method="POST">
+<br  />
+<form:form action="/sindico/encerraCotacao" commandName="resposta" method="POST">
+	<input type="hidden" name="idRespostaCotacao" value="${respostaUltima.id }" />
+	<form:button>Encerrar Cotação</form:button>
+</form:form>
+<form:form action="/sindico/deletaCotacao" commandName="resposta" method="GET">
+	<input type="hidden" name="id" value="${resposta.cotacao.id }" />
+	<form:button>Destruir Cotação</form:button>
+</form:form>
+<br />
+<h3>Responder:</h3>
+<form:form action="/sindico/criaRespostaCotacao" commandName="resposta" method="POST">
 	<table>
 		<tr>
 			<td>Cotação:</td>

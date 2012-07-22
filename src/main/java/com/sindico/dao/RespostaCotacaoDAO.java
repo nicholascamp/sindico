@@ -47,7 +47,11 @@ public class RespostaCotacaoDAO {
 				"select respostaCotacao from RespostaCotacao respostaCotacao where respostaCotacao.cotacao.id = " 
 				+ cotacaoId + " and respostaCotacao.fornecedor.id = " + fornecedorId + " order by respostaCotacao.data desc");
 
-		return (RespostaCotacao) query.uniqueResult();
+		List<RespostaCotacao> respostaCotacao = query.list();	
+		if(respostaCotacao.size() == 0)
+			return null;
+		
+		return respostaCotacao.get(0);
 	}
 
 	public void removeRespostaCotacao(final Long id) {
@@ -83,7 +87,7 @@ public class RespostaCotacaoDAO {
 		List<RespostaCotacao> respostaCotacao = new ArrayList<RespostaCotacao>();
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"select respostaCotacao from RespostaCotacao respostaCotacao where respostaCotacao.cotacao.id = " 
-				+ cotacaoId + " and respostaCotacao.fornecedor.id = " + fornecedorId + " order by respostaCotacao.data desc");
+				+ cotacaoId + " and respostaCotacao.fornecedor.id = " + fornecedorId + " order by respostaCotacao.data");
 		respostaCotacao = query.list();
 		
 		return respostaCotacao;		

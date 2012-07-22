@@ -116,21 +116,23 @@ public class RespostaCotacaoController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/criaRespostaCotacaoResposta")
-	public ModelAndView newRespostaCotacao(final Long idRespostaCotacao) {
-		RespostaCotacao respostaAnterior = service
-				.getRespostaCotacao(idRespostaCotacao);
+	public ModelAndView newRespostaCotacao(final Long idCotacao, Long idFornecedor) {
+		
 		List<RespostaCotacao> respostas = service.listRespostasCotacao(
-				respostaAnterior.getCotacao().getId(), respostaAnterior
-						.getFornecedor().getId());
-
+				idCotacao, idFornecedor);
+		RespostaCotacao respostaUltima = (respostas.size() > 0) ? respostas.get(respostas.size() - 1) : null;
+		
+		Cotacao cotacao = service.getCotacao(idCotacao);
+		
 		RespostaCotacao resposta = new RespostaCotacao();
-		resposta.setCotacao(respostaAnterior.getCotacao());
-		resposta.setFornecedor(respostaAnterior.getFornecedor());
-		resposta.setPredio(respostaAnterior.getPredio());
+		resposta.setCotacao(cotacao);
+		resposta.setFornecedor(fornecedorService.getFornecedor(idFornecedor));
+		resposta.setPredio(cotacao.getPredio());
 		
 		ModelAndView mv = new ModelAndView(
 				"/cotacao/respostaCotacao/criaResposta", "resposta", resposta);
 		mv.addObject("respostas", respostas);
+		mv.addObject("respostaUltima", respostaUltima);
 		mv.setViewName("criaRespostaCotacao");
 		return mv;
 	}
