@@ -3,6 +3,7 @@ package com.sindico.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +15,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * The Class GerenteAdministradora.
  */
 @Entity
 @Table(name = "GERENTE_ADMINISTRADORA")
-public class GerenteAdministradora {
+public class GerenteAdministradora implements UserDetails {
+
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 1126483151118802088L;
 
 	@Id
 	@GeneratedValue
@@ -35,7 +44,7 @@ public class GerenteAdministradora {
 
 	/** The predios. */
 	@OneToMany(mappedBy = "gerente")
-	private Collection<Predio>	predios		= new ArrayList<Predio>();
+	private Collection<Predio>	predios				= new ArrayList<Predio>();
 
 	/** The data cadastro. */
 	@Column(name = "DATA_CADASTRO")
@@ -56,7 +65,7 @@ public class GerenteAdministradora {
 	private String				telefone;
 
 	/** The celular. */
-	@Column(name = "CELULAR", length = 20)
+	@Column(name = "CELULAR", length = 20, nullable = false)
 	private String				celular;
 
 	/** The recebe email mkt. */
@@ -69,7 +78,25 @@ public class GerenteAdministradora {
 
 	/** The cotacoes. */
 	@OneToMany(mappedBy = "gerenteAdmin")
-	private Collection<Cotacao>	cotacoes	= new ArrayList<Cotacao>();
+	private Collection<Cotacao>	cotacoes			= new ArrayList<Cotacao>();
+
+	/**
+	 * @param string
+	 * @param encodePassword
+	 * @param email2
+	 */
+	public GerenteAdministradora(final String nome, final String password,
+			final String email) {
+		this.nome = nome;
+		this.senha = password;
+		this.email = email;
+	}
+
+	/**
+	 * 
+	 */
+	public GerenteAdministradora() {
+	}
 
 	/**
 	 * Gets the cotacoes.
@@ -267,6 +294,90 @@ public class GerenteAdministradora {
 	 */
 	public void setSenha(final String senha) {
 		this.senha = senha;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#getAuthorities
+	 * ()
+	 */
+	@SuppressWarnings("deprecation")
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new GrantedAuthorityImpl("ROLE_GERENTE"));
+
+		return authorities;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#getPassword()
+	 */
+	@Override
+	public String getPassword() {
+		return senha;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#getUsername()
+	 */
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#isAccountNonExpired
+	 * ()
+	 */
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#isAccountNonLocked
+	 * ()
+	 */
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.springframework.security.core.userdetails.UserDetails#
+	 * isCredentialsNonExpired()
+	 */
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.security.core.userdetails.UserDetails#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 }

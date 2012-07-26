@@ -21,19 +21,18 @@ public class GerenteAdministradoraDAO {
 	@Autowired
 	private SessionFactory	sessionFactory;
 
-
 	@Transactional
-	public GerenteAdministradora criaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora) {
+	public GerenteAdministradora criaGerenteAdministradora(
+			final GerenteAdministradora gerenteAdministradora) {
 		sessionFactory.getCurrentSession().save(gerenteAdministradora);
 		return gerenteAdministradora;
 	}
 
-
-	public GerenteAdministradora atualizaGerenteAdministradora(final GerenteAdministradora gerenteAdministradora) {
+	public GerenteAdministradora atualizaGerenteAdministradora(
+			final GerenteAdministradora gerenteAdministradora) {
 		sessionFactory.getCurrentSession().update(gerenteAdministradora);
 		return gerenteAdministradora;
 	}
-
 
 	public GerenteAdministradora getGerenteAdministradora(final Long id) {
 		Query query = sessionFactory.getCurrentSession().createQuery(
@@ -43,10 +42,9 @@ public class GerenteAdministradoraDAO {
 		return (GerenteAdministradora) query.uniqueResult();
 	}
 
-
 	public boolean removeGerenteAdministradora(final Long id) {
-		GerenteAdministradora gerenteAdministradora = (GerenteAdministradora) sessionFactory.getCurrentSession().load(
-				GerenteAdministradora.class, id);
+		GerenteAdministradora gerenteAdministradora = (GerenteAdministradora) sessionFactory
+				.getCurrentSession().load(GerenteAdministradora.class, id);
 		if (gerenteAdministradora != null) {
 			sessionFactory.getCurrentSession().delete(gerenteAdministradora);
 			return true;
@@ -54,15 +52,29 @@ public class GerenteAdministradoraDAO {
 		return false;
 	}
 
-
 	@SuppressWarnings("unchecked")
 	public List<GerenteAdministradora> getLista() {
 		List<GerenteAdministradora> gerenteAdministradora = new ArrayList<GerenteAdministradora>();
-		Query query = sessionFactory.getCurrentSession().createQuery(
-				"select gerenteAdministradora from GerenteAdministradora gerenteAdministradora");
+		Query query = sessionFactory
+				.getCurrentSession()
+				.createQuery(
+						"select gerenteAdministradora from GerenteAdministradora gerenteAdministradora");
 		gerenteAdministradora = query.list();
 
 		return gerenteAdministradora;
+	}
+
+	/**
+	 * @param email
+	 * @return
+	 */
+	public GerenteAdministradora getByEmail(final String email) {
+		Query query = sessionFactory
+				.getCurrentSession()
+				.createQuery(
+						"SELECT gerente FROM GerenteAdministradora gerente WHERE gerente.email = :email")
+				.setParameter("email", email);
+		return (GerenteAdministradora) query.uniqueResult();
 	}
 
 }

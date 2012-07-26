@@ -18,9 +18,27 @@ public interface EmailService {
 	 *            the mensagem
 	 * @param destinatario
 	 *            the destinatario
-	 * @param titulo
-	 *            the titulo
 	 */
-	void enviarEmail(String mensagem, String destinatario, String titulo);
+	void emailCadastro(String mensagem, String destinatario);
+
+	/**
+	 * Email pedido cotacao.
+	 * 
+	 * @param mensagem
+	 *            the mensagem
+	 * @param destinatario
+	 *            the destinatario
+	 */
+	void emailPedidoCotacao(String mensagem, String destinatario);
+
+	/**
+	 * Email resposta cotacao.
+	 * 
+	 * @param mensagem
+	 *            the mensagem
+	 * @param destinatario
+	 *            the destinatario
+	 */
+	void emailRespostaCotacao(String mensagem, String destinatario);
 
 }

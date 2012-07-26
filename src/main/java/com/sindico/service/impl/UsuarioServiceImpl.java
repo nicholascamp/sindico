@@ -12,9 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sindico.dao.UsuarioDAO;
+import com.sindico.entity.Cotacao;
 import com.sindico.entity.Usuario;
 import com.sindico.entity.UsuarioSimples;
+import com.sindico.service.CotacaoService;
 import com.sindico.service.UsuarioService;
+import com.sindico.utils.StringUtils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,7 +30,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	/** The usuario dao. */
 	@Autowired
-	private UsuarioDAO	usuarioDAO;
+	private UsuarioDAO		usuarioDAO;
+
+	@Autowired
+	private CotacaoService	cotacaoService;
 
 	/*
 	 * (non-Javadoc)
@@ -169,6 +175,29 @@ public class UsuarioServiceImpl implements UsuarioService {
 			return true;
 		}
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.UsuarioService#adicionarPorEmail(java.lang.String,
+	 * java.lang.Long)
+	 */
+	@Override
+	@Transactional
+	public Usuario adicionarPorEmail(final String email, final Long cotacaoId)
+			throws Exception {
+		Usuario usuarioExistente = loadByUsername(email);
+		if (usuarioExistente != null) {
+			Cotacao cotacao = cotacaoService.getCotacao(cotacaoId);
+			cotacao.addUsuario(getLoggedUser());
+		}
+
+		Usuario usuario = new Usuario("Convidado", StringUtils.encodePassword(
+				"sindico", email), email);
+
+		return criaUsuario(usuario);
 	}
 
 }

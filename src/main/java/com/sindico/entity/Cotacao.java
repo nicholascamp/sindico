@@ -33,71 +33,73 @@ public class Cotacao {
 	@Id
 	@GeneratedValue
 	@Column(name = "COTACAO_ID")
-	private Long					id;
+	private Long						id;
 
 	/** The data. */
 	@Column(name = "DATA")
-	private Date					data;
+	private Date						data;
 
 	/** The data atualizacao. */
 	@Column(name = "DATA_ATUALIZACAO")
-	private Date					dataAtualizacao;
+	private Date						dataAtualizacao;
 
 	/** The subcategoria. */
 	@ManyToOne
 	@JoinColumn(name = "SUBCATEGORIA_ID")
 	@NotNull
-	private Subcategoria			subcategoria;
+	private Subcategoria				subcategoria;
 
 	/** The status. */
 	@Column(name = "STATUS")
-	private Status					status;
+	private Status						status;
 
 	/** The impropria. */
 	@Column(name = "IMPROPRIA")
-	private boolean					impropria;
+	private boolean						impropria;
 
 	/** The usuario. */
-	@ManyToOne
-	@JoinColumn(name = "USUARIO_ID")
-	private Usuario					usuario;
-	
+	@ManyToMany
+	@JoinTable(name = "COTACAO_USUARIO")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Collection<Usuario>			usuarios;
+
 	@ManyToOne
 	@JoinColumn(name = "PREDIO_ID")
-	private Predio predio;
+	private Predio						predio;
 
 	/** The gerente admin. */
 	@ManyToOne
 	@JoinColumn(name = "GERENTE_ID")
-	private GerenteAdministradora	gerenteAdmin;
+	private GerenteAdministradora		gerenteAdmin;
 
 	/** The fornecedores. */
 	@ManyToMany
 	@JoinTable(name = "COTACAO_FORNECEDOR")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Collection<Fornecedor>	fornecedores	= new ArrayList<Fornecedor>();
+	private Collection<Fornecedor>		fornecedores		= new ArrayList<Fornecedor>();
 
 	/** The fornecedor vencedor. */
 	@ManyToOne
 	@JoinColumn(name = "FORNECEDOR_ID")
-	private Fornecedor				fornecedorVencedor;
+	private Fornecedor					fornecedorVencedor;
 
 	/** The titulo. */
 	@Column(name = "TITULO", nullable = false)
-	private String					titulo;
-	
+	private String						titulo;
+
 	@OneToOne
 	@JoinColumn(name = "RESPOSTA_COTACAO_VENCEDORA")
-	private RespostaCotacao respostaCotacaoVencedora;
+	private RespostaCotacao				respostaCotacaoVencedora;
 
 	@OneToMany(mappedBy = "cotacao")
-	private Collection<RespostaCotacao> respostasCotacao = new ArrayList<RespostaCotacao>();
-	
+	private Collection<RespostaCotacao>	respostasCotacao	= new ArrayList<RespostaCotacao>();
+
 	public RespostaCotacao getRespostaCotacaoVencedora() {
 		return respostaCotacaoVencedora;
 	}
 
-	public void setRespostaCotacaoVencedora(RespostaCotacao respostaCotacaoVencedora) {
+	public void setRespostaCotacaoVencedora(
+			final RespostaCotacao respostaCotacaoVencedora) {
 		this.respostaCotacaoVencedora = respostaCotacaoVencedora;
 	}
 
@@ -105,7 +107,8 @@ public class Cotacao {
 		return respostasCotacao;
 	}
 
-	public void setRespostasCotacao(Collection<RespostaCotacao> respostasCotacao) {
+	public void setRespostasCotacao(
+			final Collection<RespostaCotacao> respostasCotacao) {
 		this.respostasCotacao = respostasCotacao;
 	}
 
@@ -247,8 +250,8 @@ public class Cotacao {
 	 * 
 	 * @return the usuario
 	 */
-	public Usuario getUsuario() {
-		return usuario;
+	public Collection<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
 	/**
@@ -257,8 +260,12 @@ public class Cotacao {
 	 * @param usuario
 	 *            the new usuario
 	 */
-	public void setUsuario(final Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarios(final Collection<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public void addUsuario(final Usuario usuario) {
+		this.usuarios.add(usuario);
 	}
 
 	/**
@@ -322,7 +329,7 @@ public class Cotacao {
 		return predio;
 	}
 
-	public void setPredio(Predio predio) {
+	public void setPredio(final Predio predio) {
 		this.predio = predio;
 	}
 }

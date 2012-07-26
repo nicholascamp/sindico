@@ -13,9 +13,15 @@ import com.sindico.dao.CotacaoDAO;
 import com.sindico.dao.RespostaCotacaoDAO;
 import com.sindico.entity.Cotacao;
 import com.sindico.entity.Fornecedor;
+import com.sindico.entity.GerenteAdministradora;
 import com.sindico.entity.Predio;
 import com.sindico.entity.RespostaCotacao;
+import com.sindico.entity.Usuario;
 import com.sindico.service.CotacaoService;
+import com.sindico.service.EmailService;
+import com.sindico.service.GerenteAdministradoraService;
+import com.sindico.service.UsuarioService;
+import com.sindico.utils.StringUtils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,10 +33,19 @@ import com.sindico.service.CotacaoService;
 public class CotacaoServiceImpl implements CotacaoService {
 
 	@Autowired
-	CotacaoDAO	cotacaoDAO;
-	
+	CotacaoDAO						cotacaoDAO;
+
 	@Autowired
-	RespostaCotacaoDAO respostaCotacaoDAO;
+	RespostaCotacaoDAO				respostaCotacaoDAO;
+
+	@Autowired
+	UsuarioService					usuarioService;
+
+	@Autowired
+	GerenteAdministradoraService	gerenteService;
+
+	@Autowired
+	EmailService					emailService;
 
 	/*
 	 * (non-Javadoc)
@@ -72,14 +87,14 @@ public class CotacaoServiceImpl implements CotacaoService {
 		// TODO Auto-generated method stub
 		return cotacaoDAO.getLista();
 	}
-	
+
 	@Override
-	public List<Cotacao> listCotacoes(Long usuarioId){
+	public List<Cotacao> listCotacoes(final Long usuarioId) {
 		return cotacaoDAO.getLista(usuarioId);
 	}
-	
+
 	@Override
-	public List<Cotacao> listCotacoes(Predio predio){
+	public List<Cotacao> listCotacoes(final Predio predio) {
 		return cotacaoDAO.getLista(predio);
 	}
 
@@ -101,79 +116,137 @@ public class CotacaoServiceImpl implements CotacaoService {
 	}
 
 	@Override
-	public RespostaCotacao getRespostaCotacao(Long id) {
+	public RespostaCotacao getRespostaCotacao(final Long id) {
 		return respostaCotacaoDAO.getRespostaCotacao(id);
 	}
 
 	@Override
-	public List<RespostaCotacao> listRespostasCotacao() {		
+	public List<RespostaCotacao> listRespostasCotacao() {
 		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO.getLista();
 		return preencheRespostaCotacao(respostaCotacao);
 	}
 
 	@Override
-	public List<RespostaCotacao> listRespostasCotacao(Long idCotacao,
-			Long idFornecedor) {
+	public List<RespostaCotacao> listRespostasCotacao(final Long idCotacao,
+			final Long idFornecedor) {
 		// TODO Auto-generated method stub
-		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO.getLista(idCotacao, idFornecedor);
+		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO.getLista(
+				idCotacao, idFornecedor);
 		return respostaCotacao;
 	}
-	
+
 	@Override
-	public List<RespostaCotacao> listRespostasCotacao(Long idCotacao){
-		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO.getLista(idCotacao);
+	public List<RespostaCotacao> listRespostasCotacao(final Long idCotacao) {
+		List<RespostaCotacao> respostaCotacao = respostaCotacaoDAO
+				.getLista(idCotacao);
 		return preencheRespostaCotacao(respostaCotacao);
 	}
-	
+
 	@Override
-	public List<RespostaCotacao> listRespostasCotacaoHistorico(Cotacao cotacao) {		
+	public List<RespostaCotacao> listRespostasCotacaoHistorico(
+			final Cotacao cotacao) {
 		List<RespostaCotacao> respostaCotacao = new ArrayList<RespostaCotacao>();
-		
-		for(Fornecedor fornecedor : cotacao.getFornecedores()){
-			RespostaCotacao resposta = respostaCotacaoDAO.getRespostaCotacao(cotacao.getId(), fornecedor.getId());
-			
-			if(resposta != null)
+
+		for (Fornecedor fornecedor : cotacao.getFornecedores()) {
+			RespostaCotacao resposta = respostaCotacaoDAO.getRespostaCotacao(
+					cotacao.getId(), fornecedor.getId());
+
+			if (resposta != null) {
 				respostaCotacao.add(resposta);
+			}
 		}
 		return respostaCotacao;
 	}
-	
+
 	@Override
-	public boolean possuiNegociacaoAberta(long cotacaoId, long fornecedorId) {
+	public boolean possuiNegociacaoAberta(final long cotacaoId,
+			final long fornecedorId) {
 		return (respostaCotacaoDAO.getRespostaCotacao(cotacaoId, fornecedorId) != null);
 	}
 
 	@Override
-	public RespostaCotacao updateRespostaCotacao(RespostaCotacao respostaCotacao) {
+	public RespostaCotacao updateRespostaCotacao(
+			final RespostaCotacao respostaCotacao) {
 		return respostaCotacaoDAO.atualizaRespostaCotacao(respostaCotacao);
 	}
-	
 
 	@Override
-	public void removeRespostaCotacao(Long id) {
+	public void removeRespostaCotacao(final Long id) {
 		respostaCotacaoDAO.removeRespostaCotacao(id);
 	}
 
 	@Override
-	public RespostaCotacao criaRespostaCotacao(RespostaCotacao respostaCotacao) {
+	public RespostaCotacao criaRespostaCotacao(
+			final RespostaCotacao respostaCotacao) {
 		return respostaCotacaoDAO.criaRespostaCotacao(respostaCotacao);
 	}
-	
-	public List<RespostaCotacao> preencheRespostaCotacao(List<RespostaCotacao> respostaCotacao){
+
+	public List<RespostaCotacao> preencheRespostaCotacao(
+			final List<RespostaCotacao> respostaCotacao) {
 		List<RespostaCotacao> aux = new ArrayList<RespostaCotacao>();
-		
-		for(RespostaCotacao resposta : respostaCotacao){
-			if(verificaExistenciaFornecedor(aux, resposta))
+
+		for (RespostaCotacao resposta : respostaCotacao) {
+			if (verificaExistenciaFornecedor(aux, resposta)) {
 				aux.add(resposta);
+			}
 		}
 		return aux;
 	}
-	
-	public boolean verificaExistenciaFornecedor(List<RespostaCotacao> respostas, RespostaCotacao resposta){
-		for(RespostaCotacao respostaAux : respostas){
-			if(respostaAux.getFornecedor().equals(resposta.getFornecedor()))
+
+	public boolean verificaExistenciaFornecedor(
+			final List<RespostaCotacao> respostas,
+			final RespostaCotacao resposta) {
+		for (RespostaCotacao respostaAux : respostas) {
+			if (respostaAux.getFornecedor().equals(resposta.getFornecedor())) {
 				return false;
+			}
 		}
 		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.CotacaoService#adicionarGerente(java.lang.String,
+	 * java.lang.Long)
+	 */
+	@Override
+	public void adicionarGerente(final String email, final Long cotacaoId)
+			throws Exception {
+
+		GerenteAdministradora gerente = gerenteService.getByEmail(email);
+		if (gerente == null) {
+			gerente = new GerenteAdministradora("Convidado",
+					StringUtils.encodePassword("sindico", email), email);
+			gerenteService.createGerente(gerente);
+			emailService.emailCadastro("", email);
+		}
+
+		Cotacao cotacao = getCotacao(cotacaoId);
+		cotacao.setGerenteAdmin(gerente);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.CotacaoService#adicionarUsuario(java.lang.String,
+	 * java.lang.Long)
+	 */
+	@Override
+	public void adicionarUsuario(final String email, final Long cotacaoId)
+			throws Exception {
+
+		Usuario usuario = usuarioService.loadByUsername(email);
+		if (usuario == null) {
+			usuario = new Usuario("Convidado", StringUtils.encodePassword(
+					"sindico", email), email);
+			usuarioService.criaUsuario(usuario);
+		}
+		Cotacao cotacao = getCotacao(cotacaoId);
+		cotacao.addUsuario(usuario);
+		emailService.emailCadastro("", email);
+
 	}
 }

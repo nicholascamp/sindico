@@ -124,4 +124,14 @@ public interface UsuarioService {
 	@Transactional
 	public boolean ehUsuarioLogado();
 
+	/**
+	 * @param email
+	 * @param cotacaoId
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public Usuario adicionarPorEmail(String email, Long cotacaoId)
+			throws Exception;
+
 }

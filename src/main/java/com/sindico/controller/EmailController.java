@@ -17,9 +17,11 @@ import com.sindico.service.EmailService;
 import com.sindico.service.FornecedorService;
 import com.sindico.service.UsuarioService;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Lucas
+ * The Class EmailController.
  * 
+ * @author Lucas
  */
 @Controller
 @RequestMapping("email")
@@ -30,9 +32,11 @@ public class EmailController {
 	@Autowired
 	private EmailService		emailService;
 
+	/** The fornecedor service. */
 	@Autowired
 	private FornecedorService	fornecedorService;
 
+	/** The usuario service. */
 	@Autowired
 	private UsuarioService		usuarioService;
 
@@ -44,21 +48,53 @@ public class EmailController {
 	 * @param titulo
 	 *            the titulo
 	 */
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "cadastro", method = RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void enviarEmail(@RequestParam("mensagem") final String mensagem,
+	public void enviarEmailCadastro(
+			@RequestParam("mensagem") final String mensagem,
 			@RequestParam("titulo") final String titulo) {
 
-		String destinatario = "";
+		String destinatario = getLogedUserEmail();
+
+		emailService.emailCadastro(mensagem, destinatario);
+	}
+
+	@RequestMapping(value = "pedidoCotacao", method = RequestMethod.POST)
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public void enviarEmailPedidoCotacao(
+			@RequestParam("mensagem") final String mensagem,
+			@RequestParam("titulo") final String titulo) {
+
+		String destinatario = getLogedUserEmail();
+
+		emailService.emailCadastro(mensagem, destinatario);
+	}
+
+	@RequestMapping(value = "respostaCotacao", method = RequestMethod.POST)
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public void enviarEmailRespostaCotacao(
+			@RequestParam("mensagem") final String mensagem,
+			@RequestParam("titulo") final String titulo) {
+
+		String destinatario = getLogedUserEmail();
+
+		emailService.emailCadastro(mensagem, destinatario);
+	}
+
+	/**
+	 * Gets the loged user email.
+	 * 
+	 * @return the loged user email
+	 */
+	private String getLogedUserEmail() {
 
 		if (usuarioService.ehUsuarioLogado()) {
-			destinatario = usuarioService.getLoggedUser().getEmail();
-		} else {
-			destinatario = fornecedorService.getLoggedFornecedor().getEmail();
+			return usuarioService.getLoggedUser().getEmail();
 		}
-
-		emailService.enviarEmail(mensagem, destinatario, titulo);
+		return fornecedorService.getLoggedFornecedor().getEmail();
 	}
 
 }
