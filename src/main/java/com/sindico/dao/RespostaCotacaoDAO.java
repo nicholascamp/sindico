@@ -53,6 +53,18 @@ public class RespostaCotacaoDAO {
 		
 		return respostaCotacao.get(0);
 	}
+	
+	public RespostaCotacao getRespostaCotacaoAberta(Long cotacaoId, Long fornecedorId) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"select respostaCotacao from RespostaCotacao respostaCotacao where respostaCotacao.cotacao.id = " 
+				+ cotacaoId + " and respostaCotacao.fornecedor.id = " + fornecedorId + " and respostaCotacao.cotacao.status != 2 order by respostaCotacao.data desc");
+
+		List<RespostaCotacao> respostaCotacao = query.list();	
+		if(respostaCotacao.size() == 0)
+			return null;
+		
+		return respostaCotacao.get(0);
+	}
 
 	public void removeRespostaCotacao(final Long id) {
 		RespostaCotacao respostaCotacao = (RespostaCotacao) sessionFactory.getCurrentSession().load(

@@ -71,7 +71,7 @@
 		</table>
 		<br />
 		<div>
-			<label>Negociações Abertas:</label>
+			<h3>Negociações Abertas:</h3>
 			<table>
 				<thead>
 					<tr>

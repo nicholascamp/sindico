@@ -1,18 +1,24 @@
 <%@include file="/WEB-INF/tags/taglib_includes.jsp"%>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/sindico/javascript/actions.js"></script>
-
-<title><tiles:insertAttribute name="title" ignore="true" /></title>
-</head>
-
-<body>
-	<div>
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie7" lang="pt-br"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie8" lang="pt-br"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="pt-br"> <!--<![endif]-->
+	<head>
+		<script type="text/javascript"
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript"
+			src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/sindico/javascript/actions.js"></script>
+		<link rel="stylesheet" href="/sindico/css/style.css" />
+		
+		<title><tiles:insertAttribute name="title" ignore="true" /></title>
+		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="description" content="">
+	</head>
+	
+	<body>
 		<tiles:insertAttribute name="header" />
 		<div>
 			<sec:authorize ifAnyGranted="ROLE_USUARIO, ROLE_FORNECEDOR">
@@ -21,7 +27,7 @@
 			<hr noshade="noshade" size="1" width="100%">
 			<sec:authorize ifNotGranted="ROLE_USUARIO, ROLE_FORNECEDOR">
 				<h3>Faça Login</h3>
-
+	
 				<form name="f" action="<c:url value='/j_spring_security_check'/>"
 					method="POST">
 					<table>
@@ -39,32 +45,31 @@
 								name="_spring_security_remember_me"></td>
 							<td>Salvar usuário</td>
 						</tr>
-
+	
 						<tr>
 							<td colspan='2'><input name="submit" type="submit"></td>
 						</tr>
 					</table>
 				</form>
-				</br>
-				</br>
+				<br />
+				<br />
 				<h3>
 					Ou <a href="<c:url value='/cadastro'/>">Cadastre-se</a>
 				</h3>
-				</br>
-				</br>
-				</br>
+				<br />
+				<br />
+				<br />
 			</sec:authorize>
 		</div>
-
+	
 		<div>
 			<tiles:insertAttribute name="body" />
 		</div>
-
+	
 		<hr noshade="noshade" size="1" width="100%">
 		<sec:authorize ifAnyGranted="ROLE_USUARIO, ROLE_FORNECEDOR">
 			<a href="<c:url value="/j_spring_security_logout" />"> Logout</a>
 		</sec:authorize>
 		<tiles:insertAttribute name="footer" />
-	</div>
-</body>
+	</body>
 </html>

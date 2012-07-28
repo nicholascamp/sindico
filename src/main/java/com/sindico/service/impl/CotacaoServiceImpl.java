@@ -140,7 +140,7 @@ public class CotacaoServiceImpl implements CotacaoService {
 	
 	@Override
 	public boolean possuiNegociacaoAberta(long cotacaoId, long fornecedorId) {
-		return (respostaCotacaoDAO.getRespostaCotacao(cotacaoId, fornecedorId) != null);
+		return (respostaCotacaoDAO.getRespostaCotacaoAberta(cotacaoId, fornecedorId) != null);
 	}
 
 	@Override
