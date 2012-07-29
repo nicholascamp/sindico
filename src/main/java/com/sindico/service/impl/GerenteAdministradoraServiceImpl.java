@@ -35,23 +35,37 @@ public class GerenteAdministradoraServiceImpl implements
 	}
 
 	@Override
-	public GerenteAdministradora getGerente(Long id) {
+	public GerenteAdministradora getGerente(final Long id) {
 		return gerenteAdministradoraDAO.getGerenteAdministradora(id);
 	}
 
 	@Override
-	public GerenteAdministradora createGerente(GerenteAdministradora gerente) {
+	public GerenteAdministradora createGerente(
+			final GerenteAdministradora gerente) {
 		return gerenteAdministradoraDAO.criaGerenteAdministradora(gerente);
 	}
 
 	@Override
-	public GerenteAdministradora updateGerente(GerenteAdministradora gerente) {
+	public GerenteAdministradora updateGerente(
+			final GerenteAdministradora gerente) {
 		return gerenteAdministradoraDAO.atualizaGerenteAdministradora(gerente);
 	}
 
 	@Override
-	public boolean removeGerente(Long id) {
+	public boolean removeGerente(final Long id) {
 		return gerenteAdministradoraDAO.removeGerenteAdministradora(id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sindico.service.GerenteAdministradoraService#getByEmail(java.lang
+	 * .String)
+	 */
+	@Override
+	public GerenteAdministradora getByEmail(final String email) {
+		return gerenteAdministradoraDAO.getByEmail(email);
 	}
 
 }

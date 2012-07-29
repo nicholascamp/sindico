@@ -47,8 +47,8 @@ button, input, select, textarea {font-size: 100%; margin: 0; vertical-align: bas
 button, input {line-height: normal;}
 button, input[type="button"], input[type="reset"], input[type="submit"] {cursor: pointer; -webkit-appearance: button; *overflow: visible;}
 button[disabled], input[disabled] {cursor: default;}
-input[type="checkbox"], input[type="radio"] {box-sizing: border-box; padding: 0; *width: 13px; *height: 13px;}
-input[type="search"] {-webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box;}
+input[type="checkbox"], input[type="radio"] { padding: 0; *width: 13px; *height: 13px;}
+input[type="search"] {-webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box;}
 input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button {-webkit-appearance: none;}
 button::-moz-focus-inner, input::-moz-focus-inner {border: 0; padding: 0;}
 textarea {overflow: auto; vertical-align: top; resize: vertical;}
@@ -63,7 +63,7 @@ td {vertical-align: top;}
 .cf:after {clear: both;}
 .cf {*zoom: 1;}
 
-.hide-text {background-color: transparent; border: 0; color: transparent; font: 0/0 a; text-shadow: none;}
+.hide-text {background-color: transparent; border: 0; font: 0/0 a; text-shadow: none;}
 
 .bt-padrao {
 	background: #fda92b;

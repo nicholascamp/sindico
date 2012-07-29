@@ -42,7 +42,7 @@
 		<security:logout invalidate-session="true"
 			logout-success-url="/" />
 
-		<security:remember-me
+		<security:remember-me user-service-ref="sindicoUserDetailsService"
 			key="0a9ecae931165aae735f97dcca72ecfb1e00b0b854730cbc575930a742d1c6d3" />
 	</security:http>
 

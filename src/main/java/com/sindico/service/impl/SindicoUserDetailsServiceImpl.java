@@ -8,8 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.sindico.entity.Fornecedor;
 import com.sindico.entity.Usuario;
 import com.sindico.service.FornecedorService;
+import com.sindico.service.GerenteAdministradoraService;
 import com.sindico.service.UsuarioService;
 
 /**
@@ -19,10 +21,13 @@ import com.sindico.service.UsuarioService;
 public class SindicoUserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private UsuarioService		usuarioService;
+	private UsuarioService					usuarioService;
 
 	@Autowired
-	private FornecedorService	fornecedorService;
+	private FornecedorService				fornecedorService;
+
+	@Autowired
+	private GerenteAdministradoraService	gerenteAdministradoraService;
 
 	/*
 	 * (non-Javadoc)
@@ -37,7 +42,10 @@ public class SindicoUserDetailsServiceImpl implements UserDetailsService {
 		Usuario usuario = usuarioService.loadByUsername(email);
 
 		if (usuario == null) {
-			return fornecedorService.loadByUsername(email);
+			Fornecedor fornecedor = fornecedorService.loadByUsername(email);
+			if (fornecedor == null) {
+				return gerenteAdministradoraService.getByEmail(email);
+			}
 		}
 
 		return usuario;
