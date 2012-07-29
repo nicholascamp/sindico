@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.sindico.dao.CotacaoDAO;
 import com.sindico.dao.RespostaCotacaoDAO;
 import com.sindico.entity.Cotacao;
@@ -22,6 +23,8 @@ import com.sindico.service.EmailService;
 import com.sindico.service.GerenteAdministradoraService;
 import com.sindico.service.UsuarioService;
 import com.sindico.utils.StringUtils;
+
+
 
 // TODO: Auto-generated Javadoc
 /**
