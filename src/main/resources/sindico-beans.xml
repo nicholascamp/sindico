@@ -48,18 +48,18 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="tilesviewResolver"
-		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver"
-		p:order="0" />
+<!-- 	<bean id="tilesviewResolver" -->
+<!-- 		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" -->
+<!-- 		p:order="0" /> -->
 
-	<bean id="tilesConfigurer"
-		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-		<property name="definitions">
-			<list>
-				<value>/WEB-INF/tiles.xml</value>
-			</list>
-		</property>
-	</bean>
+<!-- 	<bean id="tilesConfigurer" -->
+<!-- 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"> -->
+<!-- 		<property name="definitions"> -->
+<!-- 			<list> -->
+<!-- 				<value>/WEB-INF/tiles.xml</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 
 	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
 
@@ -75,29 +75,6 @@
 		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations" value="classpath:appConfiguration.properties" />
 	</bean>
-
-	<!-- <bean id="validatorFactory" -->
-	<!-- class="org.springmodules.validation.commons.DefaultValidatorFactory"> -->
-	<!-- <property name="validationConfigLocations"> -->
-	<!-- <list> -->
-	<!-- <value>/WEB-INF/validation.xml</value> -->
-	<!-- <value>/WEB-INF/validator-rules.xml</value> -->
-	<!-- </list> -->
-	<!-- </property> -->
-	<!-- </bean> -->
-	<!-- <bean id="beanValidator" -->
-	<!-- class="org.springmodules.validation.commons.DefaultBeanValidator"> -->
-	<!-- <property name="validatorFactory" ref="validatorFactory" /> -->
-	<!-- </bean> -->
-
-	<!-- <bean id="messageSource" -->
-	<!-- class="org.springframework.context.support.ResourceBundleMessageSource"> -->
-	<!-- <property name="basenames"> -->
-	<!-- <value>application</value> -->
-	<!-- </property> -->
-	<!-- </bean> -->
-
-
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">

@@ -10,7 +10,9 @@ html {font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100
 html, button, input, select, textarea {font-family: sans-serif; color: #222;}
 body {margin: 0; font-size: 1em; line-height: 1.4;}
 
-::-moz-selection {background: #fe57a1; color: #fff; text-shadow: none;}
+::-moz-selection {background: #fda92b; text-shadow: none;}
+::selection {background: #fda92b; text-shadow: none;}
+
 abbr[title] {border-bottom: 1px dotted;}
 b, strong {font-weight: bold;}
 blockquote {margin: 1em 40px;}
@@ -45,8 +47,8 @@ button, input, select, textarea {font-size: 100%; margin: 0; vertical-align: bas
 button, input {line-height: normal;}
 button, input[type="button"], input[type="reset"], input[type="submit"] {cursor: pointer; -webkit-appearance: button; *overflow: visible;}
 button[disabled], input[disabled] {cursor: default;}
-input[type="checkbox"], input[type="radio"] { padding: 0; *width: 13px; *height: 13px;}
-input[type="search"] {-webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box;}
+input[type="checkbox"], input[type="radio"] {box-sizing: border-box; padding: 0; *width: 13px; *height: 13px;}
+input[type="search"] {-webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box;}
 input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button {-webkit-appearance: none;}
 button::-moz-focus-inner, input::-moz-focus-inner {border: 0; padding: 0;}
 textarea {overflow: auto; vertical-align: top; resize: vertical;}
@@ -61,7 +63,7 @@ td {vertical-align: top;}
 .cf:after {clear: both;}
 .cf {*zoom: 1;}
 
-.hide-text {background-color: transparent; border: 0; font: 0/0 a; text-shadow: none;}
+.hide-text {background-color: transparent; border: 0; color: transparent; font: 0/0 a; text-shadow: none;}
 
 .bt-padrao {
 	background: #fda92b;
@@ -72,8 +74,8 @@ td {vertical-align: top;}
 	color: #fef9ef;
 }
 .bt-menor-acao {border: 0; font-size: 14px; height: 32px; padding: 0 32px 0 16px; position: relative;}
-.bt-menor-acao:after {content: '›'; font: bold 26px/28px Arial, sans-serif; height: 28px; position: absolute; right: 10px; top: 0;}
-.bt-menor-acao.baixo:after {content: 'ˇ'; font: 44px/65px Arial, sans-serif; height: 65px;}
+.bt-menor-acao:after {content: '›'; font: bold 26px/30px Arial, sans-serif; height: 30px; position: absolute; right: 10px; top: 0;}
+.bt-menor-acao.baixo:after {content: 'ˇ'; font: 44px/62px Arial, sans-serif; height: 62px;}
 
 /* ESTRUTURA */
 /* .container-topo */
@@ -86,7 +88,7 @@ td {vertical-align: top;}
 		.acesse-sua-conta-destaque {color: #515151; float: left; font: 21px/32px Arial, sans-serif; margin: 27px 0 0 17px;}
 			.acesse-sua-conta-destaque a {border-bottom: 2px solid #a8a6a4; color: #515151; text-decoration: none;}
 			.acesse-sua-conta-destaque .bt-padrao {color: #fef9ef;}
-			.bt-padrao, .categorias-busca, .bt-categoria {
+			.bt-padrao, .categorias-busca, .bt-categoria, .checkbox-falso, .checkbox-falso span {
 				-moz-border-radius: 5px;
 				-webkit-border-radius: 5px;
 				border-radius: 5px;
@@ -202,8 +204,8 @@ td {vertical-align: top;}
 	.avaliacao-fornecedor {background: #f8f5ee; color: #92918c; float: left; font: 13px/36px Arial, sans-serif; margin-right: 18px; padding: 5px 5px 0;}
 		.avaliacao-fornecedor img {display: block;}
 		.avaliacao-fornecedor figcaption {text-indent: 3px;}
-			.avaliacao-fornecedor figcaption span {background: url(../img/estrela.png) no-repeat; display: inline-block; height: 8px; margin-right: 1px; width: 8px;}
-			.avaliacao-fornecedor figcaption span:first-child {margin-left: 3px;}
+			.avaliacao-fornecedor figcaption span, .lista-empresas .avaliacao-empresas span {background: url(../img/estrela.png) no-repeat; display: inline-block; height: 8px; margin-right: 1px; width: 8px;}
+			.avaliacao-fornecedor figcaption span:first-child, .lista-empresas .avaliacao-empresas span:first-child {margin-left: 3px;}
 	/* </ .avaliacao-fornecedor */
 
 	/* .conteudo */
@@ -231,14 +233,34 @@ td {vertical-align: top;}
 		.cx-solicitar-cotacao {}
 			.cx-solicitar-cotacao h1, .cx-solicitar-cotacao div {display: inline-block; *display: inline; margin: 0 20px; vertical-align: top;}
 			.cx-solicitar-cotacao h1 {color: #373737; font: 21px/32px Arial, sans-serif; margin: 0;}
+			.cx-solicitar-cotacao div {cursor: pointer;}
 			.campo-empresas-selecionadas > .bt-padrao {background-color: #60ade1; margin: 0;}
+				.campo-empresas-selecionadas > .bt-padrao span {font-size: 21px; font-weight: bold; margin-left: -3px; vertical-align: bottom;}
 			.campo-filtrar-por > .bt-padrao {background-color: #bdb8ad; margin: 0;}
 		/* </ .cx-solicitar-cotacao */
 
 		/* .lista-empresas */
-			.lista-empresas .avaliacao-empresas {}
-			.lista-empresas article {border-top: 1px dotted #e5e5e5; padding: 20px aaaaaaaaaaaaaaaaaaaaa 20px 0;}
+			.lista-empresas .avaliacao-empresas {font-size: 12px;}
 			.lista-empresas .avaliacao-empresas + article {border-top: none;}
+			.lista-empresas article {border-top: 1px dotted #e5e5e5; padding: 20px 40px 20px 0;}
+
+				/* .checkbox-falso */
+				.checkbox-falso {background: #c9c5bb; color: #fff; cursor: pointer; float: left; font: 11px/40px Arial, sans-serif; height: 65px; padding-top: 36px; text-align: center; width: 70px;}
+				.checkbox-falso.ticked {background: #60ade1;}
+					.checkbox-falso span {
+						-moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+						-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+						box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+						background: #92918c; display: block; margin: 0 auto; height: 20px; position: relative; width: 20px;
+					}
+					.checkbox-falso.ticked span:after {content: '✓'; font: bold 42px/1 Arial, sans-serif; left: -3px; position: absolute; top: -15px;}
+					/* </ .checkbox-falso */
+
+					.lista-empresas article img {border: 1px solid #92918c; float: left; margin: 15px 12px 0 20px;}
+					.lista-empresas article h1 {color: #6e6e6c; font: bold 21px/1 Arial, sans-serif; margin: 15px 0 0;}
+					.lista-empresas article p {font: 14px/1.4 Arial, sans-serif; overflow: hidden;}
+
+
 		/* </ .lista-empresas */
 	/* </ .conteudo */
 
